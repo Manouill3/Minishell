@@ -6,7 +6,7 @@
 #    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/02/17 14:46:10 by mdegache         ###   ########.fr        #
+#    Updated: 2025/02/17 14:51:48 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,11 +41,13 @@ $(LIBFT):
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -f $(OBJ) $(OBJ_BONUS) $(OBJ_LIB)
+	@rm -f $(OBJ)
+	@$(MAKE) -C $(LIB) clean
 	@echo "$(PURPLE)CLEAN$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
+	@$(MAKE) -C $(LIB) fclean
 	@echo "$(RED)FCLEAN$(RESET)"
 
 re: fclean all
