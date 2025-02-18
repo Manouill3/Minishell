@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   built_order.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 12:49:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/18 17:43:58 by tcybak           ###   ########.fr       */
+/*   Created: 2025/02/18 14:56:21 by tcybak            #+#    #+#             */
+/*   Updated: 2025/02/18 18:03:00 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../lib/minishell.h"
 
-size_t	ft_strlen(const char *str)
+void    ft_pwd(void)
 {
-	size_t	i;
+    char *chemin = NULL;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+    chemin = getcwd(NULL, 0); 
+    printf("Le chemin du repertoire est %s\n", chemin);
+    free(chemin);
+}
+
+void    ft_check_order(t_init *init)
+{
+    if (ft_strcmp(init->line, "pwd") == 0)
+        ft_pwd();
+    return ;
 }

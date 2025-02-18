@@ -6,7 +6,7 @@
 #    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/02/17 17:46:26 by tcybak           ###   ########.fr        #
+#    Updated: 2025/02/18 17:33:58 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ LIBFT = lib/libft/libft.a
 SRC = main.c\
 	utils/utils_parsing.c\
 	Handle_signaux.c\
+	order/built_order.c\
 
 OBJ = $(SRC:.c=.o)
 
