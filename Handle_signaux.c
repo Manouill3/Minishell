@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   Handle_signaux.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/17 18:02:14 by tcybak           ###   ########.fr       */
+/*   Created: 2025/02/17 17:37:51 by tcybak            #+#    #+#             */
+/*   Updated: 2025/02/17 17:45:03 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/minishell.h"
 
-int main(void)
+static void	sigint_handler(int sig)
 {
-	char *line;
-	
-	line = NULL;
-	while(1)
-	{
-		ft_handle_interrupt_signals();
-		line = readline("Minishell:");
-		line = ft_strtrim(line, " ");
-		if(ft_strcmp(line, "exit") == 0)
-			exit(0);
-	}
+    printf("HERE %d",sig);
+    if (sig == 2)
+    {
+        printf("\n");
+        rl_on_new_line();
+        rl_replace_line()
+    }
+}
+
+void    ft_handle_interrupt_signals(void)
+{
+    struct sigaction    sigint;
+
+    ft_bzero(&sigint, sizeof(sigint));
+	sigint.sa_handler = &sigint_handler;
+	sigaction(SIGINT, &sigint, NULL);
 }

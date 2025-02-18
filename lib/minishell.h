@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/17 14:43:22 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:08:49 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,21 @@
 # define MINISHELL_H
 
 #include <stdio.h>
+#include <signal.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "libft/libft.h"
 
+
+////////////////////////////////////////
+///			utils/utils_parsing	    ///
+//////////////////////////////////////
+
 int ft_strcmp(char *s1, char *s2);
+////////////////////////////////////////
+///			Handle_signaux          ///
+//////////////////////////////////////
+
+void    ft_handle_interrupt_signals(void);
 
 #endif

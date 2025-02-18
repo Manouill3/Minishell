@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
+#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/02/17 14:51:48 by mdegache         ###   ########.fr        #
+#    Updated: 2025/02/17 17:46:26 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ LIB = lib/libft
 LIBFT = lib/libft/libft.a
 
 SRC = main.c\
-	utils/utils_parsing.c
+	utils/utils_parsing.c\
+	Handle_signaux.c\
 
 OBJ = $(SRC:.c=.o)
 
