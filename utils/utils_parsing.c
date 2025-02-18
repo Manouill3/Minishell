@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:40:44 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/17 14:46:46 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:25:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int ft_strcmp(char *s1, char *s2)
     int i;
 
     i = 0;
+    if (*s1 == 0)
+        return (1);
     while (s1[i])
     {
         if (s1[i] != s2[i])
