@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/18 17:42:00 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/20 11:11:20 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_init
 {
     int     i;
     char    *line;
+    char    **cmds;
 
 }			t_init;
 
@@ -30,7 +31,8 @@ typedef struct s_init
 ///			utils/utils_parsing	    ///
 //////////////////////////////////////
 
-int ft_strcmp(char *s1, char *s2);
+int     ft_strcmp(char *s1, char *s2);
+void    ft_free(t_init *init);
 
 ////////////////////////////////////////
 ///			Handle_signaux          ///
@@ -43,5 +45,11 @@ void    ft_handle_interrupt_signals(void);
 //////////////////////////////////////
 
 void    ft_check_order(t_init *init);
+
+////////////////////////////////////////
+///			Parsing/parsing1.c      ///
+//////////////////////////////////////
+
+void    ft_parsing_line(t_init *init);
 
 #endif

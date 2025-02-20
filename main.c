@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/18 17:35:18 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/20 11:13:22 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int main(void)
 		init->line = readline("Minishell:");
 		init->line = ft_strtrim(init->line, " ");
 		add_history(init->line);
+		ft_parsing_line(init);
 		ft_check_order(init);
 		if(ft_strcmp(init->line, "exit") == 0)
 		{
 			free(init->line);
+			rl_clear_history();
 			exit(0);
 		}
 	}

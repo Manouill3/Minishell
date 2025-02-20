@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_order.c                                      :+:      :+:    :+:   */
+/*   Parsing1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 14:56:21 by tcybak            #+#    #+#             */
-/*   Updated: 2025/02/20 10:44:18 by tcybak           ###   ########.fr       */
+/*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
+/*   Updated: 2025/02/20 15:31:33 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void    ft_pwd(void)
+void    ft_parsing_line(t_init *init)
 {
-    char *chemin = NULL;
-
-    chemin = getcwd(NULL, 0); 
-    printf("Le chemin du repertoire est %s\n", chemin);
-    free(chemin);
-}
-
-void    ft_check_order(t_init *init)
-{
-    if (ft_strcmp(init->line, "pwd") == 0)
-        ft_pwd();
-    return ;
+    init->cmds = ft_split(init->line, ' ');
+    if (init->cmds == NULL)
+    {
+        if (!init->line)
+            perror("|");
+        ft_free(init);
+    }
+    init->i = 0;
+    while(init->cmds[init->i])
+    {
+        printf("%s\n",init->cmds[init->i]);
+        init->i++;
+    }
 }
