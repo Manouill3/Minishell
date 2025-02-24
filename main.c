@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/20 11:13:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/24 14:01:31 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int main(void)
 	{
 		ft_handle_interrupt_signals();
 		init->line = readline("Minishell:");
-		init->line = ft_strtrim(init->line, " ");
 		add_history(init->line);
 		ft_parsing_line(init);
 		ft_check_order(init);

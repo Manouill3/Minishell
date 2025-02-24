@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/24 11:02:24 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/24 16:43:11 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,20 @@
 #include <readline/history.h>
 #include "libft/libft.h"
 
+
+typedef struct s_list_char
+{
+	char				*data;
+	char				*name;
+	struct s_list_char	*next;
+	struct s_list_char	*prev;
+}						t_list_char;
+
 typedef struct s_init
 {
-    int     i;
-    char    *line;
-    char    **cmds;
-
+	int     i;
+	char    *line;
+	
 }			t_init;
 
 ////////////////////////////////////////
@@ -33,6 +41,7 @@ typedef struct s_init
 
 int     ft_strcmp(char *s1, char *s2);
 void    ft_free(t_init *init);
+char	*ft_strndup(const char *s, int n);
 
 ////////////////////////////////////////
 ///			Handle_signaux          ///
@@ -57,5 +66,12 @@ void    ft_parsing_line(t_init *init);
 //////////////////////////////////////
 
 void    token(t_init *init);
+
+////////////////////////////////////////
+///			utils/utils_lst.c		///
+//////////////////////////////////////
+
+t_list_char *ft_lstnew_char(char *str);
+void	ft_lstadd_back_char(t_list_char **lst, t_list_char *new);
 
 #endif
