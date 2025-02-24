@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/24 16:43:11 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/24 18:17:56 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void    token(t_init *init);
 ///			utils/utils_lst.c		///
 //////////////////////////////////////
 
-t_list_char *ft_lstnew_char(char *str);
+t_list_char *ft_lstnew_char(char *str, char *name);
 void	ft_lstadd_back_char(t_list_char **lst, t_list_char *new);
 
 #endif

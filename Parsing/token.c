@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/02/24 17:17:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/24 18:25:03 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    token(t_init *init)
 	int     i;
 	int     j;
 	char	*tmp;
-	t_list_char	**cmds = NULL;
+	t_list_char	*cmds;
 	t_list_char *test;
 	
 
@@ -28,23 +28,18 @@ void    token(t_init *init)
 		tmp = init->line;
 		init->line = ft_strtrim(tmp, " ");
 		free(tmp);
-		if (ft_strncmp(init->line, "echo", 3) == 0)
+		if (ft_strncmp(init->line, "echo", 4) == 0)
 		{
-			ft_strlcpy(tmp, init->line, 4);
-			if (!cmds)
-			{
-				*cmds = ft_lstnew_char(tmp);
-				test = *cmds;
-			}
-			else 
-				ft_lstadd_back_char(cmds, ft_lstnew_char(tmp));
+			ft_strlcpy(tmp, init->line, 5);
+			ft_lstadd_back_char(&cmds, ft_lstnew_char(tmp, "1"));
 			i += 4;
 		}
 		i = j + 10;
 	}
+	test = cmds;
 	while (test != NULL)
 	{
-		printf("%s -> ", test->data);
+		printf("data = %s -> name = %s\n", test->data, test->name);
 		test = test->next;
 	}
 }
