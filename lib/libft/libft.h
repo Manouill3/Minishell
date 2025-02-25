@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/24 14:40:42 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/25 15:20:57 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,8 @@ void		ft_lstdelone(t_list *lst);
 void		ft_lstclear(t_list **lst);
 void		ft_lstiter(t_list *lst, void (*f)(int));
 t_list		*ft_lstmap(t_list *lst, int (*f)(int));
+int 		get_quote(int i, const char *s);
+int 		get_double_quote(int i, const char *s);
+int 		ft_split_quote(const char *s, int k, int i, char **tab);
 
 #endif

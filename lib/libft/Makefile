@@ -6,7 +6,7 @@
 #    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 14:01:00 by mdegache          #+#    #+#              #
-#    Updated: 2024/12/19 09:10:56 by mdegache         ###   ########.fr        #
+#    Updated: 2025/02/25 14:53:02 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ SRC = ft_atoi.c\
         ft_strmapi.c\
         ft_striteri.c\
         ft_strtrim.c\
-        ft_split.c
+        ft_split.c\
+        ft_utils_split.c
 
 OBJ = $(SRC:.c=.o)
 

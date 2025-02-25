@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/25 14:02:15 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:34:04 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,16 @@ static int	len_first_tab(const char *s, char c)
 	{
 		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			count++;
-		if (s[i] == '"')
+		if (s[i] == '"' || s[i] == 39)
 		{
-			while(s[i] != '"')
-				i++;
+			if (s[i] == '"')
+				i = get_double_quote(i, s);	
+			else				i = get_quote(i, s);
+			count++;
 		}
 		i++;
 	}
-	printf("||| nb_mot = %d |||", count);
+	printf("||| nb_mot = %d |||\n", count);
 	return (count);
 }
 
@@ -87,6 +89,14 @@ char	**ft_split(char const *s, char c)
 	{
 		j = 0;
 		k = secu(k, c, s);
+		if (s[k] == '"' || s[k] == 39)
+		{
+			k = ft_split_quote(s, k, i, tab);
+			i++;
+			printf("k = %d\n", k);
+			if (k > (int)ft_strlen(s) - 1)
+				break;
+		}
 		tab[i - 1] = ft_calloc(len_word(s, k, c) + 1, sizeof(char));
 		if (!tab[i - 1])
 			free_all(tab);
