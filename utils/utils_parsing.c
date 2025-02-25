@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:40:44 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/24 13:06:11 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/25 13:41:14 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,19 @@ void    ft_free(t_init *init)
     if (init)
         free(init);
     return ;
+}
+
+void    ft_free_tab(char **tab)
+{
+    int i;
+
+    i = 0;
+    while (tab[i])
+    {
+        free(tab[i]);
+        i++;
+    }
+    free(tab);
 }
 
 char	*ft_strndup(const char *s, int n)

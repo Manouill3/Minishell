@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/24 14:01:31 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/25 13:38:17 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(void)
 		ft_check_order(init);
 		if(ft_strcmp(init->line, "exit") == 0)
 		{
-			free(init->line);
+			ft_free(init);
 			rl_clear_history();
 			exit(0);
 		}

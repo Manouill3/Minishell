@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/24 18:17:56 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/25 13:41:23 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_init
 {
 	int     i;
 	char    *line;
+	char	**tab;
 	
 }			t_init;
 
@@ -41,6 +42,7 @@ typedef struct s_init
 
 int     ft_strcmp(char *s1, char *s2);
 void    ft_free(t_init *init);
+void    ft_free_tab(char **tab);
 char	*ft_strndup(const char *s, int n);
 
 ////////////////////////////////////////

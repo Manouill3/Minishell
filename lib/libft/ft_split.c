@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2024/10/16 14:54:43 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:02:15 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
+#include <stdio.h>////// commenrtaire
 
 static void	free_all(char	**tab)
 {
@@ -45,10 +47,16 @@ static int	len_first_tab(const char *s, char c)
 	count = 0;
 	while (s[i])
 	{
-		if (s[i] != c && (s [i + 1] == c || s[i + 1] == '\0'))
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			count++;
+		if (s[i] == '"')
+		{
+			while(s[i] != '"')
+				i++;
+		}
 		i++;
 	}
+	printf("||| nb_mot = %d |||", count);
 	return (count);
 }
 
