@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/26 10:07:15 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:20:15 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,7 @@ int	len_first_tab(const char *s, char c)
 			count++;
 		if (s[i] == '"' || s[i] == 39)
 		{
-			if (s[i] == '"')
-				i = get_double_quote(i, s);	
-			else				
+			if (s[i] == '"' || s[i] == 39)				
 				i = get_quote(i, s);
 			count++;
 		}

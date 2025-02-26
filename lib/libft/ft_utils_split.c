@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/26 10:05:29 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:24:21 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 int get_quote(int i, const char *s)
 {
-    i++;
-    while(s[i] != 39)
+    if (s[i] == 39)
+    {
         i++;
-    return(i);
-}
-
-int get_double_quote(int i, const char *s)
-{
-    i++;
-    while(s[i] != '"')
+        while(s[i] != 39)
+            i++;
+    }
+    else
+    {
         i++;
+        while(s[i] != '"')
+            i++;
+    }
     return(i);
 }
 
@@ -89,4 +90,9 @@ char    **exec_all(const char *s, int k, int i, char **tab, char c)
             tab[i - 1][j++] = s[k++];
     }
     return (tab);
+}
+
+int is_white(char c)
+{
+    return ((c >= 9 && c <= 13) || c = 32)
 }
