@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/02/26 10:41:08 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/26 18:10:40 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,22 @@
 void    token(t_init *init)
 {
 	int			i;
-	// t_list_char	*cmds;
-	// t_list_char *test;
+	t_list_char	*cmds 
 	
+	cmds = NULL;
 	init->tab = ft_split(init->line);
 	i = 0;
 	while (init->tab[i])
 	{
-		printf("init->tab = %s i = %d\n", init->tab[i], i);
+		ft_lstadd_back_char(&cmds, ft_lstnew_char(init->tab[i]));
+		if (init->tab[i][0] == '<' || init->tab[i][0] == '>' || init->tab[i][0] == '|')
+			cmds->name = "Operator";
+		printf("data %s\n", cmds->data);
+		printf("name %s\n", cmds->name);
+		cmds = cmds->next;
 		i++;
 	}
+	ft_lstclear_char(&cmds);
 	ft_free_tab(init->tab);
 }
 
