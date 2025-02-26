@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/02/25 13:41:36 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:41:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    token(t_init *init)
 	// t_list_char	*cmds;
 	// t_list_char *test;
 	
-	init->tab = ft_split(init->line, ' ');
+	init->tab = ft_split(init->line);
 	i = 0;
 	while (init->tab[i])
 	{

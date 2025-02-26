@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/26 10:26:08 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:48:39 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void		ft_striteri(char *s, void (*f)(unsigned int, char*));
 char		*ft_strtrim(char const *s1, char const *set);
-char		**ft_split(char const *s, char c);
+char		**ft_split(char const *s);
 t_list		*ft_lstnew(int content);
 void		ft_lstadd_front(t_list **lst, t_list *new);
 int			ft_lstsize(t_list *lst);
@@ -65,14 +65,14 @@ void		ft_lstdelone(t_list *lst);
 void		ft_lstclear(t_list **lst);
 void		ft_lstiter(t_list *lst, void (*f)(int));
 t_list		*ft_lstmap(t_list *lst, int (*f)(int));
-int 		get_quote(int i, const char *s);
-int 		ft_split_quote(const char *s, int k, int i, char **tab);
-int 		ft_check_quote(const char *s, int k, int i, char **tab, char c);
-int			secu(int k, char c, char const *s);
-char    	**exec_all(const char *s, int k, int i, char **tab, char c);
-int			len_word(const char *s, int start, char c);
+int			get_quote(int i, const char *s);
+int			ft_split_quote(const char *s, int k, int i, char **tab);
+int			ft_check_quote(const char *s, int k, int i, char **tab);
+int			secu(int k, char const *s);
+char		**exec_all(const char *s, int k, int i, char **tab);
+int			len_word(const char *s, int start);
 void		free_all(char	**tab);
-int			len_first_tab(const char *s, char c);
-int 	is_white(char c);
+int			len_first_tab(const char *s);
+int			is_white(char c);
 
 #endif
