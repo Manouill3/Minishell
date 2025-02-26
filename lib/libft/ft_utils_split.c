@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/25 15:22:33 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:05:29 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,37 @@ int ft_split_quote(const char *s, int k, int i, char **tab)
     return (k);
 }
 
+int ft_check_quote(const char *s, int k, int i, char **tab, char c)
+{
+    k = secu(k, c, s);
+	if (s[k] == '"' || s[k] == 39)
+	{
+		k = ft_split_quote(s, k, i, tab);
+		i++;
+		k = secu(k, c, s);
+	}
+    return (k);
+}
+
+char    **exec_all(const char *s, int k, int i, char **tab, char c)
+{
+    int j;
+    int nb_word;
+    
+    nb_word = len_first_tab(s, c);
+    while (i++ < nb_word)
+    {
+        j = 0;
+        k = ft_check_quote(s, k, i, tab, c);
+        if (tab[i - 1] != NULL)
+            i++;
+        if (k > (int)ft_strlen(s) - 1)
+            break;
+        tab[i - 1] = ft_calloc(len_word(s, k, c) + 1, sizeof(char));
+        if (!tab[i - 1])
+            free_all(tab);
+        while (s[k] != c && s[k])
+            tab[i - 1][j++] = s[k++];
+    }
+    return (tab);
+}

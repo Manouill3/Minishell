@@ -6,14 +6,14 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/25 15:34:04 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:07:15 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>////// commenrtaire
 
-static void	free_all(char	**tab)
+void	free_all(char	**tab)
 {
 	char	**tmp;
 
@@ -23,7 +23,7 @@ static void	free_all(char	**tab)
 	free(tmp);
 }
 
-static int	len_word(const char *s, int start, char c)
+int	len_word(const char *s, int start, char c)
 {
 	int	i;
 	int	cmp;
@@ -38,7 +38,7 @@ static int	len_word(const char *s, int start, char c)
 	return (cmp);
 }
 
-static int	len_first_tab(const char *s, char c)
+int	len_first_tab(const char *s, char c)
 {
 	int	i;
 	int	count;
@@ -53,7 +53,8 @@ static int	len_first_tab(const char *s, char c)
 		{
 			if (s[i] == '"')
 				i = get_double_quote(i, s);	
-			else				i = get_quote(i, s);
+			else				
+				i = get_quote(i, s);
 			count++;
 		}
 		i++;
@@ -62,7 +63,7 @@ static int	len_first_tab(const char *s, char c)
 	return (count);
 }
 
-static int	secu(int k, char c, char const *s)
+int	secu(int k, char c, char const *s)
 {
 	while (s[k] == c && s[k])
 		k++;
@@ -72,7 +73,6 @@ static int	secu(int k, char c, char const *s)
 char	**ft_split(char const *s, char c)
 {
 	int			i;
-	int			j;
 	int			k;
 	int			nb_word;
 	char		**tab;
@@ -85,23 +85,6 @@ char	**ft_split(char const *s, char c)
 	tab = ft_calloc(nb_word + 1, sizeof(char *));
 	if (!tab)
 		return (0);
-	while (i++ < nb_word)
-	{
-		j = 0;
-		k = secu(k, c, s);
-		if (s[k] == '"' || s[k] == 39)
-		{
-			k = ft_split_quote(s, k, i, tab);
-			i++;
-			printf("k = %d\n", k);
-			if (k > (int)ft_strlen(s) - 1)
-				break;
-		}
-		tab[i - 1] = ft_calloc(len_word(s, k, c) + 1, sizeof(char));
-		if (!tab[i - 1])
-			free_all(tab);
-		while (s[k] != c && s[k])
-			tab[i - 1][j++] = s[k++];
-	}
+	tab = exec_all(s, k, i, tab, c);
 	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/25 15:20:57 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:05:17 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,10 @@ t_list		*ft_lstmap(t_list *lst, int (*f)(int));
 int 		get_quote(int i, const char *s);
 int 		get_double_quote(int i, const char *s);
 int 		ft_split_quote(const char *s, int k, int i, char **tab);
-
+int 		ft_check_quote(const char *s, int k, int i, char **tab, char c);
+int			secu(int k, char c, char const *s);
+char    	**exec_all(const char *s, int k, int i, char **tab, char c);
+int			len_word(const char *s, int start, char c);
+void		free_all(char	**tab);
+int			len_first_tab(const char *s, char c);
 #endif
