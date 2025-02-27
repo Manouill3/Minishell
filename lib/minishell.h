@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/27 09:26:22 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:36:41 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int     ft_strcmp(char *s1, char *s2);
 void    ft_free(t_init *init);
 void    ft_free_tab(char **tab);
 char	*ft_strndup(const char *s, int n);
+void	ft_get_start(t_list_char **tok);
 
 ////////////////////////////////////////
 ///			Handle_signaux          ///

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:40:44 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/25 13:41:14 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:35:23 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,10 @@ char	*ft_strndup(const char *s, int n)
 	tab[i] = '\0';
 	return (tab);
 }
+
+void	ft_get_start(t_list_char **tok)
+{
+    while ((*tok)->prev)
+        *tok = (*tok)->prev;
+}
+

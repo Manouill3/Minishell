@@ -6,14 +6,14 @@
 #    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 14:01:00 by mdegache          #+#    #+#              #
-#    Updated: 2025/02/27 08:18:18 by mdegache         ###   ########.fr        #
+#    Updated: 2025/02/27 16:17:58 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 CC = cc -c
-CFLAGS = -Wall -Werror -Wextra -I.
+CFLAGS = -Wall -Werror -Wextra -I. -g
 AR = ar rcs
 
 SRC = ft_atoi.c\

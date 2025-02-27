@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/26 10:47:50 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/27 11:20:19 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,22 @@ int	ft_split_quote(const char *s, int k, int i, char **tab)
 	tmp = k + 1;
 	j = 0;
 	k++;
-	count = 0;
+	count = 2;
 	while (s[tmp] != q)
 	{
 		tmp++;
 		count++;
 	}
 	tab[i - 1] = ft_calloc(count + 1, sizeof(char));
+	tab[i - 1][j++] = '"';
 	while (s[k] != q)
 	{
 		tab[i - 1][j] = s[k];
 		j++;
 		k++;
 	}
-	k++;
-	return (k);
+	tab[i - 1][j] = s[k];
+	return (k);                                                                                                           
 }
 
 int	ft_check_quote(const char *s, int k, int i, char **tab)
@@ -63,6 +64,7 @@ int	ft_check_quote(const char *s, int k, int i, char **tab)
 	if (s[k] == '"' || s[k] == 39)
 	{
 		k = ft_split_quote(s, k, i, tab);
+		k++;
 		i++;
 		k = secu(k, s);
 	}
