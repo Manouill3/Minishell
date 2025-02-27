@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   Parsing1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/02/24 11:20:34 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/27 08:44:50 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void    ft_parsing_line(t_init *init)
+void    ft_parsing_line(t_init *init, char **env)
 {
     token(init);
+    get_env(init, env);
 }

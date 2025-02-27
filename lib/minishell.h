@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/26 15:42:59 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/27 09:26:22 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_init
 	int     i;
 	char    *line;
 	char	**tab;
+	struct	s_list_char	*env;
+	struct	s_list_char	*tok;
 	
 }			t_init;
 
@@ -61,13 +63,14 @@ void    ft_check_order(t_init *init);
 ///			Parsing/parsing1.c      ///
 //////////////////////////////////////
 
-void    ft_parsing_line(t_init *init);
+void    ft_parsing_line(t_init *init, char **env);
 
 ////////////////////////////////////////
 ///			Parsing/token.c         ///
 //////////////////////////////////////
 
 void    token(t_init *init);
+void 	get_env(t_init *init, char **env);
 
 ////////////////////////////////////////
 ///			utils/utils_lst.c		///

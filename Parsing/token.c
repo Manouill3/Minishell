@@ -3,34 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/02/26 18:10:40 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/02/27 09:34:16 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
+void get_env(t_init *init, char **env)
+{
+	int	i;
+
+	i = 0;;
+	init->env = NULL;
+	while (env[i])
+	{
+		ft_lstadd_back_char(&init->env, ft_lstnew_char(env[i]));
+		i++;
+		init->env = init->env->next;
+	}
+}
+
 void    token(t_init *init)
 {
 	int			i;
-	t_list_char	*cmds 
 	
-	cmds = NULL;
+	init->tok = NULL;
 	init->tab = ft_split(init->line);
 	i = 0;
 	while (init->tab[i])
 	{
-		ft_lstadd_back_char(&cmds, ft_lstnew_char(init->tab[i]));
+		ft_lstadd_back_char(&init->tok, ft_lstnew_char(init->tab[i]));
 		if (init->tab[i][0] == '<' || init->tab[i][0] == '>' || init->tab[i][0] == '|')
-			cmds->name = "Operator";
-		printf("data %s\n", cmds->data);
-		printf("name %s\n", cmds->name);
-		cmds = cmds->next;
+			init->tok->name = "Operator";
+		init->tok = init->tok->next;
 		i++;
 	}
-	ft_lstclear_char(&cmds);
 	ft_free_tab(init->tab);
 }
 
