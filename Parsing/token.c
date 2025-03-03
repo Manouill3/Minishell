@@ -6,11 +6,24 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/02/27 16:44:48 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/03 10:41:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
+
+void	print_lst(t_list_char *lst)
+{
+	t_list_char	*curr;
+
+	curr = lst;
+	while (curr)
+	{
+		printf("name : %s\n", curr->name);
+		printf("data : %s\n", curr->data);
+		curr = curr->next;
+	}
+}
 
 void get_env(t_init *init, char **env)
 {
@@ -22,41 +35,39 @@ void get_env(t_init *init, char **env)
 	{
 		ft_lstadd_back_char(&init->env, ft_lstnew_char(env[i]));
 		i++;
-		init->env = init->env->next;
 	}
 }
 
-void	ft_check_name(t_init *init)
+void	ft_check_name(t_init **init)
 {
-	ft_lstadd_back_char(&init->tok, ft_lstnew_char(init->tab[init->i]));
-	if (init->tab[init->i][0] == '<' || init->tab[init->i][0] == '>' || init->tab[init->i][0] == '|')
-		init->tok->name = "Operator";
-	else if (init->tab[init->i][0] == '-')
-		init->tok->name = "flag";
-	else if (init->i == 0 || init->tab[init->i - 1][0] == '|')
-		init->tok->name = "cmd";
+	t_list_char *new_node;
+	
+	new_node = ft_lstnew_char((*init)->tab[(*init)->i]);
+	if ((*init)->tab[(*init)->i][0] == '<' || (*init)->tab[(*init)->i][0] == '>' || (*init)->tab[(*init)->i][0] == '|')
+		new_node->name = "Operator";
+	else if ((*init)->tab[(*init)->i][0] == '-')
+		new_node->name = "flag";
+	else if ((*init)->i == 0 || (*init)->tab[(*init)->i - 1][0] == '|')
+		new_node->name = "cmd";
 	else
-		init->tok->name = "arg";
+		new_node->name = "arg";
+	ft_lstadd_back_char(&(*init)->tok, new_node);
 }
 
 void    token(t_init *init)
-{
+{	
 	init->tok = NULL;
 	init->tab = ft_split(init->line);
 	init->i = 0;
 	while (init->tab[init->i])
 	{
-		ft_check_name(init); 
+		ft_check_name(&init);
 		init->i++;
-		if (init->tok->next == NULL)
-			break ;
-		init->tok = init->tok->next;
 	}
-	ft_free_tab(init->tab);
-	if (init->tok != NULL)
-		ft_get_start(&init->tok);
+	print_lst(init->tok);
 }
 
+//////////////////////////////
 // {
 // 	int     i;
 // 	int     j;

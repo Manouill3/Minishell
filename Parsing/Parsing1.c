@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/02/27 16:49:32 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/03 09:19:57 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void    ft_parsing_line(t_init *init, char **env)
 {
 	token(init);
 	get_env(init, env);
-	if (ft_strcmp(init->tok->name, "flag"))
-		ft_parsing_flag(init);
-	if (ft_strcmp(init->tok->name, "Operator"))
-		ft_parsing_operator(init);
+	// if (ft_strcmp(init->tok->name, "flag"))
+	// 	ft_parsing_flag(init);
+	// if (ft_strcmp(init->tok->name, "Operator"))
+	// 	ft_parsing_operator(init);
 	
 }
