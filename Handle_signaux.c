@@ -23,6 +23,7 @@ static void	sigint_handler(int sig)
     }
 }
 
+
 void    ft_handle_interrupt_signals(void)
 {
     struct sigaction    sigint;
@@ -30,4 +31,5 @@ void    ft_handle_interrupt_signals(void)
     ft_bzero(&sigint, sizeof(sigint));
 	sigint.sa_handler = &sigint_handler;
 	sigaction(SIGINT, &sigint, NULL);
+	sigaction(SIGQUIT, &(struct sigaction){.sa_handler = SIG_IGN}, NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/03 10:41:39 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:40:05 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,20 @@ void get_env(t_init *init, char **env)
 	}
 }
 
-void	ft_check_name(t_init **init)
+void	ft_check_name(t_init *init)
 {
 	t_list_char *new_node;
 	
-	new_node = ft_lstnew_char((*init)->tab[(*init)->i]);
-	if ((*init)->tab[(*init)->i][0] == '<' || (*init)->tab[(*init)->i][0] == '>' || (*init)->tab[(*init)->i][0] == '|')
+	new_node = ft_lstnew_char(init->tab[init->i]);
+	if (init->tab[init->i][0] == '<' || init->tab[init->i][0] == '>' || init->tab[init->i][0] == '|')
 		new_node->name = "Operator";
-	else if ((*init)->tab[(*init)->i][0] == '-')
+	else if (init->tab[init->i][0] == '-')
 		new_node->name = "flag";
-	else if ((*init)->i == 0 || (*init)->tab[(*init)->i - 1][0] == '|')
+	else if (init->i == 0 || init->tab[init->i - 1][0] == '|')
 		new_node->name = "cmd";
 	else
 		new_node->name = "arg";
-	ft_lstadd_back_char(&(*init)->tok, new_node);
+	ft_lstadd_back_char(&init->tok, new_node);
 }
 
 void    token(t_init *init)
@@ -61,10 +61,10 @@ void    token(t_init *init)
 	init->i = 0;
 	while (init->tab[init->i])
 	{
-		ft_check_name(&init);
+		ft_check_name(init);
 		init->i++;
 	}
-	print_lst(init->tok);
+	// print_lst(init->tok);
 }
 
 //////////////////////////////
