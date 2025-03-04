@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/04 10:12:06 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/04 10:25:31 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,6 @@ void	ft_lstclear_char(t_list_char **lst);
 ///			Heredoc/Heredock.c		///
 //////////////////////////////////////
 
+void    ft_heredoc(t_init *init);
 
 #endif

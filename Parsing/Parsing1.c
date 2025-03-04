@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parsing1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/03 14:48:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/04 10:54:06 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void    ft_parsing_line(t_init *init, char **env)
 			ft_parsing_operator(tmp->data);
 		tmp = tmp->next;
 	}
-	
+	ft_heredoc(init);
 }
