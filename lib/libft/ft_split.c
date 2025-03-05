@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/26 10:44:14 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/04 13:42:28 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int	len_first_tab(const char *s)
 			count++;
 		if (s[i] == '"' || s[i] == 39)
 		{
-			if (s[i] == '"' || s[i] == 39)
-				i = get_quote(i, s);
+			i = get_quote(i, s, s[i]);
 			count++;
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/26 10:48:39 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/04 13:41:23 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "stdlib.h"
 # include "unistd.h"
+# include "stdio.h"
 
 typedef struct s_list
 {
@@ -65,7 +66,7 @@ void		ft_lstdelone(t_list *lst);
 void		ft_lstclear(t_list **lst);
 void		ft_lstiter(t_list *lst, void (*f)(int));
 t_list		*ft_lstmap(t_list *lst, int (*f)(int));
-int			get_quote(int i, const char *s);
+int			get_quote(int i, const char *s, char c);
 int			ft_split_quote(const char *s, int k, int i, char **tab);
 int			ft_check_quote(const char *s, int k, int i, char **tab);
 int			secu(int k, char const *s);

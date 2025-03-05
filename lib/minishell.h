@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/04 10:25:31 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/04 15:49:00 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,12 @@ void	ft_lstclear_char(t_list_char **lst);
 ///			Heredoc/Heredock.c		///
 //////////////////////////////////////
 
-void    ft_heredoc(t_init *init);
+void    ft_heredoc(t_list_char *lst);
+
+////////////////////////////////////////
+///			Parsing/expand.c		///
+//////////////////////////////////////
+
+void    ft_expand(t_list_char *lst, t_list_char *data);
 
 #endif

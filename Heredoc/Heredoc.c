@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   Heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:12:50 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/04 10:55:53 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/04 14:53:54 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void    ft_heredoc(t_init *init)
+void    ft_heredoc(t_list_char *lst)
 {
 	t_list_char *tmp;
 
-	tmp = init->tok;
+	tmp = lst;
 	while(tmp)
 	{
-		if (!ft_strcmp(tmp->name, "Operator") && !ft_strcmp(tmp->data, "<<"))
+		if (!ft_strcmp(tmp->name, "Operator") && !ft_strcmp("<<", tmp->data))
 		{
-			if ((ft_strcmp(tmp->prev->data, "cmd") || tmp->next == NULL))
+			if (!tmp->prev || ((ft_strcmp(tmp->prev->data, "cmd") && ft_strcmp(tmp->prev->data, "flag"))) || tmp->next == NULL)
 				perror("heredoc");
-			printf("GOOD");
+			else
+				printf("GOOD\n");
 		}
 		tmp = tmp->next;
-		printf("hello\n");
 	}
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
+#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/04 10:23:04 by tcybak           ###   ########.fr        #
+#    Updated: 2025/03/04 15:24:01 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,9 @@ SRC = main.c\
 	order/built_order.c\
 	Parsing/Parsing1.c\
 	Parsing/token.c\
-	Heredoc/Heredoc.c
+	Parsing/expand.c\
+	Heredoc/Heredoc.c\
+	
 
 OBJ = $(SRC:.c=.o)
 

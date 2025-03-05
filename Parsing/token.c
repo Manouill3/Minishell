@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/03 14:40:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:25:15 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void    token(t_init *init)
 		ft_check_name(init);
 		init->i++;
 	}
-	// print_lst(init->tok);
 }
 
 //////////////////////////////
