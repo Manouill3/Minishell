@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/04 15:48:03 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:28:07 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,6 @@ void    ft_parsing_line(t_init *init, char **env)
 			ft_parsing_operator(tmp->data);
 		tmp = tmp->next;
 	}
-	ft_heredoc(init->tok);
+	ft_check_heredoc(init->tok, init->heredoc);
 	ft_expand(init->tok, init->env);
-	ft_lstclear_char(&init->tok);
-	ft_lstclear_char(&init->env);
-	ft_free_tab(init->tab);
 }

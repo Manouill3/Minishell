@@ -6,7 +6,7 @@
 #    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/04 15:24:01 by mdegache         ###   ########.fr        #
+#    Updated: 2025/03/05 14:50:49 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ LIB = lib/libft
 LIBFT = lib/libft/libft.a
 
 SRC = main.c\
-	utils/utils_parsing.c\
+	Free/all_free.c\
+	Parsing/utils_parsing.c\
 	utils/utils_lst.c\
 	Handle_signaux.c\
 	order/built_order.c\
@@ -32,6 +33,7 @@ SRC = main.c\
 	Parsing/token.c\
 	Parsing/expand.c\
 	Heredoc/Heredoc.c\
+	Heredoc/utils_heredoc.c\
 	
 
 OBJ = $(SRC:.c=.o)

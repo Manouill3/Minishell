@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:40:44 by mdegache          #+#    #+#             */
-/*   Updated: 2025/02/27 16:35:23 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/05 10:24:41 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,6 @@ int ft_strcmp(char *s1, char *s2)
         i++;
     }
     return (0);
-}
-void    ft_free(t_init *init)
-{
-    if (init->line)
-        free(init->line);
-    if (init)
-        free(init);
-    return ;
-}
-
-void    ft_free_tab(char **tab)
-{
-    int i;
-
-    i = 0;
-    while (tab[i])
-    {
-        free(tab[i]);
-        i++;
-    }
-    free(tab);
 }
 
 char	*ft_strndup(const char *s, int n)

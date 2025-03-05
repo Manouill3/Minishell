@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/04 15:41:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:30:00 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,14 @@ int main(int ac, char **av, char **env)
 			init->line = readline("Minishell:");
 			if (init->line == NULL)
 			{
-				free(init->line);
-				free(init);
+				ft_free(init);
 				printf("exit\n");
 				exit (1);	
 			}
 			add_history(init->line);
 			ft_parsing_line(init, env);
 			ft_check_order(init);
-			free(init->line);
+			ft_free_all(init);
 		}
 	}
 }
