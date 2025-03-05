@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:12:50 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/05 15:38:52 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:57:35 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,13 @@ void	ft_heredoc(t_heredoc *heredoc)
 void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc)
 {
 	int			i;
+	int		count;
 	t_list_char *tmp;
 
 	tmp = lst;
 	i = 0;
+	count = count_heredoc(lst);
+	heredoc->eof = ft_calloc(count, sizeof(char *));
 	while(tmp)
 	{
 		if (!ft_strcmp(tmp->name, "Operator") && !ft_strcmp("<<", tmp->data))
@@ -79,7 +82,7 @@ void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc)
 				perror("heredoc");
 			else
 			{
-				tmp->next->data = heredoc->eof[i];
+				heredoc->eof[i] = tmp->next->data;
 				i++;
 			}
 		}

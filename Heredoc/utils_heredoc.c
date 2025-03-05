@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:51:02 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/05 15:11:04 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:54:38 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,25 @@ char	*ft_get_name(void)
 	}
 	close (fd);
 	return (ft_get_name());
+}
+
+int count_heredoc(t_list_char *lst)
+{
+    int			i;
+	t_list_char *tmp;
+
+	tmp = lst;
+	i = 0;
+    while(tmp)
+	{
+		if (!ft_strcmp(tmp->name, "Operator") && !ft_strcmp("<<", tmp->data))
+		{
+			if (!tmp->prev || ((ft_strcmp(tmp->prev->name, "cmd") && ft_strcmp(tmp->prev->name, "flag"))) || !tmp->next)
+				break;
+			else
+				i++;
+        }
+        tmp = tmp->next;
+    }
+    return (i);
 }

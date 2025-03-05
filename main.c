@@ -6,11 +6,25 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/05 15:30:00 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/05 16:10:03 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/minishell.h"
+
+int	ft_init(t_init **init)
+{
+	(*init) = malloc(sizeof(t_init));
+	if (!(*init))
+		return (1);
+	(*init)->heredoc = malloc(sizeof(t_heredoc));
+	if (!(*init)->heredoc)
+	{
+		free(init);
+		return (1);
+	}
+	return (0);
+}
 
 int main(int ac, char **av, char **env)
 {
@@ -18,13 +32,13 @@ int main(int ac, char **av, char **env)
 
 	if (ac == 1 && av[0] != NULL)
 	{
-		init = malloc(sizeof(t_init));
-		if (init == NULL)
-			return (0);
+		init = NULL;
+		if (ft_init(&init))
+			return(0);
 		ft_handle_interrupt_signals();
 		while(1)
 		{
-			init->line = readline("Minishell:");
+			init->line = readline("Minishell: ");
 			if (init->line == NULL)
 			{
 				ft_free(init);

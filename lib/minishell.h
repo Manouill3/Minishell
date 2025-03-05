@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/05 15:09:06 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/05 15:54:42 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ void    ft_free_all(t_init *init);
 
 char	*get_valid_char(char *buffer);
 char	*ft_get_name(void);
+int count_heredoc(t_list_char *lst);
 
 #endif
