@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 10:24:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/06 16:37:00 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:46:17 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void    ft_free_all(t_init *init)
 	if (init->env)
 		ft_lstclear_char(&init->env);
 	if (init->heredoc)
-		ft
+		free(init->heredoc);
 	if (init->pwd)
 		free(init->pwd);
 	if (init->line)

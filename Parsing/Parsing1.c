@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/06 16:14:42 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/06 17:36:32 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ void    ft_parsing_line(t_init *init, char **env)
 	ft_check_heredoc(init->tok, init->heredoc);
 	ft_heredoc(init->heredoc);
 	ft_expand(init->tok, init->env);
+	printf("name heredoc %s \n",  init->heredoc->name);
 	if (init->heredoc->name)
 		unlink(init->heredoc->name);
+	if (init->heredoc->name)
+		free(init->heredoc->name);
 }
