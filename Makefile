@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
+#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/05 14:50:49 by mdegache         ###   ########.fr        #
+#    Updated: 2025/03/06 15:38:47 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC = main.c\
 	utils/utils_lst.c\
 	Handle_signaux.c\
 	order/built_order.c\
+	order/built_cd.c\
 	Parsing/Parsing1.c\
 	Parsing/token.c\
 	Parsing/expand.c\

@@ -3,22 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   built_order.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:56:21 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/04 15:02:12 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:25:58 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void    ft_pwd(void)
+char    *ft_pwd(void)
 {
-    char *chemin = NULL;
+    char *way = NULL;
 
-    chemin = getcwd(NULL, 0); 
-    printf("Le chemin du repertoire est %s\n", chemin);
-    free(chemin);
+    way = getcwd(NULL, 0);
+    if (!way) {
+        free(way);
+        perror("getcwd");
+        return (NULL);
+    }
+    return (way);
 }
 
 void    ft_check_order(t_init *init)

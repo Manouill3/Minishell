@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 10:24:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/05 16:57:23 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:37:00 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void    ft_free(t_init *init)
 {
+	if (init->pwd)
+		free(init->pwd);
 	if (init->line)
 		free(init->line);
 	if (init)
@@ -39,6 +41,10 @@ void    ft_free_all(t_init *init)
 		ft_lstclear_char(&init->tok);
 	if (init->env)
 		ft_lstclear_char(&init->env);
+	if (init->heredoc)
+		ft
+	if (init->pwd)
+		free(init->pwd);
 	if (init->line)
 		free(init->line);
 	if (init->tab)

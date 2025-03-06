@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/05 15:54:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:29:32 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_list_char
 {
 	char				*data;
 	char				*name;
+	int					quote;
 	struct s_list_char	*next;
 	struct s_list_char	*prev;
 }						t_list_char;
@@ -41,6 +42,7 @@ typedef struct s_init
 {
 	int     i;
 	char    *line;
+	char	*pwd;
 	char	**tab;
 	struct	s_heredoc *heredoc;
 	struct	s_list_char	*env;
@@ -63,10 +65,15 @@ void	ft_get_start(t_list_char **tok);
 void    ft_handle_interrupt_signals(void);
 
 ////////////////////////////////////////
-///			Order/pwd.c             ///
+///			Order/built_order.c		///
 //////////////////////////////////////
 
+char	*ft_pwd(void);
 void    ft_check_order(t_init *init);
+
+////////////////////////////////////////
+///			Order/built_cd.c        ///
+//////////////////////////////////////
 
 ////////////////////////////////////////
 ///			Parsing/parsing1.c      ///

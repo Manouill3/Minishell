@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/05 16:31:21 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:30:40 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int main(int ac, char **av, char **env)
 		ft_handle_interrupt_signals();
 		while(1)
 		{
-			init->line = readline("Minishell: ");
+			init->pwd = ft_pwd();
+			init->line = readline((const char *)init->pwd);
 			if (init->line == NULL)
 			{
 				ft_free(init);

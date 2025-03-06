@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:43:33 by tcybak            #+#    #+#             */
-/*   Updated: 2025/02/26 16:49:39 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:14:12 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_list_char *ft_lstnew_char(char *str)
     lst->next = NULL;
 	lst->prev = NULL;
 	lst->name = NULL;
+	lst->quote = 0;
     return lst;
 }
 
