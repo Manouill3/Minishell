@@ -6,28 +6,48 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:56:21 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/06 16:25:58 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/06 18:09:47 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char    *ft_pwd(void)
+char    *get_pwd(void)
 {
-    char *way = NULL;
-
+    char *way;
+    char *path;
+    
     way = getcwd(NULL, 0);
     if (!way) {
         free(way);
         perror("getcwd");
         return (NULL);
     }
-    return (way);
+    path = ft_strjoin(way, "$ ");
+    free(way);
+    return (path);
 }
 
+void ft_pwd()
+{
+    char *pwd;
+    
+    pwd = get_pwd();
+    printf("%s\n", pwd);
+    free(pwd);        
+}
 void    ft_check_order(t_init *init)
 {
-    if (ft_strcmp(init->line, "pwd") == 0)
-        ft_pwd();
+	t_list_char	*tmp;
+
+	tmp = init->tok;
+    while(tmp)
+    {
+        if (!ft_strcmp(tmp->data, "pwd") && !ft_strcmp(tmp->name, "cmd"))
+            ft_pwd();
+        if (!ft_strcmp(tmp->data, "cd") && !ft_strcmp(tmp->name, "cmd"))
+            ft_cd(init);
+        tmp = tmp->next;
+    }    
     return ;
 }

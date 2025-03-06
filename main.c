@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/06 16:30:40 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/06 18:08:55 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int main(int ac, char **av, char **env)
 		ft_handle_interrupt_signals();
 		while(1)
 		{
-			init->pwd = ft_pwd();
-			init->line = readline((const char *)init->pwd);
+			init->pwd = get_pwd();
+			init->line = readline(init->pwd);
 			if (init->line == NULL)
 			{
 				ft_free(init);
@@ -48,7 +48,6 @@ int main(int ac, char **av, char **env)
 			}
 			add_history(init->line);
 			ft_parsing_line(init, env);
-			ft_check_order(init);
 			ft_free_all(init);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:12:50 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/06 16:06:33 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/06 18:11:55 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc)
 	i = 0;
 	count = count_heredoc(lst);
 	heredoc->eof = ft_calloc(count + 1, sizeof(char *));
+	if (!heredoc->eof)
+		return ;
 	while(tmp)
 	{
 		if (!ft_strcmp(tmp->name, "Operator") && !ft_strcmp("<<", tmp->data))

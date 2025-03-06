@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/06 16:29:32 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/06 18:06:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_heredoc
 	char	*name;
 	char	*input;
 	char	**eof;
-}	t_heredoc;
+}			t_heredoc;
 
 typedef struct s_list_char
 {
@@ -68,12 +68,15 @@ void    ft_handle_interrupt_signals(void);
 ///			Order/built_order.c		///
 //////////////////////////////////////
 
-char	*ft_pwd(void);
+char	*get_pwd(void);
+void 	ft_pwd();
 void    ft_check_order(t_init *init);
 
 ////////////////////////////////////////
 ///			Order/built_cd.c        ///
 //////////////////////////////////////
+
+void    ft_cd(t_init *init);
 
 ////////////////////////////////////////
 ///			Parsing/parsing1.c      ///

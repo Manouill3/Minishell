@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:51:02 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/05 16:58:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:58:40 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	*get_valid_char(char *buffer)
 
 	i = 0;
 	j = 0;
-	res = ft_calloc(100, sizeof(char));
+	res = ft_calloc(40, sizeof(char));
 	if (res == NULL)
 		return (NULL);
-	while (buffer[j] && i < 100)
+	while (buffer[j] && i < 40)
 	{
 		if (ft_isalnum(buffer[j]))
 		{

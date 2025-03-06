@@ -6,13 +6,14 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:37:36 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/06 17:36:57 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/06 17:56:02 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-// void    ft_cd(t_init *init)
-// {
-    
-// }
+void    ft_cd(t_init *init)
+{
+	(void)init;
+	printf("GOOD");
+}
