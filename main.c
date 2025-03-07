@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/06 18:08:55 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/07 10:48:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int	ft_init(t_init **init)
 		free(init);
 		return (1);
 	}
+	(*init)->heredoc->name = NULL;
+	(*init)->heredoc->eof = NULL;
 	return (0);
 }
 

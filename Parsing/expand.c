@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:05:45 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/04 16:57:36 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/07 10:17:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static char	*ft_var_tmp(t_list_char *tmp, int i)
 	int		j;
 	char	*tmp_var_env;
 
-	i++;
 	j = 0;
+	i++;
 	tmp_var_env = ft_calloc(ft_strlen(&tmp->data[i]) + 1, sizeof(char));
 	if (!tmp_var_env)
 		return (NULL);

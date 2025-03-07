@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:12:50 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/06 18:11:55 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/07 10:48:10 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,22 +71,25 @@ void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc)
 	tmp = lst;
 	i = 0;
 	count = count_heredoc(lst);
-	heredoc->eof = ft_calloc(count + 1, sizeof(char *));
-	if (!heredoc->eof)
-		return ;
-	while(tmp)
+	if (count > 0)
 	{
-		if (!ft_strcmp(tmp->name, "Operator") && !ft_strcmp("<<", tmp->data))
+		heredoc->eof = ft_calloc(count + 1, sizeof(char *));
+		if (!heredoc->eof)
+			return ;
+		while(tmp)
 		{
-			if (!tmp->prev || ((ft_strcmp(tmp->prev->name, "cmd") && ft_strcmp(tmp->prev->name, "flag"))) || !tmp->next)
-				perror("heredoc");
-			else
+			if (!ft_strcmp(tmp->name, "Operator") && !ft_strcmp("<<", tmp->data))
 			{
-				heredoc->eof[i] = tmp->next->data;
-				i++;
+				if (!tmp->prev || ((ft_strcmp(tmp->prev->name, "cmd") && ft_strcmp(tmp->prev->name, "flag"))) || !tmp->next)
+					perror("heredoc");
+				else
+				{
+					heredoc->eof[i] = tmp->next->data;
+					i++;
+				}
 			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
 }
 
