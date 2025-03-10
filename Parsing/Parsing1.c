@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/07 10:53:41 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:50:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,21 @@ void	ft_parsing_flag(char *name, char *data)
 	}
 }
 
+void	ft_parsing_check_quote(char *data, int *quote)
+{
+	int	i;
+
+	i = 0;
+	while(data[i])
+	{
+		if (data[i] == '"')
+			*quote = 2;
+		else if (data[i] == 39)
+			*quote = 1;
+		i++;
+	}
+}
+
 void    ft_parsing_line(t_init *init, char **env)
 {
 	t_list_char *tmp;
@@ -63,16 +78,18 @@ void    ft_parsing_line(t_init *init, char **env)
 			ft_parsing_flag(tmp->name, tmp->data);
 		if (!ft_strcmp(tmp->name, "Operator"))
 			ft_parsing_operator(tmp->data);
+		if (!ft_strcmp(tmp->name, "arg"))
+			ft_parsing_check_quote(tmp->data, &tmp->quote);
 		tmp = tmp->next;
 	}
-	ft_check_heredoc(init->tok, init->heredoc);
+ 	ft_check_heredoc(init->tok, init->heredoc);
 	if (init->heredoc->eof)
-	{
-		printf("HERE NAME\n");
 		ft_heredoc(init->heredoc);
-	}
 	ft_expand(init->tok, init->env);
 	ft_check_order(init);
 	if (init->heredoc->name)
+	{
 		unlink(init->heredoc->name);
+		free(init->heredoc->name);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:12:50 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/07 10:48:10 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:45:02 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc)
 					perror("heredoc");
 				else
 				{
-					heredoc->eof[i] = tmp->next->data;
+					heredoc->eof[i] = ft_strdup(tmp->next->data);
 					i++;
 				}
 			}

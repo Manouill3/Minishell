@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/06 18:06:08 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/10 15:23:57 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ void    ft_parsing_line(t_init *init, char **env);
 
 void    token(t_init *init);
 void 	get_env(t_init *init, char **env);
+void	print_lst(t_list_char *lst);
 
 ////////////////////////////////////////
 ///			utils/utils_lst.c		///
