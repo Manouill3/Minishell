@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/10 15:23:57 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 09:50:14 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,14 @@ void	ft_lstdelone_char(t_list_char *lst);
 void	ft_lstclear_char(t_list_char **lst);
 
 ////////////////////////////////////////
-///			Heredoc/Heredock.c		///
+///			Heredoc/Heredoc.c		///
 //////////////////////////////////////
 
 void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc);
 void	ft_heredoc(t_heredoc *heredoc);
 void	ft_heredoc_oef_before(t_heredoc *heredoc, int i);
 void	ft_heredoc_oef_last(t_heredoc *heredoc, int i);
+char	*get_eof(char *data, char *eof);
 
 ////////////////////////////////////////
 ///			Parsing/expand.c		///

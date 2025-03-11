@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:12:50 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/10 16:45:02 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 09:57:03 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,27 @@ void	ft_heredoc(t_heredoc *heredoc)
 	}
 }
 
+char	*get_eof(char *data, char *eof)
+{
+	int	i;
+	int	j;
+	
+	i = 0;
+	j = 0;
+	eof = ft_calloc(ft_strlen(data) + 1, sizeof(char));
+	while (data[i])
+	{
+		if (data[i] != '"' && data[i] != 39)
+		{
+			eof[j] = data[i];
+			j++;
+		}
+		i++;
+	}
+	return (eof);
+}
+
+
 void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc)
 {
 	int			i;
@@ -84,12 +105,19 @@ void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc)
 					perror("heredoc");
 				else
 				{
-					heredoc->eof[i] = ft_strdup(tmp->next->data);
+					heredoc->eof[i] = get_eof(tmp->next->data, heredoc->eof[i]);
+					if (!heredoc->eof[i][0])
+					{
+						tmp = tmp->next;
+						heredoc->eof[i] = get_eof(tmp->next->data, heredoc->eof[i]);
+					}
 					i++;
 				}
 			}
 			tmp = tmp->next;
 		}
+		if (heredoc->eof[0] != NULL)
+			ft_heredoc(heredoc);
 	}
 }
 

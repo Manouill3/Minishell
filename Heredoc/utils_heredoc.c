@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 14:51:02 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/10 11:31:38 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 09:59:27 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	*get_valid_char(char *buffer)
 
 	i = 0;
 	j = 0;
-	res = ft_calloc(100, sizeof(char));
+	res = ft_calloc(10, sizeof(char));
 	if (res == NULL)
 		return (NULL);
-	while (buffer[j] && i < 100)
+	while (buffer[j] && i < 9)
 	{
 		if (ft_isalnum(buffer[j]))
 		{
@@ -48,6 +48,7 @@ char	*ft_get_name(void)
     bytes = read(fd, buffer, 1000);
 	if (bytes == -1)
         return (NULL);
+	buffer[bytes] = '\0';
 	valid_name = get_valid_char(buffer);
 	if (access(valid_name, F_OK))
 	{

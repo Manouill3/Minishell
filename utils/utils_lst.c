@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:43:33 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/10 15:50:07 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 09:45:45 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,5 @@ void	ft_lstdelone_char(t_list_char *lst)
 {
 	if (!lst)
 		return ;
-	// if (lst->data)
-	// 	free(lst->data);
 	free(lst);
 }
