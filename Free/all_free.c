@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 10:24:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/10 16:19:59 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:01:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void    ft_free(t_init *init)
 {
+	if (init->env)
+		ft_lstclear_char(&init->env);
 	if (init->pwd)
 		free(init->pwd);
 	if (init->line)
@@ -30,24 +32,29 @@ void    ft_free_tab(char **tab)
 	int i;
 
 	i = 0;
-	while (tab[i])
+	while (tab && tab[i])
 	{
 		if (tab[i])
 			free(tab[i]);
 		i++;
 	}
-	free(tab);
+	if (tab)
+		free(tab);
 }
 void    ft_free_all(t_init *init)
 {
-	if (init->env)
-		ft_lstclear_char(&init->env);
 	if (init->tok)
 		ft_lstclear_char(&init->tok);
 	if (init->tab)
+	{
 		ft_free_tab(init->tab);
+		init->tab = NULL;
+	}
 	if (init->heredoc->eof)
+	{
 		ft_free_tab(init->heredoc->eof);
+		init->heredoc->eof = NULL;
+	}
 	if (init->pwd)
 		free(init->pwd);
 	if (init->line)

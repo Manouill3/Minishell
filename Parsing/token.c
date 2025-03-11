@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/10 15:54:40 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:57:49 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	print_lst(t_list_char *lst)
 	{
 		printf("name : %s\n", curr->name);
 		printf("data : %s\n", curr->data);
+		printf("var : %s\n", curr->var);
 		curr = curr->next;
 	}
 }
@@ -64,5 +65,6 @@ void    token(t_init *init)
 		ft_check_name(init);
 		init->i++;
 	}
+	
 }
 

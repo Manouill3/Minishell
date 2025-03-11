@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/11 09:50:25 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:57:08 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,11 @@ void    ft_parsing_line(t_init *init, char **env)
 {
 	t_list_char *tmp;
 
-	get_env(init, env);
+	(void)env;
 	token(init);
 	tmp = init->tok;
 	while (tmp)
 	{
-		printf("checkname :%s\n", tmp->name);
-		printf("checkdata :%s\n", tmp->data);
 		if (!ft_strcmp(tmp->name, "flag"))
 			ft_parsing_flag(tmp->name, tmp->data);
 		if (!ft_strcmp(tmp->name, "Operator"))
@@ -83,10 +81,13 @@ void    ft_parsing_line(t_init *init, char **env)
 		tmp = tmp->next;
 	}
  	ft_check_heredoc(init->tok, init->heredoc);
+	ft_expand(init->tok, init->env);
+	print_lst(init->tok);
 	// ft_check_order(init);
-	if (init->heredoc->name)
+	if (init->heredoc->name != NULL)
 	{
 		unlink(init->heredoc->name);
 		free(init->heredoc->name);
+		init->heredoc->name = NULL;
 	}
 }

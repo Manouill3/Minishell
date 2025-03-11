@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/11 09:50:14 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:55:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_heredoc
 typedef struct s_list_char
 {
 	char				*data;
+	char				*var;
 	char				*name;
 	int					quote;
 	struct s_list_char	*next;

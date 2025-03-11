@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/11 09:46:19 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:59:35 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int main(int ac, char **av, char **env)
 		if (ft_init(&init))
 			return(0);
 		ft_handle_interrupt_signals();
+		get_env(init, env);
 		while(1)
 		{
 			init->pwd = get_pwd();
@@ -48,9 +49,12 @@ int main(int ac, char **av, char **env)
 				printf("exit\n");
 				exit (1);	
 			}
-			add_history(init->line);
-			ft_parsing_line(init, env);
-			ft_free_all(init);
+			if(init->line[0] != '\0')
+			{
+				add_history(init->line);
+				ft_parsing_line(init, env);
+				ft_free_all(init);
+			}
 		}
 	}
 }

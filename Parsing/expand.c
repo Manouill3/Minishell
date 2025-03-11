@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:05:45 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/10 11:07:29 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:56:27 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void    ft_expand(t_list_char *lst, t_list_char *env)
 {
 	int			i;
 	char		*var_tmp;
+	int			start;
 	t_list_char *tmp;
 	t_list_char	*tmp_env;
 
@@ -54,7 +55,13 @@ void    ft_expand(t_list_char *lst, t_list_char *env)
 					while(tmp_env)
 					{
 						if (!ft_strcmp(var_tmp, tmp_env->data))
+						{
+							start = 0;
+							while(tmp_env->data[start] != '=')
+								start++;
+							tmp->var = ft_substr(tmp_env->data, start + 1, ft_strlen(tmp_env->data) - start + 1);
 							break ;
+						}
 						tmp_env = tmp_env->next;
 					}
 					free(var_tmp);
