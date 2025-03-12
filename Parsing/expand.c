@@ -6,13 +6,13 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:05:45 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/11 13:56:27 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:39:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-static char	*ft_var_tmp(t_list_char *tmp, int i)
+char	*ft_var_tmp(t_list_char *tmp, int i)
 {
 	int		j;
 	char	*tmp_var_env;
@@ -31,7 +31,7 @@ static char	*ft_var_tmp(t_list_char *tmp, int i)
 	return (tmp_var_env);
 }
 
-void    ft_expand(t_list_char *lst, t_list_char *env)
+void    ft_expand_test(t_list_char *lst, t_list_char *env)
 {
 	int			i;
 	char		*var_tmp;
@@ -59,7 +59,6 @@ void    ft_expand(t_list_char *lst, t_list_char *env)
 							start = 0;
 							while(tmp_env->data[start] != '=')
 								start++;
-							tmp->var = ft_substr(tmp_env->data, start + 1, ft_strlen(tmp_env->data) - start + 1);
 							break ;
 						}
 						tmp_env = tmp_env->next;

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/11 13:55:32 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:35:09 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ typedef struct s_heredoc
 typedef struct s_list_char
 {
 	char				*data;
-	char				*var;
 	char				*name;
 	int					quote;
 	struct s_list_char	*next;
@@ -83,7 +82,8 @@ void    ft_cd(t_init *init);
 ///			Parsing/parsing1.c      ///
 //////////////////////////////////////
 
-void    ft_parsing_line(t_init *init, char **env);
+void    ft_parsing_line(t_init *init);
+void	ft_parsing_check_quote(char *data, int *quote);
 
 ////////////////////////////////////////
 ///			Parsing/token.c         ///
@@ -92,6 +92,7 @@ void    ft_parsing_line(t_init *init, char **env);
 void    token(t_init *init);
 void 	get_env(t_init *init, char **env);
 void	print_lst(t_list_char *lst);
+char	*quote_out(char *cont, char quote);
 
 ////////////////////////////////////////
 ///			utils/utils_lst.c		///
@@ -116,7 +117,8 @@ char	*get_eof(char *data, char *eof);
 ///			Parsing/expand.c		///
 //////////////////////////////////////
 
-void    ft_expand(t_list_char *lst, t_list_char *data);
+void    ft_expand_test(t_list_char *lst, t_list_char *data);
+char	*ft_var_tmp(t_list_char *tmp, int i);
 
 ////////////////////////////////////////
 ///			Free/all_free.c 		///

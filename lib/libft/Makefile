@@ -6,14 +6,21 @@
 #    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 14:01:00 by mdegache          #+#    #+#              #
-#    Updated: 2025/02/27 16:17:58 by mdegache         ###   ########.fr        #
+#    Updated: 2025/03/12 14:54:16 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 CC = cc -c
+
+LIBFT_MALLOC_DEBUG      ?= 0
+
 CFLAGS = -Wall -Werror -Wextra -I. -g
+ifeq ($(LIBFT_MALLOC_DEBUG), 1)
+        CFLAGS += -DLIBFT_MALLOC_DEBUG=1
+endif
+
 AR = ar rcs
 
 SRC = ft_atoi.c\
@@ -50,7 +57,8 @@ SRC = ft_atoi.c\
         ft_striteri.c\
         ft_strtrim.c\
         ft_split.c\
-        ft_utils_split.c
+        ft_utils_split.c\
+        ft_test_malloc.c
 
 OBJ = $(SRC:.c=.o)
 
