@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/11 14:20:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:12:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,34 @@ void	ft_parsing_flag(char *name, char *data)
 void	ft_parsing_check_quote(char *data, int *quote)
 {
 	int	i;
+	char	*tmp;
 
 	i = 0;
+	tmp = NULL;
 	while(data[i])
 	{
 		if (data[i] == '"')
+		{
 			*quote = 2;
+			tmp = data;
+			data = quote_out(data, '"');
+			free(tmp);
+		}
 		else if (data[i] == 39)
+		{
 			*quote = 1;
+			tmp = data;
+			data = quote_out(data, 39);
+			free(tmp);
+		}
 		i++;
 	}
 }
 
-void    ft_parsing_line(t_init *init, char **env)
+void    ft_parsing_line(t_init *init)
 {
 	t_list_char *tmp;
 
-	(void)env;
 	token(init);
 	tmp = init->tok;
 	while (tmp)
@@ -81,7 +92,6 @@ void    ft_parsing_line(t_init *init, char **env)
 		tmp = tmp->next;
 	}
  	ft_check_heredoc(init->tok, init->heredoc);
-	ft_expand(init->tok, init->env);
 	print_lst(init->tok);
 	if (init->heredoc->name != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 14:43:33 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/11 13:56:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:32:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_list_char *ft_lstnew_char(char *str)
     if (!lst)
         return NULL;
     lst->data = str;
-	lst->var  = NULL;
     lst->next = NULL;
 	lst->prev = NULL;
 	lst->name = NULL;
@@ -65,6 +64,8 @@ void	ft_lstclear_char(t_list_char **lst)
 	while (*lst)
 	{
 		tmp = (*lst)->next;
+		if ((*lst)->data)
+			free((*lst)->data);
 		ft_lstdelone_char(*lst);
 		*lst = tmp;
 	}

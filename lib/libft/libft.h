@@ -6,16 +6,27 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/04 13:41:23 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:53:15 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include "stdlib.h"
-# include "unistd.h"
-# include "stdio.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+
+// a retirer   
+# ifdef LIBFT_MALLOC_DEBUG
+
+#  define malloc(X)	__test_malloc(X, __FILE__, __LINE__, __func__)
+#  define free(X)	__test_free(X, __FILE__, __LINE__, __func__)
+
+void    *__test_malloc(size_t size, const char *file, int line, const char *func);
+void    __test_free(void *ptr, const char *file, int line, const char *func);
+
+# endif
 
 typedef struct s_list
 {
