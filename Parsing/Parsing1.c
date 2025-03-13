@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Parsing1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/12 14:12:39 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:55:26 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void    ft_parsing_line(t_init *init)
 	}
  	ft_check_heredoc(init->tok, init->heredoc);
 	print_lst(init->tok);
+	ft_exceve(init);
 	if (init->heredoc->name != NULL)
 	{
 		unlink(init->heredoc->name);

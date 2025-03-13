@@ -6,7 +6,7 @@
 #    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/13 15:55:51 by tcybak           ###   ########.fr        #
+#    Updated: 2025/03/13 17:46:43 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC = main.c\
 	Parsing/expand_2.c\
 	Heredoc/Heredoc.c\
 	Heredoc/utils_heredoc.c\
+	exec/exec.c\
 	
 
 OBJ = $(SRC:.c=.o)

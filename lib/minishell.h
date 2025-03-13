@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/13 17:41:33 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/13 17:55:11 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ char	*expand_quote(t_list_char *tmp, char *data);
 
 char	*quote_out(char *cont, char quote);
 char	*get_quote_back(char *data, char quote);
+char	*ft_expand_rest(t_init *init, char *data, char *content, int i);
 char	*ft_expand(t_init *init);
 
 ////////////////////////////////////////
@@ -155,5 +156,11 @@ void    ft_free_all(t_init *init);
 char	*get_valid_char(char *buffer);
 char	*ft_get_name(void);
 int 	count_heredoc(t_list_char *lst);
+
+////////////////////////////////////////
+///		Heredoc/utils_Heredock.c	///
+//////////////////////////////////////
+
+void	ft_exceve(t_init *init);
 
 #endif
