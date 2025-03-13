@@ -14,12 +14,7 @@ NAME = libft.a
 
 CC = cc -c
 
-LIBFT_MALLOC_DEBUG      ?= 0
-
 CFLAGS = -Wall -Werror -Wextra -I. -g
-ifeq ($(LIBFT_MALLOC_DEBUG), 1)
-        CFLAGS += -DLIBFT_MALLOC_DEBUG=1
-endif
 
 AR = ar rcs
 
