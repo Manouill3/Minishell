@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/13 15:35:51 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:41:33 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_init
 	int     i;
 	char    *line;
 	char	*pwd;
+	char 	*tmp_data;
 	char	**tab;
 	struct	s_heredoc *heredoc;
 	struct	s_list_char	*env;
@@ -122,13 +123,21 @@ void	ft_heredoc_oef_before(t_heredoc *heredoc, int i);
 void	ft_heredoc_oef_last(t_heredoc *heredoc, int i);
 char	*get_eof(char *data, char *eof);
 
+
+////////////////////////////////////////
+///			Parsing/expand_2.c		///
+//////////////////////////////////////
+
+char    *verif_simple_quote(char *tmp_data, char *data);
+char    *ft_value_var(char *tmp_data, t_list_char *tmp, int i);
+char	*expand_quote(t_list_char *tmp, char *data);
+
 ////////////////////////////////////////
 ///			Parsing/expand.c		///
 //////////////////////////////////////
 
 char	*quote_out(char *cont, char quote);
 char	*get_quote_back(char *data, char quote);
-char	*expand_quote(t_list_char *tmp, char *data);
 char	*ft_expand(t_init *init);
 
 ////////////////////////////////////////
