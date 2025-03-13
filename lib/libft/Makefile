@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
+#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 14:01:00 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/12 14:54:16 by mdegache         ###   ########.fr        #
+#    Updated: 2025/03/13 11:17:30 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,7 @@ SRC = ft_atoi.c\
         ft_striteri.c\
         ft_strtrim.c\
         ft_split.c\
-        ft_utils_split.c\
-        ft_test_malloc.c
+        ft_utils_split.c
 
 OBJ = $(SRC:.c=.o)
 

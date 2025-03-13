@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/12 14:35:09 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/13 11:12:38 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void    ft_check_order(t_init *init);
 ///			Order/built_cd.c        ///
 //////////////////////////////////////
 
-void    ft_cd(t_init *init);
+void    ft_cd(t_list_char *lst);
 
 ////////////////////////////////////////
 ///			Parsing/parsing1.c      ///

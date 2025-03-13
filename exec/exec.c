@@ -6,11 +6,11 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:48:39 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/13 10:50:39 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:08:27 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
 
-void    ft
+void    ft_verif_input()

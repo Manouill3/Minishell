@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 14:56:21 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/06 18:09:47 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:17:03 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void    ft_check_order(t_init *init)
         if (!ft_strcmp(tmp->data, "pwd") && !ft_strcmp(tmp->name, "cmd"))
             ft_pwd();
         if (!ft_strcmp(tmp->data, "cd") && !ft_strcmp(tmp->name, "cmd"))
-            ft_cd(init);
+            ft_cd(tmp);
         tmp = tmp->next;
     }    
     return ;
