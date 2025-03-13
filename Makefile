@@ -6,7 +6,7 @@
 #    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/06 15:38:47 by tcybak           ###   ########.fr        #
+#    Updated: 2025/03/13 15:55:51 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC = main.c\
 	Parsing/Parsing1.c\
 	Parsing/token.c\
 	Parsing/expand.c\
+	Parsing/expand_2.c\
 	Heredoc/Heredoc.c\
 	Heredoc/utils_heredoc.c\
 	

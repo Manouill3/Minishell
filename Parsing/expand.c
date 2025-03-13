@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:05:45 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/13 15:21:53 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:46:57 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,48 +53,6 @@ char	*get_quote_back(char *data, char quote)
 	return (res);
 }
 
-char	*expand_quote(t_list_char *tmp, char *data)
-{
-	int	i;
-	char *res;
-	char *tmp_data;
-	
-	i = 0;
-	tmp_data = data;
-	data = quote_out(data, 39);
-	free(tmp_data);
-	tmp_data = NULL;
-	if (data[0] != '$')
-	{
-		tmp_data = data;
-		data = get_quote_back(data, 39);
-		free(tmp_data);
-		tmp_data = NULL;
-		return (data);
-	}
-	tmp_data = data;
-	data = quote_out(data, '$');
-	free(tmp_data);
-	tmp_data = NULL;
-	while (tmp && ft_strcmp(data, tmp->data))
-		tmp = tmp->next;
-	if (!tmp)
-	{
-		tmp_data = data;
-		data = get_quote_back(data, 39);
-		free(tmp_data);
-		tmp_data = NULL;
-		return(data);
-	}
-	free(data);
-	while (tmp && tmp->data[i] && tmp->data[i] != '=')
-		i++;
-	res = ft_substr(tmp->data, i + 1, ft_strlen(tmp->data) - i + 1);
-	tmp_data = res;
-	res = get_quote_back(res, 39);
-	free(tmp_data);
-	return (res);
-}
 
 char	*ft_expand(t_init *init)
 {
