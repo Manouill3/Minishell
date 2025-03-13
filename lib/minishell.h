@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/13 11:12:38 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/13 15:35:51 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,24 @@ typedef struct s_init
 }			t_init;
 
 ////////////////////////////////////////
-///			utils/utils_parsing	    ///
+///			main.c	                ///
+//////////////////////////////////////
+
+int		ft_init(t_init **init);
+
+////////////////////////////////////////
+///			utils/utils_parsing.c   ///
 //////////////////////////////////////
 
 int     ft_strcmp(char *s1, char *s2);
 char	*ft_strndup(const char *s, int n);
-void	ft_get_start(t_list_char **tok);
 
 ////////////////////////////////////////
-///			Handle_signaux          ///
+///			Handle_signaux.c        ///
 //////////////////////////////////////
 
 void    ft_handle_interrupt_signals(void);
+void	sigint_handler(int sig);
 
 ////////////////////////////////////////
 ///			Order/built_order.c		///
@@ -84,6 +90,8 @@ void    ft_cd(t_list_char *lst);
 
 void    ft_parsing_line(t_init *init);
 void	ft_parsing_check_quote(char *data, int *quote);
+void	ft_parsing_flag(char *name, char *data);
+void    ft_parsing_operator(char *data);
 
 ////////////////////////////////////////
 ///			Parsing/token.c         ///
@@ -92,7 +100,7 @@ void	ft_parsing_check_quote(char *data, int *quote);
 void    token(t_init *init);
 void 	get_env(t_init *init, char **env);
 void	print_lst(t_list_char *lst);
-char	*quote_out(char *cont, char quote);
+void	ft_check_name(t_init *init);
 
 ////////////////////////////////////////
 ///			utils/utils_lst.c		///
@@ -102,6 +110,7 @@ t_list_char *ft_lstnew_char(char *str);
 void	ft_lstadd_back_char(t_list_char **lst, t_list_char *new);
 void	ft_lstdelone_char(t_list_char *lst);
 void	ft_lstclear_char(t_list_char **lst);
+void	ft_init_list(t_list_char **lst);
 
 ////////////////////////////////////////
 ///			Heredoc/Heredoc.c		///
@@ -117,8 +126,10 @@ char	*get_eof(char *data, char *eof);
 ///			Parsing/expand.c		///
 //////////////////////////////////////
 
-void    ft_expand_test(t_list_char *lst, t_list_char *data);
-char	*ft_var_tmp(t_list_char *tmp, int i);
+char	*quote_out(char *cont, char quote);
+char	*get_quote_back(char *data, char quote);
+char	*expand_quote(t_list_char *tmp, char *data);
+char	*ft_expand(t_init *init);
 
 ////////////////////////////////////////
 ///			Free/all_free.c 		///
@@ -134,6 +145,6 @@ void    ft_free_all(t_init *init);
 
 char	*get_valid_char(char *buffer);
 char	*ft_get_name(void);
-int count_heredoc(t_list_char *lst);
+int 	count_heredoc(t_list_char *lst);
 
 #endif

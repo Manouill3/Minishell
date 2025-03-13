@@ -6,68 +6,144 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:05:45 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/11 15:39:52 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:21:53 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char	*ft_var_tmp(t_list_char *tmp, int i)
+char	*quote_out(char *cont, char quote)
 {
-	int		j;
-	char	*tmp_var_env;
+	int	i;
+	int	j;
+	char	*tmp;
 
+	i = 0;
 	j = 0;
-	i++;
-	tmp_var_env = ft_calloc(ft_strlen(&tmp->data[i]) + 1, sizeof(char));
-	if (!tmp_var_env)
-		return (NULL);
-	while(tmp->data[i] && tmp->data[i] != '"')
+	tmp = ft_calloc(ft_strlen(cont) + 1, sizeof(char));
+	while (cont[i])
 	{
-		tmp_var_env[j] = tmp->data[i];
-		j++;
+		if (cont[i] != quote)
+		{
+			tmp[j] = cont[i];
+			j++;
+		}
 		i++;
 	}
-	return (tmp_var_env);
+	return (tmp);
 }
 
-void    ft_expand_test(t_list_char *lst, t_list_char *env)
+char	*get_quote_back(char *data, char quote)
 {
-	int			i;
-	char		*var_tmp;
-	int			start;
-	t_list_char *tmp;
-	t_list_char	*tmp_env;
+	int	i;
+	int	j;
+	char *res;
 
-	tmp = lst;
-	tmp_env = env;
-	var_tmp = NULL;
-	while(tmp)
+	i = 0;
+	j = 1;
+	res = ft_calloc(ft_strlen(data) + 3, sizeof(char));
+	res[0] = quote;
+	while(data[i])
 	{
-		i = 0;
-		if (tmp->data[0] != 39)
-		{
-			while(tmp->data[i])
-			{
-				if (tmp->data[i] == '$')
-				{
-					var_tmp = ft_var_tmp(tmp, i);
-					while(tmp_env)
-					{
-						if (!ft_strcmp(var_tmp, tmp_env->data))
-						{
-							start = 0;
-							while(tmp_env->data[start] != '=')
-								start++;
-							break ;
-						}
-						tmp_env = tmp_env->next;
-					}
-					free(var_tmp);
-				}
-				i++;
-			}
-		}
-		tmp = tmp->next;
+		res[j] = data[i];
+		i++;
+		j++;
 	}
+	res[j] = quote;
+	return (res);
+}
+
+char	*expand_quote(t_list_char *tmp, char *data)
+{
+	int	i;
+	char *res;
+	char *tmp_data;
+	
+	i = 0;
+	tmp_data = data;
+	data = quote_out(data, 39);
+	free(tmp_data);
+	tmp_data = NULL;
+	if (data[0] != '$')
+	{
+		tmp_data = data;
+		data = get_quote_back(data, 39);
+		free(tmp_data);
+		tmp_data = NULL;
+		return (data);
+	}
+	tmp_data = data;
+	data = quote_out(data, '$');
+	free(tmp_data);
+	tmp_data = NULL;
+	while (tmp && ft_strcmp(data, tmp->data))
+		tmp = tmp->next;
+	if (!tmp)
+	{
+		tmp_data = data;
+		data = get_quote_back(data, 39);
+		free(tmp_data);
+		tmp_data = NULL;
+		return(data);
+	}
+	free(data);
+	while (tmp && tmp->data[i] && tmp->data[i] != '=')
+		i++;
+	res = ft_substr(tmp->data, i + 1, ft_strlen(tmp->data) - i + 1);
+	tmp_data = res;
+	res = get_quote_back(res, 39);
+	free(tmp_data);
+	return (res);
+}
+
+char	*ft_expand(t_init *init)
+{
+	int	i;
+	char	*content;
+	char	*res;
+	char	*data;
+	t_list_char	*tmp_env;
+	char	*tmp_data;
+
+	i = 0;
+	data = NULL;
+	content = init->tab[init->i];
+	tmp_env  = init->env;
+	if (ft_strchr(content, '$'))
+	{
+		if ((content && content[0] == content[ft_strlen(content) - 1]
+			&& content[0] == '"') ||
+				content[0] != 39)
+		{
+			tmp_data = data;
+			data = quote_out(content, '"');
+			free(tmp_data);
+			tmp_data = NULL;
+			if (data[0] == 39)
+			{
+				res = expand_quote(tmp_env, data);
+				return (res);
+			}
+			if (data[0] != '$')
+			{
+				free(data);
+				return (ft_strdup(content));
+			}
+			tmp_data = data;
+			data = quote_out(data, '$');
+			free(tmp_data);
+			tmp_data = NULL;
+			while (tmp_env && ft_strcmp(data, tmp_env->data))
+				tmp_env = tmp_env->next;
+			free(data);
+			if (!tmp_env)
+				return(ft_strdup(content));
+			while (tmp_env && tmp_env->data[i] && tmp_env->data[i] != '=')
+				i++;
+			res = ft_substr(tmp_env->data, i + 1, ft_strlen(tmp_env->data) - i + 1);
+			return (res);
+		}
+	}
+	
+	return (ft_strdup(content));	
 }

@@ -12,7 +12,7 @@
 
 #include "lib/minishell.h"
 
-static void	sigint_handler(int sig)
+void	sigint_handler(int sig)
 {
     if (sig == 2)
     {

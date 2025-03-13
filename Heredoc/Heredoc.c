@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:12:50 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/11 10:48:47 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:34:28 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,4 +120,3 @@ void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc)
 			ft_heredoc(heredoc);
 	}
 }
-
