@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 10:24:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/13 11:20:56 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:28:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void    ft_free_all(t_init *init)
 		ft_lstclear_char(&init->tok);
 	if (init->tab)
 	{
-		ft_free_tab(init->tab);
+		// ft_free_tab(init->tab);
+		free(init->tab);
 		init->tab = NULL;
 	}
 	if (init->heredoc->eof)

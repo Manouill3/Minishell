@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:37:36 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/13 11:10:32 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/13 11:28:44 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ void	ft_rest_way_cd(t_list_char *lst, char *new_tmp)
 
 void    ft_cd(t_list_char *lst)
 {
-	int		len_pwd;
 	char	*new_tmp;
 	
 	ft_pwd();
 	new_tmp = get_pwd();
-	len_pwd = 0;
 	if (lst->next == NULL)
 	{
 		perror("cd");
