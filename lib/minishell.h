@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/18 15:51:11 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:00:39 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,12 @@ typedef struct s_list_char
 	struct s_list_char	*prev;
 }						t_list_char;
 
+typedef struct s_tab_file
+{
+	char	*name;
+	struct s_tab_file	*next;
+}			t_tab_file;
+
 typedef struct s_init
 {
 	int     i;
@@ -55,8 +61,9 @@ typedef struct s_init
 	char	*pwd;
 	char 	*tmp_data;
 	char	**tab;
-	struct  s_fds 	*fds;
-	struct	s_heredoc *heredoc;
+	struct	s_tab_file 	*file;
+	struct  s_fds 		*fds;
+	struct	s_heredoc 	*heredoc;
 	struct	s_list_char	*env;
 	struct	s_list_char	*tok;
 	

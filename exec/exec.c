@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:48:39 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/18 15:52:24 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:04:45 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_count_cmd(t_list_char *tok , t_fds *fds)
 		tmp = tmp->next;
 	}
 }
-void	ft_check_file(t_list_char *tok, t_fds *fds)
+void	ft_check_file(t_list_char *tok, t_fds *fds, t_tab_file *file)
 {
 	t_list_char *tmp;
 
@@ -59,13 +59,12 @@ void	ft_check_file(t_list_char *tok, t_fds *fds)
 			{
 				if (ft_strcmp(tmp->prev->prev->name, "cmd"))
 				{
-					
 					tmp->next->name = "cmd";
 				}	
 				// if (access(tmp->data, R_OK | F_OK) != -1)
 				// 	fds->fd_infile = open(tmp->data, O_RDONLY, 0644);
 				else
-					perror(infile);
+					perror("infile");
 			}
 			if  (!ft_strcmp(tmp->prev->data, ">"))
 			{
@@ -113,8 +112,6 @@ void	ft_exec_cmd(t_init *init)
 	if (init->fds->count_com != 1)
 		ft_fork();
 	verif_build();
-
-	
 }
 
 // void	ft_exceve(t_init *init)
