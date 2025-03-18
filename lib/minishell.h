@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/17 13:55:34 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:51:11 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct s_fds
 	int		fd_infile;
 	int		fd_outfile;
 	int		pipe_fd[2];
+	int		pid;
+	int		count_com;
+	char	**file;
 }			t_fds;
 
 typedef struct s_heredoc

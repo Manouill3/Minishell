@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 10:12:50 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/13 15:34:28 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/18 10:55:02 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc)
 					if (!heredoc->eof[i][0])
 					{
 						tmp = tmp->next;
+						free(heredoc->eof[i]);
+						heredoc->eof[i] = NULL;
 						heredoc->eof[i] = get_eof(tmp->next->data, heredoc->eof[i]);
 					}
 					i++;

@@ -7,6 +7,7 @@
         "string_view": "c",
         "span": "c",
         "libft.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "random": "c"
     }
 }

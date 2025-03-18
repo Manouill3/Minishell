@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/17 13:28:39 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:09:59 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,32 @@ void	ft_parsing_flag(char *name, char *data)
 	}
 }
 
-void	ft_parsing_check_quote(char *data, int *quote)
-{
-	int	i;
-	char	*tmp;
+// void	ft_parsing_check_quote(char *data, int *quote)
+// {
+// 	int	i;
+// 	char	*tmp;
 
-	i = 0;
-	tmp = NULL;
-	while(data[i])
-	{
-		if (data[i] == '"')
-		{
-			*quote = 2;
-			tmp = data;
-			data = quote_out(data, '"');
-			free(tmp);
-		}
-		else if (data[i] == 39)
-		{
-			*quote = 1;
-			tmp = data;
-			data = quote_out(data, 39);
-			free(tmp);
-		}
-		i++;
-	}
-}
+// 	i = 0;
+// 	tmp = NULL;
+// 	while(data[i])
+// 	{
+// 		if (data[i] == '"')
+// 		{
+// 			*quote = 2;
+// 			tmp = data;
+// 			data = quote_out(data, '"');
+// 			free(tmp);
+// 		}
+// 		else if (data[i] == 39)
+// 		{
+// 			*quote = 1;
+// 			tmp = data;
+// 			data = quote_out(data, 39);
+// 			free(tmp);
+// 		}
+// 		i++;
+// 	}
+// }
 
 void    ft_parsing_line(t_init *init)
 {
@@ -87,13 +87,11 @@ void    ft_parsing_line(t_init *init)
 			ft_parsing_flag(tmp->name, tmp->data);
 		if (!ft_strcmp(tmp->name, "Operator"))
 			ft_parsing_operator(tmp->data);
-		if (!ft_strcmp(tmp->name, "arg"))
-			ft_parsing_check_quote(tmp->data, &tmp->quote);
 		tmp = tmp->next;
 	}
  	ft_check_heredoc(init->tok, init->heredoc);
 	print_lst(init->tok);
-	ft_exec_cmd(init);
+	ft_exec_cmd(init->tok, init->fds);
 	if (init->heredoc->name != NULL)
 	{
 		unlink(init->heredoc->name);
