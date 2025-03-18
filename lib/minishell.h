@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/13 17:55:11 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/17 13:55:34 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@
 #include <readline/history.h>
 #include "libft/libft.h"
 
+
+typedef struct s_fds
+{
+	int		fd_infile;
+	int		fd_outfile;
+	int		pipe_fd[2];
+}			t_fds;
 
 typedef struct s_heredoc
 {
@@ -45,6 +52,7 @@ typedef struct s_init
 	char	*pwd;
 	char 	*tmp_data;
 	char	**tab;
+	struct  s_fds 	*fds;
 	struct	s_heredoc *heredoc;
 	struct	s_list_char	*env;
 	struct	s_list_char	*tok;
