@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
+#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/13 17:46:43 by tcybak           ###   ########.fr        #
+#    Updated: 2025/03/19 09:54:18 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,19 +48,19 @@ $(NAME): $(LIBFT) $(OBJ)
 	@echo "$(GREEN)SUCCESS$(RESET)"
 
 $(LIBFT):
-	@$(MAKE) -C $(LIB) bonus
+	@$(MAKE) -s -C $(LIB) bonus
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ)
-	@$(MAKE) -C $(LIB) clean
+	@$(MAKE) -s -C $(LIB) clean
 	@echo "$(PURPLE)CLEAN$(RESET)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) -C $(LIB) fclean
+	@$(MAKE) -s -C $(LIB) fclean
 	@echo "$(RED)FCLEAN$(RESET)"
 
 re: fclean all

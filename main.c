@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/12 14:49:16 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:58:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ int	ft_init(t_init **init)
 	if (!(*init)->heredoc)
 	{
 		free(init);
+		return (1);
+	}
+	(*init)->fds = malloc(sizeof(t_fds));
+	if (!(*init)->fds)
+	{
+		free(init);
+		free((*init)->heredoc);
 		return (1);
 	}
 	(*init)->heredoc->name = NULL;

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 10:35:41 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/18 11:09:59 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/19 10:38:12 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void    ft_parsing_line(t_init *init)
 	}
  	ft_check_heredoc(init->tok, init->heredoc);
 	print_lst(init->tok);
-	ft_exec_cmd(init->tok, init->fds);
+	ft_exec_cmd(init);
 	if (init->heredoc->name != NULL)
 	{
 		unlink(init->heredoc->name);

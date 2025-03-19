@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
+#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 14:01:00 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/13 11:29:32 by tcybak           ###   ########.fr        #
+#    Updated: 2025/03/19 09:50:28 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,40 +19,40 @@ CFLAGS = -Wall -Werror -Wextra -I. -g
 AR = ar rcs
 
 SRC = ft_atoi.c\
-        ft_bzero.c\
-        ft_isalnum.c\
-        ft_isalpha.c\
-        ft_isascii.c\
-        ft_isdigit.c\
-        ft_isprint.c\
-        ft_memchr.c\
-        ft_memcmp.c\
-        ft_memcpy.c\
-        ft_memmove.c\
-        ft_memset.c\
-        ft_strchr.c\
-        ft_strlcat.c\
-        ft_strlcpy.c\
-        ft_strlen.c\
-        ft_strncmp.c\
-        ft_strnstr.c\
-        ft_strrchr.c\
-        ft_tolower.c\
-        ft_toupper.c\
-        ft_calloc.c\
-        ft_strdup.c\
-        ft_substr.c\
-        ft_itoa.c\
-        ft_putchar_fd.c\
-        ft_putstr_fd.c\
-        ft_putendl_fd.c\
-        ft_putnbr_fd.c\
-        ft_strjoin.c\
-        ft_strmapi.c\
-        ft_striteri.c\
-        ft_strtrim.c\
-        ft_split.c\
-        ft_utils_split.c
+	ft_bzero.c\
+	ft_isalnum.c\
+	ft_isalpha.c\
+	ft_isascii.c\
+	ft_isdigit.c\
+	ft_isprint.c\
+	ft_memchr.c\
+	ft_memcmp.c\
+	ft_memcpy.c\
+	ft_memmove.c\
+	ft_memset.c\
+	ft_strchr.c\
+	ft_strlcat.c\
+	ft_strlcpy.c\
+	ft_strlen.c\
+	ft_strncmp.c\
+	ft_strnstr.c\
+	ft_strrchr.c\
+	ft_tolower.c\
+	ft_toupper.c\
+	ft_calloc.c\
+	ft_strdup.c\
+	ft_substr.c\
+	ft_itoa.c\
+	ft_putchar_fd.c\
+	ft_putstr_fd.c\
+	ft_putendl_fd.c\
+	ft_putnbr_fd.c\
+	ft_strjoin.c\
+	ft_strmapi.c\
+	ft_striteri.c\
+	ft_strtrim.c\
+	ft_split.c\
+	ft_utils_split.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -71,17 +71,17 @@ OBJ_BONUS = $(BONUS:.c=.o) $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		@$(CC) $(SRC) $(CFLAGS)
-		@$(AR) $(NAME) -o $^
+	@$(CC) $(SRC) $(CFLAGS)
+	@$(AR) $(NAME) -o $^
 
 bonus : $(OBJ_BONUS)
-	       	@$(CC) $(SRC) $(BONUS) $(CFLAGS)
-		@$(AR) $(NAME) -o $^
+	@$(CC) $(SRC) $(BONUS) $(CFLAGS)
+	@$(AR) $(NAME) -o $^
 
 clean:
-		@rm -f $(OBJ_BONUS)
-    
+	@rm -f $(OBJ_BONUS)
+
 fclean: clean
-		@rm -f $(NAME)
-    
+	@rm -f $(NAME)
+
 re: fclean all
