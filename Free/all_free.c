@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 10:24:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/20 11:11:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/20 13:07:45 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void    ft_free_all(t_init *init)
 	}
 	if (init->fds->file_input)
 	{
-		ft_free_tab(init->fds->file_input);
+		free(init->fds->file_input);
 		init->fds->file_input = NULL;
 	}
 	if (init->fds->file_output)
 	{
-		ft_free_tab(init->fds->file_output);
+		free(init->fds->file_output);
 		init->fds->file_output = NULL;
 	}	
 }

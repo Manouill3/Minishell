@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:48:39 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/20 13:00:52 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/20 13:19:20 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	ft_list_file(t_list_char *tok, t_fds *fds)
 	while (tmp)
 	{
 		if (( !ft_strcmp(tmp->data, ">") || !ft_strcmp(tmp->data, ">>")) && tmp->next->data != NULL)
-			count_input++;
-		if (!ft_strcmp(tmp->data, "<"))
 			count_output++;
+		if (!ft_strcmp(tmp->data, "<"))
+			count_input++;
 		tmp = tmp->next;
 	}
-	fds->file_input = ft_calloc(count_input + 1, sizeof(char*));
-	fds->file_output = ft_calloc(count_output + 1, sizeof(char*));
+	fds->file_input = ft_calloc(count_input + 1, sizeof(char *));
+	fds->file_output = ft_calloc(count_output + 1, sizeof(char *));
 }
 
 void	ft_check_file(t_list_char *tok, t_fds *fds)
@@ -88,17 +88,17 @@ void	ft_check_file(t_list_char *tok, t_fds *fds)
 				i++;
 				// if (ft_strcmp(tmp->prev->prev->name, "cmd"))
 				// 	tmp->next->name = "cmd";	
-				if (access(tmp->data, R_OK | F_OK) != -1)
-					fds->fd_infile = open(tmp->data, O_RDONLY, 0644);
-				else
-					perror("infile");
+				// if (access(tmp->data, R_OK | F_OK) != -1)
+				// 	fds->fd_infile = open(tmp->data, O_RDONLY, 0644);
+				// else
+				// 	perror("infile");
 			}
 			if  (!ft_strcmp(tmp->prev->data, ">") || !ft_strcmp(tmp->prev->data, ">>"))
 			{
 				fds->file_output[j] = tmp->data;
 				j++;
-				if (ft_strcmp(tmp->prev->prev->name, "cmd"))
-					tmp->next->name = "cmd";
+				// if (ft_strcmp(tmp->prev->prev->name, "cmd"))
+				// 	tmp->next->name = "cmd";
 				// if (access(tmp->data, F_OK | W_OK) != -1)
 				// 	fds->fd_outfile = open(tmp->data, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 				// else
@@ -109,20 +109,20 @@ void	ft_check_file(t_list_char *tok, t_fds *fds)
 			}
 		}
 		tmp = tmp->next;
-		i = 0;
-		while(fds->file_input[i])
-		{
-			printf("nom file input =%s\n", fds->file_input[i]);	
-			i++;
-			printf("i = %d\n", i);
-		}
-		i = 0;
-		while(fds->file_output[i])
-		{
-			printf("nom file output =%s\n", fds->file_output[i]);	
-			i++;
-			printf("i = %d\n", i);
-		}
+	}
+	i = 0;
+	while(fds->file_input[i])
+	{
+		printf("nom file input =%s\n", fds->file_input[i]);	
+		i++;
+		printf("i = %d\n", i);
+	}
+	i = 0;
+	while(fds->file_output[i])
+	{
+		printf("nom file output =%s\n", fds->file_output[i]);	
+		i++;
+		printf("i = %d\n", i);
 	}
 }
 
@@ -134,49 +134,3 @@ void	ft_exec_cmd(t_init *init)
 		// ft_fork();
 	verif_build(init->tok);
 }
-// void	ft_child_process(t_list_char *tok, t_fds *fds)
-// {
-// 	t_list_char *tmp;
-
-// 	tmp = tok;
-// 	if ()
-// }
-
-// void	ft_fork(t_init *init)
-// {
-// 	init->fds->pid = fork();
-// 	if (param->fd.pid == -1)
-//     {
-//         perror("pid");
-//         exit (127);
-//     }
-// 	if (param->fd.pid == 0)
-// 		ft_child_process();
-// 	else
-// 		ft_parent_process();
-// }
-
-
-// void	ft_exceve(t_init *init)
-// {
-// 	int		build;
-// 	// int		fd_pid;
-// 	// char	*data;
-// 	t_list_char	*tmp;
-
-// 	tmp = init->tok;
-// 	build = 0;
-// 	while(tmp)
-// 	{
-// 		build = verif_build(tmp);
-// 		if (build == 0)
-// 		{
-			
-// 			// ft_verif_file();
-// 			// fd_pid = fork();
-// 			// data = tmp->data;
-			
-// 		}
-// 		tmp = tmp->next;
-// 	}
-// }
