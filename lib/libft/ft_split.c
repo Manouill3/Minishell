@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/10 11:09:49 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/20 19:11:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,29 @@ void	free_all(char	**tab)
 int	len_word(const char *s, int start)
 {
 	int	i;
-	int	cmp;
 
 	i = start;
-	cmp = 0;
-	while (is_white(s[i]) != 1 && s[i])
+	if (is_ope(s[i]) == 1)
 	{
-		i++;
-		cmp++;
+		while (is_ope(s[i]) == 1)
+			i++;
+		return (i - start);
 	}
-	return (cmp);
+	while (is_white(s[i]) != 1 && is_ope(s[i]) != 1 && s[i])
+	{
+		if (s[i] == '"' || s[i] == 39)
+		{
+			i++;
+			while (s[i] && s[i] != '"' && s[i] != 39)
+				i++;
+			i++;
+		}
+		else
+			i++;
+	}
+	printf("i = %d\n", i);
+	printf("start = %d\n", start);
+	return (i - start);
 }
 
 int	len_first_tab(const char *s)
@@ -49,11 +62,9 @@ int	len_first_tab(const char *s)
 		if (is_white(s[i]) != 1 && (is_white(s[i + 1]) == 1
 				|| s[i + 1] == '\0'))
 			count++;
-		if (s[i] == '"' || s[i] == 39)
-		{
-			i = get_quote(i, s, s[i]);
+		if ((is_ope(s[i]) != 1 && is_ope(s[i + 1]) == 1 && is_white(s[i]) != 1) ||
+				(is_ope(s[i]) == 1 && is_ope(s[i + 1]) != 1 && is_white(s[i + 1]) != 1))
 			count++;
-		}
 		i++;
 	}
 	return (count);

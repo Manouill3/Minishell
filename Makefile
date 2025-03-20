@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
+#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/20 14:15:59 by tcybak           ###   ########.fr        #
+#    Updated: 2025/03/20 16:35:08 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC = main.c\
 	Heredoc/Heredoc.c\
 	Heredoc/utils_heredoc.c\
 	exec/exec.c\
-	exec/handle_redirection.c\
+	exec/handle_redirection.c
 	
 
 OBJ = $(SRC:.c=.o)

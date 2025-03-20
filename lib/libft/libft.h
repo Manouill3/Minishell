@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/13 11:00:43 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:10:59 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ int			len_word(const char *s, int start);
 void		free_all(char	**tab);
 int			len_first_tab(const char *s);
 int			is_white(char c);
+int			is_ope(char c);
 
 #endif
