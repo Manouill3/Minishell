@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:48:39 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/20 13:39:50 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:21:31 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ void	ft_exec_cmd(t_init *init)
 	// if (init->fds->count_com != 1)
 		// ft_fork();
 	verif_build(init->tok);
+	close_all(init->fds);
 }

@@ -6,11 +6,19 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 10:24:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/20 13:07:45 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:20:59 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
+
+void	close_all(t_fds *fds)
+{
+	if (fds->fd_infile != -1)
+		close(fds->fd_infile);
+	if (fds->fd_outfile != -1)
+		close(fds->fd_outfile);
+}
 
 void    ft_free(t_init *init)
 {
