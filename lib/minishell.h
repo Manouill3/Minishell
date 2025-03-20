@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/19 10:37:39 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:08:38 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct s_fds
 	int		pipe_fd[2];
 	int		pid;
 	int		count_com;
-	char	**file;
+	char	**file_input;
+	char	**file_output;
 }			t_fds;
 
 typedef struct s_heredoc
