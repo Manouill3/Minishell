@@ -3,56 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:20:56 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/20 13:59:16 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:10:53 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void    handle_redirection(t_list_char *tok, t_fds *fds)
-{
-    ft_check_file(tok, fds);
-    check_access(fds);
-}
 
 void    check_access(t_fds *fds)
 {
-    int i;
-
+	int i;
+	
     i = 0;
     while (fds->file_input[i])
     {
-        if (access(fds->file_input[i], R_OK | F_OK) != -1)
-            fds->fd_infile = open(fds->file_input[i], O_RDONLY, 0644);
+		if (access(fds->file_input[i], R_OK | F_OK) != -1)
+		fds->fd_infile = open(fds->file_input[i], O_RDONLY, 0644);
         else
-            perror("infile");
+		perror("infile");
         i++;
     }
     i = 0;
     while (fds->file_output[i])
     {
-        if (access(fds->file_output[i], F_OK | W_OK) != -1)
-            fds->fd_outfile = open(fds->file_output[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (access(fds->file_output[i], F_OK | W_OK) != -1)
+		fds->fd_outfile = open(fds->file_output[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
         else
         {
-            if (access(fds->file_output[i], F_OK) == -1)
-                fds->fd_outfile = open(fds->file_output[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (access(fds->file_output[i], F_OK) == -1)
+			fds->fd_outfile = open(fds->file_output[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
         }
         i++;
     }
 }
-
-
 
 void	ft_list_file(t_list_char *tok, t_fds *fds)
 {
 	t_list_char	*tmp;
 	int			count_input;
 	int			count_output;
-
+	
 	fds->file_input = NULL;
 	fds->file_output = NULL;
 	tmp = tok;
@@ -61,33 +54,41 @@ void	ft_list_file(t_list_char *tok, t_fds *fds)
 	while (tmp)
 	{
 		if (( !ft_strcmp(tmp->data, ">") || !ft_strcmp(tmp->data, ">>")) && tmp->next->data != NULL)
-			count_output++;
+		count_output++;
 		if (!ft_strcmp(tmp->data, "<"))
-			count_input++;
+		count_input++;
 		tmp = tmp->next;
 	}
 	fds->file_input = ft_calloc(count_input + 1, sizeof(char *));
 	fds->file_output = ft_calloc(count_output + 1, sizeof(char *));
 }
-void    ft_check_ cmd(t_list_char *tok)
-{
-    t_list_char *tmp;
 
+void    ft_check_cmd(t_list_char *tok)
+{
+	t_list_char *tmp;
+	
     tmp = tok;
     while(tmp)
     {
-        if (!ft_strcmp(tmp->data, "<"))
+		if (!ft_strcmp(tmp->data, "<"))
         {
-            if (ft_strcmp(tmp->prev->name, "cmd"))
-                tmp->next->name = "cmd";
+			if (ft_strcmp(tmp->prev->name, "cmd"))
+			tmp->next->name = "cmd";
         }
         if  (!ft_strcmp(tmp->data, ">") || !ft_strcmp(tmp->data, ">>"))
 		{
-            if (ft_strcmp(tmp->prev->name, "cmd"))
-                tmp->next->name = "cmd";
+			if (ft_strcmp(tmp->prev->name, "cmd"))
+			tmp->next->name = "cmd";
         }
         tmp = tmp->next;
     }
+}
+
+void    handle_redirection(t_list_char *tok, t_fds *fds)
+{
+	ft_check_file(tok, fds);
+	ft_check_cmd(tok);
+	check_access(fds);
 }
 
 void	ft_check_file(t_list_char *tok, t_fds *fds)
