@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/21 11:19:11 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:27:47 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ int	len_first_tab(const char *s)
 		if (is_white(s[i]) != 1 && (is_white(s[i + 1]) == 1
 				|| s[i + 1] == '\0'))
 			count++;
-		if ((is_ope(s[i]) != 1 && is_ope(s[i + 1]) == 1 && is_white(s[i]) != 1) ||
-				(is_ope(s[i]) == 1 && is_ope(s[i + 1]) != 1 && is_white(s[i + 1]) != 1))
+		if ((is_ope(s[i]) != 1 && is_ope(s[i + 1]) == 1 && is_white(s[i]) != 1)
+			|| (is_ope(s[i]) == 1 && is_ope(s[i + 1]) != 1
+				&& is_white(s[i + 1]) != 1))
 			count++;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/21 11:22:47 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/21 13:25:42 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
-
 
 typedef struct s_list
 {
@@ -77,6 +76,6 @@ void		free_all(char	**tab);
 int			len_first_tab(const char *s);
 int			is_white(char c);
 int			is_ope(char c);
-char	**ft_normal_split(char const *s, char c);
+char		**ft_normal_split(char const *s, char c);
 
 #endif
