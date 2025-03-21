@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/21 13:25:42 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/21 14:20:05 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ void		ft_lstclear(t_list **lst);
 void		ft_lstiter(t_list *lst, void (*f)(int));
 t_list		*ft_lstmap(t_list *lst, int (*f)(int));
 int			get_quote(int i, const char *s, char c);
-int			ft_split_quote(const char *s, int k, int i, char **tab);
-int			ft_check_quote(const char *s, int k, int i, char **tab);
 int			secu(int k, char const *s);
 char		**exec_all(const char *s, int k, int i, char **tab);
 int			len_word(const char *s, int start);
@@ -77,5 +75,8 @@ int			len_first_tab(const char *s);
 int			is_white(char c);
 int			is_ope(char c);
 char		**ft_normal_split(char const *s, char c);
+char		**handle_quote(const char *s, int k, char **tab, int i);
+char		**ft_extract_word(const char *s, int *k, int *i, char **tab);
+char		**split_ope(const char *s, int k, int i, char **tab);
 
 #endif

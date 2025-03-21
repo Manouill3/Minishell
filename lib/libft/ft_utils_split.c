@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/21 13:29:49 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/21 14:12:34 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,28 +30,28 @@ int	get_quote(int i, const char *s, char c)
 	return (i);
 }
 
-char	**ft_extract_word(char **tab, int k, const char *s, int i)
+char	**ft_extract_word(const char *s, int *k, int *i, char **tab)
 {
 	int		j;
 	char	c;
 
-	k = secu(k, s);
 	j = 0;
-	tab[i - 1] = ft_calloc(len_word(s, k) + 1, sizeof(char));
-	if (!tab[i - 1])
+	(*k) = secu((*k), s);
+	tab[(*i) - 1] = ft_calloc(len_word(s, (*k)) + 1, sizeof(char));
+	if (!tab[(*i) - 1])
 		free_all(tab);
-	while (s[k] && is_white(s[k]) != 1 && is_ope(s[k]) != 1)
+	while (s[(*k)] && is_white(s[(*k)]) != 1 && is_ope(s[(*k)]) != 1)
 	{
-		if (s[k] == '"' || s[k] == 39)
+		if (s[(*k)] == '"' || s[(*k)] == 39)
 		{
-			c = s[k];
-			tab[i - 1][j++] = s[k++];
-			while (s[k] && s[k] != c)
-				tab[i - 1][j++] = s[k++];
-			tab[i - 1][j++] = s[k++];
+			c = s[(*k)];
+			tab[(*i) - 1][j++] = s[(*k)++];
+			while (s[(*k)] && s[(*k)] != c)
+				tab[(*i) - 1][j++] = s[(*k)++];
+			tab[(*i) - 1][j++] = s[(*k)++];
 		}
 		else
-			tab[i - 1][j++] = s[k++];
+			tab[((*i)) - 1][j++] = s[((*k))++];
 	}
 	return (tab);
 }
@@ -75,7 +75,7 @@ char	**split_ope(const char *s, int k, int i, char **tab)
 		if (tab[i - 1] != NULL)
 			i++;
 		if (k < (int)ft_strlen(s) && i - 1 < nb_word)
-			tab = ft_extract_word(tab, k, s, i);
+			ft_extract_word(s, &k, &i, tab);
 	}
 	return (tab);
 }
@@ -102,24 +102,4 @@ char	**handle_quote(const char *s, int k, char **tab, int i)
 			tab[i - 1][j++] = s[k++];
 	}
 	return (tab);
-}
-
-char	**exec_all(const char *s, int k, int i, char **tab)
-{
-	int	nb_word;
-
-	nb_word = len_first_tab(s);
-	if (ft_strchr(s, '|') || ft_strchr(s, '<') || ft_strchr(s, '>'))
-	{
-		tab = split_ope(s, k, i, tab);
-		return(tab);
-	}
-	while (i++ < nb_word)
-		tab = handle_quote(s, k, tab, i);
-	return (tab);
-}
-
-int	is_white(char c)
-{
-	return ((c >= 9 && c <= 13) || c == 32);
 }

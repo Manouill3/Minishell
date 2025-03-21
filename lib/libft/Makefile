@@ -6,7 +6,7 @@
 #    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 14:01:00 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/21 11:22:57 by tcybak           ###   ########.fr        #
+#    Updated: 2025/03/21 14:14:39 by tcybak           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ SRC = ft_atoi.c\
 	ft_strtrim.c\
 	ft_split.c\
 	ft_normal_split.c\
-	ft_utils_split.c
+	ft_utils_split.c \
+	ft_utils_split2.c 
 
 OBJ = $(SRC:.c=.o)
 
