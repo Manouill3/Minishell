@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/20 19:03:50 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:18:28 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,50 +30,10 @@ int	get_quote(int i, const char *s, char c)
 	return (i);
 }
 
-int	ft_split_quote(const char *s, int k, int i, char **tab)
-{
-	int		tmp;
-	int		count;
-	char	q;
-	int		j;
-
-	q = s[k];
-	tmp = k + 1;
-	j = 0;
-	k++;
-	count = 2;
-	while (s[tmp] != q)
-	{
-		tmp++;
-		count++;
-	}
-	tab[i - 1] = ft_calloc(count + 1, sizeof(char));
-	tab[i - 1][j++] = q;
-	while (s[k] != q)
-	{
-		tab[i - 1][j] = s[k];
-		j++;
-		k++;
-	}
-	tab[i - 1][j] = s[k];
-	return (k);                                                                                                           
-}
-
-int	ft_check_quote(const char *s, int k, int i, char **tab)
-{
-	if (s[k] == '"' || s[k] == 39)
-	{
-		k = ft_split_quote(s, k, i, tab);
-		k++;
-		i++;
-		k = secu(k, s);
-	}
-	return (k);
-}
-
 char	**split_ope(const char *s, int k, int i, char **tab)
 {
 	int	j;
+	char c;
 	int	nb_word;
 	
 	nb_word = len_first_tab(s);
@@ -100,8 +60,9 @@ char	**split_ope(const char *s, int k, int i, char **tab)
 			{
 				if (s[k] == '"' || s[k] == 39)
 				{
+					c = s[k];
 					tab[i - 1][j++] = s[k++];
-					while (s[k] && s[k] != '"' && s[k] != 39)
+					while (s[k] && s[k] != c)
 						tab[i - 1][j++] = s[k++];
 					tab[i - 1][j++] = s[k++];
 				}
@@ -116,6 +77,7 @@ char	**split_ope(const char *s, int k, int i, char **tab)
 char	**exec_all(const char *s, int k, int i, char **tab)
 {
 	int	j;
+	char c;
 	int	nb_word;
 
 	nb_word = len_first_tab(s);
@@ -135,7 +97,8 @@ char	**exec_all(const char *s, int k, int i, char **tab)
 		{
 			if (s[k] == '"' || s[k] == 39)
 			{
-				while (s[k] && s[k] != '"' && s[k] != 39)
+				c = s[k];
+				while (s[k] && s[k] != c)
 					tab[i - 1][j++] = s[k++];	
 			}
 			else
@@ -149,10 +112,3 @@ int	is_white(char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
 }
-
-
-
-// k = ft_check_quote(s, k, i, tab);
-		// if (k == tmp)
-		// { 
-		// }

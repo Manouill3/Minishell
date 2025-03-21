@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/20 19:11:01 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:19:11 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	len_word(const char *s, int start)
 		else
 			i++;
 	}
-	printf("i = %d\n", i);
-	printf("start = %d\n", start);
 	return (i - start);
 }
 
