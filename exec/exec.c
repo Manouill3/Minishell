@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:48:39 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/20 15:21:31 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:22:40 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_count_cmd(t_list_char *tok , t_fds *fds)
 
 void	ft_exec_cmd(t_init *init)
 {
-	handle_redirection(init->tok, init->fds);
+	handle_redirection(init->tok, init->fds, init->env);
 	ft_count_cmd(init->tok, init->fds);
 	// if (init->fds->count_com != 1)
 		// ft_fork();

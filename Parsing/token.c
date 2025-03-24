@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/13 15:20:24 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:24:57 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void get_env(t_init *init, char **env)
 		ft_lstadd_back_char(&init->env, ft_lstnew_char(ft_strdup(env[i])));
 		i++;
 	}
+	// while (init->env)
+	// {
+	// 	printf("env = %s\n", init->env->data);
+	// 	init->env = init->env->next;
+	// }
 }
 
 void	ft_check_name(t_init *init)

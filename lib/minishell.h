@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/20 15:22:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/24 14:22:12 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,8 +182,8 @@ void	ft_exec_cmd(t_init *init);
 
 void    check_access(t_fds *fds);
 void	ft_list_file(t_list_char *tok, t_fds *fds);
-void    ft_check_cmd(t_list_char *tok);
-void    handle_redirection(t_list_char *tok, t_fds *fds);
+void    ft_check_cmd(t_list_char *tok, t_list_char *env);
+void    handle_redirection(t_list_char *tok, t_fds *fds, t_list_char *env);
 void	ft_check_file(t_list_char *tok, t_fds *fds);
 
 #endif
