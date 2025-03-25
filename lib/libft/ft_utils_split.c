@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/21 14:12:34 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/25 13:57:31 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,26 +80,26 @@ char	**split_ope(const char *s, int k, int i, char **tab)
 	return (tab);
 }
 
-char	**handle_quote(const char *s, int k, char **tab, int i)
+char	**handle_quote(const char *s, int *k, char **tab, int i)
 {
 	int		j;
 	char	c;
 
 	j = 0;
-	k = secu(k, s);
-	tab[i - 1] = ft_calloc(len_word(s, k) + 1, sizeof(char));
+	(*k) = secu((*k), s);
+	tab[i - 1] = ft_calloc(len_word(s, (*k)) + 1, sizeof(char));
 	if (!tab[i - 1])
 		free_all(tab);
-	while (is_white(s[k]) != 1 && s[k])
+	while (is_white(s[(*k)]) != 1 && s[(*k)])
 	{
-		if (s[k] == '"' || s[k] == 39)
+		if (s[(*k)] == '"' || s[(*k)] == 39)
 		{
-			c = s[k];
-			while (s[k] && s[k] != c)
-				tab[i - 1][j++] = s[k++];
+			c = s[(*k)];
+			while (s[(*k)] && s[(*k)] != c)
+				tab[i - 1][j++] = s[(*k)++];
 		}
 		else
-			tab[i - 1][j++] = s[k++];
+			tab[i - 1][j++] = s[(*k)++];
 	}
 	return (tab);
 }

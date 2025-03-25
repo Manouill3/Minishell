@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/21 14:20:05 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/25 13:57:46 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int			len_first_tab(const char *s);
 int			is_white(char c);
 int			is_ope(char c);
 char		**ft_normal_split(char const *s, char c);
-char		**handle_quote(const char *s, int k, char **tab, int i);
+char		**handle_quote(const char *s, int *k, char **tab, int i);
 char		**ft_extract_word(const char *s, int *k, int *i, char **tab);
 char		**split_ope(const char *s, int k, int i, char **tab);
 
