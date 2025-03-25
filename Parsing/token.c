@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 10:53:40 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/24 14:24:57 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/25 17:55:40 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_check_name(t_init *init)
 void    token(t_init *init)
 {	
 	init->tok = NULL;
-	init->tab = ft_split(init->line);
+	init->tab = ft_split(init->line);	
 	init->i = 0;
 	while (init->tab[init->i])
 	{

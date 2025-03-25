@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/25 13:57:31 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/25 18:02:36 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,20 +83,24 @@ char	**split_ope(const char *s, int k, int i, char **tab)
 char	**handle_quote(const char *s, int *k, char **tab, int i)
 {
 	int		j;
+	int		len;
 	char	c;
 
 	j = 0;
 	(*k) = secu((*k), s);
-	tab[i - 1] = ft_calloc(len_word(s, (*k)) + 1, sizeof(char));
+	len = len_word(s, (*k));
+	tab[i - 1] = ft_calloc(len + 1, sizeof(char));
 	if (!tab[i - 1])
 		free_all(tab);
-	while (is_white(s[(*k)]) != 1 && s[(*k)])
+	while (j < len && s[(*k)] && is_white(s[(*k)]) != 1)
 	{
 		if (s[(*k)] == '"' || s[(*k)] == 39)
 		{
+			tab[i - 1][j++] = s[(*k)++];
 			c = s[(*k)];
 			while (s[(*k)] && s[(*k)] != c)
-				tab[i - 1][j++] = s[(*k)++];
+				tab[i - 1][j++] = s[(*k)];
+			tab[i - 1][j++] = s[(*k)++];
 		}
 		else
 			tab[i - 1][j++] = s[(*k)++];
