@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/24 14:22:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/26 16:42:48 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_init
 	char	*pwd;
 	char 	*tmp_data;
 	char	**tab;
+	char	**cmd_path;
 	struct  s_fds 		*fds;
 	struct	s_heredoc 	*heredoc;
 	struct	s_list_char	*env;
@@ -175,15 +176,17 @@ int 	count_heredoc(t_list_char *lst);
 //////////////////////////////////////
 
 void	ft_exec_cmd(t_init *init);
+void    handle_redirection(t_init *init);
+int	verify_build(t_list_char *lst);
 
 ////////////////////////////////////////
 ///		exec/handle_redirection.c	///
 //////////////////////////////////////
 
-void    check_access(t_fds *fds);
+void    check_access_output(t_fds *fds);
+void    check_access_input(t_fds *fds);
 void	ft_list_file(t_list_char *tok, t_fds *fds);
-void    ft_check_cmd(t_list_char *tok, t_list_char *env);
-void    handle_redirection(t_list_char *tok, t_fds *fds, t_list_char *env);
+void    ft_check_cmd(t_list_char *tok, t_list_char *env, t_init *init);
 void	ft_check_file(t_list_char *tok, t_fds *fds);
 
 #endif
