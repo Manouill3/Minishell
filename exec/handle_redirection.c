@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 13:20:56 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/25 11:02:59 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/26 15:56:41 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,17 @@ void	ft_list_file(t_list_char *tok, t_fds *fds)
 	fds->file_output = ft_calloc(count_output + 1, sizeof(char *));
 }
 
-void    ft_check_cmd(t_list_char *tok, t_list_char *env)
+void    ft_check_cmd(t_list_char *tok, t_list_char *env, t_init *init)
 {
 	int		i;
 	t_list_char *tmp;
-	char **cmd_path;
 	char *tmp_data;
 	char *tmp_data2;
 	
     tmp = tok;
 	while (ft_strncmp(env->data, "PATH=", 5))
 		env = env->next;
-	cmd_path = ft_normal_split(env->data + 5, ':');
+	init->cmd_path = ft_normal_split(env->data + 5, ':');
     while(tmp)
     {
 		if (!ft_strcmp(tmp->name, "arg"))
@@ -105,9 +104,9 @@ void    ft_check_cmd(t_list_char *tok, t_list_char *env)
 				if (!tmp->prev->prev || (ft_strcmp(tmp->prev->prev->name, "cmd") || ft_strcmp(tmp->prev->prev->name, "arg")))
 				{
 					i = 0;
-					while(cmd_path[i])
+					while(init->cmd_path[i])
 					{
-						tmp_data = ft_strjoin(cmd_path[i], "/");
+						tmp_data = ft_strjoin(init->cmd_path[i], "/");
 						tmp_data2 = ft_strjoin(tmp_data, tmp->data);
 						free(tmp_data);
 						printf("tmp_data = %s\n", tmp_data2);
@@ -132,16 +131,9 @@ void    ft_check_cmd(t_list_char *tok, t_list_char *env)
 		printf("data = %s\n", tmp->data);
 		tmp = tmp->next;
 	}
-	ft_free_tab(cmd_path);
+	ft_free_tab(init->cmd_path);
 }
 
-void    handle_redirection(t_list_char *tok, t_fds *fds, t_list_char *env)
-{
-	ft_check_file(tok, fds);
-	ft_check_cmd(tok, env);
-	check_access_input(fds);
-	check_access_output(fds);
-}
 
 void	ft_check_file(t_list_char *tok, t_fds *fds)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/25 18:07:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:50:13 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_init
 	char	*pwd;
 	char 	*tmp_data;
 	char	**tab;
+	char	**cmd_path;
 	struct  s_fds 		*fds;
 	struct	s_heredoc 	*heredoc;
 	struct	s_list_char	*env;
@@ -102,6 +103,7 @@ void    ft_cd(t_list_char *lst);
 //////////////////////////////////////
 
 void    ft_parsing_line(t_init *init);
+void	ft_parsing_check_quote(char *data, int *quote);
 void	ft_parsing_flag(char *name, char *data);
 void    ft_parsing_operator(char *data);
 
@@ -134,14 +136,22 @@ void	ft_heredoc_oef_before(t_heredoc *heredoc, int i);
 void	ft_heredoc_oef_last(t_heredoc *heredoc, int i);
 char	*get_eof(char *data, char *eof);
 
+
+////////////////////////////////////////
+///			Parsing/expand_2.c		///
+//////////////////////////////////////
+
+char    *verif_simple_quote(char *tmp_data, char *data);
+char    *ft_value_var(char *tmp_data, t_list_char *tmp, int i);
+char	*expand_quote(t_list_char *tmp, char *data);
+
 ////////////////////////////////////////
 ///			Parsing/expand.c		///
 //////////////////////////////////////
 
-char	*expand_now(t_init *init, char *data, char *content, int i);
-char	*all_quote_out(char *data);
 char	*quote_out(char *cont, char quote);
-char	*ft_expand_arg(t_init *init, char *data, char *content, int i);
+char	*get_quote_back(char *data, char quote);
+char	*ft_expand_rest(t_init *init, char *data, char *content, int i);
 char	*ft_expand(t_init *init);
 
 ////////////////////////////////////////
@@ -166,15 +176,17 @@ int 	count_heredoc(t_list_char *lst);
 //////////////////////////////////////
 
 void	ft_exec_cmd(t_init *init);
+void    handle_redirection(t_init *init);
+int		verif_build(t_list_char *lst);
 
 ////////////////////////////////////////
 ///		exec/handle_redirection.c	///
 //////////////////////////////////////
 
-void    check_access(t_fds *fds);
+void    check_access_output(t_fds *fds);
+void    check_access_input(t_fds *fds);
 void	ft_list_file(t_list_char *tok, t_fds *fds);
-void    ft_check_cmd(t_list_char *tok, t_list_char *env);
-void    handle_redirection(t_list_char *tok, t_fds *fds, t_list_char *env);
+void    ft_check_cmd(t_list_char *tok, t_list_char *env, t_init *init);
 void	ft_check_file(t_list_char *tok, t_fds *fds);
 
 #endif
