@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:53:45 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/26 16:45:24 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/27 11:08:50 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,14 @@ void    ft_init_exec(t_init *init)
     tmp = init->tok;
     while(i < count_cmd)
     {
-        verif = verif_build(tmp->data);
+        verif = verif_build(tmp);
         if (count_cmd == 1 && verif == 1)
         {
             ft_check_order(init);
             return ;
         }
-        if (!verify_build(tmp->data))
+        if (verif == 0)
         {
-            if (pipe(init->fds->pipe_fd) == -1)
-                exit(1);
-            else
                 ft_exec(init);
         }
     }

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/26 16:42:48 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/26 16:50:13 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ int 	count_heredoc(t_list_char *lst);
 
 void	ft_exec_cmd(t_init *init);
 void    handle_redirection(t_init *init);
-int	verify_build(t_list_char *lst);
+int		verif_build(t_list_char *lst);
 
 ////////////////////////////////////////
 ///		exec/handle_redirection.c	///
