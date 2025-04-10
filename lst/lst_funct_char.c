@@ -72,6 +72,10 @@ void	ft_lstdelone_char(t_list_char *lst)
 		free_tab(lst->heredoc->eof);
 	if (lst->heredoc)
 		free(lst->heredoc);
+	if (lst->infiles)
+		free_tab(lst->infiles);
+	if (lst->outfiles)
+		free_tab(lst->outfiles);
 	if (lst->no_red)
 		free_tab(lst->no_red);
 	if (lst->cmd)

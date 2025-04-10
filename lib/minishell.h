@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/10 13:14:20 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:12:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,17 +217,17 @@ void    verif_fd(int count, t_init *param);
 ///			exec/exec_file.c		///
 //////////////////////////////////////
 
+void	get_in_out_complet_list(t_list_char *tok, t_list_char *tmp,
+	int file_output, int file_input);
 void	get_in_out(t_list_char *tok);
-void    check_access_output(t_list_char *tok);
-void    check_access_input(t_list_char *tok);
+void	get_in_fd(t_list_char *node);
+void	get_out_fd(t_list_char *node);
 
 ////////////////////////////////////////
 ///			exec/exec_utils2.c		///
 //////////////////////////////////////
 
 void	get_tty(void);
-int    get_tty_as_in(int fd_infile);
-int    get_tty_as_out(int fd_outfile);
 
 ////////////////////////////////////////
 ///			built-in.c/pwd.c		///

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/10 14:16:47 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/10 16:18:53 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,10 @@ void    exec(t_init *param)
 	get_in_out(param->tok);
 	while (tmp)
 	{
-		check_access_input(tmp);
-		check_access_output(tmp);
-		if (tmp->outfiles)
-			free_tab(tmp->outfiles);
 		if (tmp->infiles)
-			free_tab(tmp->infiles);
+			get_in_fd(tmp);
+		if (tmp->outfiles)
+			get_out_fd(tmp); 
 		if (param->count_cmd == 1 && verif_built(tmp))
 			ft_exec_built_in(param, tmp);
 		if (pipe(param->fds.pipe_fd) == -1)
@@ -116,8 +114,8 @@ void    exec(t_init *param)
 			exit (127);
 		}
 		ft_exec_pipe(tmp, param, count);
-		count++;
 		close_all(param, tmp);
+		count++;
 		tmp = tmp->next;
 	}
 	ft_wait_child(param);
