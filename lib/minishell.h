@@ -3,190 +3,247 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/26 16:50:13 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/10 13:14:20 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <fcntl.h>
-#include <signal.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "libft/libft.h"
-
+# include <stdio.h>
+# include <fcntl.h>
+# include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/wait.h>
+# include "libft/libft.h"
 
 typedef struct s_fds
 {
-	int		fd_infile;
-	int		fd_outfile;
 	int		pipe_fd[2];
 	int		pid;
-	int		count_com;
-	char	**file_input;
-	char	**file_output;
 }			t_fds;
 
 typedef struct s_heredoc
 {
 	int		fd;
+	int		nb_eof;
 	char	*name;
 	char	*input;
 	char	**eof;
 }			t_heredoc;
 
+typedef struct s_env
+{
+	char			*name;
+	char			*cont;
+	struct s_env	*next;
+}			t_env;
+
 typedef struct s_list_char
 {
-	char				*data;
-	char				*name;
-	int					quote;
+	int					fd_infile;
+	int					fd_outfile;
+	char				**cmd_path;
+	char				**cmd;
+	char				**no_red;
+	char				*funct;
+	char				**infiles;
+	char				**outfiles;
+	struct s_heredoc	*heredoc;
 	struct s_list_char	*next;
-	struct s_list_char	*prev;
-}						t_list_char;
+}			t_list_char;
 
 typedef struct s_init
 {
-	int     i;
-	char    *line;
-	char	*pwd;
-	char 	*tmp_data;
-	char	**tab;
-	char	**cmd_path;
-	struct  s_fds 		*fds;
-	struct	s_heredoc 	*heredoc;
-	struct	s_list_char	*env;
-	struct	s_list_char	*tok;
-	
+	int					status;
+	int					count_cmd;
+	char				*line;
+	char				*pwd;
+	char				*tmp_data;
+	char				**tab;
+	struct s_env		*lst_env;
+	struct s_fds		fds;
+	struct s_list_char	*tok;
+
 }			t_init;
 
 ////////////////////////////////////////
 ///			main.c	                ///
 //////////////////////////////////////
 
-int		ft_init(t_init **init);
+int			ft_init(t_init **init);
 
 ////////////////////////////////////////
-///			utils/utils_parsing.c   ///
+///			signal/signal.c         ///
 //////////////////////////////////////
 
-int     ft_strcmp(char *s1, char *s2);
-char	*ft_strndup(const char *s, int n);
+void		sigint_handler(int sig);
+void		ft_handle_interrupt_signals(void);
 
 ////////////////////////////////////////
-///			Handle_signaux.c        ///
+///			env/env.c	            ///
 //////////////////////////////////////
 
-void    ft_handle_interrupt_signals(void);
-void	sigint_handler(int sig);
+void		get_final_cont(t_env *env);
+void		get_name_env(t_env *env);
+int			get_env(t_init *param, char **env);
 
 ////////////////////////////////////////
-///			Order/built_order.c		///
+///			lst/lst_funct_env.c	    ///
 //////////////////////////////////////
 
-char	*get_pwd(void);
+t_env		*ft_lstnew_env(char *str);
+void		ft_lstadd_back_env(t_env **lst, t_env *new);
+void		ft_lstclear_env(t_env **lst);
+void		ft_lstdelone_env(t_env *lst);
+
+////////////////////////////////////////
+///			lst/lst_funct_char.c    ///
+//////////////////////////////////////
+
+t_list_char	*ft_lstnew_char(char **tab);
+void		ft_lstadd_back_char(t_list_char **lst, t_list_char *new);
+void		ft_lstclear_char(t_list_char **lst);
+void		ft_lstdelone_char(t_list_char *lst);
+
+////////////////////////////////////////
+///			free/free_funct.c       ///
+//////////////////////////////////////
+
+void    	close_all(t_init *param, t_list_char *tmp);
+void		clear_files(t_list_char *lst);
+void		free_tab(char **tab);
+void		free_struct(t_init *param);
+void		ft_free_all(t_init *param);
+
+////////////////////////////////////////
+///			utils/utils_fucnt.c     ///
+//////////////////////////////////////
+
+void		print_lst_env(t_env *lst);
+void		print_lst_char(t_list_char *lst);
+int			len_cmd(char **tab);
+int			ft_strcmp(char *s1, char *s2);
+int			get_nb_cmd(char **tab);
+
+////////////////////////////////////////
+///			parsing/token.c         ///
+//////////////////////////////////////
+
+int			get_tab_len(char **tab, int k);
+t_list_char	*set_lst(int count_cmd);
+void		set_cmd(t_init *param, t_list_char *tmp, int *k);
+void		get_token(t_init *param);
+
+////////////////////////////////////////
+///			parsing/parse_line.c    ///
+//////////////////////////////////////
+
+char		*get_fonct_suit(t_list_char *tmp, int *i, int *j, char **tmp_tab);
+void		get_funct(t_list_char *lst);
+void		parsing_line(t_init *param);
+
+////////////////////////////////////////
+///			expand/expand.c         ///
+//////////////////////////////////////
+
+char		*all_quote_out(char *str);
+char		*char_out(char *str, char c);
+char		*change_word(char *word, t_env *lst_env);
+char		*expand_word(char *word, t_env *lst_env);
+void		expand_arg(t_init *param);
+
+////////////////////////////////////////
+///			expand/expand_sup.c     ///
+//////////////////////////////////////
+
+int			get_len_quote(char *str);
+char		*get_final_word(char *word_quote, char *expand);
+char		*get_res(int j, int i, char *res, char *word_quote);
+char		*expand_quote(char *tmp, char *tmp_free, t_env *lst_env);
+
+////////////////////////////////////////
+///			heredoc/heredoc.c       ///
+//////////////////////////////////////
+
+char		*get_valid_char(char *buffer);
+char		*get_name_h(void);
+void		get_nb_eof(t_list_char *tok);
+void		get_eof_tab(t_list_char *tok);
+char		*get_final_eof(char *str);
+
+////////////////////////////////////////
+///			heredoc/heredoc_exec.c  ///
+//////////////////////////////////////
+
+void		ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env);
+void		ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env);
+void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env);
+
+////////////////////////////////////////
+///			exec/exec_init.c		///
+//////////////////////////////////////
+
+int		verif_built(t_list_char *tok);
+int		no_red_len(char **tab);
+void	get_no_red(t_list_char *tok);
+void    ft_exec_pipe( t_list_char *tmp, t_init *param, int count);
+void    exec(t_init *param);
+
+////////////////////////////////////////
+///			exec/exec_cmd.c	    	///
+//////////////////////////////////////
+
+void    child_process(t_list_char *tmp, t_init *param, int count);
+void    parent_process(t_init *param);
+void    ft_dup_file(t_init *param, t_list_char *tmp, int count);
+void    exec_cmd(t_init *param, t_list_char *tmp);
+
+////////////////////////////////////////
+///			exec/exec_utils.c		///
+//////////////////////////////////////
+
+void    ft_wait_child(t_init *param);
+char    **conv_lst_tab(t_env *env);
+char    **make_path(t_env *env);
+char    **set_args(char **args, char **path);
+void    verif_fd(int count, t_init *param);
+
+////////////////////////////////////////
+///			exec/exec_file.c		///
+//////////////////////////////////////
+
+void	get_in_out(t_list_char *tok);
+void    check_access_output(t_list_char *tok);
+void    check_access_input(t_list_char *tok);
+
+////////////////////////////////////////
+///			exec/exec_utils2.c		///
+//////////////////////////////////////
+
+void	get_tty(void);
+int    get_tty_as_in(int fd_infile);
+int    get_tty_as_out(int fd_outfile);
+
+////////////////////////////////////////
+///			built-in.c/pwd.c		///
+//////////////////////////////////////
+
+void    ft_exec_built_in(t_init *param, t_list_char *tok);
+char    *get_pwd(void);
 void 	ft_pwd();
-void    ft_check_order(t_init *init);
 
 ////////////////////////////////////////
-///			Order/built_cd.c        ///
+///			built-in.c/cd.c			///
 //////////////////////////////////////
 
-void    ft_cd(t_list_char *lst);
+void    ft_cd(t_init *param, t_list_char *tok);
 
-////////////////////////////////////////
-///			Parsing/parsing1.c      ///
-//////////////////////////////////////
-
-void    ft_parsing_line(t_init *init);
-void	ft_parsing_check_quote(char *data, int *quote);
-void	ft_parsing_flag(char *name, char *data);
-void    ft_parsing_operator(char *data);
-
-////////////////////////////////////////
-///			Parsing/token.c         ///
-//////////////////////////////////////
-
-void    token(t_init *init);
-void 	get_env(t_init *init, char **env);
-void	print_lst(t_list_char *lst);
-void	ft_check_name(t_init *init);
-
-////////////////////////////////////////
-///			utils/utils_lst.c		///
-//////////////////////////////////////
-
-t_list_char *ft_lstnew_char(char *str);
-void	ft_lstadd_back_char(t_list_char **lst, t_list_char *new);
-void	ft_lstdelone_char(t_list_char *lst);
-void	ft_lstclear_char(t_list_char **lst);
-void	ft_init_list(t_list_char **lst);
-
-////////////////////////////////////////
-///			Heredoc/Heredoc.c		///
-//////////////////////////////////////
-
-void    ft_check_heredoc(t_list_char *lst, t_heredoc *heredoc);
-void	ft_heredoc(t_heredoc *heredoc);
-void	ft_heredoc_oef_before(t_heredoc *heredoc, int i);
-void	ft_heredoc_oef_last(t_heredoc *heredoc, int i);
-char	*get_eof(char *data, char *eof);
-
-
-////////////////////////////////////////
-///			Parsing/expand_2.c		///
-//////////////////////////////////////
-
-char    *verif_simple_quote(char *tmp_data, char *data);
-char    *ft_value_var(char *tmp_data, t_list_char *tmp, int i);
-char	*expand_quote(t_list_char *tmp, char *data);
-
-////////////////////////////////////////
-///			Parsing/expand.c		///
-//////////////////////////////////////
-
-char	*quote_out(char *cont, char quote);
-char	*get_quote_back(char *data, char quote);
-char	*ft_expand_rest(t_init *init, char *data, char *content, int i);
-char	*ft_expand(t_init *init);
-
-////////////////////////////////////////
-///			Free/all_free.c 		///
-//////////////////////////////////////
-
-void    ft_free(t_init *init);
-void    ft_free_tab(char **tab);
-void    ft_free_all(t_init *init);
-void	close_all(t_fds *fds);
-
-////////////////////////////////////////
-///		Heredoc/utils_Heredock.c	///
-//////////////////////////////////////
-
-char	*get_valid_char(char *buffer);
-char	*ft_get_name(void);
-int 	count_heredoc(t_list_char *lst);
-
-////////////////////////////////////////
-///		exec/exec.c					///
-//////////////////////////////////////
-
-void	ft_exec_cmd(t_init *init);
-void    handle_redirection(t_init *init);
-int		verif_build(t_list_char *lst);
-
-////////////////////////////////////////
-///		exec/handle_redirection.c	///
-//////////////////////////////////////
-
-void    check_access_output(t_fds *fds);
-void    check_access_input(t_fds *fds);
-void	ft_list_file(t_list_char *tok, t_fds *fds);
-void    ft_check_cmd(t_list_char *tok, t_list_char *env, t_init *init);
-void	ft_check_file(t_list_char *tok, t_fds *fds);
 
 #endif
+
+//valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --track-fds=yes --trace-children=yes --suppressions=readline.sup ./Minishell

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_order.c                                      :+:      :+:    :+:   */
+/*   pwd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/18 14:56:21 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/13 11:29:33 by tcybak           ###   ########.fr       */
+/*   Created: 2025/04/08 08:43:24 by tcybak            #+#    #+#             */
+/*   Updated: 2025/04/08 08:44:40 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char    *get_pwd(void)
 {
     char *way;
-    char *path;
     
     way = getcwd(NULL, 0);
     if (!way) {
@@ -23,9 +22,7 @@ char    *get_pwd(void)
         perror("getcwd");
         return (NULL);
     }
-    path = ft_strjoin(way, "$ ");
-    free(way);
-    return (path);
+    return (way);
 }
 
 void ft_pwd()
@@ -36,18 +33,21 @@ void ft_pwd()
     printf("%s\n", pwd);
     free(pwd);        
 }
-void    ft_check_order(t_init *init)
-{
-	t_list_char	*tmp;
 
-	tmp = init->tok;
-    while(tmp)
-    {
-        if (!ft_strcmp(tmp->data, "pwd") && !ft_strcmp(tmp->name, "cmd"))
-            ft_pwd();
-        if (!ft_strcmp(tmp->data, "cd") && !ft_strcmp(tmp->name, "cmd"))
-            ft_cd(tmp);
-        tmp = tmp->next;
-    }    
-    return ;
+void    ft_exec_built_in(t_init *param, t_list_char *tok)
+{
+	if(!ft_strcmp("echo", tok->funct))
+        return ;
+	if(!ft_strcmp("cd", tok->funct))
+        ft_cd(param, tok);
+	if(!ft_strcmp("pwd", tok->funct))
+        ft_pwd();
+	if(!ft_strcmp("export", tok->funct))
+        return ;
+	if(!ft_strcmp("unset", tok->funct))
+        return ;
+	if(!ft_strcmp("env", tok->funct))
+        return ;
+	if(!ft_strcmp("exit", tok->funct))
+        return ;
 }

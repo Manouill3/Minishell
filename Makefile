@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/02/17 14:14:26 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/26 16:42:09 by tcybak           ###   ########.fr        #
+#    Created: 2025/03/27 21:16:47 by marvin            #+#    #+#              #
+#    Updated: 2025/03/27 21:16:47 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,22 +24,25 @@ LIB = lib/libft
 LIBFT = lib/libft/libft.a
 
 SRC = main.c\
-	Free/all_free.c\
-	Parsing/utils_parsing.c\
-	utils/utils_lst.c\
-	Handle_signaux.c\
-	order/built_order.c\
-	order/built_cd.c\
-	Parsing/Parsing1.c\
-	Parsing/token.c\
-	Parsing/expand.c\
-	Parsing/expand_2.c\
-	Heredoc/Heredoc.c\
-	Heredoc/utils_heredoc.c\
-	exec/exec.c\
-	exec/handle_redirection.c\
-	exec/exec_init.c
-	
+	env/env.c\
+	lst/lst_funct_char.c\
+	lst/lst_funct_env.c\
+	signal/signal.c\
+	free/free_funct.c\
+	utils/utils_funct.c\
+	parsing/parse_line.c\
+	parsing/token.c\
+	expand/expand.c\
+	expand/expand_sup.c\
+	heredoc/heredoc.c\
+	heredoc/heredoc_exec.c\
+	exec/exec_init.c\
+	exec/exec_cmd.c\
+	exec/exec_utils.c\
+	exec/exec_utils2.c\
+	exec/exec_file.c \
+	built-in/pwd.c \
+	built-in/cd.c
 
 OBJ = $(SRC:.c=.o)
 

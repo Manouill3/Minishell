@@ -8,6 +8,7 @@
         "span": "c",
         "libft.h": "c",
         "stdlib.h": "c",
-        "random": "c"
+        "random": "c",
+        "history.h": "c"
     }
 }

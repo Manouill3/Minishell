@@ -3,58 +3,123 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 15:53:45 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/27 11:08:50 by tcybak           ###   ########.fr       */
+/*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
+/*   Updated: 2025/04/10 14:16:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void    ft_exec(t_init *init)
+int	verif_built(t_list_char *tok)
 {
-    init->fds->pid = fork();
-    if (init->fds->pid == -1)
-    {
-        perror("pid");
-        exit(1);
-    }
-    if (init->fds->pid == 0)
-        printf("HERE1"); //child_process();
-    else
-        printf("HERE2"); //parent_process();
+	if(!ft_strcmp("echo", tok->funct))
+		return (1);
+	if(!ft_strcmp("cd", tok->funct))
+		return (2);
+	if(!ft_strcmp("pwd", tok->funct))
+		return (3);
+	if(!ft_strcmp("export", tok->funct))
+		return (4);
+	if(!ft_strcmp("unset", tok->funct))
+		return (5);
+	if(!ft_strcmp("env", tok->funct))
+		return (6);
+	if(!ft_strcmp("exit", tok->funct))
+		return (7);
+	return (0);
 }
 
-
-void    ft_init_exec(t_init *init)
+int	no_red_len(char **tab)
 {
-    int i;
-    int verif;
-    int count_cmd;
-    t_list_char *tmp;
+	int	i;
+	int	len;
+	
+	i = 0;
+	len = 0;
+	while (tab[i])
+	{
+		if (ft_strcmp(">", tab[i]) && ft_strcmp("<", tab[i]))
+			len++;
+		else
+			i++;
+		i++;
+	}
+	return (len);
+}
 
-    i = 0;
-    count_cmd = 0;
-    tmp = init->tok;
-    while(tmp)
-    {
-        if (!ft_strcmp(tmp->name, "cmd"))
-            count_cmd++;
-        tmp = tmp->next;
-    }
-    tmp = init->tok;
-    while(i < count_cmd)
-    {
-        verif = verif_build(tmp);
-        if (count_cmd == 1 && verif == 1)
-        {
-            ft_check_order(init);
-            return ;
-        }
-        if (verif == 0)
-        {
-                ft_exec(init);
-        }
-    }
+void	get_no_red(t_list_char *tok)
+{
+	t_list_char *tmp;
+	int	len;
+	int	i;
+	int	j;
+
+	tmp = tok;
+	while(tmp)
+	{
+		i = 0;
+		j = 0;
+		len = no_red_len(tok->cmd);
+		tmp->no_red = ft_calloc(len + 1, sizeof(char *));
+		if (!tok->no_red)
+			return ;
+		while (j < len && i < len_cmd(tok->cmd))
+		{
+			if (ft_strcmp(">", tok->cmd[i]) && ft_strcmp("<", tok->cmd[i]))
+				tmp->no_red[j++] = ft_strdup(tok->cmd[i]);
+			else
+				i++;
+			i++;
+		}
+		tmp = tmp->next;
+	}
+}
+
+void    ft_exec_pipe(t_list_char *tmp, t_init *param, int count)
+{
+	param->fds.pid = fork();
+	if (param->fds.pid == -1)
+	{
+		perror("pid");
+		exit (127);
+	}
+	if (param->fds.pid == 0)
+		child_process(tmp, param, count);
+	else
+		parent_process(param);
+}
+
+void    exec(t_init *param)
+{
+	t_list_char *tmp;
+	int count;
+
+	count = 0;
+	tmp = param->tok;
+	get_no_red(param->tok);
+	get_in_out(param->tok);
+	while (tmp)
+	{
+		check_access_input(tmp);
+		check_access_output(tmp);
+		if (tmp->outfiles)
+			free_tab(tmp->outfiles);
+		if (tmp->infiles)
+			free_tab(tmp->infiles);
+		if (param->count_cmd == 1 && verif_built(tmp))
+			ft_exec_built_in(param, tmp);
+		if (pipe(param->fds.pipe_fd) == -1)
+		{
+			perror("pipe");
+			exit (127);
+		}
+		ft_exec_pipe(tmp, param, count);
+		count++;
+		close_all(param, tmp);
+		tmp = tmp->next;
+	}
+	ft_wait_child(param);
+	get_tty();
 }

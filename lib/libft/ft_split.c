@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/03/21 13:27:47 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/03/30 23:56:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_all(char	**tab)
 
 int	len_word(const char *s, int start)
 {
-	int	i;
+	size_t	i;
 
 	i = start;
 	if (is_ope(s[i]) == 1)
@@ -33,7 +33,7 @@ int	len_word(const char *s, int start)
 			i++;
 		return (i - start);
 	}
-	while (is_white(s[i]) != 1 && is_ope(s[i]) != 1 && s[i])
+	while (i < ft_strlen(s) && is_white(s[i]) != 1 && is_ope(s[i]) != 1)
 	{
 		if (s[i] == '"' || s[i] == 39)
 		{
