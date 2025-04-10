@@ -1,0 +1,17 @@
+Makefile
+Minishell
+built-in
+env
+exec
+expand
+free
+heredoc
+lib
+lst
+main.c
+main.o
+out
+parsing
+readline.sup
+signal
+utils

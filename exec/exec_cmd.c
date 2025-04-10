@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/10 13:18:20 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/10 20:13:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,13 @@ void    ft_dup_file(t_init *param, t_list_char *tmp, int count)
 	{
 		if (param->fds.pipe_fd[0] != -1)
 			close(param->fds.pipe_fd[0]);
-		dup2(param->fds.pipe_fd[1], STDOUT_FILENO);
+		if (tmp->fd_outfile != -1)
+		{
+			dup2(tmp->fd_outfile, STDOUT_FILENO);
+			close(tmp->fd_outfile);
+		}
+		else
+			dup2(param->fds.pipe_fd[1], STDOUT_FILENO);
 		if (param->fds.pipe_fd[1] != -1)
 			close(param->fds.pipe_fd[1]);
 	}
