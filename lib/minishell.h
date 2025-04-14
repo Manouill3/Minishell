@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/10 20:10:52 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/14 09:31:18 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,8 +217,7 @@ void    verif_fd(int count, t_init *param);
 ///			exec/exec_file.c		///
 //////////////////////////////////////
 
-void	get_in_out_complet_list(t_list_char *tok, t_list_char *tmp,
-	int file_output, int file_input);
+void	get_in_out_complet_list(t_list_char *node);
 void	get_in_out(t_list_char *tok);
 void	get_in_fd(t_list_char *node);
 void	get_out_fd(t_list_char *node);
@@ -228,6 +227,9 @@ void	get_out_fd(t_list_char *node);
 //////////////////////////////////////
 
 void	get_tty(void);
+char    *get_last_eof(char **cmd);
+int get_infile_nb(char **cmd);
+int get_outfile_nb(char **cmd);
 
 ////////////////////////////////////////
 ///			built-in.c/pwd.c		///

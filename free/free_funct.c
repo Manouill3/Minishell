@@ -26,14 +26,13 @@ void    close_all(t_init *param, t_list_char *tmp)
 
 void	clear_files(t_list_char *lst)
 {
-	if (lst->heredoc)
+	if (lst->heredoc->fd)
+		close(lst->heredoc->fd);
+	if (lst->heredoc->name)
 	{
-		if (lst->heredoc->name)
-		{
-			unlink(lst->heredoc->name);
-			free(lst->heredoc->name);
-			lst->heredoc->name = NULL;
-		}
+		unlink(lst->heredoc->name);
+		free(lst->heredoc->name);
+		lst->heredoc->name = NULL;
 	}
 }
 
