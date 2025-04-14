@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/14 09:31:18 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:00:20 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_init
 ///			main.c	                ///
 //////////////////////////////////////
 
+void	init_heredoc(t_list_char *node);
 int			ft_init(t_init **init);
 
 ////////////////////////////////////////
@@ -221,6 +222,8 @@ void	get_in_out_complet_list(t_list_char *node);
 void	get_in_out(t_list_char *tok);
 void	get_in_fd(t_list_char *node);
 void	get_out_fd(t_list_char *node);
+void	check_access_out(t_list_char *node, int	i);
+void	check_access_app(t_list_char *node, int	i);
 
 ////////////////////////////////////////
 ///			exec/exec_utils2.c		///

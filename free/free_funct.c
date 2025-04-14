@@ -64,6 +64,7 @@ void	ft_free_all(t_init *param)
 	tmp = param->tok;
 	while (tmp)
 	{
+		clear_files(tmp);
 		close_all(param, tmp);
 		tmp = tmp->next;
 	}

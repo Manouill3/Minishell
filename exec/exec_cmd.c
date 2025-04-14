@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/14 08:17:08 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:39:57 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void    parent_process(t_init *param)
 {
 	close(param->fds.pipe_fd[1]);
 	dup2(param->fds.pipe_fd[0], STDIN_FILENO);
-	close (param->fds.pipe_fd[0]);    
+	close (param->fds.pipe_fd[0]);
 }
 
 void    ft_dup_file(t_init *param, t_list_char *tmp, int count)

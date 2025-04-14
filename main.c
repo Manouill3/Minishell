@@ -12,6 +12,15 @@
 
 #include "lib/minishell.h"
 
+void	init_heredoc(t_list_char *node)
+{
+	node->heredoc->fd = -1;
+	node->heredoc->eof = NULL;
+	node->heredoc->input = NULL;
+	node->heredoc->name = NULL;
+	node->heredoc->nb_eof = 0;
+}
+
 int	ft_init(t_init **param)
 {
 	(*param) = malloc(sizeof(t_init));

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/14 09:03:40 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:43:31 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ void    exec(t_init *param)
 	tmp = param->tok;
 	while (tmp)
 	{
-		get_fds(tmp); 
+		if (tmp->infiles)
+			get_in_fd(tmp);
+		if (tmp->outfiles)
+			get_out_fd(tmp);			
 		if (param->count_cmd == 1 && verif_built(tmp))
 			ft_exec_built_in(param, tmp);
 		if (pipe(param->fds.pipe_fd) == -1)

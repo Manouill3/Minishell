@@ -31,6 +31,7 @@ t_list_char	*ft_lstnew_char(char **tab)
 	lst->heredoc = malloc(sizeof(t_heredoc));
 	if (!lst->heredoc)
 		return (NULL);
+	init_heredoc(lst);
 	return (lst);
 }
 

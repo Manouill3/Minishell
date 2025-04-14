@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/11 08:58:49 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:35:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,6 @@ void	parsing_line(t_init *param)
 	while (tmp)
 	{
 		exec_heredoc(tmp, tmp->heredoc, param->lst_env);
-		// close (tmp->heredoc->fd);
-		// unlink(tmp->heredoc->name);
-		// free(tmp->heredoc->name);
-		// tmp->heredoc->name = NULL;
 		tmp = tmp->next;
 	}
 	if (!param->tok->cmd[0])

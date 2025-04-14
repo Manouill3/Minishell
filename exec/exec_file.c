@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/14 11:43:38 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/14 15:49:31 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	get_in_out_complet_list(t_list_char *node)
 	nb_out = 0;
 	while (node->cmd[i])
 	{
-		if (!ft_strcmp("<", node_cmd[i]))
+		if (!ft_strcmp("<", node->cmd[i]))
 		{
-			node->infiles[j++] = node_cmd[i++];
-			node->infiles[j++] = node_cmd[i];
+			node->infiles[j++] = ft_strdup(node->cmd[i++]);
+			node->infiles[j++] = ft_strdup(node->cmd[i]);
 		}
-		if (!ft_strcmp(">", node_cmd[i]))
+		if (!ft_strcmp(">", node->cmd[i]))
 		{
-			node->infiles[k++] = node_cmd[i++];
-			node->infiles[k++] = node_cmd[i];
+			node->outfiles[k++] = ft_strdup(node->cmd[i++]);
+			node->outfiles[k++] = ft_strdup(node->cmd[i]);
 		}
 		i++;
 	}
@@ -43,7 +43,6 @@ void	get_in_out_complet_list(t_list_char *node)
 
 void	get_in_out(t_list_char *tok)
 {
-	int			i;
 	int			file_output;
 	int			file_input;
 	t_list_char	*tmp;
@@ -51,8 +50,8 @@ void	get_in_out(t_list_char *tok)
 	tmp = tok;
 	while (tmp)
 	{
-		file_input = get_infile_nb(tmp);
-		file_output = get_outfile_nb(tmp);
+		file_input = get_infile_nb(tmp->cmd);
+		file_output = get_outfile_nb(tmp->cmd);
 		tmp->infiles = ft_calloc((file_input + 1), sizeof(char *));
 		tmp->outfiles = ft_calloc((file_output + 1), sizeof(char *));
 		if (!tmp->infiles || !tmp->outfiles)
@@ -82,8 +81,6 @@ void	get_in_fd(t_list_char *node)
 				close(node->fd_infile);
 			node->fd_infile = open(node->infiles[i], O_RDONLY, 0644);
 		}
-		else
-			perror("infile");
 		i++;
 	}
 }
@@ -96,9 +93,9 @@ void	get_out_fd(t_list_char *node)
 	while (node->outfiles[i])
 	{
 		if (!ft_strcmp(">>", node->outfiles[i]))
-			check_access_app(node, i);
+			check_access_app(node, i + 1);
 		else if (!ft_strcmp(">", node->outfiles[i]))
-			check_acces_
+			check_access_out(node, i + 1);
 		i++;
 	}
 }
@@ -131,7 +128,7 @@ void	check_access_app(t_list_char *node, int	i)
 		if (node->fd_outfile && node->fd_outfile != -1)
 			close(node->fd_outfile);
 		node->fd_outfile = open(node->outfiles[i], O_WRONLY
-				| O_CREAT, 0644);
+				| O_CREAT | O_APPEND, 0644);
 	}
 	else
 	{
@@ -140,7 +137,7 @@ void	check_access_app(t_list_char *node, int	i)
 			if (node->fd_outfile && node->fd_outfile != -1)
 				close(node->fd_outfile);
 			node->fd_outfile = open(node->outfiles[i], O_WRONLY
-				| O_CREAT, 0644);
+				| O_CREAT | O_APPEND, 0644);
 		}
 	}
 }
