@@ -6,11 +6,20 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/14 15:51:35 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/15 14:30:05 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
+
+char	*expand_hinput(char *input, t_env *env)
+{
+	int	i;
+	char	*save;
+
+	save = input;
+	input = expand_word(input, env);
+}
 
 void	ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env)
 {

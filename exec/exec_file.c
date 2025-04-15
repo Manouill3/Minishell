@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/14 15:49:31 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/15 09:17:17 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ void	get_in_fd(t_list_char *node)
 		{
 			if (node->fd_infile != -1)
 				close(node->fd_infile);
-			node->fd_infile = node->heredoc->fd;
+			node->fd_infile = open(node->heredoc->name, O_RDONLY);
 		}
 		else if (!ft_strcmp("<", node->infiles[i]) &&
-				access(node->infiles[i], F_OK | R_OK) != -1)
+				access(node->infiles[i + 1], F_OK | R_OK) != -1)
 		{
 			if (node->fd_infile != -1)
 				close(node->fd_infile);
-			node->fd_infile = open(node->infiles[i], O_RDONLY, 0644);
+			node->fd_infile = open(node->infiles[i + 1], O_RDONLY, 0644);
 		}
 		i++;
 	}

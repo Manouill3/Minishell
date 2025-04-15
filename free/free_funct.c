@@ -26,7 +26,7 @@ void    close_all(t_init *param, t_list_char *tmp)
 
 void	clear_files(t_list_char *lst)
 {
-	if (lst->heredoc->fd)
+	if (lst->heredoc->fd != -1)
 		close(lst->heredoc->fd);
 	if (lst->heredoc->name)
 	{
