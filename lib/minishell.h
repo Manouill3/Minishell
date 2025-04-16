@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/15 09:37:15 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:10:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,14 @@ int			get_len_quote(char *str);
 char		*get_final_word(char *word_quote, char *expand);
 char		*get_res(int j, int i, char *res, char *word_quote);
 char		*expand_quote(char *tmp, char *tmp_free, t_env *lst_env);
+
+////////////////////////////////////////
+///			expand/expand_heredoc.c ///
+//////////////////////////////////////
+
+int		count_quote(char *input);
+char    *change_to_var(char *input, t_env *env);
+char    *exp_heredoc(char *input, t_env *env);
 
 ////////////////////////////////////////
 ///			heredoc/heredoc.c       ///

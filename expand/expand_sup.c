@@ -12,64 +12,56 @@
 
 #include "../lib/minishell.h"
 
-int	get_len_quote(char *str)
+int	get_len_w_q(char word,char quote, int	i)
 {
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == 39)
-			count++;
+	i++;
+	while (word[i], word[i] != quote)
 		i++;
-	}
-	return (count);
+	return (i);
 }
 
-char	*get_final_word(char *word_quote, char *expand)
+char	*all_quote_out(char *str)
 {
+	char	*new;
 	int		i;
 	int		j;
-	int		len;
-	size_t	k;
-	char	*res;
 
 	i = 0;
 	j = 0;
-	k = 0;
-	len = ft_strlen(expand) + get_len_quote(word_quote) + 1;
-	res = ft_calloc(len, sizeof(char));
-	while (i < len - 1)
+	new = ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	if (!new)
+		return (NULL);
+	while (str[i])
 	{
-		while (word_quote[j] == 39)
-			res[i++] = word_quote[j++];
-		if (k < ft_strlen(expand))
-			res[i] = expand[k++];
-		else
-			res = get_res(j, i, res, word_quote);
+		if (str[i] != 39 && str[i] != '"')
+		{
+			new[j] = str[i];
+			j++;
+		}
 		i++;
 	}
-	return (res);
+	return (new);
 }
 
-char	*get_res(int j, int i, char *res, char *word_quote)
+char	*char_out(char *str, char c)
 {
-	while (word_quote[j] && word_quote[j] != 39)
-		j++;
-	if (word_quote[j])
-		res[i] = word_quote[j];
-	return (res);
-}
+	char	*new;
+	int		i;
+	int		j;
 
-char	*expand_quote(char *tmp, char *tmp_free, t_env *lst_env)
-{
-	tmp = char_out(tmp, '"');
-	free(tmp_free);
-	tmp_free = NULL;
-	tmp_free = tmp;
-	tmp = change_word(tmp, lst_env);
-	free(tmp_free);
-	return (tmp);
+	i = 0;
+	j = 0;
+	new = ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	if (!new)
+		return (NULL);
+	while (str[i])
+	{
+		if (str[i] != c)
+		{
+			new[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	return (new);
 }

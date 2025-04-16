@@ -6,20 +6,11 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/15 14:30:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/16 09:09:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
-
-char	*expand_hinput(char *input, t_env *env)
-{
-	int	i;
-	char	*save;
-
-	save = input;
-	input = expand_word(input, env);
-}
 
 void	ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env)
 {
@@ -32,7 +23,7 @@ void	ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env)
 		if (!ft_strchr(heredoc->eof[i], '"') && !ft_strchr(heredoc->eof[i], 39))
 		{
 			if (heredoc->input && ft_strchr(heredoc->input, '$'))
-				heredoc->input = expand_word(heredoc->input, env);
+				heredoc->input = exp_heredoc(heredoc->input, env);
 		}
 		if (!heredoc->input || !ft_strcmp(heredoc->input, final_eof))
 		{
@@ -57,7 +48,7 @@ void	ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env)
 		if (!ft_strchr(heredoc->eof[i], '"') && !ft_strchr(heredoc->eof[i], 39))
 		{
 			if (heredoc->input && ft_strchr(heredoc->input, '$'))
-				heredoc->input = expand_word(heredoc->input, env);
+				heredoc->input = exp_heredoc(heredoc->input, env);
 		}
 		if (!heredoc->input || !ft_strcmp(heredoc->input, final_eof))
 		{
