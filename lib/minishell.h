@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/16 09:10:47 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:09:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,20 +152,17 @@ void		parsing_line(t_init *param);
 ///			expand/expand.c         ///
 //////////////////////////////////////
 
-char		*all_quote_out(char *str);
-char		*char_out(char *str, char c);
-char		*change_word(char *word, t_env *lst_env);
-char		*expand_word(char *word, t_env *lst_env);
+char	*get_actual_word(char *word, int i, int len);
+char		*expand_word(char *word);
 void		expand_arg(t_init *param);
 
 ////////////////////////////////////////
 ///			expand/expand_sup.c     ///
 //////////////////////////////////////
 
-int			get_len_quote(char *str);
-char		*get_final_word(char *word_quote, char *expand);
-char		*get_res(int j, int i, char *res, char *word_quote);
-char		*expand_quote(char *tmp, char *tmp_free, t_env *lst_env);
+int	get_len_w_q(char *word, char quote, int i);
+char	*all_quote_out(char *str);
+char	*char_out(char *str, char c);
 
 ////////////////////////////////////////
 ///			expand/expand_heredoc.c ///

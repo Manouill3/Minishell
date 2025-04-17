@@ -12,10 +12,10 @@
 
 #include "../lib/minishell.h"
 
-int	get_len_w_q(char word,char quote, int	i)
+int	get_len_w_q(char *word, char quote, int	i)
 {
 	i++;
-	while (word[i], word[i] != quote)
+	while (word[i] && word[i] != quote)
 		i++;
 	return (i);
 }

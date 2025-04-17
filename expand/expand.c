@@ -6,13 +6,13 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/16 16:02:09 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:42:54 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char	*get_actual_word(char *word, int i, int len, t_env *env)
+char	*get_actual_word(char *word, int i, int len)
 {
 	char	*sub_word;
 	
@@ -20,9 +20,10 @@ char	*get_actual_word(char *word, int i, int len, t_env *env)
 	if (!sub_word)
 		return(NULL);
 	
+	return (sub_word);
 }
 
-char	*expand_word(char *word, t_env *lst_env)
+char	*expand_word(char *word)
 {
 	int	i;
 	int	len;
@@ -30,6 +31,7 @@ char	*expand_word(char *word, t_env *lst_env)
 	char	*res;
 
 	i = 0;
+	res = NULL;
 	while (word[i])
 	{
 		len = i;
@@ -40,12 +42,14 @@ char	*expand_word(char *word, t_env *lst_env)
 		}
 		else
 		{
+			i++;
 			while (word[i] && ft_isalnum(word[i]))
 				i++; 
 		}
-		actual_word = get_actual_word(word, i, len, env);
+		actual_word = get_actual_word(word, i, len);
+		printf("word = %s\n", actual_word);
 		res = ft_strjoin(res, actual_word);
-		free(get_actual_word);
+		printf("res = %s\n", res);
 	}
 	return (res);
 }
@@ -67,7 +71,7 @@ void	expand_arg(t_init *param)
 				if (i == 0 || ft_strcmp("<<", tmp->cmd[i - 1]))
 				{
 					tmp_free = tmp->cmd[i];
-					tmp->cmd[i] = expand_word(tmp->cmd[i], param->lst_env);
+					tmp->cmd[i] = expand_word(tmp->cmd[i]);
 					free(tmp_free);
 				}
 			}
