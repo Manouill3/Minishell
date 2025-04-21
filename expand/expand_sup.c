@@ -12,6 +12,35 @@
 
 #include "../lib/minishell.h"
 
+char	*get_result(char *cont, char *word)
+{
+	int		i;
+	int		j;
+	int		k;
+	char	*result;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	result = ft_calloc(ft_strlen(cont) + count_quote(word) + 1, sizeof(char));
+	if (!result)
+		return (NULL);
+	while (j < (int)ft_strlen(cont) + count_quote(word))
+	{
+		if (word[i] != 39 && word[i] != '"')
+		{
+			while (word[i] && word[i] != 39 && word[i] != '"')
+				i++;
+			while (cont[k])
+				result[j++] = cont[k++];
+		}
+		else
+			result[j++] = word[i++];
+	}
+	free(cont);
+	return (result);
+}
+
 int	get_len_w_q(char *word, char quote, int	i)
 {
 	i++;

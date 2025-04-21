@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/15 09:17:17 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/21 16:10:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@ void	get_in_out_complet_list(t_list_char *node)
 	int	i;
 	int	j;
 	int	k;
-	int	nb_in;
-	int	nb_out;
 
 	i = 0;
 	j = 0;
 	k = 0;
-	nb_in = 0;
-	nb_out = 0;
 	while (node->cmd[i])
 	{
 		if (!ft_strcmp("<", node->cmd[i]))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/17 11:09:39 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/21 22:14:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,14 +152,17 @@ void		parsing_line(t_init *param);
 ///			expand/expand.c         ///
 //////////////////////////////////////
 
-char	*get_actual_word(char *word, int i, int len);
-char		*expand_word(char *word);
+char	*get_final_word(t_init *param, char *word, t_env *env);
+char	*check_quote(t_init *param, char *word, t_env *env);
+char	*get_actual_word(t_init *param, char *word, int i, int len, t_env *env);
+char		*expand_word(t_init *param, char *word, t_env *env);
 void		expand_arg(t_init *param);
 
 ////////////////////////////////////////
 ///			expand/expand_sup.c     ///
 //////////////////////////////////////
 
+char	*get_result(char *cont, char *word);
 int	get_len_w_q(char *word, char quote, int i);
 char	*all_quote_out(char *str);
 char	*char_out(char *str, char c);

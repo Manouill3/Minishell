@@ -26,6 +26,7 @@ int	ft_init(t_init **param)
 	(*param) = malloc(sizeof(t_init));
 	if (!(*param))
 		return (1);
+	(*param)->status = 0;
 	return (0);
 }
 
