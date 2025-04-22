@@ -33,6 +33,7 @@ SRC = main.c\
 	parsing/parse_line.c\
 	parsing/token.c\
 	expand/expand.c\
+	expand/expand_res.c\
 	expand/expand_sup.c\
 	expand/expand_heredoc.c\
 	heredoc/heredoc.c\

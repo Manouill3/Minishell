@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/21 22:14:40 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/22 13:21:37 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,10 +159,17 @@ char		*expand_word(t_init *param, char *word, t_env *env);
 void		expand_arg(t_init *param);
 
 ////////////////////////////////////////
+///			expand/expand_res.c     ///
+//////////////////////////////////////
+
+char	*expand_quote(t_init *param, char *word, t_env *env);
+char	*get_result(char *cont, char *word);
+
+////////////////////////////////////////
 ///			expand/expand_sup.c     ///
 //////////////////////////////////////
 
-char	*get_result(char *cont, char *word);
+char	*no_expand(char *word, int i, int len);
 int	get_len_w_q(char *word, char quote, int i);
 char	*all_quote_out(char *str);
 char	*char_out(char *str, char c);

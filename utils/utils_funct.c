@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/03 09:25:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/22 09:50:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
-	if (*s1 == 0)
+	if (!s1 || !s2)
 		return (1);
 	while (s1[i])
 	{

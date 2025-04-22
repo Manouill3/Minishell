@@ -12,33 +12,22 @@
 
 #include "../lib/minishell.h"
 
-char	*get_result(char *cont, char *word)
+char	*no_expand(char *word, int i, int len)
 {
-	int		i;
-	int		j;
-	int		k;
-	char	*result;
+	char	*sub_word;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	result = ft_calloc(ft_strlen(cont) + count_quote(word) + 1, sizeof(char));
-	if (!result)
+	sub_word = ft_substr(word, len, i - len);
+	if (!sub_word)
 		return (NULL);
-	while (j < (int)ft_strlen(cont) + count_quote(word))
-	{
-		if (word[i] != 39 && word[i] != '"')
-		{
-			while (word[i] && word[i] != 39 && word[i] != '"')
-				i++;
-			while (cont[k])
-				result[j++] = cont[k++];
-		}
-		else
-			result[j++] = word[i++];
-	}
-	free(cont);
-	return (result);
+	return (sub_word);
+}
+
+int	get_len_w_d(char *word, int i);
+{
+	i++;
+	while (word[i] && ft_isalnum(word[i]))
+		i++;
+	return (i);
 }
 
 int	get_len_w_q(char *word, char quote, int	i)
@@ -46,6 +35,7 @@ int	get_len_w_q(char *word, char quote, int	i)
 	i++;
 	while (word[i] && word[i] != quote)
 		i++;
+	i++;
 	return (i);
 }
 
