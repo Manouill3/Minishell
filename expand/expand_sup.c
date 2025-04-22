@@ -12,17 +12,36 @@
 
 #include "../lib/minishell.h"
 
-char	*no_expand(char *word, int i, int len)
+int	inputs_len(char *word)
 {
-	char	*sub_word;
+	int	i;
+	int	len;
 
-	sub_word = ft_substr(word, len, i - len);
-	if (!sub_word)
-		return (NULL);
-	return (sub_word);
+	i = 0;
+	len = 0;
+	while (word[i])
+	{
+		if (word[i] == '"' || word[i] == 39)
+		{
+			i = get_len_w_q(word, word[i], i);
+			len++;
+		}
+		else if (word[i] == '$')
+		{
+			i = get_len_w_d(word, i);
+			len++;
+		}
+		else
+		{
+			while (word[i] && word[i] != '$')
+				i++;
+			len++;
+		}
+	}
+	return (len);
 }
 
-int	get_len_w_d(char *word, int i);
+int	get_len_w_d(char *word, int i)
 {
 	i++;
 	while (word[i] && ft_isalnum(word[i]))
