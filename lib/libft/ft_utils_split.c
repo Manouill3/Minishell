@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/21 22:18:43 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/23 16:25:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ char	**handle_quote(const char *s, int *k, char **tab, int i)
 	j = 0;
 	(*k) = secu((*k), s);
 	len = len_word(s, (*k));
+	printf("len = %d\n", len);
 	tab[i - 1] = ft_calloc(len + 1, sizeof(char));
 	if (!tab[i - 1])
 		free_all(tab);

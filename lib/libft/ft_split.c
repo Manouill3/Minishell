@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/21 22:29:48 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/23 16:36:29 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,20 @@ int	len_word(const char *s, int start)
 int	len_first_tab(const char *s)
 {
 	int	i;
+	char	c;
 	int	count;
 
 	i = 0;
 	count = 0;
 	while (s[i])
 	{
+		if (s[i] == '"' || s[i] == 39)
+		{
+			c = s[i++];
+			while (s[i] && s[i] != c)
+				i++;
+			count++;
+		}
 		if (is_white(s[i]) != 1 && (is_white(s[i + 1]) == 1
 				|| s[i + 1] == '\0'))
 			count++;
@@ -88,6 +96,7 @@ char	**ft_split(char const *s)
 	if (!s)
 		return (0);
 	nb_word = len_first_tab(s);
+	printf("nb_word = %d\n", nb_word);
 	tab = ft_calloc(nb_word + 1, sizeof(char *));
 	if (!tab)
 		return (0);

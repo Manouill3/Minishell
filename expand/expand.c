@@ -3,14 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/22 22:06:34 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/23 16:19:33 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
+
+char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while(word[i])
+	{
+		if (i > 0 && word[i] == '?' && word[i - 1] == '$')
+			i++;
+		j = i;
+		if (word[i] == '$')
+			i = get_len_w_d(word, i);
+		else
+		{
+			while (word[i] && word[i] != '$')
+				i++;
+		}
+		inputs[k++] = get_actual_word(param, word, i, j, env);
+	}
+	return (inputs);
+}
+
+char	*expand_quote(t_init *param, t_env *env, char *word)
+{
+	int		len;
+	char	*res;
+	char	**inputs;
+
+	len = inputs_len(word, 1);
+	inputs = ft_calloc(len + 1, sizeof(char *));
+	if (!inputs)
+		return (NULL);
+	inputs = expand_input_q(param, word, env, inputs);
+	if (!inputs)
+		return (NULL);
+	res = ft_calloc(final_len(inputs, len) + 1, sizeof(char));
+	if (!res)
+		return(NULL);
+	res = get_final_input(res, inputs, len);
+	free_tab(inputs);
+	return (res);
+}
+
+char	*get_final_input(char *res, char **inputs, int len)
+{
+	int	i;
+	int	j;
+	int	k;
+	
+	i = 0;
+	k = 0;
+	while (i < len)
+	{
+		j = 0;
+		while (j < (int)ft_strlen(inputs[i]))
+			res[k++] = inputs[i][j++];
+		i++;
+	}
+	return (res);
+}
 
 char	*get_result(char *cont, char *sub_word)
 {
@@ -21,6 +85,8 @@ char	*get_result(char *cont, char *sub_word)
 	char	*res;
 
 	i = 0;
+	j = 0;
+	k = 0;
 	len = count_quote(sub_word) + ft_strlen(cont);
 	res = ft_calloc(len + 1, sizeof(char));
 	if (!res)
@@ -46,7 +112,7 @@ char	*get_env_value(t_env *env, char *sub_word)
 	no_quote = all_quote_out(sub_word);
 	env_comp = char_out(no_quote, '$');
 	tmp = env;
-	while (tmp && ft_strcmp(env->cont, tmp->name))
+	while (tmp && ft_strcmp(env_comp, tmp->name))
 		tmp = tmp->next;
 	if (!tmp)
 	{
@@ -60,11 +126,13 @@ char	*get_env_value(t_env *env, char *sub_word)
 	return (final_word);
 }
 
-char	*check_quote(char *word, t_env *env)
+char	*check_quote(t_init *param, char *word, t_env *env)
 {
 	char	*no_quote;
 	char	*final_word;
 
+	if (!ft_strchr(word, '$'))
+		return(ft_strdup(word));
 	if (word[0] == 39)
 	{
 		final_word = char_out(word, 39);
@@ -73,7 +141,7 @@ char	*check_quote(char *word, t_env *env)
 	if (word[0] == '"')
 	{
 		no_quote = char_out(word, '"');
-		final_word = get_env_value(env, no_quote);
+		final_word = expand_quote(param, env, no_quote);
 		free(no_quote);
 		return(final_word);
 	}
@@ -91,16 +159,21 @@ char	*get_actual_word(t_init *param, char *word, int i, int len, t_env *env)
 		sub_word = ft_substr(word, len, i - len);
 		if (!sub_word)
 			return (NULL);
-		if (!ft_strcmp(sub_word, "$?"))
+		if (!ft_strcmp("$?", sub_word))
 		{
 			free(sub_word);
 			return (ft_itoa(param->status));
+		}
+		if (word[i] == '$')
+		{
+			free(sub_word);
+			return (ft_strdup("$"));
 		}
 	}
 	sub_word = ft_substr(word, len, i - len);
 	if (!sub_word)
 		return (NULL);
-	final_word = check_quote(sub_word, env);
+	final_word = check_quote(param, sub_word, env);
 	free(sub_word);
 	return (final_word);
 }
@@ -115,6 +188,8 @@ char	**expand_input(t_init *param, char *word, t_env *env, char **inputs)
 	k = 0;
 	while(word[i])
 	{
+		if (i > 0 && word[i] == '?' && word[i - 1] == '$')
+			i++;
 		j = i;
 		if (word[i] == '"' || word[i] == 39)
 			i = get_len_w_q(word, word[i], i);
@@ -132,25 +207,31 @@ char	**expand_input(t_init *param, char *word, t_env *env, char **inputs)
 
 char	*expand_word(t_init *param, char *word, t_env *env)
 {
-	int		i;
-	int	len;
+	int i;
+	int		len;
+	char	*res;
 	char	**inputs;
 
-	len = inputs_len(word);
-	printf("len = %d\n", len);
+	i = 0;
+	len = inputs_len(word, 0);
 	inputs = ft_calloc(len + 1, sizeof(char *));
 	if (!inputs)
 		return (NULL);
 	inputs = expand_input(param, word, env, inputs);
 	if (!inputs)
 		return (NULL);
-	i = 0;
-	while (inputs[i])
+	res = ft_calloc(final_len(inputs, len) + 1, sizeof(char));
+	if (!res)
+		return(NULL);
+	res = get_final_input(res, inputs, len);
+	while (i < len)
 	{
-		printf("inputs[%d] = %s\n", i, inputs[i]);
+		if (!inputs[i])
+			inputs[i] = ft_strdup(res);
 		i++;
 	}
-	return (inputs[0]);
+	free_tab(inputs);
+	return (res);
 }
 
 void	expand_arg(t_init *param)
@@ -171,8 +252,8 @@ void	expand_arg(t_init *param)
 				{
 					tmp_free = tmp->cmd[i];
 					tmp->cmd[i] = expand_word(param, tmp->cmd[i], param->lst_env);
-					printf("cmd = %s\n", tmp->cmd[i]);
 					free(tmp_free);
+					printf("cmd = %s\n", tmp->cmd[i]);
 				}
 			}
 			i++;

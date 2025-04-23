@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/22 21:50:44 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/23 16:19:13 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,12 @@ void		parsing_line(t_init *param);
 ///			expand/expand.c         ///
 //////////////////////////////////////
 
+char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs);
+char		*expand_quote(t_init *param, t_env *env, char *word);
+char		*get_final_input(char *res, char **inputs, int len);
 char		*get_result(char *cont, char *sub_word);
 char		*get_env_value(t_env *env, char *sub_word);
-char		*check_quote(char *word, t_env *env);
+char		*check_quote(t_init *param, char *word, t_env *env);
 char		*get_actual_word(t_init *param, char *word, int i, int len, t_env *env);
 char		**expand_input(t_init *param, char *word, t_env *env, char **inputs);
 char		*expand_word(t_init *param, char *word, t_env *env);
@@ -164,13 +167,13 @@ void		expand_arg(t_init *param);
 ///			expand/expand_res.c     ///
 //////////////////////////////////////
 
-
+int final_len(char **inputs, int len);
 
 ////////////////////////////////////////
 ///			expand/expand_sup.c     ///
 //////////////////////////////////////
 
-int	inputs_len(char *word);
+int	inputs_len(char *word, int i);
 int		get_len_w_d(char *word, int i);
 int		get_len_w_q(char *word, char quote, int i);
 char	*all_quote_out(char *str);
