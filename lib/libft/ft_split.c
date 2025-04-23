@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/23 16:36:29 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/23 23:26:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,17 @@ int	len_word(const char *s, int start)
 {
 	size_t	i;
 
+	if (is_ope(s[start]) == 1)
+		start++;
+	while (s[start] && is_white(s[start]) == 1)
+		start++;
 	i = start;
-	if (is_ope(s[i]) == 1)
-	{
-		while (is_ope(s[i]) == 1)
-			i++;
-		return (i - start);
-	}
-	while (i < ft_strlen(s) && is_white(s[i]) != 1 && is_ope(s[i]) != 1)
-	{
-		if (s[i] == '"' || s[i] == 39)
-		{
-			i++;
-			while (s[i] && s[i] != '"' && s[i] != 39)
-				i++;
-			i++;
-		}
-		else
-			i++;
-	}
+	while (s[i] && is_ope(s[i]) != 1)
+		i++;
+	if (s[i] && s[i] == '|')
+		i--;
+	while (s[i] && is_white(s[i - 1]) == 1)
+		i--;
 	return (i - start);
 }
 
@@ -60,17 +52,14 @@ int	len_first_tab(const char *s)
 	{
 		if (s[i] == '"' || s[i] == 39)
 		{
-			c = s[i++];
+			c = s[i];
+			i++;
 			while (s[i] && s[i] != c)
 				i++;
-			count++;
 		}
-		if (is_white(s[i]) != 1 && (is_white(s[i + 1]) == 1
-				|| s[i + 1] == '\0'))
+		if (is_white(s[i]) != 1 && s[i + 1] == '\0')
 			count++;
-		if ((is_ope(s[i]) != 1 && is_ope(s[i + 1]) == 1 && is_white(s[i]) != 1)
-			|| (is_ope(s[i]) == 1 && is_ope(s[i + 1]) != 1
-				&& is_white(s[i + 1]) != 1))
+		if (is_ope(s[i]) == 1 && s[i + 1] != '\0')
 			count++;
 		i++;
 	}
@@ -79,7 +68,7 @@ int	len_first_tab(const char *s)
 
 int	secu(int k, char const *s)
 {
-	while (is_white(s[k]) == 1 && s[k])
+	while (s[k] && (is_white(s[k]) == 1 || is_ope(s[k]) == 1))
 		k++;
 	return (k);
 }
@@ -96,7 +85,6 @@ char	**ft_split(char const *s)
 	if (!s)
 		return (0);
 	nb_word = len_first_tab(s);
-	printf("nb_word = %d\n", nb_word);
 	tab = ft_calloc(nb_word + 1, sizeof(char *));
 	if (!tab)
 		return (0);

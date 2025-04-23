@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/23 16:19:33 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/23 23:33:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ char	*get_actual_word(t_init *param, char *word, int i, int len, t_env *env)
 
 	if (i - len == 1 && word[len] == '$')
 	{
-		sub_word = ft_substr(word, len, i - len);
+		sub_word = ft_substr(word, len, i - len + 1);
 		if (!sub_word)
 			return (NULL);
 		if (!ft_strcmp("$?", sub_word))

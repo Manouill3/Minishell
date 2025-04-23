@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 14:12:37 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/31 00:07:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/23 22:11:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**exec_all(const char *s, int k, int i, char **tab)
 	int	nb_word;
 
 	nb_word = len_first_tab(s);
-	if (ft_strchr(s, '|') || ft_strchr(s, '<') || ft_strchr(s, '>'))
+	if (ft_strchr(s, '|'))
 	{
 		tab = split_ope(s, k, i, tab);
 		return (tab);
