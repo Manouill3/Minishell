@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 17:50:24 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/24 20:42:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,13 @@ void	set_cmd(char *tab, t_list_char *tmp)
 	while (i < tab_len)
 	{
 		k = 0;
-		printf("tab[j] = %c\n", tab[j]);
 		while (tab[j] && is_white(tab[j]))
 			j++;
-		printf("tab[j] = %c\n", tab[j]);
 		len = ft_len_word(tab, j);
-		printf("len = %d\n", len);
 		tmp->cmd[i] = ft_calloc(len + 1, sizeof(char));
 		if (!tmp->cmd[i])
 			return ;
-		while (j < len)
+		while (k < len)
 			tmp->cmd[i][k++] = tab[j++];
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 17:34:37 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/24 21:29:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int final_len(char **inputs, int len);
 ///			expand/expand_sup.c     ///
 //////////////////////////////////////
 
-int	inputs_len(char *word, int i);
+int	inputs_len(char *word);
 int		get_len_w_d(char *word, int i);
 int		get_len_w_q(char *word, char quote, int i);
 char	*all_quote_out(char *str);

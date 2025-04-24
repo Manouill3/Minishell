@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 16:49:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/24 20:37:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,11 @@ char	**ft_extract_word(const char *s, int *k, int *i, char **tab)
 
 char	**split_ope(const char *s, int k, int i, char **tab)
 {
-	int	j;
 	int	nb_word;
 
 	nb_word = len_first_tab(s);
 	while (i++ < nb_word)
 	{
-		j = 0;
 		k = secu(k, s);
 		if (k < (int)ft_strlen(s) && i - 1 < nb_word)
 			ft_extract_word(s, &k, &i, tab);

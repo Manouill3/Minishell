@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 14:07:58 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/24 23:06:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*check_quote_q(char *word, t_env *env)
 {
-	//char	*no_quote;
+	char	*no_quote;
 	char	*final_word;
 
 	// if (word[0] == '"')
@@ -28,6 +28,12 @@ char	*check_quote_q(char *word, t_env *env)
 	// 	free(no_quote);
 	// 	return(final_word);
 	// }
+	no_quote = char_out(word, 39);
+	if (ft_strlen(no_quote) == 1 && no_quote[0] == '$')
+	{
+		free(no_quote);
+		return (ft_strdup(word));
+	}
 	if (!ft_strchr(word, '$'))
 		return(ft_strdup(word));
 	final_word = get_env_value(env, word);
@@ -64,7 +70,7 @@ char	*get_actual_word_q(t_init *param, char *word, int i, int len, t_env *env)
 	sub_word = ft_substr(word, len, i - len);
 	if (!sub_word)
 		return (NULL);
-	printf("sub_word = %s\n", sub_word);
+	printf("sub_word_out = %s\n", sub_word);
 	final_word = check_quote_q(sub_word, env);
 	free(sub_word);
 	return (final_word);
@@ -84,24 +90,14 @@ char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs)
 			i++;
 		j = i;
 		if (word[i] == '"' || word[i] == 39)
-		{
-			printf("i = %d\n", i);
 			i = get_len_w_q(word, word[i], i);
-			printf("i = %d\n", i);
-		}
 		else if (word[i] == '$')
-		{
-			printf("i = %d\n", i);
 			i = get_len_w_d(word, i);
-			printf("i = %d\n", i);
-		}
 		else
 		{
-			printf("i = %d\n", i);
 			while (word[i] &&
 				(word[i] != '$' && word[i] != '"' && word[i] != 39))
 				i++;
-			printf("i = %d\n", i);
 		}
 		inputs[k++] = get_actual_word_q(param, word, i, j, env);
 	}
@@ -115,7 +111,7 @@ char	*expand_quote(t_init *param, t_env *env, char *word)
 	char	*res;
 	char	**inputs;
 
-	len = inputs_len(word, 1);
+	len = inputs_len(word);
 	inputs = ft_calloc(len + 1, sizeof(char *));
 	if (!inputs)
 		return (NULL);
@@ -264,7 +260,7 @@ char	*get_actual_word(t_init *param, char *word, int i, int len, t_env *env)
 	sub_word = ft_substr(word, len, i - len);
 	if (!sub_word)
 		return (NULL);
-	printf("sub_word = %s\n", sub_word);
+	printf("sub_word_out = %s\n", sub_word);
 	final_word = check_quote(param, sub_word, env);
 	free(sub_word);
 	return (final_word);
@@ -293,7 +289,6 @@ char	**expand_input(t_init *param, char *word, t_env *env, char **inputs)
 				(word[i] != '$' && word[i] != '"' && word[i] != 39))
 				i++;
 		}
-		printf("i = %d\n", i);
 		inputs[k++] = get_actual_word(param, word, i, j, env);
 	}
 	return (inputs);
@@ -307,7 +302,7 @@ char	*expand_word(t_init *param, char *word, t_env *env)
 	char	**inputs;
 
 	i = 0;
-	len = inputs_len(word, 0);
+	len = inputs_len(word);
 	inputs = ft_calloc(len + 1, sizeof(char *));
 	if (!inputs)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 15:02:23 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/24 20:59:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_fonct_suit(t_list_char *tmp, int *i, int *j, char **tmp_tab)
 	while ((*i) < len_cmd(tmp->cmd))
 	{
 		while (tmp->cmd[(*i)] && (!ft_strcmp("<", tmp->cmd[(*i)]) || !ft_strcmp(">", tmp->cmd[(*i)])))
-		(*i) = (*i) + 2;
+			(*i) = (*i) + 2;
 		if ((*i) < len_cmd(tmp->cmd))
 		{
 			tmp_tab[(*j)] = ft_strdup(tmp->cmd[(*i)]);
@@ -70,6 +70,5 @@ void	parsing_line(t_init *param)
 	}
 	if (!param->tok->cmd[0])
 		return ;
-	print_lst_char(param->tok);
 	// exec(param);
 }

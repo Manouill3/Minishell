@@ -12,7 +12,7 @@
 
 #include "../lib/minishell.h"
 
-int	inputs_len(char *word, int nb)
+int	inputs_len(char *word)
 {
 	int	i;
 	int	len;
@@ -21,7 +21,7 @@ int	inputs_len(char *word, int nb)
 	len = 0;
 	while (word[i])
 	{
-		if (nb != 1 && (word[i] == '"' || word[i] == 39))
+		if (word[i] == '"' || word[i] == 39)
 			i = get_len_w_q(word, word[i], i);
 		else if (word[i] == '$')
 			i = get_len_w_d(word, i);
