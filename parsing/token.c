@@ -3,26 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/01 14:27:18 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:50:24 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-int	get_tab_len(char **tab, int k)
+int    ft_len_word(const char *s, int start)
 {
-	int	i;
+    int    i;
+    int    cmp;
 
-	i = 0;
-	while (tab[k] && ft_strcmp("|", tab[k]))
-	{
-		i++;
-		k++;
-	}
-	return (i);
+    i = start;
+    cmp = 0;
+    while (s[i] && !is_white(s[i]))
+    {
+        i++;
+        cmp++;
+    }
+    return (cmp);
+}
+
+int	get_tab_len(char *tab)
+{
+    int    i;
+    int    count;
+
+    i = 0;
+    count = 0;
+    while (tab[i])
+    {
+        if (!is_white(tab[i]) && (is_white(tab[i + 1]) || tab[i + 1] == '\0'))
+            count++;
+        i++;
+    }
+    return (count);
 }
 
 t_list_char	*set_lst(int count_cmd)
@@ -40,39 +58,51 @@ t_list_char	*set_lst(int count_cmd)
 	return (lst);
 }
 
-void	set_cmd(t_init *param, t_list_char *tmp, int *k)
+void	set_cmd(char *tab, t_list_char *tmp)
 {
+	int i;
 	int	j;
+	int	k;
+	int	len;
 	int	tab_len;
 
+	i = 0;
 	j = 0;
-	tab_len = get_tab_len(param->tab, (*k));
-	tmp->cmd = malloc(sizeof(char *) * (tab_len + 1));
-	while (j < tab_len)
+	tab_len = get_tab_len(tab);
+	tmp->cmd = ft_calloc(tab_len + 1, sizeof(char *));
+	if (!tmp->cmd)
+		return ;
+	while (i < tab_len)
 	{
-		tmp->cmd[j] = ft_strdup(param->tab[(*k)]);
-		j++;
-		(*k)++;
+		k = 0;
+		printf("tab[j] = %c\n", tab[j]);
+		while (tab[j] && is_white(tab[j]))
+			j++;
+		printf("tab[j] = %c\n", tab[j]);
+		len = ft_len_word(tab, j);
+		printf("len = %d\n", len);
+		tmp->cmd[i] = ft_calloc(len + 1, sizeof(char));
+		if (!tmp->cmd[i])
+			return ;
+		while (j < len)
+			tmp->cmd[i][k++] = tab[j++];
+		i++;
 	}
-	tmp->cmd[j] = NULL;
 }
 
 void	get_token(t_init *param)
 {
 	int			i;
-	int			k;
 	t_list_char	*tmp;
 
 	i = 0;
-	k = 0;
 	param->tab = ft_split(param->line);
 	param->count_cmd = get_nb_cmd(param->tab);
 	param->tok = set_lst(param->count_cmd);
 	tmp = param->tok;
 	while (i < param->count_cmd)
 	{
-		set_cmd(param, tmp, &k);
-		k++;
+		set_cmd(param->tab[i], tmp);
 		i++;
 		tmp = tmp->next;
 	}

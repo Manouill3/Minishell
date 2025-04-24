@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 14:49:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/24 17:34:37 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,10 @@ int			get_nb_cmd(char **tab);
 ///			parsing/token.c         ///
 //////////////////////////////////////
 
-int			get_tab_len(char **tab, int k);
+int    		ft_len_word(const char *s, int start);
+int			get_tab_len(char *tab);
 t_list_char	*set_lst(int count_cmd);
-void		set_cmd(t_init *param, t_list_char *tmp, int *k);
+void		set_cmd(char *tab, t_list_char *tmp);
 void		get_token(t_init *param);
 
 ////////////////////////////////////////
@@ -287,7 +288,7 @@ void    ft_cd(t_init *param, t_list_char *tok);
 ///			built-in.c/env.c		///
 //////////////////////////////////////
 
-void    ft_env(t_env *env);
+void    ft_env(t_env *env);	
 
 ////////////////////////////////////////
 ///			built-in.c/export.c		///

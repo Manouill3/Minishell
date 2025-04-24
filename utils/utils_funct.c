@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_funct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/22 09:50:52 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:42:52 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,10 @@ int	get_nb_cmd(char **tab)
 	int	count;
 
 	i = 0;
-	count = 1;
+	count = 0;
 	while (tab[i])
 	{
-		if (ft_strcmp("|", tab[i]) == 0)
-			count++;
+		count++;
 		i++;
 	}
 	return (count);
