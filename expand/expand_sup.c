@@ -22,21 +22,16 @@ int	inputs_len(char *word, int nb)
 	while (word[i])
 	{
 		if (nb != 1 && (word[i] == '"' || word[i] == 39))
-		{
 			i = get_len_w_q(word, word[i], i);
-			len++;
-		}
 		else if (word[i] == '$')
-		{
 			i = get_len_w_d(word, i);
-			len++;
-		}
 		else
 		{
-			while (word[i] && word[i] != '$')
+			while (word[i]
+				&& (word[i] != '$' && word[i] != '"' && word[i] != 39))
 				i++;
-			len++;
 		}
+		len++;
 	}
 	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/23 16:19:13 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:02:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ void		parsing_line(t_init *param);
 ///			expand/expand.c         ///
 //////////////////////////////////////
 
+char	*check_quote_q(char *word, t_env *env);
+char	*get_actual_word_q(t_init *param, char *word, int i, int len, t_env *env);
 char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs);
 char		*expand_quote(t_init *param, t_env *env, char *word);
 char		*get_final_input(char *res, char **inputs, int len);

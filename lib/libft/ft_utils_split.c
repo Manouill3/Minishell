@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/23 23:28:17 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/24 09:54:04 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,5 @@ char	**handle_quote(const char *s, int *k, char **tab, int i)
 		else
 			tab[i - 1][j++] = s[(*k)++];
 	}
-	printf("tab[%d] = %s\n", i - 1, tab[i - 1]);
 	return (tab);
 }

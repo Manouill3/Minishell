@@ -3,14 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/23 23:33:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/24 14:07:58 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
+
+char	*check_quote_q(char *word, t_env *env)
+{
+	//char	*no_quote;
+	char	*final_word;
+
+	// if (word[0] == '"')
+	// {
+	// 	if (ft_strlen(word) == 0)
+	// 		return(NULL);
+	// 	no_quote = char_out(word, '"');
+	// 	if (!ft_strchr(no_quote, '$'))
+	// 		return(no_quote);
+	// 	final_word = expand_quote(param, env, no_quote);
+	// 	free(no_quote);
+	// 	return(final_word);
+	// }
+	if (!ft_strchr(word, '$'))
+		return(ft_strdup(word));
+	final_word = get_env_value(env, word);
+	return (final_word);
+}
+
+char	*get_actual_word_q(t_init *param, char *word, int i, int len, t_env *env)
+{
+	char	*sub_word;
+	char	*final_word;
+
+	if (i - len == 1 && word[len] == '$')
+	{
+		sub_word = ft_substr(word, len, i - len + 1);
+		if (!sub_word)
+			return (NULL);
+		printf("sub_word = %s\n", sub_word);
+		if (!ft_strcmp("$?", sub_word))
+		{
+			free(sub_word);
+			return (ft_itoa(param->status));
+		}
+		if (!ft_isalnum(word[i]))
+		{
+			free(sub_word);
+			return (ft_strdup("$"));
+		}
+		else
+		{
+			free(sub_word);
+			return(NULL);
+		}
+	}
+	sub_word = ft_substr(word, len, i - len);
+	if (!sub_word)
+		return (NULL);
+	printf("sub_word = %s\n", sub_word);
+	final_word = check_quote_q(sub_word, env);
+	free(sub_word);
+	return (final_word);
+}
 
 char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs)
 {
@@ -25,20 +83,34 @@ char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs)
 		if (i > 0 && word[i] == '?' && word[i - 1] == '$')
 			i++;
 		j = i;
-		if (word[i] == '$')
+		if (word[i] == '"' || word[i] == 39)
+		{
+			printf("i = %d\n", i);
+			i = get_len_w_q(word, word[i], i);
+			printf("i = %d\n", i);
+		}
+		else if (word[i] == '$')
+		{
+			printf("i = %d\n", i);
 			i = get_len_w_d(word, i);
+			printf("i = %d\n", i);
+		}
 		else
 		{
-			while (word[i] && word[i] != '$')
+			printf("i = %d\n", i);
+			while (word[i] &&
+				(word[i] != '$' && word[i] != '"' && word[i] != 39))
 				i++;
+			printf("i = %d\n", i);
 		}
-		inputs[k++] = get_actual_word(param, word, i, j, env);
+		inputs[k++] = get_actual_word_q(param, word, i, j, env);
 	}
 	return (inputs);
 }
 
 char	*expand_quote(t_init *param, t_env *env, char *word)
 {
+	int		i;
 	int		len;
 	char	*res;
 	char	**inputs;
@@ -54,6 +126,13 @@ char	*expand_quote(t_init *param, t_env *env, char *word)
 	if (!res)
 		return(NULL);
 	res = get_final_input(res, inputs, len);
+	i = 0;
+	while (i < len)
+	{
+		if (!inputs[i])
+			inputs[i] = ft_strdup(res);
+		i++;
+	}
 	free_tab(inputs);
 	return (res);
 }
@@ -131,20 +210,26 @@ char	*check_quote(t_init *param, char *word, t_env *env)
 	char	*no_quote;
 	char	*final_word;
 
-	if (!ft_strchr(word, '$'))
-		return(ft_strdup(word));
 	if (word[0] == 39)
 	{
+		if (ft_strlen(word) == 0)
+			return(NULL);
 		final_word = char_out(word, 39);
 		return (final_word);
 	}
 	if (word[0] == '"')
 	{
+		if (ft_strlen(word) == 0)
+			return(NULL);
 		no_quote = char_out(word, '"');
+		if (!ft_strchr(no_quote, '$'))
+			return(no_quote);
 		final_word = expand_quote(param, env, no_quote);
 		free(no_quote);
 		return(final_word);
 	}
+	if (!ft_strchr(word, '$'))
+		return(ft_strdup(word));
 	final_word = get_env_value(env, word);
 	return (final_word);
 }
@@ -159,20 +244,27 @@ char	*get_actual_word(t_init *param, char *word, int i, int len, t_env *env)
 		sub_word = ft_substr(word, len, i - len + 1);
 		if (!sub_word)
 			return (NULL);
+		printf("sub_word = %s\n", sub_word);
 		if (!ft_strcmp("$?", sub_word))
 		{
 			free(sub_word);
 			return (ft_itoa(param->status));
 		}
-		if (word[i] == '$')
+		if (!ft_isalnum(word[i]))
 		{
 			free(sub_word);
 			return (ft_strdup("$"));
+		}
+		else
+		{
+			free(sub_word);
+			return(NULL);
 		}
 	}
 	sub_word = ft_substr(word, len, i - len);
 	if (!sub_word)
 		return (NULL);
+	printf("sub_word = %s\n", sub_word);
 	final_word = check_quote(param, sub_word, env);
 	free(sub_word);
 	return (final_word);
@@ -197,9 +289,11 @@ char	**expand_input(t_init *param, char *word, t_env *env, char **inputs)
 			i = get_len_w_d(word, i);
 		else
 		{
-			while (word[i] && word[i] != '$')
+			while (word[i] &&
+				(word[i] != '$' && word[i] != '"' && word[i] != 39))
 				i++;
 		}
+		printf("i = %d\n", i);
 		inputs[k++] = get_actual_word(param, word, i, j, env);
 	}
 	return (inputs);
