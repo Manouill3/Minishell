@@ -22,6 +22,7 @@ t_env	*ft_lstnew_env(char *str)
 	lst->name = NULL;
 	lst->cont = str;
 	lst->next = NULL;
+	lst->prev = NULL;
 	return (lst);
 }
 
@@ -38,6 +39,7 @@ void	ft_lstadd_back_env(t_env **lst, t_env *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 void	ft_lstclear_env(t_env **lst)

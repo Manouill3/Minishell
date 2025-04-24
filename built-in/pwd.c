@@ -36,18 +36,19 @@ void ft_pwd()
 
 void    ft_exec_built_in(t_init *param, t_list_char *tok)
 {
+    printf("MAGROSSEBITE\n");
 	if(!ft_strcmp("echo", tok->funct))
-        return ;
+        ft_echo(param, tok);
 	if(!ft_strcmp("cd", tok->funct))
         ft_cd(param, tok);
 	if(!ft_strcmp("pwd", tok->funct))
         ft_pwd();
 	if(!ft_strcmp("export", tok->funct))
-        return ;
+        ft_export(param, tok);
 	if(!ft_strcmp("unset", tok->funct))
-        return ;
+        ft_unset(param, tok);
 	if(!ft_strcmp("env", tok->funct))
-        return ;
+        ft_env(param->lst_env);
 	if(!ft_strcmp("exit", tok->funct))
-        return ;
+        ft_exit(param);
 }

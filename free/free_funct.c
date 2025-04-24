@@ -54,6 +54,7 @@ void	free_tab(char **tab)
 void	free_struct(t_init *param)
 {
 	ft_lstclear_env(&param->lst_env);
+	ft_lstclear_env(&param->lst_export);
 	free(param);
 }
 

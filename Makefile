@@ -44,7 +44,12 @@ SRC = main.c\
 	exec/exec_utils2.c\
 	exec/exec_file.c \
 	built-in/pwd.c \
-	built-in/cd.c
+	built-in/cd.c \
+	built-in/echo.c \
+	built-in/env_built-in.c \
+	built-in/export.c \
+	built-in/unset.c \
+	built-in/exit.c
 
 OBJ = $(SRC:.c=.o)
 

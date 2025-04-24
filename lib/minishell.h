@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 14:02:32 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:49:22 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ typedef struct s_heredoc
 
 typedef struct s_env
 {
+	int				exp;
 	char			*name;
 	char			*cont;
 	struct s_env	*next;
+	struct s_env	*prev;
 }			t_env;
 
 typedef struct s_list_char
@@ -59,12 +61,14 @@ typedef struct s_list_char
 
 typedef struct s_init
 {
+	int					exit;
 	int					status;
 	int					count_cmd;
 	char				*line;
 	char				*pwd;
 	char				*tmp_data;
 	char				**tab;
+	struct s_env		*lst_export;
 	struct s_env		*lst_env;
 	struct s_fds		fds;
 	struct s_list_char	*tok;
@@ -90,7 +94,9 @@ void		ft_handle_interrupt_signals(void);
 //////////////////////////////////////
 
 void		get_final_cont(t_env *env);
+void		get_final_cont_more(t_env *env);
 void		get_name_env(t_env *env);
+void		get_name_env_more(t_env *env);
 int			get_env(t_init *param, char **env);
 
 ////////////////////////////////////////
@@ -256,6 +262,13 @@ char    *get_last_eof(char **cmd);
 int get_infile_nb(char **cmd);
 int get_outfile_nb(char **cmd);
 
+
+////////////////////////////////////////
+///			built-in.c/echo.c		///
+//////////////////////////////////////
+
+void    ft_echo(t_init *param, t_list_char *tok);
+
 ////////////////////////////////////////
 ///			built-in.c/pwd.c		///
 //////////////////////////////////////
@@ -270,6 +283,29 @@ void 	ft_pwd();
 
 void    ft_cd(t_init *param, t_list_char *tok);
 
+////////////////////////////////////////
+///			built-in.c/env.c		///
+//////////////////////////////////////
+
+void    ft_env(t_env *env);
+
+////////////////////////////////////////
+///			built-in.c/export.c		///
+//////////////////////////////////////
+
+void    ft_export(t_init *param, t_list_char *tok);
+
+////////////////////////////////////////
+///			built-in.c/unset.c		///
+//////////////////////////////////////
+
+void    ft_unset(t_init *param, t_list_char *tok);
+
+////////////////////////////////////////
+///			built-in.c/exit.c		///
+//////////////////////////////////////
+
+void    ft_exit(t_init *param);
 
 #endif
 
