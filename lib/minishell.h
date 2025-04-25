@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 21:29:12 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/25 15:26:55 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,9 +159,10 @@ void		parsing_line(t_init *param);
 ///			expand/expand.c         ///
 //////////////////////////////////////
 
-char	*check_quote_q(char *word, t_env *env);
-char	*get_actual_word_q(t_init *param, char *word, int i, int len, t_env *env);
-char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs);
+char		*get_exit_value(t_init *param, char *word);
+char		*check_quote_q(t_init *param, char *word, t_env *env);
+char		*get_actual_word_q(t_init *param, char *word, int i, int len, t_env *env);
+char		**expand_input_q(t_init *param, char *word, t_env *env, char **inputs);
 char		*expand_quote(t_init *param, t_env *env, char *word);
 char		*get_final_input(char *res, char **inputs, int len);
 char		*get_result(char *cont, char *sub_word);
