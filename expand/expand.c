@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/25 15:34:09 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/28 11:35:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,25 @@
 
 int	len_get_exit_value(int status, char *word)
 {
-	
+	int	i;
+	int	j;
+	int	count;
+	char *value;
+
+	i = 0;
+	j = 0;
+	count = 0;
+	value = ft_itoa(status);
+	while (word[i] && word[i++] != '$')
+		count++;
+	while (value[j++])
+		count++;
+	while (word[i] && (word[i] == '$' || word[i] == '?'))
+		i++;
+	while (word[i++])
+		count++;
+	free (value);	
+	return (count);
 }
 
 char	*get_exit_value(t_init *param, char *word)
@@ -29,9 +47,6 @@ char	*get_exit_value(t_init *param, char *word)
 	j = 0;
 	len = len_get_exit_value(param->status, word);
 	value = ft_itoa(param->status);
-	while (word[len])
-		len++;
-	len--;
 	final_word = ft_calloc(len + 1, sizeof(char));
 	if (!final_word)
 		return (NULL);
@@ -39,9 +54,12 @@ char	*get_exit_value(t_init *param, char *word)
 	while (word[i] && word[i] != '$')
 		final_word[j++] = word[i++];
 	while (value[len])
-		final_word[j++] = value[len++]; 
+		final_word[j++] = value[len++];
+	while (word[i] && (word[i] == '$' || word[i] == '?'))
+		i++;
 	while (word[i])
 		final_word[j++] = word[i++];
+	free (value);
 	return (final_word);
 }
 
@@ -85,10 +103,16 @@ char	*get_actual_word_q(t_init *param, char *word, int i, int len, t_env *env)
 			free(sub_word);
 			return (ft_itoa(param->status));
 		}
-		if (!ft_isalnum(word[i]))
+		else if (!ft_isalnum(word[i]))
 		{
 			free(sub_word);
 			return (ft_strdup("$"));
+		}
+		else if (!ft_strcmp("$_", sub_word))
+		{
+			final_word = check_quote(param, sub_word, env);
+			free(sub_word);
+			return (final_word);
 		}
 		else
 		{
@@ -115,7 +139,7 @@ char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs)
 	k = 0;
 	while(word[i])
 	{
-		if (i > 0 && word[i] == '?' && word[i - 1] == '$')
+		if (i > 0 && (word[i] == '?' || word[i] == '_') && word[i - 1] == '$')
 			i++;
 		j = i;
 		if (word[i] == '"' || word[i] == 39)
@@ -275,7 +299,13 @@ char	*get_actual_word(t_init *param, char *word, int i, int len, t_env *env)
 			free(sub_word);
 			return (ft_itoa(param->status));
 		}
-		if (!ft_isalnum(word[i]))
+		else if (!ft_strcmp("$_", sub_word))
+		{
+			final_word = check_quote(param, sub_word, env);
+			free(sub_word);
+			return (final_word);
+		}
+		else if (!ft_isalnum(word[i]))
 		{
 			free(sub_word);
 			return (ft_strdup("$"));
@@ -305,7 +335,7 @@ char	**expand_input(t_init *param, char *word, t_env *env, char **inputs)
 	k = 0;
 	while(word[i])
 	{
-		if (i > 0 && word[i] == '?' && word[i - 1] == '$')
+		if (i > 0 && (word[i] == '?' || word[i] == '_') && word[i - 1] == '$')
 			i++;
 		j = i;
 		if (word[i] == '"' || word[i] == 39)
