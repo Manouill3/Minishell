@@ -44,6 +44,8 @@ int	main(int ac, char **av, char **env)
 			return (0);
 		while (1)
 		{
+			if (isatty(STDIN_FILENO))
+				break;
 			param->line = readline("Minishell : ");
 			if (param->line == NULL)
 			{

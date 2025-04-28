@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/04/08 16:19:25 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/28 15:55:18 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,30 +115,38 @@ void    ft_cd(t_init *param, t_list_char *tok)
 		free_tab(path_split);
 		result = chdir(path);
 		if (result == -1)
+		{
+			param->status = 1;
 			perror("cd");
+		}
 		free(path);
 	}
 	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
 	{
 		tmp = ft_path_user(path, tok);
-		printf("tmp = %s\n", tmp);
 		result = chdir(tmp);
 		if (result == -1)
+		{
+			param->status = 1;
 			perror("cd");
+		}
 		free(path);
 		free(tmp);
 	}
 	else if (check_inside_path(path, tok) == 0)
 	{
-		printf("tok->cmd[1] = %s\n", tok->cmd[1]);
 		result = chdir(tok->cmd[1]);
 		if (result == -1)
+		{
+			param->status = 1;
 			perror("cd");
+		}
 		free(path);
 	}
 	else
 	{
 		free(path);
+		param->status = 1;
 		perror("cd");
 	}
 }

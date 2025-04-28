@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:35:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/04/24 14:39:34 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/28 14:49:32 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,27 @@ void    ft_print_arg(int n, int i, t_list_char *tok)
 void    ft_echo(t_init *param, t_list_char *tok)
 {
     int i;
+    int j;
     int n;
+    (void)param;
 
     i = 1;
+    j = 1;
     n = 0;
-    printf("tok->cmd[i]%s\n", tok->cmd[0]);
-    printf("tok->cmd[i]%s\n", tok->cmd[1]);
     if (tok->cmd[1] == NULL)
     {
         printf("\n");
         return ;
     }
-    if (tok->cmd[1][0] == '$' && tok->cmd[1][1] == '?')
-        printf("%d", param->exit);
-    while (tok->cmd[i] && !ft_strcmp(tok->cmd[i], "-n"))
+    while (tok->cmd[i] && (!ft_strcmp(tok->cmd[i], "-n") || (tok->cmd[i][0] == '-' && tok->cmd[i][j] == 'n')))
     {
         n = 1;
-        i++;
+        if (tok->cmd[i][j])
+        {
+            j = 1;
+            i++;
+        }
+        j++;
     }
     ft_print_arg(n, i, tok);
 
