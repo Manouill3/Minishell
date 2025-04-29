@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/28 14:38:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:03:11 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	parsing_line(t_init *param)
 	
 	get_token(param);
 	expand_arg(param);
+	
 	get_funct(param->tok);
 	get_no_red(param->tok);
 	get_in_out(param->tok);
