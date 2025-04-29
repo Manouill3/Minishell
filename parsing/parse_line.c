@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 13:45:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/29 14:31:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,10 @@ void	get_funct(t_list_char *lst)
 
 void	parsing_line(t_init *param)
 {
-	// t_list_char	*tmp;
+	t_list_char	*tmp;
 
 	get_token(param);
 	expand_arg(param);
-
 	// supp_quote(param);
 	get_funct(param->tok);
 	get_no_red(param->tok);
@@ -73,5 +72,5 @@ void	parsing_line(t_init *param)
 	if (!param->tok)
 		return ;
 	print_lst_char(param->tok);
-	exec(param);
+	// exec(param);
 }
