@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 14:29:12 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:18:46 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,25 @@
 
 int    ft_len_word(const char *s, int start)
 {
-    int    i;
-    int    cmp;
+    int		i;
+    int		cmp;
+	char	c;
 
     i = start;
     cmp = 0;
+	if (s[i] == '"' || s[i] == 39)
+	{
+		c = s[i++];
+		cmp++;
+		while (s[i] && s[i] != c)
+		{
+			i++;
+			cmp++;
+		}
+		i++;
+		cmp++;
+		return (cmp);
+	}
 	if (s[i] == '<' || s[i] == '>')
 	{
 		while (s[i] && (s[i] == '<' || s[i] == '>'))
@@ -39,12 +53,22 @@ int    ft_len_word(const char *s, int start)
 int	get_tab_len(char *tab)
 {
     int    i;
+	char	c;
     int    count;
 
     i = 0;
     count = 0;
     while (tab[i])
     {
+		if (tab[i] == '"' || tab[i] == 39)
+		{
+			c = tab[i++];
+			count++;
+			while (tab[i] && tab[i] != c)
+				i++;
+			i++;
+			continue;
+		}
 		if ((tab[i] == '<' || tab[i] == '>') && tab[i + 1] != tab[i])
 		{
 			count++;
@@ -84,7 +108,6 @@ void	set_cmd(char *tab, t_list_char *tmp)
 	i = 0;
 	j = 0;
 	tab_len = get_tab_len(tab);
-	printf("tab_len = %d\n", tab_len);
 	tmp->cmd = ft_calloc(tab_len + 1, sizeof(char *));
 	if (!tmp->cmd)
 		return ;
