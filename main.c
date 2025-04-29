@@ -44,8 +44,6 @@ int	main(int ac, char **av, char **env)
 			return (0);
 		while (1)
 		{
-			if (isatty(STDIN_FILENO))
-				break;
 			param->line = readline("Minishell : ");
 			if (param->line == NULL)
 			{
@@ -57,6 +55,8 @@ int	main(int ac, char **av, char **env)
 				add_history(param->line);
 			parsing_line(param);
 			ft_free_all(param);
+			if (!isatty(STDIN_FILENO))
+				break;
 		}
 	}
 }
