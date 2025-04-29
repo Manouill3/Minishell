@@ -55,7 +55,7 @@ int	main(int ac, char **av, char **env)
 				add_history(param->line);
 			parsing_line(param);
 			ft_free_all(param);
-			if (!isatty(STDIN_FILENO))
+			if (isatty(STDIN_FILENO))
 				break;
 		}
 	}
