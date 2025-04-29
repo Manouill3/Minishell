@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/04/24 14:25:34 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/29 16:34:32 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int		ft_add_value_var(t_init *param, int i, t_list_char *tok)
 	len = ft_strlen(tok->cmd[1]) - i;
 	add = ft_substr(tok->cmd[1], i, len);
 	name = ft_substr(tok->cmd[1], 0, (i - 2));
-	printf("len = %d\n add = %s\n name = %s\n", len, add, name);
 	while (tmp_env)
 	{
 		if (!ft_strcmp(name, tmp_env->name))
@@ -87,7 +86,6 @@ int		ft_add_value_var(t_init *param, int i, t_list_char *tok)
 			}
 		tmp_exp = tmp_exp->next;
 	}
-	printf("HERE\n");
 	tmp_env = NULL;
 	tmp_exp = NULL;
 	tmp_env = param->lst_env;
@@ -116,7 +114,6 @@ int		ft_continue_value(t_init *param, t_list_char *tok)
 	{
 		if (tok->cmd[1][i] == '+' && tok->cmd[1][i + 1] == '=')
 		{
-			printf("NOTHERE");
 			i = i + 2;
 			ft_add_value_var(param, i, tok);
 			return (0);
@@ -168,7 +165,6 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 	len_const = 0;
 	exist = 0;
 	tmp_env = param->lst_env;
-	printf("Create = %d\n", create);
 	while(tok->cmd[1][i] != '=' && tok->cmd[1][i])
 	{
 		if (ft_isalnum(tok->cmd[1][i]) == 0)
@@ -181,7 +177,6 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 	name = ft_substr(tok->cmd[1], 0, (i));
 	while (tmp_env)
 	{
-		// printf("tmp_env->name = %s, name = %s\n", tmp_env->name, name);
 		if (!ft_strcmp(tmp_env->name, name))
 		{
 			create = 1;
@@ -191,14 +186,12 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 	}
 	if (create == 0 && tok->cmd[1][i] == '=')
 		create = 2;
-	printf("Create = %d\n", create);
 	while (tmp_exp)
 	{
 		if (!ft_strcmp(tmp_exp->name, name))
 			exist = 1;
 		if (!ft_strcmp(tmp_exp->name, name) && create == 1 && tok->cmd[1][i] != '=')
 		{
-			printf("HERE1\n");
 			tmp_exp->exp = 0;
 			if (create != 2)
 			{
@@ -208,7 +201,6 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 		}
 		if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[1][i] != '=')
 		{
-			printf("HERE2\n");
 			tmp_exp->exp = 1;
 			if (create != 2)
 			{
@@ -218,7 +210,6 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 		}
 		if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[1][i] == '=')
 		{
-			printf("HERE3\n");
 			i++;
 			j = i;
 			while (tok->cmd[1][i])

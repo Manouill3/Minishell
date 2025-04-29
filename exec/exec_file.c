@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/21 16:10:57 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/29 16:30:41 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	get_in_out_complet_list(t_list_char *node)
 	k = 0;
 	while (node->cmd[i])
 	{
-		if (!ft_strcmp("<", node->cmd[i]))
+		if (!ft_strcmp(node->cmd[i], "<"))
 		{
 			node->infiles[j++] = ft_strdup(node->cmd[i++]);
 			node->infiles[j++] = ft_strdup(node->cmd[i]);
 		}
-		if (!ft_strcmp(">", node->cmd[i]))
+		if (!ft_strcmp( node->cmd[i], ">"))
 		{
 			node->outfiles[k++] = ft_strdup(node->cmd[i++]);
 			node->outfiles[k++] = ft_strdup(node->cmd[i]);
