@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/28 14:26:50 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/29 10:49:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,25 +158,37 @@ void		parsing_line(t_init *param);
 ///			expand/expand.c         ///
 //////////////////////////////////////
 
-char		*get_exit_value(t_init *param, char *word);
-char		*check_quote_q(t_init *param, char *word, t_env *env);
-char		*get_actual_word_q(t_init *param, char *word, int i, int len, t_env *env);
-char		**expand_input_q(t_init *param, char *word, t_env *env, char **inputs);
-char		*expand_quote(t_init *param, t_env *env, char *word);
-char		*get_final_input(char *res, char **inputs, int len);
 char		*get_result(char *cont, char *sub_word);
-char		*get_env_value(t_env *env, char *sub_word);
 char		*check_quote(t_init *param, char *word, t_env *env);
-char		*get_actual_word(t_init *param, char *word, int i, int len, t_env *env);
-char		**expand_input(t_init *param, char *word, t_env *env, char **inputs);
-char		*expand_word(t_init *param, char *word, t_env *env);
+char		**expand_input(t_init *param, char *word, char **inputs);
+char		*expand_word(t_init *param, char *word);
 void		expand_arg(t_init *param);
 
 ////////////////////////////////////////
 ///			expand/expand_res.c     ///
 //////////////////////////////////////
 
-int final_len(char **inputs, int len);
+char		**expand_input_q(t_init *param, char *word, char **inputs);
+char		*check_quote_q(t_init *param, char *word, t_env *env);
+char		*get_exit_value(t_init *param, char *word);
+int			len_get_exit_value(int status, char *word);
+int 		final_len(char **inputs, int len);
+
+////////////////////////////////////////
+///			expand/expand_res2.c    ///
+//////////////////////////////////////
+
+char		*get_env_value(t_env *env, char *sub_word);
+char		*expand_quote(t_init *param, char *word);
+char		*get_actual_word_q(t_init *param, char *word, int i, int len);
+char		*get_actual_word(t_init *param, char *word, int i, int len);
+char    	*one_char_test(t_init *param, char *word, char *sub_word, int i);
+
+////////////////////////////////////////
+///			expand/expand_res3.c    ///
+//////////////////////////////////////
+
+char		*get_final_input(char *res, char **inputs, int len);
 
 ////////////////////////////////////////
 ///			expand/expand_sup.c     ///

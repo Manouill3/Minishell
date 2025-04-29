@@ -34,6 +34,8 @@ SRC = main.c\
 	parsing/token.c\
 	expand/expand.c\
 	expand/expand_res.c\
+	expand/expand_res2.c\
+	expand/expand_res3.c\
 	expand/expand_sup.c\
 	expand/expand_heredoc.c\
 	heredoc/heredoc.c\

@@ -6,13 +6,13 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:55:11 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 09:45:52 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/29 10:44:07 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs)
+char	**expand_input_q(t_init *param, char *word, char **inputs)
 {
 	int	i;
 	int	j;
@@ -35,7 +35,7 @@ char	**expand_input_q(t_init *param, char *word, t_env *env, char **inputs)
 				(word[i] != '$' && word[i] != '"' && word[i] != 39))
 				i++;
 		}
-		inputs[k++] = get_actual_word_q(param, word, i, j, env);
+		inputs[k++] = get_actual_word_q(param, word, i, j);
 	}
 	return (inputs);
 }
