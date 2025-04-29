@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 20:42:20 by marvin           ###   ########.fr       */
+/*   Updated: 2025/04/29 11:19:06 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int    ft_len_word(const char *s, int start)
 
     i = start;
     cmp = 0;
-    while (s[i] && !is_white(s[i]))
+    while (s[i] && !is_white(s[i]) && s[i] != '<' && s[i] != '>')
     {
         i++;
         cmp++;
@@ -36,6 +36,11 @@ int	get_tab_len(char *tab)
     count = 0;
     while (tab[i])
     {
+		if ((tab[i] == '<' || tab[i] == '>') && tab[i + 1] != tab[i])
+		{
+			count++;
+			continue;
+		}
         if (!is_white(tab[i]) && (is_white(tab[i + 1]) || tab[i + 1] == '\0'))
             count++;
         i++;
@@ -69,6 +74,7 @@ void	set_cmd(char *tab, t_list_char *tmp)
 	i = 0;
 	j = 0;
 	tab_len = get_tab_len(tab);
+	printf("tab_len = %d\n", tab_len);
 	tmp->cmd = ft_calloc(tab_len + 1, sizeof(char *));
 	if (!tmp->cmd)
 		return ;
