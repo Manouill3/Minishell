@@ -33,6 +33,7 @@ int	ft_init(t_init **param)
 int	main(int ac, char **av, char **env)
 {
 	t_init	*param;
+	int	tt_y;
 
 	if (ac == 1 && av[0] != NULL)
 	{
@@ -42,6 +43,7 @@ int	main(int ac, char **av, char **env)
 		ft_handle_interrupt_signals();
 		if (get_env(param, env))
 			return (0);
+		tt_y = isatty(STDIN_FILENO);
 		while (1)
 		{
 			param->line = readline("Minishell : ");
@@ -55,7 +57,7 @@ int	main(int ac, char **av, char **env)
 				add_history(param->line);
 			parsing_line(param);
 			ft_free_all(param);
-			if (isatty(STDIN_FILENO))
+			if (!tt_y)
 				break;
 		}
 	}

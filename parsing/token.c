@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 11:19:06 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/29 13:36:30 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,21 @@ int    ft_len_word(const char *s, int start)
 
     i = start;
     cmp = 0;
+	if (s[i] == '<' || s[i] == '>')
+	{
+		while (s[i] && (s[i] == '<' || s[i] == '>'))
+		{
+			i++;
+			cmp++;
+		}
+		return (cmp);
+	}
     while (s[i] && !is_white(s[i]) && s[i] != '<' && s[i] != '>')
     {
         i++;
         cmp++;
     }
-    return (cmp);
+	return (cmp);
 }
 
 int	get_tab_len(char *tab)
