@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 10:49:37 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/29 11:02:41 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ void	expand_arg(t_init *param)
 					tmp_free = tmp->cmd[i];
 					tmp->cmd[i] = expand_word(param, tmp->cmd[i]);
 					free(tmp_free);
-					printf("cmd = %s\n", tmp->cmd[i]);
 				}
 			}
 			i++;
