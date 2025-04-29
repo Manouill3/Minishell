@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/04/28 15:55:18 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/29 17:22:56 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,13 @@ void    ft_cd(t_init *param, t_list_char *tok)
 	result = 0;
 	path = get_pwd();
 	path_split = NULL;
-	if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
+	if (ft_strlen(tok->cmd[1]) > 3)
+	{
+		free(path);
+		param->status = 1;
+		perror("cd");
+	}
+	else if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
 	{
 		free(path);
 		path = NULL;

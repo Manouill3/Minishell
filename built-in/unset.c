@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:06:32 by tcybak            #+#    #+#             */
-/*   Updated: 2025/04/23 17:58:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/29 17:25:06 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void    ft_unset(t_init *param, t_list_char *tok)
 
 	i = 0;
 	tmp = param->lst_env;
-	while(tok->cmd[1][i])
+	while(tok->cmd[1] && tok->cmd[1][i])
 	{
 		if (ft_isalnum(tok->cmd[1][i]) == 0)
 		{

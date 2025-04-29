@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/15 09:38:15 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:35:52 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	no_red_len(char **tab)
 	len = 0;
 	while (tab[i])
 	{
-		if (ft_strcmp(">", tab[i]) && ft_strcmp("<", tab[i]))
+		if (ft_strcmp(tab[i], ">") && ft_strcmp(tab[i], "<"))
 			len++;
 		else
 			i++;
