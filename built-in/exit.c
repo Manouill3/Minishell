@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/04/29 17:03:03 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/30 16:36:41 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void    ft_exit(t_init *param)
     if (nb_arg > 2)
     {
         param->status = 1;
-        perror("exit :too many arguments");
+        dprintf(2, " too many arguments");
+        exit(param->status);
     }
     // printf("HERE1 %d\n", param->status);
     if (param->tok->cmd[1] != NULL)
