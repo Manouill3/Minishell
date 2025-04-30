@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/30 15:28:21 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/30 16:21:23 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 		free_tab(path);
 		free_tab(args);
 		free_tab(env);
-		exit (127);
+		exit (126);
 	}
 }

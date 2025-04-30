@@ -35,6 +35,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_init	*param;
 	int	tt_y;
+	int res;
 
 	if (ac == 1 && av[0] != NULL)
 	{
@@ -50,7 +51,6 @@ int	main(int ac, char **av, char **env)
 			param->line = readline("Minishell : ");
 			if (param->line == NULL)
 			{
-				free_struct(param);
 				printf("exit\n");
 				break ;
 			}
@@ -61,6 +61,8 @@ int	main(int ac, char **av, char **env)
 			if (!tt_y)
 				break;
 		}
-		return (param->status);
+		res = param->status;
+		free_struct(param); 
+		return (res);
 	}
 }

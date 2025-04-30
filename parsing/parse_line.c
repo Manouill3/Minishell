@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/30 14:19:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:04:22 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	get_funct(t_list_char *lst)
 	{
 		i = 0;
 		j = 0;
-		tmp_tab = ft_calloc(2, sizeof(char *));
+		tmp_tab = ft_calloc(5, sizeof(char *));
 		if (!tmp_tab)
 			return ;
 		get_fonct_suit(tmp, &i, &j, tmp_tab);
@@ -49,41 +49,6 @@ void	get_funct(t_list_char *lst)
 			tmp->funct = NULL;
 		free_tab(tmp_tab);
 		tmp = tmp->next;
-	}
-}
-
-void	ft_supp_quote(t_init *param)
-{
-	int	i;
-	int	j;
-	int	nb;
-	char	*tmp;
-
-	i = 0;
-	nb = 0;
-	while (param->tok->cmd[i])
-	{
-		nb++;
-		i++;	
-	}
-	i = 0;
-	while (i < nb)
-	{
-		j = 0;
-		while (param->tok->cmd[i][j])
-		{
-			if (param->tok->cmd[i][j] == 39 || param->tok->cmd[i][j] == '"')
-			{
-				tmp = char_out(param->tok->cmd[i], param->tok->cmd[i][j]);
-				free(param->tok->cmd[i]);
-				param->tok->cmd[i] = NULL;
-				param->tok->cmd[i] = ft_strdup(tmp);
-				free(tmp);
-				break ;
-			}
-			j++;
-		}
-		i++;
 	}
 }
 
