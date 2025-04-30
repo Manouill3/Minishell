@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//hello
 #include "lib/minishell.h"
 
 void	init_heredoc(t_list_char *node)
@@ -51,7 +52,7 @@ int	main(int ac, char **av, char **env)
 			{
 				free_struct(param);
 				printf("exit\n");
-				exit (1);
+				break ;
 			}
 			if (param->line[0] != '\0')
 				add_history(param->line);
@@ -60,5 +61,6 @@ int	main(int ac, char **av, char **env)
 			if (!tt_y)
 				break;
 		}
+		return (param->status);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 14:35:53 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/30 15:28:21 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 	char    **args;
 	char    **env;
 	
-	if (param->count_cmd > 1 && verif_built(tmp))
+	if (param->count_cmd > 0 && verif_built(tmp))
 	{
 		ft_exec_built_in(param, tmp);
-		exit(0);
+		//printf("test = %d\n", param->status);
+		exit (param->status);
 	}
 	path = make_path(param->lst_env);
 	if (!path)

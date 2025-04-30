@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/04/29 16:34:32 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/30 15:22:19 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,9 @@ int		ft_continue_value(t_init *param, t_list_char *tok)
 		}
 		if (ft_isalnum(tok->cmd[1][i]) == 0)
 		{
-			perror("export identifier");
+			param->status = 1;
+			//perror;
+			dprintf(2, " not a valid identifier\n");
 			return (0);
 		}
 		i++;
@@ -169,7 +171,9 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 	{
 		if (ft_isalnum(tok->cmd[1][i]) == 0)
 		{
-			perror("export identifier");
+			param->status = 1;
+			//perror;
+			dprintf(2, " not a valid identifier\n");
 			return ;
 		}
 		i++;
@@ -294,6 +298,10 @@ void    ft_export(t_init *param, t_list_char *tok)
 		return ;
 	}
 	else
-		perror("export identifier");
+	{
+		param->status = 1;
+		//perror;
+		dprintf(2, " not a valid identifier\n");
+	}
 }
 

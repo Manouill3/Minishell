@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 17:35:52 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/04/30 15:30:24 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,10 @@ void    exec(t_init *param)
 			get_in_fd(tmp);
 		if (tmp->outfiles)
 			get_out_fd(tmp);			
-		if (param->count_cmd == 1 && verif_built(tmp))
+		if (param->count_cmd - 1 == count && (verif_built(tmp) == 5 || verif_built(tmp) == 7))
+		{
 			ft_exec_built_in(param, tmp);
+		}
 		if (pipe(param->fds.pipe_fd) == -1)
 		{
 			perror("pipe");
