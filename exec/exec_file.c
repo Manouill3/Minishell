@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 16:30:41 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/01 14:32:50 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@ void	get_in_out_complet_list(t_list_char *node)
 	i = 0;
 	j = 0;
 	k = 0;
-	while (node->cmd[i])
+	while (i < node->len_cmd)
 	{
-		if (!ft_strcmp(node->cmd[i], "<"))
+		if (node->cmd[i])
+			i++;
+		if (!ft_strcmp(node->cmd[i], "<") && node->len_cmd)
 		{
 			node->infiles[j++] = ft_strdup(node->cmd[i++]);
 			node->infiles[j++] = ft_strdup(node->cmd[i]);
 		}
-		if (!ft_strcmp( node->cmd[i], ">"))
+		if ( !ft_strcmp(node->cmd[i], ">") && node->len_cmd)
 		{
 			node->outfiles[k++] = ft_strdup(node->cmd[i++]);
 			node->outfiles[k++] = ft_strdup(node->cmd[i]);
