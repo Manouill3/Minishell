@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 16:33:27 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/01 23:07:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	parsing_line(t_init *param)
 	get_token(param);
 	expand_arg(param);
 	get_funct(param->tok);
-	// print_lst_char(param->tok);
 	get_no_red(param->tok);
+	// print_lst_char(param->tok);
 	get_in_out(param->tok);
 	get_nb_eof(param->tok);
 	tmp = param->tok;

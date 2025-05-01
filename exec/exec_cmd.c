@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 16:48:34 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/01 23:07:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 	char    **path;
 	char    **args;
 	char    **env;
-	
+
 	if (param->count_cmd > 0 && verif_built(tmp))
 	{
 		ft_exec_built_in(param, tmp);
@@ -81,7 +81,6 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 		free_tab(path);
 		exit(127);
 	}
-	printf("args[0] = %s\n", args[0]);
 	if (execve(args[0], args, env) == -1)
 	{
 		perror("execve");

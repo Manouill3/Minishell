@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 16:46:04 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/01 23:06:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	verif_built(t_list_char *tok)
 {
-	printf("tok->funct = %s\n", tok->funct);
 	if(!ft_strcmp("echo", tok->funct))
 		return (1);
 	if(!ft_strcmp("cd", tok->funct))
@@ -62,14 +61,14 @@ void	get_no_red(t_list_char *tok)
 	{
 		i = 0;
 		j = 0;
-		len = no_red_len(tok->cmd, tmp);
+		len = no_red_len(tmp->cmd, tmp);
 		tmp->no_red = ft_calloc(len + 1, sizeof(char *));
 		if (!tok->no_red)
 			return ;
 		while (j < len && i < tmp->len_cmd)
 		{
-			if (ft_strcmp(">", tok->cmd[i]) && ft_strcmp("<", tok->cmd[i]))
-				tmp->no_red[j++] = ft_strdup(tok->cmd[i]);
+			if (ft_strcmp(">", tmp->cmd[i]) && ft_strcmp("<", tmp->cmd[i]))
+				tmp->no_red[j++] = ft_strdup(tmp->cmd[i]);
 			else
 				i++;
 			i++;
