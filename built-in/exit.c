@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/04/30 16:36:41 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/01 17:20:12 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,11 @@ void    ft_exit(t_init *param)
     if (nb_arg > 2)
     {
         param->status = 1;
-        dprintf(2, " too many arguments");
+        write(2, " too many arguments", 19);
         exit(param->status);
     }
-    // printf("HERE1 %d\n", param->status);
     if (param->tok->cmd[1] != NULL)
         param->status = ft_atoi(param->tok->cmd[1]);
-    // printf("HERE2 %d\n", param->status);
-    if (param->status < 0)
-        param->status = 256 + param->status;
-    // printf("HERE3 %d\n", param->status);
-    if (param->status > 256)
-        param->status = param->status - 256;
-    // printf("HERE4 %d\n", param->status);
     nb_arg = param->status;
     ft_free_all(param);
     free_struct(param);
