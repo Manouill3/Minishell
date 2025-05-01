@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 13:19:06 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:53:45 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int	verif_built(t_list_char *tok)
 	return (0);
 }
 
-int	no_red_len(char **tab)
+int	no_red_len(char **tab, t_list_char *tmp)
 {
 	int	i;
 	int	len;
 	
 	i = 0;
 	len = 0;
-	while (tab[i])
+	while (i < tmp->len_cmd)
 	{
 		if (ft_strcmp(tab[i], ">") && ft_strcmp(tab[i], "<"))
 			len++;
@@ -61,7 +61,7 @@ void	get_no_red(t_list_char *tok)
 	{
 		i = 0;
 		j = 0;
-		len = no_red_len(tok->cmd);
+		len = no_red_len(tok->cmd, tmp);
 		tmp->no_red = ft_calloc(len + 1, sizeof(char *));
 		if (!tok->no_red)
 			return ;

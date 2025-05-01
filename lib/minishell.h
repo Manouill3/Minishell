@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 13:24:32 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/01 14:55:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,7 @@ void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env);
 //////////////////////////////////////
 
 int		verif_built(t_list_char *tok);
-int		no_red_len(char **tab);
+int		no_red_len(char **tab, t_list_char *tmp);
 void	get_no_red(t_list_char *tok);
 void    ft_exec_pipe( t_list_char *tmp, t_init *param, int count);
 void    exec(t_init *param);
