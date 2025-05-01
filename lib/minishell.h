@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 10:49:01 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/01 09:01:42 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ void		get_token(t_init *param);
 ///			parsing/parse_line.c    ///
 //////////////////////////////////////
 
-char		*get_fonct_suit(t_list_char *tmp, int *i, int *j, char **tmp_tab);
 void		get_funct(t_list_char *lst);
 void		parsing_line(t_init *param);
 
