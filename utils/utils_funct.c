@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_funct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 17:42:52 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/01 13:58:57 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,19 @@ void	print_lst_char(t_list_char *lst)
 	}
 }
 
-int	len_cmd(char **tab)
+int	is_red(char *val)
 {
-	int	i;
-
-	i = 0;
-	while(tab[i])
-		i++;
-	return (i);
+	if (ft_strlen(val) <= 0)
+		return (1);
+	if (!ft_strcmp(val, ">"))
+		return (0);
+	if (!ft_strcmp(val, ">>"))
+		return (0);
+	if (!ft_strcmp(val, "<"))
+		return (0);
+	if (!ft_strcmp(val, "<<"))
+		return (0);
+	return (1);
 }
 
 int	ft_strcmp(char *s1, char *s2)

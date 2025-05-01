@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 09:01:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:24:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_env
 
 typedef struct s_list_char
 {
+	int					len_cmd;
 	int					fd_infile;
 	int					fd_outfile;
 	char				**cmd_path;
@@ -132,7 +133,7 @@ void		ft_free_all(t_init *param);
 
 void		print_lst_env(t_env *lst);
 void		print_lst_char(t_list_char *lst);
-int			len_cmd(char **tab);
+int			is_red(char *val);
 int			ft_strcmp(char *s1, char *s2);
 int			get_nb_cmd(char **tab);
 

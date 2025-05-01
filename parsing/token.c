@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/30 14:18:27 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/01 13:04:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,15 +106,14 @@ void	set_cmd(char *tab, t_list_char *tmp)
 	int	j;
 	int	k;
 	int	len;
-	int	tab_len;
 
 	i = 0;
 	j = 0;
-	tab_len = get_tab_len(tab);
-	tmp->cmd = ft_calloc(tab_len + 1, sizeof(char *));
+	tmp->len_cmd = get_tab_len(tab);
+	tmp->cmd = ft_calloc(tmp->len_cmd + 1, sizeof(char *));
 	if (!tmp->cmd)
 		return ;
-	while (i < tab_len)
+	while (i < tmp->len_cmd)
 	{
 		k = 0;
 		while (tab[j] && is_white(tab[j]))
