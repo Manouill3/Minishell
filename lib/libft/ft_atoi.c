@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:51:03 by mdegache          #+#    #+#             */
-/*   Updated: 2024/12/17 14:55:50 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:18:07 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-long	ft_atoi(const char *nptr)
+#include "libft.h"
+
+uint8_t	ft_atoi(const char *nptr)
 {
-	int		i;
-	long	nb;
+	uint8_t		i;
+	uint8_t 	nb;
 	int		sign;
 
 	sign = 1;

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/01 16:41:11 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/01 16:47:59 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void    ft_cd(t_init *param, t_list_char *tok)
 	{
 		free(path);
 		param->status = 1;
-		perror(" too many arguments");
+		write(2, " too many arguments", 19);
 	}
 	else if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
 	{
