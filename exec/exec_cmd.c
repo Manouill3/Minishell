@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/30 16:21:23 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/01 16:48:34 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 	if (param->count_cmd > 0 && verif_built(tmp))
 	{
 		ft_exec_built_in(param, tmp);
-		//printf("test = %d\n", param->status);
 		exit (param->status);
 	}
 	path = make_path(param->lst_env);
@@ -82,8 +81,7 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 		free_tab(path);
 		exit(127);
 	}
-	if (param->count_cmd == 1 && verif_built(tmp))
-		exit(0);
+	printf("args[0] = %s\n", args[0]);
 	if (execve(args[0], args, env) == -1)
 	{
 		perror("execve");

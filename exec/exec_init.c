@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 14:53:45 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/01 16:46:04 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	verif_built(t_list_char *tok)
 {
+	printf("tok->funct = %s\n", tok->funct);
 	if(!ft_strcmp("echo", tok->funct))
 		return (1);
 	if(!ft_strcmp("cd", tok->funct))
@@ -40,7 +41,7 @@ int	no_red_len(char **tab, t_list_char *tmp)
 	len = 0;
 	while (i < tmp->len_cmd)
 	{
-		if (ft_strcmp(tab[i], ">") && ft_strcmp(tab[i], "<"))
+		if (tab[i] && ft_strcmp(tab[i], ">") && ft_strcmp(tab[i], "<"))
 			len++;
 		else
 			i++;
@@ -104,10 +105,8 @@ void    exec(t_init *param)
 			get_in_fd(tmp);
 		if (tmp->outfiles)
 			get_out_fd(tmp);			
-		if (param->count_cmd - 1 == count && (verif_built(tmp) == 5 || verif_built(tmp) == 7))
-		{
+		if (count == param->count_cmd - 1 && (verif_built(tmp) == 5 || verif_built(tmp) == 7))
 			ft_exec_built_in(param, tmp);
-		}
 		if (pipe(param->fds.pipe_fd) == -1)
 		{
 			perror("pipe");
