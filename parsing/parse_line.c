@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 11:31:27 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:33:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ void	ft_supp_quote(char **cmd)
 
 	i = 0;
 	nb = 0;
-	while (cmd[i])
-	{
-		nb++;
-		i++;	
-	}
-	i = 0;
+	while (cmd[nb])
+		nb++;	
 	while (i < nb)
 	{
 		j = 0;
@@ -34,11 +30,13 @@ void	ft_supp_quote(char **cmd)
 		{
 			if (cmd[i][j] == 39 || cmd[i][j] == '"')
 			{
-				tmp = char_out(cmd[i], cmd[i][j]);
-				free(cmd[i]);
-				cmd[i] = NULL;
-				cmd[i] = ft_strdup(tmp);
+				tmp = cmd[i];
+				cmd[i] = char_out(cmd[i], cmd[i][j]);
 				free(tmp);
+				// tmp = char_out(cmd[i], cmd[i][j]);
+				// free(cmd[i]);
+				// cmd[i] = NULL;
+				// cmd[i] = tmp;
 				break ;
 			}
 			j++;
@@ -86,9 +84,14 @@ void	parsing_line(t_init *param)
 	expand_arg(param);
 	get_funct(param->tok);
 	get_no_red(param->tok);
+	tmp = param->tok;
+	while(tmp)
+	{
+		ft_supp_quote(tmp->cmd);
+		ft_supp_quote(tmp->no_red);
+		tmp = tmp->next;
+	}
 	// print_lst_char(param->tok);
-	ft_supp_quote(param->tok->cmd);
-	ft_supp_quote(param->tok->no_red);
 	get_in_out(param->tok);
 	get_nb_eof(param->tok);
 	tmp = param->tok;
