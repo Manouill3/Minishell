@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 11:05:47 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/02 11:32:51 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,17 @@ int	get_tab_len(char *tab)
 			while (tab[i] && tab[i] != c)
 				i++;
 			i++;
+			if (tab[i] && is_white(tab[i]))
+				count++;
 			if (!tab[i] && i - save > 2)
 				count++;
-			// continue;
+			continue;
 		}
 		if ((tab[i] == '<' || tab[i] == '>') && tab[i + 1] != tab[i])
 		{
 			count++;
 			i++;
-			// continue;
+			continue;
 		}
         if (!is_white(tab[i]) && (is_white(tab[i + 1]) || tab[i + 1] == '\0'))
             count++;
