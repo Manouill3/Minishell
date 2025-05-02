@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 13:04:01 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/02 10:47:37 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ int    ft_len_word(const char *s, int start)
 	}
     while (s[i] && !is_white(s[i]) && s[i] != '<' && s[i] != '>')
     {
+		if (s[i] == '"' || s[i] == 39)
+		{
+			c = s[i++];
+			cmp++;
+			while (s[i] && s[i] != c)
+			{
+				i++;
+				cmp++;
+			}
+		}
         i++;
         cmp++;
     }
@@ -61,6 +71,7 @@ int	get_tab_len(char *tab)
     count = 0;
     while (tab[i])
     {
+		printf("tab[i] = %c\n", tab[i]);
 		if (tab[i] == '"' || tab[i] == 39)
 		{
 			save = i;
@@ -70,13 +81,13 @@ int	get_tab_len(char *tab)
 			i++;
 			if (!tab[i] && i - save > 2)
 				count++;
-			continue;
+			// continue;
 		}
 		if ((tab[i] == '<' || tab[i] == '>') && tab[i + 1] != tab[i])
 		{
 			count++;
 			i++;
-			continue;
+			// continue;
 		}
         if (!is_white(tab[i]) && (is_white(tab[i + 1]) || tab[i + 1] == '\0'))
             count++;
@@ -110,6 +121,7 @@ void	set_cmd(char *tab, t_list_char *tmp)
 	i = 0;
 	j = 0;
 	tmp->len_cmd = get_tab_len(tab);
+	printf("len = %d\n", tmp->len_cmd);
 	tmp->cmd = ft_calloc(tmp->len_cmd + 1, sizeof(char *));
 	if (!tmp->cmd)
 		return ;
@@ -119,6 +131,7 @@ void	set_cmd(char *tab, t_list_char *tmp)
 		while (tab[j] && is_white(tab[j]))
 			j++;
 		len = ft_len_word(tab, j);
+		printf("len_word = %d\n", len);
 		tmp->cmd[i] = ft_calloc(len + 1, sizeof(char));
 		if (!tmp->cmd[i])
 			return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 14:55:08 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/02 09:32:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ void		get_token(t_init *param);
 ///			parsing/parse_line.c    ///
 //////////////////////////////////////
 
+void	ft_supp_quote(char **cmd);
 void		get_funct(t_list_char *lst);
 void		parsing_line(t_init *param);
 

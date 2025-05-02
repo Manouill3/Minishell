@@ -3,14 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 23:07:39 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/02 10:29:49 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
+
+void	ft_supp_quote(char **cmd)
+{
+	int	i;
+	int	j;
+	int	nb;
+	char	*tmp;
+
+	i = 0;
+	nb = 0;
+	while (cmd[i])
+	{
+		nb++;
+		i++;	
+	}
+	i = 0;
+	while (i < nb)
+	{
+		j = 0;
+		while (cmd[i][j])
+		{
+			if (cmd[i][j] == 39 || cmd[i][j] == '"')
+			{
+				tmp = char_out(cmd[i], cmd[i][j]);
+				free(cmd[i]);
+				cmd[i] = NULL;
+				cmd[i] = ft_strdup(tmp);
+				free(tmp);
+				break ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 void	get_funct(t_list_char *lst)
 {
@@ -45,22 +80,24 @@ void	get_funct(t_list_char *lst)
 
 void	parsing_line(t_init *param)
 {
-	t_list_char	*tmp;
-
+	// t_list_char	*tmp;
+	
 	get_token(param);
 	expand_arg(param);
 	get_funct(param->tok);
 	get_no_red(param->tok);
-	// print_lst_char(param->tok);
-	get_in_out(param->tok);
-	get_nb_eof(param->tok);
-	tmp = param->tok;
-	while (tmp)
-	{
-		exec_heredoc(tmp, tmp->heredoc, param->lst_env);
-		tmp = tmp->next;
-	}
-	if (!param->tok)
-		return ;
-	exec(param);
+	ft_supp_quote(param->tok->cmd);
+	ft_supp_quote(param->tok->no_red);
+	print_lst_char(param->tok);
+	// get_in_out(param->tok);
+	// get_nb_eof(param->tok);
+	// tmp = param->tok;
+	// while (tmp)
+	// {
+	// 	exec_heredoc(tmp, tmp->heredoc, param->lst_env);
+	// 	tmp = tmp->next;
+	// }
+	// if (!param->tok)
+	// 	return ;
+	// exec(param);
 }
