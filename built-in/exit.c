@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/01 17:20:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/02 11:42:05 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    ft_exit(t_init *param)
 
     i = 0;
     nb_arg = 0;
-    while (param->tok->cmd[i])
+    while (ft_strlen(param->tok->cmd[i]) && param->tok->cmd[i])
     {
         nb_arg++;
         i++;
@@ -31,10 +31,25 @@ void    ft_exit(t_init *param)
         exit(param->status);
     }
     if (param->tok->cmd[1] != NULL)
+    {
+        i = 0;
+        while (param->tok->cmd[1][i])
+        {
+            if (!(param->tok->cmd[1][i] >= '0' && param->tok->cmd[1][i] <= '9')
+                && param->tok->cmd[1][i] != '+' && param->tok->cmd[1][i] != '-')
+            {
+                param->status = 2;
+                write(2, " numeric argument required", 26);
+                exit(param->status);
+            }
+            i++;
+        }
         param->status = ft_atoi(param->tok->cmd[1]);
+    }
     nb_arg = param->status;
     ft_free_all(param);
     free_struct(param);
     printf("exit\n");
+    // printf("exit = %d", nb_arg);
     exit(nb_arg);
 }
