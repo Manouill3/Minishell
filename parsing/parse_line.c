@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 10:29:49 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/02 11:31:27 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,24 +80,24 @@ void	get_funct(t_list_char *lst)
 
 void	parsing_line(t_init *param)
 {
-	// t_list_char	*tmp;
+	t_list_char	*tmp;
 	
 	get_token(param);
 	expand_arg(param);
 	get_funct(param->tok);
 	get_no_red(param->tok);
+	// print_lst_char(param->tok);
 	ft_supp_quote(param->tok->cmd);
 	ft_supp_quote(param->tok->no_red);
-	print_lst_char(param->tok);
-	// get_in_out(param->tok);
-	// get_nb_eof(param->tok);
-	// tmp = param->tok;
-	// while (tmp)
-	// {
-	// 	exec_heredoc(tmp, tmp->heredoc, param->lst_env);
-	// 	tmp = tmp->next;
-	// }
-	// if (!param->tok)
-	// 	return ;
-	// exec(param);
+	get_in_out(param->tok);
+	get_nb_eof(param->tok);
+	tmp = param->tok;
+	while (tmp)
+	{
+		exec_heredoc(tmp, tmp->heredoc, param->lst_env);
+		tmp = tmp->next;
+	}
+	if (!param->tok)
+		return ;
+	exec(param);
 }

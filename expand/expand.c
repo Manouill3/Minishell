@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 09:58:59 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/02 11:32:17 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ char	*check_quote(t_init *param, char *word, t_env *env)
 	{
 		if (ft_strlen(word) == 0)
 			return(NULL);
-		final_word = char_out(word, 39);
-		return (final_word);
+		// final_word = char_out(word, 39);
+		return (ft_strdup(word));
 	}
 	if (word[0] == '"')
 	{
@@ -58,6 +58,12 @@ char	*check_quote(t_init *param, char *word, t_env *env)
 		if (!ft_strchr(no_quote, '$'))
 			return(no_quote);
 		final_word = expand_quote(param, no_quote);
+		if (!ft_strcmp(final_word, no_quote))
+		{
+			free(no_quote);
+			free(final_word);
+			return (ft_strdup(word));
+		}
 		free(no_quote);
 		return(final_word);
 	}
