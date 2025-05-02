@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 23:07:50 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/02 13:52:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 	path = make_path(param->lst_env);
 	if (!path)
 		return ;
-	args = set_args(tmp->no_red, path);
+	args = set_args(tmp->no_red, path, param);
 	env = conv_lst_tab(param->lst_env);
 	if (!args || !args[0])
 	{
 		if (args)
 			free_tab(args);
 		free_tab(path);
-		exit(127);
+		exit(param->status);
 	}
 	if (execve(args[0], args, env) == -1)
 	{
@@ -87,6 +87,6 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 		free_tab(path);
 		free_tab(args);
 		free_tab(env);
-		exit (126);
+		exit (param->status);
 	}
 }

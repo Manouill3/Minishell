@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:06:32 by tcybak            #+#    #+#             */
-/*   Updated: 2025/04/29 17:25:06 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/02 13:16:59 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void    ft_unset(t_init *param, t_list_char *tok)
 	{
 		if (ft_isalnum(tok->cmd[1][i]) == 0)
 		{
+			param->status = 1;
 			perror("export identifier");
 			return ;
 		}
@@ -52,4 +53,5 @@ void    ft_unset(t_init *param, t_list_char *tok)
 	tmp = param->lst_export;
 	ft_delete(tmp, name);
 	free(name);
+	param->status = 0;
 }
