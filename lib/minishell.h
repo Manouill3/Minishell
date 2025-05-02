@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 09:32:32 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/02 13:53:04 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,7 @@ void    exec_cmd(t_init *param, t_list_char *tmp);
 void    ft_wait_child(t_init *param);
 char    **conv_lst_tab(t_env *env);
 char    **make_path(t_env *env);
-char    **set_args(char **args, char **path);
+char    **set_args(char **args, char **path, t_init *param);
 void    verif_fd(int count, t_init *param);
 
 ////////////////////////////////////////

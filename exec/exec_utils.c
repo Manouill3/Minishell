@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 14:57:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/02 14:06:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char    **make_path(t_env *env)
     return (NULL);
 }
 
-char    **set_args(char **args, char **path)
+char    **set_args(char **args, char **path, t_init *param)
 {
     int i;
     char *tmp;
@@ -77,7 +77,10 @@ char    **set_args(char **args, char **path)
 
     i = 0;
     if (args[0] && !access(args[0], X_OK | F_OK))
+    {
+        param->status = 126;
         return (args);
+    }
     if (!args[0])
     {
         free_tab(args);
@@ -98,6 +101,10 @@ char    **set_args(char **args, char **path)
         free(tmp);
         i++;
     }
+    if (access(args[0], F_OK) == 0 && access(args[0], X_OK) != 0)
+        param->status = 126;
+    else
+        param->status = 127;
     return (args);
 }
 
