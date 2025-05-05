@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 16:52:15 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:59:52 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	get_in_out(t_list_char *tok)
 	}
 }
 
-void	get_in_fd(t_list_char *node)
+void	get_in_fd(t_init *param, t_list_char *node)
 {
 	int	i;
 
@@ -85,6 +85,8 @@ void	get_in_fd(t_list_char *node)
 				if (node->fd_infile != -1)
 					close(node->fd_infile);
 				node->fd_infile = -1;
+				param->status = 1;
+				write (2, " No such file or directory", 26);
 				break ;
 			}
 		}
@@ -92,7 +94,7 @@ void	get_in_fd(t_list_char *node)
 	}
 }
 
-void	get_out_fd(t_list_char *node)
+void	get_out_fd(t_init *param, t_list_char *node)
 {
 	int	i;
 
@@ -105,7 +107,11 @@ void	get_out_fd(t_list_char *node)
 			check_access_out(node, i + 1);
 		i++;
 		if (i > 0 && node->fd_outfile == -1)
+		{
+			param->status= 1;
+			write(2, " Permission denied", 18);
 			break ;
+		}
 	}
 }
 

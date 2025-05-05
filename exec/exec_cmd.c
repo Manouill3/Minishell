@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 16:15:57 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:04:56 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 void    child_process(t_list_char *tmp, t_init *param, int count)
 {
 	if (tmp->infiles)
-		get_in_fd(tmp);
+		get_in_fd(param, tmp);
 	if (tmp->outfiles)
-		get_out_fd(tmp);
+		get_out_fd(param, tmp);
 	if ((tmp->fd_infile == -1 && ft_strlen(tmp->infiles[0]) > 0)
 			|| (tmp->fd_outfile == -1 && ft_strlen(tmp->outfiles[0]) > 0))
 	{
 		close_all(param, tmp);
-		exit (127);
+		exit (param->status);
 	}
 	if (count == 0)
 	{
@@ -104,7 +104,6 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 	}
 	if (execve(args[0], args, env) == -1)
 	{
-		perror("execve");
 		free_tab(path);
 		free_tab(args);
 		free_tab(env);

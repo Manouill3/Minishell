@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 15:49:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/05 18:06:10 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ char    **set_args(char **args, char **path, t_init *param)
 	if (args[0] && !access(args[0], X_OK | F_OK))
 	{
 		if ((args[0][0] != '.' && args[0][1] != '/'))
+		{
 			param->status = 127;
+		}
 		else 
 			param->status = 126;
 		return (args);
@@ -105,9 +107,14 @@ char    **set_args(char **args, char **path, t_init *param)
 		i++;
 	}
 	if (!access(args[0], F_OK) && access(args[0], X_OK) && (args[0][0] =='.' && args[0][1] == '/'))
+	{
 		param->status = 126;
+	}
 	else
+	{
+		write(2, " command not found",18);
 		param->status = 127;
+	}
 	return (args);
 }
 

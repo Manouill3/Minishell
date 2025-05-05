@@ -36,18 +36,18 @@ void ft_pwd()
 
 void    ft_exec_built_in(t_init *param, t_list_char *tok)
 {
-	if(!ft_strcmp("echo", tok->funct))
+	if(!ft_strcmp(tok->funct, "echo"))
                 ft_echo(param, tok);
-	if(!ft_strcmp("cd", tok->funct))
+	if(!ft_strcmp(tok->funct, "cd"))
                 ft_cd(param, tok);
-	if(!ft_strcmp("pwd", tok->funct))
+	if(!ft_strcmp(tok->funct, "pwd"))
                 ft_pwd();
-	if(!ft_strcmp("export", tok->funct))
+	if(!ft_strcmp(tok->funct, "export"))
                 ft_export(param, tok);
-	if(!ft_strcmp("unset", tok->funct))
+	if(!ft_strcmp(tok->funct, "unset"))
                 ft_unset(param, tok);
-	if(!ft_strcmp("env", tok->funct))
+	if(!ft_strcmp(tok->funct, "env"))
                 ft_env(param->lst_env);
-	if(!ft_strcmp("exit", tok->funct))
+	if(!ft_strcmp(tok->funct, "exit"))
                 ft_exit(param);
 }

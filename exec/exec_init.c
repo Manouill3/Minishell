@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 16:49:56 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:49:23 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 int	verif_built(t_list_char *tok)
 {
-	if(!ft_strcmp("echo", tok->funct))
+	if(!ft_strcmp(tok->funct, "echo"))
 		return (1);
-	if(!ft_strcmp("cd", tok->funct))
+	if(!ft_strcmp(tok->funct, "cd"))
 		return (2);
-	if(!ft_strcmp("pwd", tok->funct))
+	if(!ft_strcmp(tok->funct, "pwd"))
 		return (3);
-	if(!ft_strcmp("export", tok->funct))
+	if(!ft_strcmp(tok->funct, "export"))
 		return (4);
-	if(!ft_strcmp("unset", tok->funct))
+	if(!ft_strcmp(tok->funct, "unset"))
 		return (5);
-	if(!ft_strcmp("env", tok->funct))
+	if(!ft_strcmp(tok->funct, "env"))
 		return (6);
-	if(!ft_strcmp("exit", tok->funct))
+	if(!ft_strcmp(tok->funct, "exit"))
 		return (7);
 	return (0);
 }
