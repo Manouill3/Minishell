@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 18:06:10 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/05 18:11:40 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char    **make_path(t_env *env)
 	tmp = env;
 	while (tmp)
 	{
-		if (!ft_strcmp("PATH", tmp->name))
+		if (!ft_strcmp(tmp->name, "PATH"))
 			return (ft_normal_split(tmp->cont, ':'));
 		tmp = tmp->next;
 	}
