@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_funct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/01 23:04:47 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/05 11:11:56 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_strcmp(char *s1, char *s2)
 
 	i = 0;
 	if (!s1 || !s2)
-		return (1);
+		return (1 );
 	while (s1[i])
 	{
 		if (s1[i] != s2[i])

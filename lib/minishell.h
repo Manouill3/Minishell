@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 13:53:04 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/05 16:06:17 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,5 +322,3 @@ void    ft_unset(t_init *param, t_list_char *tok);
 void    ft_exit(t_init *param);
 
 #endif
-
-//valgrind --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=readline.sup ./Minishell

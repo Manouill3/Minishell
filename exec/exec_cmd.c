@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 13:52:25 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/05 16:15:57 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 void    child_process(t_list_char *tmp, t_init *param, int count)
 {
+	if (tmp->infiles)
+		get_in_fd(tmp);
+	if (tmp->outfiles)
+		get_out_fd(tmp);
+	if ((tmp->fd_infile == -1 && ft_strlen(tmp->infiles[0]) > 0)
+			|| (tmp->fd_outfile == -1 && ft_strlen(tmp->outfiles[0]) > 0))
+	{
+		close_all(param, tmp);
+		exit (127);
+	}
 	if (count == 0)
 	{
 		dup2(tmp->fd_infile, STDIN_FILENO);
@@ -40,7 +50,18 @@ void    ft_dup_file(t_init *param, t_list_char *tmp, int count)
 			close(param->fds.pipe_fd[0]);
 		if (param->fds.pipe_fd[1] != -1)
 			close(param->fds.pipe_fd[1]);
-		dup2(tmp->fd_outfile, STDOUT_FILENO);
+		if (tmp->fd_infile != -1)
+		{
+			dup2(tmp->fd_infile, STDIN_FILENO);
+			close(tmp->fd_infile);
+		}
+		if (tmp->fd_outfile != -1)
+		{
+			dup2(tmp->fd_outfile, STDOUT_FILENO);
+			close(tmp->fd_outfile);
+		}
+		else
+			dup2(param->fds.pipe_fd[1], STDOUT_FILENO);
 	}
 	else
 	{

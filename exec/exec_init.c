@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 13:38:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/05 16:49:56 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	no_red_len(char **tab, t_list_char *tmp)
 	len = 0;
 	while (i < tmp->len_cmd)
 	{
+		if (ft_strlen(tab[i]) < 1)
+		{
+			i++;
+			continue;
+		}
 		if (tab[i] && ft_strcmp(tab[i], ">") && ft_strcmp(tab[i], "<"))
 			len++;
 		else
@@ -67,6 +72,11 @@ void	get_no_red(t_list_char *tok)
 			return ;
 		while (j < len && i < tmp->len_cmd)
 		{
+			if (ft_strlen(tmp->cmd[i]) < 1)
+			{
+				i++;
+				continue;
+			}
 			if (ft_strcmp(">", tmp->cmd[i]) && ft_strcmp("<", tmp->cmd[i]))
 				tmp->no_red[j++] = ft_strdup(tmp->cmd[i]);
 			else
@@ -100,10 +110,6 @@ void    exec(t_init *param)
 	tmp = param->tok;
 	while (tmp)
 	{
-		if (tmp->infiles)
-			get_in_fd(tmp);
-		if (tmp->outfiles)
-			get_out_fd(tmp);			
 		if (count == param->count_cmd - 1 && (verif_built(tmp) == 5 || verif_built(tmp) == 7))
 			ft_exec_built_in(param, tmp);
 		if (pipe(param->fds.pipe_fd) == -1)

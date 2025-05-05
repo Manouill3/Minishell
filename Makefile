@@ -67,6 +67,9 @@ $(LIBFT):
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+val:
+	valgrind --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=readline.sup ./minishell
+
 clean:
 	@rm -f $(OBJ)
 	@$(MAKE) -s -C $(LIB) clean

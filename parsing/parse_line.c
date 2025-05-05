@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 13:33:39 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:39:58 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ void	ft_supp_quote(char **cmd)
 				tmp = cmd[i];
 				cmd[i] = char_out(cmd[i], cmd[i][j]);
 				free(tmp);
-				// tmp = char_out(cmd[i], cmd[i][j]);
-				// free(cmd[i]);
-				// cmd[i] = NULL;
-				// cmd[i] = tmp;
 				break ;
 			}
 			j++;

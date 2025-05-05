@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 11:32:51 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/05 14:37:27 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int    ft_len_word(const char *s, int start)
 		}
 		i++;
 		cmp++;
-		return (cmp);
+		if (!s[i])
+			return (cmp);
 	}
 	if (s[i] == '<' || s[i] == '>')
 	{
