@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/06 15:16:20 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/06 17:46:01 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,39 +41,49 @@ void	ft_supp_quote(char **cmd)
 	}
 }
 
-// void	ft_verif_redirect(t_init *param, t_list_char *lst)
+// int	ft_verif_redirect(t_init *param, t_list_char *lst)
 // {
-// 	int	i;
 // 	int	j;
 // 	int	len;
 // 	t_list_char	*tmp;
 	
 // 	tmp = lst;
-// 	while (tmp)
+// 	while (tmp->next != NULL)
 // 	{
-// 		i = 0;
-// 		while (i < tmp->len_cmd)
-// 		{
-// 			j = 0;
-// 			len = ft_strlen(tmp->cmd[i]);
-// 			while (tmp->cmd[i][j] == '<' || tmp->cmd[i][j] == '>')
-// 				j++;
-// 			if (j - 1 >= 0 && j < 2 && !tmp->cmd[i + 1] && !tmp->cmd[i][j + 1] && (tmp->cmd[i][j - 1] == '<' || tmp->cmd[i][j - 1] == '>'))
-// 			{
-// 				write(2, "syntax error near unexpected token `newline'", 44);
-// 				param->status = 2;
-// 				return ;
-// 			}
-// 			else if (j - 1 >= 0 && j > 2 && !tmp->cmd[i + 1] && !tmp->cmd[i][j + 1] && (tmp->cmd[i][j - 1] == '<' || tmp->cmd[i][j - 1] == '>'))
-// 			{
-// 				write(2, "syntax error near unexpected token `>>'", 39);
-// 				param->status = 2;
-// 				return ;
-// 			}
-// 			i++;
-// 		}
 // 		tmp = tmp->next;
 // 	}
+// 		j = 0;
+// 		len = ft_strlen(tmp->cmd[0]);
+// 		while (tmp->cmd[0][j] == '<' || tmp->cmd[0][j] == '>')
+// 			j++;
+// 		// printf("HERE = %c j = %d\n", tmp->cmd[0][j - 1],j);
+// 		if (j - 1 >= 0 && ((tmp->cmd[0][j - 1] == '<' && j <= 3) || (tmp->cmd[0][j - 1] == '>' && j < 2)))
+// 		{
+// 			write(2, "syntax error near unexpected token `newline'\n", 45);
+// 			param->status = 2;
+// 			return (1);
+// 		}
+// 		else if (j - 1 >= 0 && ((tmp->cmd[0][j - 1] == '<' && j == 4) || (tmp->cmd[0][j - 1] == '>' && j == 3)))
+// 		{
+// 			write(2, "syntax error near unexpected token `", 37);
+// 			write(2, &(tmp->cmd[0][j - 1]), 1);
+// 			write(2, "'\n", 2);
+// 			param->status = 2;
+// 			return (1);
+// 		}
+// 		else if (j - 1 >= 0 && j > 3 && (tmp->cmd[0][j - 1] == '>'))
+// 		{
+// 			write(2, "syntax error near unexpected token `>>'\n", 40);
+// 			param->status = 2;
+// 			return (1);
+// 		}
+// 		else if (j - 1 >= 0 && j > 4 && (tmp->cmd[0][j - 1] == '<'))
+// 		{
+// 			write(2, "syntax error near unexpected token `<<'\n", 40);
+// 			param->status = 2;
+// 			return (1);
+// 		}
+// 	return (0);
 // }
 
 void	get_funct(t_init *param, t_list_char *lst)
@@ -114,7 +124,8 @@ void	parsing_line(t_init *param)
 	
 	get_token(param);
 	expand_arg(param);
-	// ft_verif_redirect(param, param->tok);
+	// if (ft_verif_redirect(param, param->tok))
+	// 	return ;
 	get_funct(param, param->tok);
 	get_no_red(param->tok);
 	tmp = param->tok;
@@ -124,10 +135,10 @@ void	parsing_line(t_init *param)
 		ft_supp_quote(tmp->no_red);
 		tmp = tmp->next;
 	}
-	// print_lst_char(param->tok);
 	get_in_out(param->tok);
 	get_nb_eof(param->tok);
 	tmp = param->tok;
+	// print_lst_char(param->tok);
 	while (tmp)
 	{
 		exec_heredoc(tmp, tmp->heredoc, param->lst_env);
