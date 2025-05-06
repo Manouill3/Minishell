@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 14:39:58 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/06 15:16:20 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,44 @@ void	ft_supp_quote(char **cmd)
 	}
 }
 
-void	get_funct(t_list_char *lst)
+// void	ft_verif_redirect(t_init *param, t_list_char *lst)
+// {
+// 	int	i;
+// 	int	j;
+// 	int	len;
+// 	t_list_char	*tmp;
+	
+// 	tmp = lst;
+// 	while (tmp)
+// 	{
+// 		i = 0;
+// 		while (i < tmp->len_cmd)
+// 		{
+// 			j = 0;
+// 			len = ft_strlen(tmp->cmd[i]);
+// 			while (tmp->cmd[i][j] == '<' || tmp->cmd[i][j] == '>')
+// 				j++;
+// 			if (j - 1 >= 0 && j < 2 && !tmp->cmd[i + 1] && !tmp->cmd[i][j + 1] && (tmp->cmd[i][j - 1] == '<' || tmp->cmd[i][j - 1] == '>'))
+// 			{
+// 				write(2, "syntax error near unexpected token `newline'", 44);
+// 				param->status = 2;
+// 				return ;
+// 			}
+// 			else if (j - 1 >= 0 && j > 2 && !tmp->cmd[i + 1] && !tmp->cmd[i][j + 1] && (tmp->cmd[i][j - 1] == '<' || tmp->cmd[i][j - 1] == '>'))
+// 			{
+// 				write(2, "syntax error near unexpected token `>>'", 39);
+// 				param->status = 2;
+// 				return ;
+// 			}
+// 			i++;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// }
+
+void	get_funct(t_init *param, t_list_char *lst)
 {
+	(void)param;
 	int		i;
 	t_list_char	*tmp;
 
@@ -78,7 +114,8 @@ void	parsing_line(t_init *param)
 	
 	get_token(param);
 	expand_arg(param);
-	get_funct(param->tok);
+	// ft_verif_redirect(param, param->tok);
+	get_funct(param, param->tok);
 	get_no_red(param->tok);
 	tmp = param->tok;
 	while(tmp)
