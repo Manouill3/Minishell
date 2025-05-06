@@ -15,11 +15,8 @@
 void    child_process(t_list_char *tmp, t_init *param, int count)
 {
 	if (tmp->infiles)
-		get_in_fd(param, tmp);
-	if (tmp->outfiles)
-		get_out_fd(param, tmp);
-	if ((tmp->fd_infile == -1 && ft_strlen(tmp->infiles[0]) > 0)
-			|| (tmp->fd_outfile == -1 && ft_strlen(tmp->outfiles[0]) > 0))
+		get_good_fd(param, tmp);
+	if (param->status == 1)
 	{
 		close_all(param, tmp);
 		exit (param->status);
@@ -84,11 +81,15 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 	char    **path;
 	char    **args;
 	char    **env;
+	int		status;
 
 	if (param->count_cmd > 0 && verif_built(tmp))
 	{
 		ft_exec_built_in(param, tmp);
-		exit (param->status);
+		status = param->status;
+		ft_free_all(param);
+		free_struct(param);
+		exit (status);
 	}
 	path = make_path(param->lst_env);
 	if (!path)

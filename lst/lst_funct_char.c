@@ -26,7 +26,6 @@ t_list_char	*ft_lstnew_char(char **tab)
 	lst->fd_infile = -1;
 	lst->fd_outfile = -1;
 	lst->infiles = NULL;
-	lst->outfiles = NULL;
 	lst->next = NULL;
 	lst->heredoc = malloc(sizeof(t_heredoc));
 	if (!lst->heredoc)
@@ -75,8 +74,6 @@ void	ft_lstdelone_char(t_list_char *lst)
 		free(lst->heredoc);
 	if (lst->infiles)
 		free_tab(lst->infiles);
-	if (lst->outfiles)
-		free_tab(lst->outfiles);
 	if (lst->no_red)
 		free_tab(lst->no_red);
 	if (lst->cmd)

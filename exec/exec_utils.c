@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
 /*   Updated: 2025/05/06 13:27:38 by tcybak           ###   ########.fr       */
