@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 18:11:40 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/06 13:27:38 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,18 @@ char    **set_args(char **args, char **path, t_init *param)
 	i = 0;
 	if (args[0] && !access(args[0], X_OK | F_OK))
 	{
-		if ((args[0][0] != '.' && args[0][1] != '/'))
+		if ((args[0][0] != '.' && args[0][0] != '/'))
 		{
+			
+			if (!access(args[0], F_OK) && (args[0][0] != '.' && args[0][1] != '/'))
+				write(2, " command not found", 18);
 			param->status = 127;
 		}
-		else 
+		else
+		{
+			write(2, " Is a directory",15);
 			param->status = 126;
+		}
 		return (args);
 	}
 	if (!args[0])
@@ -108,11 +114,15 @@ char    **set_args(char **args, char **path, t_init *param)
 	}
 	if (!access(args[0], F_OK) && access(args[0], X_OK) && (args[0][0] =='.' && args[0][1] == '/'))
 	{
+		write(2, " Permission denied",18);
 		param->status = 126;
 	}
 	else
 	{
-		write(2, " command not found",18);
+		if ((args[0][0] == '.' || args[0][0] == '/'))
+		 	write(2, " No such file or directory",26);
+		else
+			write(2, " command not found",18);
 		param->status = 127;
 	}
 	return (args);
