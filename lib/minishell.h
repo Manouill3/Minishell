@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 17:58:35 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/06 14:36:18 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_list_char
 	char				**no_red;
 	char				*funct;
 	char				**infiles;
-	char				**outfiles;
 	struct s_heredoc	*heredoc;
 	struct s_list_char	*next;
 }			t_list_char;
@@ -262,8 +261,9 @@ void    verif_fd(int count, t_init *param);
 
 void	get_in_out_complet_list(t_list_char *node);
 void	get_in_out(t_list_char *tok);
-void	get_in_fd(t_init *param, t_list_char *node);
-void	get_out_fd(t_init *param, t_list_char *node);
+void	get_good_fd(t_init *param, t_list_char *node);
+void	get_in_fd(t_init *param, t_list_char *node, int i);
+void	get_out_fd(t_init *param, t_list_char *node, int i);
 void	check_access_out(t_list_char *node, int	i);
 void	check_access_app(t_list_char *node, int	i);
 

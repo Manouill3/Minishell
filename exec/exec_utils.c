@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 18:11:40 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/06 12:57:22 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char    **set_args(char **args, char **path, t_init *param)
 	i = 0;
 	if (args[0] && !access(args[0], X_OK | F_OK))
 	{
-		if ((args[0][0] != '.' && args[0][1] != '/'))
+		if ((args[0][0] != '.' && args[0][0] != '/'))
 		{
 			param->status = 127;
 		}
