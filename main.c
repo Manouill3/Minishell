@@ -12,6 +12,8 @@
 
 #include "lib/minishell.h"
 
+int g_exit_code = 0;
+
 void	init_heredoc(t_list_char *node)
 {
 	node->heredoc->fd = -1;
@@ -48,6 +50,11 @@ int	main(int ac, char **av, char **env)
 		while (1)
 		{
 			param->line = readline("Minishell : ");
+			if (g_exit_code == 130)
+			{
+				param->status = g_exit_code;
+				g_exit_code = 0;
+			}
 			if (param->line == NULL)
 			{
 				printf("exit\n");

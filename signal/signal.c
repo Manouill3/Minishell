@@ -16,11 +16,15 @@ void	sigint_handler(int sig)
 {
 	if (sig == 2)
 	{
+		g_exit_code = 130;
 		printf("\n");
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		rl_done = 1;
 	}
+	if (sig == 3)
+		g_exit_code = 131;
 }
 
 void	ft_handle_interrupt_signals(void)

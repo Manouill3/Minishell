@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/07 13:21:56 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/07 19:20:31 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	parsing_line(t_init *param)
 	if (syntax_error(param, param->line))
 		return ;
 	expand_arg(param);
-	// if (ft_verif_redirect(param, param->tok))
-	// 	return ;
 	get_funct(param, param->tok);
 	get_no_red(param->tok);
 	tmp = param->tok;
@@ -98,9 +96,11 @@ void	parsing_line(t_init *param)
 	// print_lst_char(param->tok);
 	while (tmp)
 	{
-		exec_heredoc(tmp, tmp->heredoc, param->lst_env);
+		if (g_exit_code != 130)
+			exec_heredoc(tmp, tmp->heredoc, param->lst_env);
 		tmp = tmp->next;
 	}
+	g_exit_code = 0;
 	if (!param->tok)
 		return ;
 	exec(param);
