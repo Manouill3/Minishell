@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:35:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/07 13:58:34 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/07 14:14:50 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void    ft_echo(t_init *param, t_list_char *tok)
         {
             if (tok->no_red[i][j] != 'n')
             {
-                n = 0;
                 ft_print_arg(n, i, tok);
                 return ;
             }
@@ -68,6 +67,6 @@ void    ft_echo(t_init *param, t_list_char *tok)
         i++;
         n = 1;
     }
+    param->status = 0;
     ft_print_arg(n, i, tok);
-
 }
