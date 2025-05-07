@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 09:46:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 10:48:54 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/07 13:18:04 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ char	*get_actual_word(t_init *param, char *word, int i, int len)
         if (!sub_word)
             return (NULL);
 		final_word = one_char_test(param, word, sub_word, i);
+		free(sub_word);
         return (final_word);
 	}
 	sub_word = ft_substr(word, len, i - len);
@@ -112,24 +113,16 @@ char    *one_char_test(t_init *param, char *word, char *sub_word, int i)
     char    *final_word;
     
     if (!ft_strcmp("$?", sub_word))
-    {
-        free(sub_word);
         return (ft_itoa(param->status));
-    }
     else if (!ft_strcmp("$_", sub_word))
     {
         final_word = check_quote(param, sub_word, param->lst_env);
-        free(sub_word);
         return (final_word);
     }
+	else if (word[i] == '"' || word[i] == 39)
+		return (NULL);
     else if (!ft_isalnum(word[i]))
-    {
-        free(sub_word);
         return (ft_strdup("$"));
-    }
     else
-    {
-        free(sub_word);
         return(NULL);
-    }
 }
