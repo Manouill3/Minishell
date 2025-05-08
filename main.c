@@ -35,8 +35,8 @@ int	ft_init(t_init **param)
 int	main(int ac, char **av, char **env)
 {
 	t_init	*param;
-	int	tt_y;
-	int res;
+	int		tt_y;
+	int		res;
 
 	if (ac == 1 && av[0] != NULL)
 	{
@@ -62,6 +62,7 @@ int	main(int ac, char **av, char **env)
 			}
 			if (param->line[0] != '\0')
 				add_history(param->line);
+			continue;
 			parsing_line(param);
 			ft_free_all(param);
 			if (!tt_y)

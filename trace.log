@@ -1,0 +1,183 @@
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, "/usr/bin/valgrind", O_RDONLY) = 3
+openat(AT_FDCWD, "/usr/lib/debug/glibc-hwcaps/x86-64-v3/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/glibc-hwcaps/x86-64-v2/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/tls/haswell/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/tls/haswell/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/tls/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/tls/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/haswell/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/haswell/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, "./minishell", O_RDONLY) = 3
+open("/proc/self/maps", O_RDONLY)       = 3
+open("/nfs/homes/mdegache/.valgrindrc", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("./.valgrindrc", O_RDONLY)         = -1 ENOENT (No such file or directory)
+open("./minishell", O_RDONLY)           = 3
+open("/lib64/ld-linux-x86-64.so.2", O_RDONLY) = 4
+open("./minishell", O_RDONLY)           = 3
+open("/tmp/valgrind_proc_127285_cmdline_bbde8083", O_RDWR|O_CREAT|O_EXCL|O_TRUNC, 0600) = 3
+open("/tmp/valgrind_proc_127285_auxv_bbde8083", O_RDWR|O_CREAT|O_EXCL|O_TRUNC, 0600) = 3
+==127285== Memcheck, a memory error detector
+==127285== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==127285== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==127285== Command: ./minishell
+==127285== 
+open("/proc/self/fd", O_RDONLY)         = 3
+open("/nfs/homes/mdegache/stud/Minishell/minishell", O_RDONLY|O_LARGEFILE) = 3
+open("/nfs/homes/mdegache/stud/Minishell/minishell", O_RDONLY|O_LARGEFILE) = 3
+open("/nfs/homes/mdegache/stud/Minishell/minishell", O_RDONLY|O_LARGEFILE) = 3
+open("/nfs/homes/mdegache/stud/Minishell/minishell", O_RDONLY|O_LARGEFILE) = 3
+open("/nfs/homes/mdegache/stud/Minishell/minishell", O_RDONLY) = 3
+open("/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2", O_RDONLY|O_LARGEFILE) = 3
+open("/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2", O_RDONLY|O_LARGEFILE) = 3
+open("/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2", O_RDONLY|O_LARGEFILE) = 3
+open("/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2", O_RDONLY|O_LARGEFILE) = 3
+open("/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2", O_RDONLY) = 3
+open("/usr/lib/debug/.build-id/e4/de036b19e4768e7591b596c4be9f9015f2d28a.debug", O_RDONLY) = 4
+open("/usr/libexec/valgrind/memcheck-amd64-linux", O_RDONLY|O_LARGEFILE) = 3
+open("/usr/libexec/valgrind/memcheck-amd64-linux", O_RDONLY|O_LARGEFILE) = 3
+open("/usr/libexec/valgrind/memcheck-amd64-linux", O_RDONLY|O_LARGEFILE) = 3
+open("/usr/libexec/valgrind/memcheck-amd64-linux", O_RDONLY|O_LARGEFILE) = 3
+open("/usr/libexec/valgrind/memcheck-amd64-linux", O_RDONLY) = 3
+open("/usr/lib/debug/.build-id/84/fedd9a4c04941b8d123398ad0dd0ebc25c120c.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/libexec/valgrind/fedd9a4c04941b8d123398ad0dd0ebc25c120c.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/libexec/valgrind/fedd9a4c04941b8d123398ad0dd0ebc25c120c.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/libexec/valgrind/.debug/fedd9a4c04941b8d123398ad0dd0ebc25c120c.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/libexec/valgrind/.debug/fedd9a4c04941b8d123398ad0dd0ebc25c120c.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/usr/libexec/valgrind/fedd9a4c04941b8d123398ad0dd0ebc25c120c.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/libexec/valgrind/fedd9a4c04941b8d123398ad0dd0ebc25c120c.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("readline.sup", O_RDONLY)          = 3
+open("/usr/libexec/valgrind/default.supp", O_RDONLY) = 3
+open("/proc/sys/kernel/yama/ptrace_scope", O_RDONLY) = 3
+open("/tmp/vgdb-pipe-shared-mem-vgdb-127285-by-mdegache-on-???", O_RDWR|O_CREAT, 0600) = 3
+open("/tmp/vgdb-pipe-from-vgdb-to-127285-by-mdegache-on-???", O_RDONLY|O_NONBLOCK) = 3
+openat(AT_FDCWD, "/usr/libexec/valgrind/vgpreload_core-amd64-linux.so", O_RDONLY|O_CLOEXEC) = 3
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeffded0} ---
+open("/usr/libexec/valgrind/vgpreload_core-amd64-linux.so", O_RDONLY) = 4
+open("/usr/lib/debug/.build-id/7b/e1c1588ba6713462a4091c80bbb78004f47ba6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/libexec/valgrind/e1c1588ba6713462a4091c80bbb78004f47ba6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/libexec/valgrind/e1c1588ba6713462a4091c80bbb78004f47ba6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/libexec/valgrind/.debug/e1c1588ba6713462a4091c80bbb78004f47ba6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/libexec/valgrind/.debug/e1c1588ba6713462a4091c80bbb78004f47ba6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/usr/libexec/valgrind/e1c1588ba6713462a4091c80bbb78004f47ba6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/libexec/valgrind/e1c1588ba6713462a4091c80bbb78004f47ba6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so", O_RDONLY|O_CLOEXEC) = 3
+open("/usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so", O_RDONLY) = 4
+open("/usr/lib/debug/.build-id/ca/411cf3a4b32c9d21bbc464935b0f1af28fb2d8.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/libexec/valgrind/411cf3a4b32c9d21bbc464935b0f1af28fb2d8.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/libexec/valgrind/411cf3a4b32c9d21bbc464935b0f1af28fb2d8.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/libexec/valgrind/.debug/411cf3a4b32c9d21bbc464935b0f1af28fb2d8.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/libexec/valgrind/.debug/411cf3a4b32c9d21bbc464935b0f1af28fb2d8.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/usr/libexec/valgrind/411cf3a4b32c9d21bbc464935b0f1af28fb2d8.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/libexec/valgrind/411cf3a4b32c9d21bbc464935b0f1af28fb2d8.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/glibc-hwcaps/x86-64-v3/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/glibc-hwcaps/x86-64-v2/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/tls/haswell/x86_64/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/tls/haswell/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/tls/x86_64/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/tls/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/haswell/x86_64/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/haswell/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/x86_64/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/libreadline.so.8", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libreadline.so.8", O_RDONLY|O_CLOEXEC) = 3
+open("/usr/lib/x86_64-linux-gnu/libreadline.so.8.1", O_RDONLY) = 4
+open("/usr/lib/debug/.build-id/c5/4682f27b37bcc6d4692c9ebc8f6b458727cf73.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/4682f27b37bcc6d4692c9ebc8f6b458727cf73.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/4682f27b37bcc6d4692c9ebc8f6b458727cf73.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/.debug/4682f27b37bcc6d4692c9ebc8f6b458727cf73.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/.debug/4682f27b37bcc6d4692c9ebc8f6b458727cf73.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/usr/lib/x86_64-linux-gnu/4682f27b37bcc6d4692c9ebc8f6b458727cf73.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/lib/x86_64-linux-gnu/4682f27b37bcc6d4692c9ebc8f6b458727cf73.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/libncurses.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libncurses.so.6", O_RDONLY|O_CLOEXEC) = 3
+open("/usr/lib/x86_64-linux-gnu/libncurses.so.6.3", O_RDONLY) = 4
+open("/usr/lib/debug/.build-id/41/a87100b34a11f3689e2e6f9f236a8dc19c9120.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/a87100b34a11f3689e2e6f9f236a8dc19c9120.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/a87100b34a11f3689e2e6f9f236a8dc19c9120.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/.debug/a87100b34a11f3689e2e6f9f236a8dc19c9120.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/.debug/a87100b34a11f3689e2e6f9f236a8dc19c9120.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/usr/lib/x86_64-linux-gnu/a87100b34a11f3689e2e6f9f236a8dc19c9120.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/lib/x86_64-linux-gnu/a87100b34a11f3689e2e6f9f236a8dc19c9120.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/libtinfo.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtinfo.so.6", O_RDONLY|O_CLOEXEC) = 3
+open("/usr/lib/x86_64-linux-gnu/libtinfo.so.6.3", O_RDONLY) = 4
+open("/usr/lib/debug/.build-id/e2/2ba7829a55a0dec2201a0b6dac7ba236118561.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/2ba7829a55a0dec2201a0b6dac7ba236118561.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/2ba7829a55a0dec2201a0b6dac7ba236118561.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/.debug/2ba7829a55a0dec2201a0b6dac7ba236118561.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/.debug/2ba7829a55a0dec2201a0b6dac7ba236118561.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/usr/lib/x86_64-linux-gnu/2ba7829a55a0dec2201a0b6dac7ba236118561.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/lib/x86_64-linux-gnu/2ba7829a55a0dec2201a0b6dac7ba236118561.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/.build-id/f1/5c1bd135e5debdb82dff6bc44d4f69a2c1f624.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/.dwz/x86_64-linux-gnu/libtinfo6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu//usr/lib/debug/.dwz/x86_64-linux-gnu/libtinfo6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu//usr/lib/debug/.dwz/x86_64-linux-gnu/libtinfo6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/.debug//usr/lib/debug/.dwz/x86_64-linux-gnu/libtinfo6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/.debug//usr/lib/debug/.dwz/x86_64-linux-gnu/libtinfo6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/usr/lib/x86_64-linux-gnu//usr/lib/debug/.dwz/x86_64-linux-gnu/libtinfo6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/lib/debug/lib/x86_64-linux-gnu//usr/lib/debug/.dwz/x86_64-linux-gnu/libtinfo6.debug", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/usr/lib/debug/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+open("/usr/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY) = 4
+open("/usr/lib/debug/.build-id/cd/410b710f0f094c6832edd95931006d883af48e.debug", O_RDONLY) = 5
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeffc9b8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeffb9b8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeffa9b8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff99b8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff89b8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff79b8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff69b8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff5948} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff4948} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff3948} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff2948} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff1948} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffeff0948} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefef948} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefee948} ---
+openat(AT_FDCWD, "/lib/terminfo/x/xterm-256color", O_RDONLY) = 3
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefed8f8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefec8f8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefeb8f8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefea8f8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefe98f8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefe88f8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefe78f8} ---
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_MAPERR, si_addr=0x1ffefe68f8} ---
+openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
+openat(AT_FDCWD, "/nfs/homes/mdegache/.inputrc", O_RDONLY) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, "/etc/inputrc", O_RDONLY) = 3
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY) = 3
+==127285== 
+==127285== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==127285== Open file descriptor 2: /nfs/homes/mdegache/stud/Minishell/trace.log
+==127285==    <inherited from parent>
+==127285== 
+==127285== Open file descriptor 1: /dev/pts/1
+==127285==    <inherited from parent>
+==127285== 
+==127285== Open file descriptor 0: /dev/pts/1
+==127285==    <inherited from parent>
+==127285== 
+==127285== 
+==127285== HEAP SUMMARY:
+==127285==     in use at exit: 204,182 bytes in 221 blocks
+==127285==   total heap usage: 893 allocs, 672 frees, 245,143 bytes allocated
+==127285== 
+==127285== LEAK SUMMARY:
+==127285==    definitely lost: 0 bytes in 0 blocks
+==127285==    indirectly lost: 0 bytes in 0 blocks
+==127285==      possibly lost: 0 bytes in 0 blocks
+==127285==    still reachable: 0 bytes in 0 blocks
+==127285==         suppressed: 204,182 bytes in 221 blocks
+==127285== 
+==127285== For lists of detected and suppressed errors, rerun with: -s
+==127285== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
++++ exited with 0 +++

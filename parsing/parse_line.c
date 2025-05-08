@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/07 19:20:31 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/08 15:30:21 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	parsing_line(t_init *param)
 	get_token(param);
 	if (syntax_error(param, param->line))
 		return ;
+	
 	expand_arg(param);
 	get_funct(param, param->tok);
 	get_no_red(param->tok);
@@ -93,7 +94,6 @@ void	parsing_line(t_init *param)
 	get_in_out(param->tok);
 	get_nb_eof(param->tok);
 	tmp = param->tok;
-	// print_lst_char(param->tok);
 	while (tmp)
 	{
 		if (g_exit_code != 130)

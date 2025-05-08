@@ -53,7 +53,8 @@ SRC = main.c\
 	built-in/unset.c \
 	built-in/exit.c
 
-OBJ = $(SRC:.c=.o)
+OBJ_DIR = build
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
 
 all: $(NAME)
 
@@ -64,14 +65,15 @@ $(NAME): $(LIBFT) $(OBJ)
 $(LIBFT):
 	@$(MAKE) -s -C $(LIB) bonus
 
-%.o: %.c
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 val:
 	valgrind --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=readline.sup ./minishell
 
 clean:
-	@rm -f $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@$(MAKE) -s -C $(LIB) clean
 	@echo "$(PURPLE)CLEAN$(RESET)"
 
