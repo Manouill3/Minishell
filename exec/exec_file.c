@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/06 14:48:38 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/08 11:22:41 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	get_in_out_complet_list(t_list_char *node)
 			node->infiles[j++] = ft_strdup(node->cmd[i++]);
 			node->infiles[j++] = ft_strdup(node->cmd[i]);
 		}
-		if (!ft_strcmp(node->cmd[i], "<") && node->cmd[i + 1] )
+		if (!ft_strcmp(node->cmd[i], "<<") && node->cmd[i + 1] )
 		{
 			node->infiles[j++] = ft_strdup(node->cmd[i++]);
 			node->infiles[j++] = ft_strdup(node->cmd[i]);

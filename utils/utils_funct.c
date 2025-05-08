@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_funct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 17:36:30 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/08 10:40:34 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	ft_strcmp(char *s1, char *s2)
 	int	i;
 
 	i = 0;
+	if (ft_strlen(s1) != ft_strlen(s2))
+		return (1);
 	if (!s1 || !s2)
 		return (1);
 	while (s1[i])

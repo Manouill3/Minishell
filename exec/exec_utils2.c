@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:17:24 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/14 09:48:12 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/08 11:21:16 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int get_infile_nb(char **cmd)
     {
         if (!ft_strcmp("<", cmd[i]))
             nb++;
+        if (!ft_strcmp("<<", cmd[i]))
+            nb++;
         i++;
     }
     nb = nb * 2;
@@ -82,6 +84,8 @@ int get_outfile_nb(char **cmd)
     while (cmd[i])
     {
         if (!ft_strcmp(">", cmd[i]))
+            nb++;
+        if (!ft_strcmp(">>", cmd[i]))
             nb++;
         i++;
     }

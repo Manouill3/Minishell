@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/07 18:25:28 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/08 10:50:56 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	get_no_red(t_list_char *tok)
 				i++;
 				continue;
 			}
-			if (ft_strcmp(">", tmp->cmd[i]) && ft_strcmp("<", tmp->cmd[i]))
+			if (ft_strcmp(">", tmp->cmd[i]) && ft_strcmp("<", tmp->cmd[i]) && ft_strcmp(">>", tmp->cmd[i]) && ft_strcmp("<<", tmp->cmd[i]))
 				tmp->no_red[j++] = ft_strdup(tmp->cmd[i]);
 			else
 				i++;
