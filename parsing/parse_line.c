@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/07 19:20:31 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:51:52 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,7 @@ void	parsing_line(t_init *param)
 	// print_lst_char(param->tok);
 	while (tmp)
 	{
-		if (g_exit_code != 130)
-			exec_heredoc(tmp, tmp->heredoc, param->lst_env);
+		exec_heredoc(param, tmp, tmp->heredoc, param->lst_env);
 		tmp = tmp->next;
 	}
 	g_exit_code = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/06 13:27:38 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/08 13:42:58 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char    **set_args(char **args, char **path, t_init *param)
 		{
 			
 			if (!access(args[0], F_OK) && (args[0][0] != '.' && args[0][1] != '/'))
-				write(2, " command not found", 18);
+				write(2, " command not found\n", 19);
 			param->status = 127;
 		}
 		else
@@ -122,7 +122,7 @@ char    **set_args(char **args, char **path, t_init *param)
 		if ((args[0][0] == '.' || args[0][0] == '/'))
 		 	write(2, " No such file or directory",26);
 		else
-			write(2, " command not found",18);
+			write(2, " command not found\n",19);
 		param->status = 127;
 	}
 	return (args);

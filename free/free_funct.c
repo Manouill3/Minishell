@@ -14,6 +14,7 @@
 
 void    close_all(t_init *param, t_list_char *tmp)
 {
+	close(11);
     if (tmp->fd_infile != -1)
         close (tmp->fd_infile);
     if (tmp->fd_outfile != -1)
