@@ -49,33 +49,23 @@ int	main(int ac, char **av, char **env)
 		tt_y = isatty(STDIN_FILENO);
 		while (1)
 		{
-			if (!tt_y)
+			param->line = readline("Minishell : ");
+			if (param->line == NULL)
 			{
-				param->line = get_next_line(STDIN_FILENO);
-				if (param->line && param->line[ft_strlen(param->line) - 1] == '\n')
-					param->line[ft_strlen(param->line) - 1] = '\0';
-				parsing_line(param);
-				ft_free_all(param);
+				printf("exit\n");
 				break ;
 			}
-			else
+			if (g_exit_code == 130)
 			{
-				param->line = readline("Minishell : ");
-				if (param->line == NULL)
-				{
-					printf("exit\n");
-					break ;
-				}
-				if (g_exit_code == 130)
-				{
-					param->status = g_exit_code;
-					g_exit_code = 0;
-				}
-				if (param->line[0] != '\0')
-					add_history(param->line);
-				parsing_line(param);
-				ft_free_all(param);
+				param->status = g_exit_code;
+				g_exit_code = 0;
 			}
+			if (param->line[0] != '\0')
+			add_history(param->line);
+			parsing_line(param);
+			ft_free_all(param);
+			if (!tt_y)
+				break;
 		}
 		res = param->status;
 		free_struct(param);
