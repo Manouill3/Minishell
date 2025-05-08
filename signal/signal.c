@@ -17,14 +17,24 @@ void	sigint_handler(int sig)
 	if (sig == 2)
 	{
 		g_exit_code = 130;
-		printf("\n");
+		write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		rl_done = 1;
 	}
-	if (sig == 3)
+	else if (sig == 3)
+	{
 		g_exit_code = 131;
+	}
+}
+
+void	sigint_heredoc_handler(int sig)
+{
+	(void)sig;
+	g_exit_code = 130;
+	rl_replace_line("", 0);
+	rl_done = 1;
+	close(0);
 }
 
 void	ft_handle_interrupt_signals(void)
@@ -34,5 +44,15 @@ void	ft_handle_interrupt_signals(void)
 	ft_bzero(&sigint, sizeof(sigint));
 	sigint.sa_handler = &sigint_handler;
 	sigaction(SIGINT, &sigint, NULL);
+	sigaction(SIGQUIT, &(struct sigaction){.sa_handler = SIG_IGN}, NULL);
+}
+
+void	ft_handle_heredoc_signals(void)
+{
+	struct sigaction	sig;
+
+	ft_bzero(&sig, sizeof(sig));
+	sig.sa_handler = &sigint_heredoc_handler;
+	sigaction(SIGINT, &sig, NULL);
 	sigaction(SIGQUIT, &(struct sigaction){.sa_handler = SIG_IGN}, NULL);
 }

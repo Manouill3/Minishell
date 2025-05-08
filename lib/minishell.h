@@ -6,7 +6,6 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/08 18:25:23 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +31,7 @@ typedef struct s_fds
 typedef struct s_heredoc
 {
 	int		fd;
+	int		fd_tmp;
 	int		nb_eof;
 	char	*name;
 	char	*input;
@@ -88,7 +88,9 @@ int			ft_init(t_init **init);
 //////////////////////////////////////
 
 void		sigint_handler(int sig);
+void		sigint_heredoc_handler(int sig);
 void		ft_handle_interrupt_signals(void);
+void		ft_handle_heredoc_signals(void);
 
 ////////////////////////////////////////
 ///			env/env.c	            ///
@@ -226,9 +228,9 @@ char		*get_final_eof(char *str);
 ///			heredoc/heredoc_exec.c  ///
 //////////////////////////////////////
 
-void		ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env);
-void		ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env);
-void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env);
+void		ft_heredoc_oef_before(t_init *param, t_heredoc *heredoc, int i, t_env *env);
+void		ft_heredoc_oef_last(t_init *param, t_heredoc *heredoc, int i, t_env *env);
+void		exec_heredoc(t_init *param, t_list_char *tmp, t_heredoc *heredoc, t_env *env);
 
 ////////////////////////////////////////
 ///			exec/exec_init.c		///
