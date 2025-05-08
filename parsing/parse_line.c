@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/08 15:30:21 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:38:40 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ void	parsing_line(t_init *param)
 	get_token(param);
 	if (syntax_error(param, param->line))
 		return ;
-	
+	if (param->count_cmd == 1 && !only_white(param->line))
+	{
+		param->status = 0;
+		return ;
+	}
 	expand_arg(param);
 	get_funct(param, param->tok);
 	get_no_red(param->tok);

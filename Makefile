@@ -51,7 +51,9 @@ SRC = main.c\
 	built-in/env_built-in.c \
 	built-in/export.c \
 	built-in/unset.c \
-	built-in/exit.c
+	built-in/exit.c \
+	GNL/get_next_line_bonus.c \
+	GNL/get_next_line_utils_bonus.c
 
 OBJ_DIR = build
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/07 15:31:13 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/08 17:22:40 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../GNL/get_next_line_bonus.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <signal.h>
@@ -137,6 +138,7 @@ void		print_lst_char(t_list_char *lst);
 int			is_red(char *val);
 int			ft_strcmp(char *s1, char *s2);
 int			get_nb_cmd(char **tab);
+int	only_white(char	*line);
 
 ////////////////////////////////////////
 ///			parsing/token.c         ///

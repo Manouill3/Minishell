@@ -9,6 +9,7 @@
         "libft.h": "c",
         "stdlib.h": "c",
         "random": "c",
-        "history.h": "c"
+        "history.h": "c",
+        "get_next_line_bonus.h": "c"
     }
 }

@@ -22,7 +22,6 @@ void    close_all(t_init *param, t_list_char *tmp)
 		close (param->fds.pipe_fd[0]);
     if (param->fds.pipe_fd[1] != -1)
 		close (param->fds.pipe_fd[1]);
-	// close(11);
 }
 
 void	clear_files(t_list_char *lst)
