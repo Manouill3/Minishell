@@ -3,10 +3,9 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/08 17:51:52 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +79,11 @@ void	parsing_line(t_init *param)
 	get_token(param);
 	if (syntax_error(param, param->line))
 		return ;
+	if (param->count_cmd == 1 && !only_white(param->line))
+	{
+		param->status = 0;
+		return ;
+	}
 	expand_arg(param);
 	get_funct(param, param->tok);
 	get_no_red(param->tok);
@@ -90,10 +94,10 @@ void	parsing_line(t_init *param)
 		ft_supp_quote(tmp->no_red);
 		tmp = tmp->next;
 	}
+	print_lst_char(param->tok);
 	get_in_out(param->tok);
 	get_nb_eof(param->tok);
 	tmp = param->tok;
-	// print_lst_char(param->tok);
 	while (tmp)
 	{
 		exec_heredoc(param, tmp, tmp->heredoc, param->lst_env);
@@ -123,11 +127,17 @@ int	syntax_error(t_init *param, char *line)
 			i++;
 			continue;
 		}
-		if (line[i] == '|' && line[i + 1] == '|')
+		if (line[i] == '|')
 		{
-			ft_putstr_fd("Two pipes next to each other\n", 2);
-			param->status = 2;
-			return (1);
+			save = i + 1;
+			while (line[save] && is_white(line[save]))
+				save++;
+			if (line[save] == '|')
+			{
+				ft_putstr_fd("Two pipes next to each other\n", 2);
+				param->status = 2;
+				return (1);
+			}
 		}
 		if (line[i] == '|')
 		{

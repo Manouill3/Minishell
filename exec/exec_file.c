@@ -6,7 +6,6 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/08 18:49:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +74,7 @@ void	get_good_fd(t_init *param, t_list_char *node)
 	check = 2;
 	while (node->infiles[i])
 	{
-		if (ft_strlen(node->infiles[i]) == 2 && !ft_strcmp(node->infiles[i], ">>"))
+		if (!ft_strcmp(node->infiles[i], ">>"))
 		{
 			get_out_fd(param, node, i);
 			check = 0;
@@ -85,7 +84,7 @@ void	get_good_fd(t_init *param, t_list_char *node)
 			get_out_fd(param, node, i);
 			check = 0;
 		}
-		else if (ft_strlen(node->infiles[i]) == 2 && !ft_strcmp(node->infiles[i], "<<"))
+		else if (!ft_strcmp(node->infiles[i], "<<"))
 		{
 			get_in_fd(param, node, i);
 			check = 1;
@@ -105,11 +104,11 @@ void	get_good_fd(t_init *param, t_list_char *node)
 
 void	get_in_fd(t_init *param, t_list_char *node, int i)
 {
-	if (ft_strlen(node->infiles[i]) == 2 && !ft_strcmp(node->infiles[i], "<<"))
+	if (!ft_strcmp(node->infiles[i], "<<"))
 	{
 		if (node->fd_infile != -1)
 			close(node->fd_infile);
-		node->fd_infile = open(node->heredoc->name, O_RDONLY);
+		node->fd_infile = open(node->heredoc->name, O_RDONLY, 0644);
 	}
 	else if (!ft_strcmp(node->infiles[i], "<"))
 	{
@@ -132,7 +131,7 @@ void	get_in_fd(t_init *param, t_list_char *node, int i)
 
 void	get_out_fd(t_init *param, t_list_char *node, int i)
 {
-	if (ft_strlen(node->infiles[i]) == 2 && !ft_strcmp(node->infiles[i], ">>"))
+	if (!ft_strcmp(node->infiles[i], ">>"))
 		check_access_app(node, i + 1);
 	else if (!ft_strcmp(node->infiles[i], ">"))
 		check_access_out(node, i + 1);

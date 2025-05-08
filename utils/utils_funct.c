@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/08 10:40:34 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:29:59 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,16 @@ int	get_nb_cmd(char **tab)
 	return (count);
 }
 
+int	only_white(char	*line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!is_white(line[i]))
+			return(1);
+		i++;	
+	}
+	return (0);
+}

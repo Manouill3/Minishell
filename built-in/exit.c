@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/02 14:47:04 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/08 18:31:12 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void    ft_exit(t_init *param)
 			{
 				param->status = 2;
 				write(2, " numeric argument required",26);
-				printf("exit\n");
+				// printf("exit\n");
 				exit(param->status);
 			}
 			i++;
@@ -49,6 +49,6 @@ void    ft_exit(t_init *param)
 	nb_arg = param->status;
 	ft_free_all(param);
 	free_struct(param);
-	printf("exit\n");
+	// printf("exit\n");
 	exit(nb_arg);
 }

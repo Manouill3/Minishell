@@ -35,8 +35,8 @@ int	ft_init(t_init **param)
 int	main(int ac, char **av, char **env)
 {
 	t_init	*param;
-	int	tt_y;
-	int res;
+	int		tt_y;
+	int		res;
 
 	if (ac == 1 && av[0] != NULL)
 	{
@@ -50,18 +50,18 @@ int	main(int ac, char **av, char **env)
 		while (1)
 		{
 			param->line = readline("Minishell : ");
-			if (g_exit_code == 130)
-			{
-				param->status = g_exit_code;
-				g_exit_code = 0;
-			}
 			if (param->line == NULL)
 			{
 				printf("exit\n");
 				break ;
 			}
+			if (g_exit_code == 130)
+			{
+				param->status = g_exit_code;
+				g_exit_code = 0;
+			}
 			if (param->line[0] != '\0')
-				add_history(param->line);
+			add_history(param->line);
 			parsing_line(param);
 			ft_free_all(param);
 			if (!tt_y)

@@ -14,15 +14,14 @@
 
 void    close_all(t_init *param, t_list_char *tmp)
 {
-	close(11);
-    if (tmp->fd_infile != -1)
-        close (tmp->fd_infile);
+	if (tmp->fd_infile != -1)
+		close (tmp->fd_infile);
     if (tmp->fd_outfile != -1)
-        close (tmp->fd_outfile);
+		close (tmp->fd_outfile);
     if (param->fds.pipe_fd[0] != -1)
-        close (param->fds.pipe_fd[0]);
+		close (param->fds.pipe_fd[0]);
     if (param->fds.pipe_fd[1] != -1)
-        close (param->fds.pipe_fd[1]);
+		close (param->fds.pipe_fd[1]);
 }
 
 void	clear_files(t_list_char *lst)
@@ -67,7 +66,6 @@ void	ft_free_all(t_init *param)
 	while (tmp)
 	{
 		clear_files(tmp);
-		//close_all(param, tmp);
 		tmp = tmp->next;
 	}
 	if (param->tab)
