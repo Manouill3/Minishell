@@ -3,19 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/08 18:31:12 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 13:39:07 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void    ft_exit(t_init *param)
+void	ft_verif_nb(t_init *param)
 {
-	int nb_arg;
-	int i;
+	int	i;
+
+	i = 0;
+	while (param->tok->cmd[1][i])
+	{
+		if (!((param->tok->cmd[1][i] >= 48 && param->tok->cmd[1][i] <= 57)
+			|| param->tok->cmd[1][i] == '+' || param->tok->cmd[1][i] == '-'))
+		{
+			param->status = 2;
+			write(2, " numeric argument required", 26);
+			// printf("exit\n");
+			exit(param->status);
+		}
+		i++;
+	}
+	param->status = ft_atoi(param->tok->cmd[1]);
+}
+
+void	ft_exit(t_init *param)
+{
+	int	nb_arg;
+	int	i;
 
 	i = 0;
 	nb_arg = 0;
@@ -31,21 +51,7 @@ void    ft_exit(t_init *param)
 		exit(param->status);
 	}
 	if (param->tok->cmd[1] != NULL)
-	{
-		i = 0;
-		while (param->tok->cmd[1][i])
-		{
-			if (!((param->tok->cmd[1][i] >= 48 && param->tok->cmd[1][i] <= 57) || param->tok->cmd[1][i] == '+' || param->tok->cmd[1][i] == '-'))
-			{
-				param->status = 2;
-				write(2, " numeric argument required",26);
-				// printf("exit\n");
-				exit(param->status);
-			}
-			i++;
-		}
-		param->status = ft_atoi(param->tok->cmd[1]);
-	}
+		ft_verif_nb(param);
 	nb_arg = param->status;
 	ft_free_all(param);
 	free_struct(param);
