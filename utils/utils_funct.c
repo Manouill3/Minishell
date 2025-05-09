@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 10:32:55 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 10:44:20 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,12 @@ int	nb_exp(char **cmd)
 	nb = 0;
 	while (cmd[i])
 	{
-		if (ft_strchr(cmd[i], '$') && ft_strlen(cmd[i]) > 1)
+		if (ft_strchr(cmd[i], '$'))
+		{
 			nb++;
-		if (i > 0 && (!ft_strcmp(cmd[i - 1], "<<") || !ft_strcmp(cmd[i - 1], "<") || !ft_strcmp(cmd[i - 1], ">") || !ft_strcmp(cmd[i - 1], ">>")))
-			nb--;
+			if (i > 0 && (!ft_strcmp(cmd[i - 1], "<<") || !ft_strcmp(cmd[i - 1], "<") || !ft_strcmp(cmd[i - 1], ">") || !ft_strcmp(cmd[i - 1], ">>")))
+				nb--;
+		}
 		i++;
 	}
 	return (nb);

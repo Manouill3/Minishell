@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 10:34:15 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 10:40:36 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,7 @@ void	expand_arg(t_init *param)
 			{
 				if (i == 0 || ft_strcmp("<<", tmp->cmd[i - 1]) || ft_strcmp(">", tmp->cmd[i - 1]) || ft_strcmp(">>", tmp->cmd[i - 1]) || ft_strcmp("<", tmp->cmd[i - 1]))
 				{
-					if (ft_strlen(tmp->cmd[i]) > 1)
-						tmp->ind_exp[j++] = i;
+					tmp->ind_exp[j++] = i;
 					tmp_free = tmp->cmd[i];
 					tmp->cmd[i] = expand_word(param, tmp->cmd[i]);
 					free(tmp_free);

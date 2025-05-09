@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 10:27:19 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 10:54:49 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_supp_quote(t_list_char *tok, char **cmd)
 {
 	int	i;
 	int	j;
+	int	k;
 	int	save;
 	int	nb;
 	char	*tmp;
@@ -27,10 +28,13 @@ void	ft_supp_quote(t_list_char *tok, char **cmd)
 	while (i < nb)
 	{
 		j = 0;
+		k = 0;
 		save = i;
 		while (tok->ind_exp[j] && save == i)
 		{
-			if (tok->ind_exp[j] == i)
+			while (cmd[i][k] && cmd[i][k] != '$')
+				k++;
+			if (tok->ind_exp[j] == i && !is_white(cmd[i][k + 1]) && cmd[i][k + 1] != '"' && cmd[i][k + 1] != 39)
 				i++;
 			j++;
 		}
@@ -99,8 +103,6 @@ void	parsing_line(t_init *param)
 	expand_arg(param);
 	get_funct(param, param->tok);
 	get_no_red(param->tok);
-	get_in_out(param->tok);
-	get_nb_eof(param->tok);
 	tmp = param->tok;
 	while(tmp)
 	{
@@ -109,6 +111,8 @@ void	parsing_line(t_init *param)
 		free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
+	get_in_out(param->tok);
+	get_nb_eof(param->tok);
 	tmp = param->tok;
 	while (tmp)
 	{
