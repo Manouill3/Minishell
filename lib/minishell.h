@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 10:12:49 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 11:19:42 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -304,7 +304,19 @@ void 	ft_pwd();
 ///			built-in.c/cd.c			///
 //////////////////////////////////////
 
+void	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result);
+void	ft_cd_alone(char *path, char **path_split, t_init *param, int result);
 void    ft_cd(t_init *param, t_list_char *tok);
+
+////////////////////////////////////////
+///		built-in.c/cd_utils.c		///
+//////////////////////////////////////
+
+char	*ft_split_home_way(char **path_split, int i, int *j, char *lst);
+char	*ft_give_home_way(char **path_split, char *lst);
+char	*ft_path_user(char *path, t_list_char *tok);
+int		check_inside_path(char *path, t_list_char *tok);
+void	ft_cd_last(t_init *param, t_list_char *tok, int result, char *path);
 
 ////////////////////////////////////////
 ///			built-in.c/env.c		///

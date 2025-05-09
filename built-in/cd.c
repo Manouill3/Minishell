@@ -5,103 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/01 16:47:59 by tcybak           ###   ########.fr       */
+/*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
+/*   Updated: 2025/05/09 11:18:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char    *ft_split_home_way(char **path_split, int i, int *j, char *lst)
+void	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result)
 {
-	int start;
+	char	*tmp;
 
-	start = 0;
-	if (path_split[i][(*j)] == lst[start])
+	tmp = ft_path_user(path, tok);
+	result = chdir(tmp);
+	if (result == -1)
 	{
-		while(path_split[i][(*j)] == lst[start])
-		{
-			if (path_split[i][(*j) + 1] == '/')
-			{
-				(*j) = (*j) + 2;
-				while (path_split[i][(*j)] != '/')
-					(*j)++;;
-				return (ft_substr(path_split[i],0, (*j)));
-			}
-			(*j)++;
-			start++;
-		}
+		param->status = 1;
+		perror("cd");
 	}
-	(*j)++;
-	return (NULL);
+	free(path);
+	free(tmp);
 }
 
-char    *ft_give_home_way(char **path_split, char *lst)
+void	ft_cd_alone(char *path, char **path_split, t_init *param, int result)
 {
-	int i;
-	int j;
-	char    *path_home;
-
-	i = 0;
-	path_home = NULL;
-	while (path_split[i])
+	free(path);
+	path = NULL;
+	path_split = make_path(param->lst_env);
+	path = ft_give_home_way(path_split, "homes");
+	free_tab(path_split);
+	result = chdir(path);
+	if (result == -1)
 	{
-		j = 0;
-		while (path_split[i][j])
-		{
-			path_home = ft_split_home_way(path_split, i, &j, lst);
-			if (path_home != NULL)
-				return (path_home);
-		}
-		i++;
+		param->status = 1;
+		perror("cd");
 	}
-	return (NULL);
+	free(path);
 }
 
-char    *ft_path_user(char *path, t_list_char *tok)
-{
-	int     i;
-	int     j;
-	int     len;
-	char    *tmp;
-
-	i = 0;
-	j = 0;
-	if (tok->cmd[1][0] == '/')
-		tmp = ft_strjoin(path, tok->cmd[1]);
-	else 
-	{
-		len = ft_strlen(tok->cmd[1]);
-		tmp = ft_calloc(sizeof(char), (len + 2));
-		if (!tmp)
-			return (NULL);
-		tmp[0] = '/';
-		while (tok->cmd[1][i])
-		{
-			tmp[j] = tok->cmd[1][i];
-			j++;
-			i++;
-		}
-	}
-	return (tmp);
-}
-
-int     check_inside_path(char *path, t_list_char *tok)
-{
-	int len;
-	int result;
-
-	len = ft_strlen(path) - 1;
-	result = ft_strncmp(path, tok->cmd[1], len);
-	return (result);
-}
-
-void    ft_cd(t_init *param, t_list_char *tok)
+void	ft_cd(t_init *param, t_list_char *tok)
 {
 	int		result;
-	char *path;
-	char *tmp;
-	char **path_split;
+	char	*path;
+	char	**path_split;
 
 	result = 0;
 	path = get_pwd();
@@ -113,42 +59,11 @@ void    ft_cd(t_init *param, t_list_char *tok)
 		write(2, " too many arguments", 19);
 	}
 	else if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
-	{
-		free(path);
-		path = NULL;
-		path_split = make_path(param->lst_env);
-		path = ft_give_home_way(path_split, "homes");
-		free_tab(path_split);
-		result = chdir(path);
-		if (result == -1)
-		{
-			param->status = 1;
-			perror("cd");
-		}
-		free(path);
-	}
+		ft_cd_alone(path, path_split, param, result);
 	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
-	{
-		tmp = ft_path_user(path, tok);
-		result = chdir(tmp);
-		if (result == -1)
-		{
-			param->status = 1;
-			perror("cd");
-		}
-		free(path);
-		free(tmp);
-	}
+		ft_cd_rest(param, tok, path, result);
 	else if (check_inside_path(path, tok) == 0)
-	{
-		result = chdir(tok->cmd[1]);
-		if (result == -1)
-		{
-			param->status = 1;
-			perror("cd");
-		}
-		free(path);
-	}
+		ft_cd_last(param, tok, result, path);
 	else
 	{
 		free(path);
