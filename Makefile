@@ -51,6 +51,8 @@ SRC = main.c\
 	built-in/echo.c \
 	built-in/env_built-in.c \
 	built-in/export.c \
+	built-in/export_add.c \
+	built-in/export_add.c \
 	built-in/unset.c \
 	built-in/exit.c 
 

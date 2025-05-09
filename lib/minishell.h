@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 11:19:42 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/09 15:52:41 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -323,6 +323,28 @@ void	ft_cd_last(t_init *param, t_list_char *tok, int result, char *path);
 //////////////////////////////////////
 
 void    ft_env(t_env *env);	
+
+////////////////////////////////////////
+///		built-in.c/export_add.c		///
+//////////////////////////////////////
+
+void	env_content(t_env *env, char *add);
+void	export_content(t_env *exp, char *add);
+int 	existing_vars(t_env *env, t_env *exp, char *name, char *add);
+int		add_to_env_if_in_export(t_init *param, char *name, char *add, t_list_char *tok);
+void	add_to_both_lists(t_init *param, t_list_char *tok, char *add, char *name);
+int	ft_add_value_var(t_init *param, int i, t_list_char *tok);
+
+////////////////////////////////////////
+///		built-in.c/export_add.c		///
+//////////////////////////////////////
+
+void	env_content(t_env *env, char *add);
+void	export_content(t_env *exp, char *add);
+int		existing_vars(t_env *env, t_env *exp, char *name, char *add);
+int		add_to_env_if_in_export(t_init *param, char *name, char *add, t_list_char *tok);
+void	add_to_both_lists(t_init *param, t_list_char *tok, char *add, char *name);
+int		ft_add_value_var(t_init *param, int i, t_list_char *tok);
 
 ////////////////////////////////////////
 ///			built-in.c/export.c		///
