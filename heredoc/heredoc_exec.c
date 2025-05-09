@@ -12,11 +12,12 @@
 
 #include "../lib/minishell.h"
 
-void	ft_heredoc_oef_before(t_init *param, t_heredoc *heredoc, int i, t_env *env)
+void	ft_heredoc_oef_before(t_init *param, t_heredoc *heredoc, int i,
+		t_env *env)
 {
-	(void)param;
 	char	*final_eof;
 
+	(void)param;
 	ft_handle_heredoc_signals();
 	while (1)
 	{
@@ -31,7 +32,7 @@ void	ft_heredoc_oef_before(t_init *param, t_heredoc *heredoc, int i, t_env *env)
 			close(heredoc->fd_tmp);
 			free(final_eof);
 			ft_handle_interrupt_signals();
-			break;
+			break ;
 		}
 		if (!ft_strchr(heredoc->eof[i], '"') && !ft_strchr(heredoc->eof[i], 39))
 		{
@@ -51,11 +52,12 @@ void	ft_heredoc_oef_before(t_init *param, t_heredoc *heredoc, int i, t_env *env)
 	close(heredoc->fd_tmp);
 }
 
-void	ft_heredoc_oef_last(t_init *param, t_heredoc *heredoc, int i, t_env *env)
+void	ft_heredoc_oef_last(t_init *param, t_heredoc *heredoc, int i,
+		t_env *env)
 {
-	(void)param;
 	char	*final_eof;
 
+	(void)param;
 	ft_handle_heredoc_signals();
 	while (1)
 	{
@@ -91,13 +93,14 @@ void	ft_heredoc_oef_last(t_init *param, t_heredoc *heredoc, int i, t_env *env)
 	close(heredoc->fd_tmp);
 }
 
-void	exec_heredoc(t_init *param, t_list_char *tmp, t_heredoc *heredoc, t_env *env)
+void	exec_heredoc(t_init *param, t_list_char *tmp, t_heredoc *heredoc,
+		t_env *env)
 {
 	int	i;
 
 	i = 0;
 	if (heredoc->nb_eof > 0)
-	{	
+	{
 		heredoc->name = get_name_h();
 		heredoc->fd = open(heredoc->name, O_CREAT | O_WRONLY);
 		get_eof_tab(tmp);

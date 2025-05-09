@@ -14,17 +14,17 @@
 
 void	ft_supp_quote(t_list_char *tok, char **cmd)
 {
-	int	i;
-	int	j;
-	int	k;
-	int	save;
-	int	nb;
+	int		i;
+	int		j;
+	int		k;
+	int		save;
+	int		nb;
 	char	*tmp;
 
 	i = 0;
 	nb = 0;
 	while (cmd[nb])
-		nb++;	
+		nb++;
 	while (i < nb)
 	{
 		j = 0;
@@ -34,7 +34,8 @@ void	ft_supp_quote(t_list_char *tok, char **cmd)
 		{
 			while (cmd[i][k] && cmd[i][k] != '$')
 				k++;
-			if (tok->ind_exp[j] == i && !is_white(cmd[i][k + 1]) && cmd[i][k + 1] != '"' && cmd[i][k + 1] != 39)
+			if (tok->ind_exp[j] == i && !is_white(cmd[i][k + 1]) && cmd[i][k
+				+ 1] != '"' && cmd[i][k + 1] != 39)
 				i++;
 			j++;
 		}
@@ -58,10 +59,10 @@ void	ft_supp_quote(t_list_char *tok, char **cmd)
 
 void	get_funct(t_init *param, t_list_char *lst)
 {
-	(void)param;
-	int		i;
+	int			i;
 	t_list_char	*tmp;
 
+	(void)param;
 	tmp = lst;
 	while (tmp)
 	{
@@ -70,18 +71,18 @@ void	get_funct(t_init *param, t_list_char *lst)
 		{
 			if (i > 0)
 			{
-				if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i]) && is_red(tmp->cmd[i - 1]))
+				if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i])
+					&& is_red(tmp->cmd[i - 1]))
 				{
 					tmp->funct = ft_strdup(tmp->cmd[i]);
 					break ;
 				}
 			}
-			else
-				if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i]))
-				{
-					tmp->funct = ft_strdup(tmp->cmd[i]);
-					break ;
-				}
+			else if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i]))
+			{
+				tmp->funct = ft_strdup(tmp->cmd[i]);
+				break ;
+			}
 			i++;
 		}
 		tmp = tmp->next;
@@ -91,7 +92,7 @@ void	get_funct(t_init *param, t_list_char *lst)
 void	parsing_line(t_init *param)
 {
 	t_list_char	*tmp;
-	
+
 	get_token(param);
 	if (syntax_error(param, param->line))
 		return ;
@@ -104,7 +105,7 @@ void	parsing_line(t_init *param)
 	get_funct(param, param->tok);
 	get_no_red(param->tok);
 	tmp = param->tok;
-	while(tmp)
+	while (tmp)
 	{
 		ft_supp_quote(tmp, tmp->cmd);
 		ft_supp_quote(tmp, tmp->no_red);
@@ -126,9 +127,9 @@ void	parsing_line(t_init *param)
 
 int	syntax_error(t_init *param, char *line)
 {
-	int	i;
-	int	save;
-	char c;
+	int		i;
+	int		save;
+	char	c;
 
 	i = 0;
 	while (line[i])
@@ -140,7 +141,7 @@ int	syntax_error(t_init *param, char *line)
 			while (line[i] && line[i] != c)
 				i++;
 			i++;
-			continue;
+			continue ;
 		}
 		if (line[i] == '|')
 		{
@@ -194,15 +195,18 @@ int	syntax_error(t_init *param, char *line)
 				param->status = 2;
 				return (1);
 			}
-			while (line[i] && (is_white(line[i]) || line[i] == '<' || line[i] == '>'))
+			while (line[i] && (is_white(line[i]) || line[i] == '<'
+					|| line[i] == '>'))
 				i++;
-			if (i >= (int)ft_strlen(param->line) || (i < (int)ft_strlen(param->line) && (line[i] == '<' || line[i] == '>' || line[i] == '|')))
+			if (i >= (int)ft_strlen(param->line)
+				|| (i < (int)ft_strlen(param->line) && (line[i] == '<'
+						|| line[i] == '>' || line[i] == '|')))
 			{
 				ft_putstr_fd("Error syntax : no file after redirection\n", 2);
 				param->status = 2;
 				return (1);
 			}
-		}	
+		}
 		i++;
 	}
 	return (0);

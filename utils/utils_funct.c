@@ -98,7 +98,7 @@ int	get_nb_cmd(char **tab)
 	return (count);
 }
 
-int	only_white(char	*line)
+int	only_white(char *line)
 {
 	int	i;
 
@@ -106,8 +106,8 @@ int	only_white(char	*line)
 	while (line[i])
 	{
 		if (!is_white(line[i]))
-			return(1);
-		i++;	
+			return (1);
+		i++;
 	}
 	return (0);
 }
@@ -116,7 +116,7 @@ int	nb_exp(char **cmd)
 {
 	int	i;
 	int	nb;
-	
+
 	i = 0;
 	nb = 0;
 	while (cmd[i])
@@ -124,7 +124,9 @@ int	nb_exp(char **cmd)
 		if (ft_strchr(cmd[i], '$'))
 		{
 			nb++;
-			if (i > 0 && (!ft_strcmp(cmd[i - 1], "<<") || !ft_strcmp(cmd[i - 1], "<") || !ft_strcmp(cmd[i - 1], ">") || !ft_strcmp(cmd[i - 1], ">>")))
+			if (i > 0 && (!ft_strcmp(cmd[i - 1], "<<") || !ft_strcmp(cmd[i - 1],
+						"<") || !ft_strcmp(cmd[i - 1], ">") || !ft_strcmp(cmd[i
+						- 1], ">>")))
 				nb--;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 10:12:49 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 14:39:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_init
 
 void	init_heredoc(t_list_char *node);
 int			ft_init(t_init **init);
+void	minishell(t_init *param, int tt_y);
 
 ////////////////////////////////////////
 ///			signal/signal.c         ///
@@ -242,7 +243,7 @@ void		exec_heredoc(t_init *param, t_list_char *tmp, t_heredoc *heredoc, t_env *e
 int		verif_built(t_list_char *tok);
 int		no_red_len(char **tab, t_list_char *tmp);
 void	get_no_red(t_list_char *tok);
-void    ft_exec_pipe( t_list_char *tmp, t_init *param, int count);
+void    ft_exec_fork( t_list_char *tmp, t_init *param, int count);
 void    exec(t_init *param);
 
 ////////////////////////////////////////
@@ -268,7 +269,8 @@ void    verif_fd(int count, t_init *param);
 ///			exec/exec_file.c		///
 //////////////////////////////////////
 
-void	get_in_out_complet_list(t_list_char *node);
+void	get_in_complet_list(t_list_char *node);
+void	get_out_complet_list(t_list_char *node, int *i, int	*j);
 void	get_in_out(t_list_char *tok);
 void	get_good_fd(t_init *param, t_list_char *node);
 void	get_in_fd(t_init *param, t_list_char *node, int i);

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 10:40:36 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 14:59:11 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ char	*check_quote(t_init *param, char *word, t_env *env)
 	{
 		no_quote = char_out(word, 39);
 		if (ft_strlen(word) == 0)
-			return(NULL);
+			return (NULL);
 		return (no_quote);
 	}
 	if (word[0] == '"')
 	{
 		if (ft_strlen(word) == 0)
-			return(NULL);
+			return (NULL);
 		no_quote = char_out(word, '"');
 		if (!ft_strchr(no_quote, '$'))
-			return(no_quote);
+			return (no_quote);
 		final_word = expand_quote(param, no_quote);
 		if (!ft_strcmp(final_word, no_quote))
 		{
@@ -65,10 +65,10 @@ char	*check_quote(t_init *param, char *word, t_env *env)
 			return (ft_strdup(word));
 		}
 		free(no_quote);
-		return(final_word);
+		return (final_word);
 	}
 	if (!ft_strchr(word, '$'))
-		return(ft_strdup(word));
+		return (ft_strdup(word));
 	final_word = get_env_value(env, word);
 	return (final_word);
 }
@@ -81,7 +81,7 @@ char	**expand_input(t_init *param, char *word, char **inputs)
 
 	i = 0;
 	k = 0;
-	while(word[i])
+	while (word[i])
 	{
 		if (i > 0 && (word[i] == '?' || word[i] == '_') && word[i - 1] == '$')
 			i++;
@@ -92,8 +92,8 @@ char	**expand_input(t_init *param, char *word, char **inputs)
 			i = get_len_w_d(word, i);
 		else
 		{
-			while (word[i] &&
-				(word[i] != '$' && word[i] != '"' && word[i] != 39))
+			while (word[i] && (word[i] != '$' && word[i] != '"'
+					&& word[i] != 39))
 				i++;
 		}
 		inputs[k++] = get_actual_word(param, word, i, j);
@@ -103,7 +103,7 @@ char	**expand_input(t_init *param, char *word, char **inputs)
 
 char	*expand_word(t_init *param, char *word)
 {
-	int i;
+	int		i;
 	int		len;
 	char	*res;
 	char	**inputs;
@@ -118,7 +118,7 @@ char	*expand_word(t_init *param, char *word)
 		return (NULL);
 	res = ft_calloc(final_len(inputs, len) + 1, sizeof(char));
 	if (!res)
-		return(NULL);
+		return (NULL);
 	res = get_final_input(res, inputs, len);
 	while (i < len)
 	{
@@ -149,7 +149,9 @@ void	expand_arg(t_init *param)
 			j = 0;
 			if (ft_strchr(tmp->cmd[i], '$'))
 			{
-				if (i == 0 || ft_strcmp("<<", tmp->cmd[i - 1]) || ft_strcmp(">", tmp->cmd[i - 1]) || ft_strcmp(">>", tmp->cmd[i - 1]) || ft_strcmp("<", tmp->cmd[i - 1]))
+				if (i == 0 || ft_strcmp("<<", tmp->cmd[i - 1]) || ft_strcmp(">",
+						tmp->cmd[i - 1]) || ft_strcmp(">>", tmp->cmd[i - 1])
+					|| ft_strcmp("<", tmp->cmd[i - 1]))
 				{
 					tmp->ind_exp[j++] = i;
 					tmp_free = tmp->cmd[i];

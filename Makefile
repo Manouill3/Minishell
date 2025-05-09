@@ -41,16 +41,20 @@ SRC = main.c\
 	heredoc/heredoc.c\
 	heredoc/heredoc_exec.c\
 	exec/exec_init.c\
+	exec/exec_init2.c\
 	exec/exec_cmd.c\
+	exec/exec_cmd2.c\
 	exec/exec_utils.c\
 	exec/exec_utils2.c\
-	exec/exec_file.c \
-	built-in/pwd.c \
-	built-in/cd.c \
-	built-in/echo.c \
-	built-in/env_built-in.c \
-	built-in/export.c \
-	built-in/unset.c \
+	exec/set_args.c\
+	exec/exec_file.c\
+	exec/exec_file2.c\
+	built-in/pwd.c\
+	built-in/cd.c\
+	built-in/echo.c\
+	built-in/env_built-in.c\
+	built-in/export.c\
+	built-in/unset.c\
 	built-in/exit.c 
 
 OBJ_DIR = build

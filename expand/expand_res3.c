@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:33:56 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/29 10:34:38 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:21:09 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_final_input(char *res, char **inputs, int len)
 	int	i;
 	int	j;
 	int	k;
-	
+
 	i = 0;
 	k = 0;
 	while (i < len)
@@ -29,3 +29,4 @@ char	*get_final_input(char *res, char **inputs, int len)
 	}
 	return (res);
 }
+

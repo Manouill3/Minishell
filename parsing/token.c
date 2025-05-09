@@ -12,14 +12,14 @@
 
 #include "../lib/minishell.h"
 
-int    ft_len_word(const char *s, int start)
+int	ft_len_word(const char *s, int start)
 {
-    int		i;
-    int		cmp;
+	int		i;
+	int		cmp;
 	char	c;
 
-    i = start;
-    cmp = 0;
+	i = start;
+	cmp = 0;
 	if (s[i] == '"' || s[i] == 39)
 	{
 		c = s[i++];
@@ -43,8 +43,8 @@ int    ft_len_word(const char *s, int start)
 		}
 		return (cmp);
 	}
-    while (s[i] && !is_white(s[i]) && s[i] != '<' && s[i] != '>')
-    {
+	while (s[i] && !is_white(s[i]) && s[i] != '<' && s[i] != '>')
+	{
 		if (s[i] == '"' || s[i] == 39)
 		{
 			c = s[i++];
@@ -55,23 +55,23 @@ int    ft_len_word(const char *s, int start)
 				cmp++;
 			}
 		}
-        i++;
-        cmp++;
-    }
+		i++;
+		cmp++;
+	}
 	return (cmp);
 }
 
 int	get_tab_len(char *tab)
 {
-    int    i;
-	int	save;
+	int		i;
+	int		save;
 	char	c;
-    int    count;
+	int		count;
 
-    i = 0;
-    count = 0;
-    while (tab[i])
-    {
+	i = 0;
+	count = 0;
+	while (tab[i])
+	{
 		if (tab[i] == '"' || tab[i] == 39)
 		{
 			save = i;
@@ -83,19 +83,19 @@ int	get_tab_len(char *tab)
 				count++;
 			if (!tab[i] && i - save > 2)
 				count++;
-			continue;
+			continue ;
 		}
 		if ((tab[i] == '<' || tab[i] == '>') && tab[i + 1] != tab[i])
 		{
 			count++;
 			i++;
-			continue;
+			continue ;
 		}
-        if (!is_white(tab[i]) && (is_white(tab[i + 1]) || tab[i + 1] == '\0'))
-            count++;
-        i++;
-    }
-    return (count);
+		if (!is_white(tab[i]) && (is_white(tab[i + 1]) || tab[i + 1] == '\0'))
+			count++;
+		i++;
+	}
+	return (count);
 }
 
 t_list_char	*set_lst(int count_cmd)
@@ -115,7 +115,7 @@ t_list_char	*set_lst(int count_cmd)
 
 void	set_cmd(char *tab, t_list_char *tmp)
 {
-	int i;
+	int	i;
 	int	j;
 	int	k;
 	int	len;

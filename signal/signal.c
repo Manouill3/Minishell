@@ -49,7 +49,7 @@ void	ft_handle_interrupt_signals(void)
 
 void	ft_handle_heredoc_signals(void)
 {
-	struct sigaction	sig;
+	struct sigaction sig;
 
 	ft_bzero(&sig, sizeof(sig));
 	sig.sa_handler = &sigint_heredoc_handler;
