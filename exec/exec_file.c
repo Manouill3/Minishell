@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
+/*   Updated: 2025/05/08 19:15:07 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +109,13 @@ void	get_in_fd(t_init *param, t_list_char *node, int i)
 	{
 		if (node->fd_infile != -1)
 			close(node->fd_infile);
-		node->fd_infile = open(node->heredoc->name, O_RDONLY, 0644);
+		if (g_exit_code != 130)
+			node->fd_infile = open(node->heredoc->name, O_RDONLY, 0644);
+		else if (!ft_strcmp(node->funct, "cat"))
+		{
+			close_all(param, node);
+			exit (param->status);
+		}
 	}
 	else if (!ft_strcmp(node->infiles[i], "<"))
 	{

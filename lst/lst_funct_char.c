@@ -27,6 +27,7 @@ t_list_char	*ft_lstnew_char(char **tab)
 	lst->fd_outfile = -1;
 	lst->infiles = NULL;
 	lst->next = NULL;
+	lst->ind_exp = NULL;
 	lst->heredoc = malloc(sizeof(t_heredoc));
 	if (!lst->heredoc)
 		return (NULL);

@@ -6,15 +6,17 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
+/*   Updated: 2025/05/09 10:27:19 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	ft_supp_quote(char **cmd)
+void	ft_supp_quote(t_list_char *tok, char **cmd)
 {
 	int	i;
 	int	j;
+	int	save;
 	int	nb;
 	char	*tmp;
 
@@ -24,6 +26,16 @@ void	ft_supp_quote(char **cmd)
 		nb++;	
 	while (i < nb)
 	{
+		j = 0;
+		save = i;
+		while (tok->ind_exp[j] && save == i)
+		{
+			if (tok->ind_exp[j] == i)
+				i++;
+			j++;
+		}
+		if (i > save)
+			continue ;
 		j = 0;
 		while (cmd[i][j])
 		{
@@ -87,23 +99,22 @@ void	parsing_line(t_init *param)
 	expand_arg(param);
 	get_funct(param, param->tok);
 	get_no_red(param->tok);
+	get_in_out(param->tok);
+	get_nb_eof(param->tok);
 	tmp = param->tok;
 	while(tmp)
 	{
-		ft_supp_quote(tmp->cmd);
-		ft_supp_quote(tmp->no_red);
+		ft_supp_quote(tmp, tmp->cmd);
+		ft_supp_quote(tmp, tmp->no_red);
+		free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
-	print_lst_char(param->tok);
-	get_in_out(param->tok);
-	get_nb_eof(param->tok);
 	tmp = param->tok;
 	while (tmp)
 	{
 		exec_heredoc(param, tmp, tmp->heredoc, param->lst_env);
 		tmp = tmp->next;
 	}
-	g_exit_code = 0;
 	if (!param->tok)
 		return ;
 	exec(param);

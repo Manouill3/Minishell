@@ -6,10 +6,11 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
+/*   Updated: 2025/05/09 10:12:49 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+# ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include <stdio.h>
@@ -52,6 +53,7 @@ typedef struct s_list_char
 	int					len_cmd;
 	int					fd_infile;
 	int					fd_outfile;
+	int					*ind_exp;
 	char				**cmd_path;
 	char				**cmd;
 	char				**no_red;
@@ -140,6 +142,7 @@ int			is_red(char *val);
 int			ft_strcmp(char *s1, char *s2);
 int			get_nb_cmd(char **tab);
 int	only_white(char	*line);
+int	nb_exp(char **cmd);
 
 ////////////////////////////////////////
 ///			parsing/token.c         ///
@@ -155,7 +158,7 @@ void		get_token(t_init *param);
 ///			parsing/parse_line.c    ///
 //////////////////////////////////////
 
-void		ft_supp_quote(char **cmd);
+void		ft_supp_quote(t_list_char *tok, char **cmd);
 void		get_funct(t_init *param, t_list_char *lst);
 void		parsing_line(t_init *param);
 int			syntax_error(t_init *param, char *line);

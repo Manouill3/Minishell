@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/02 11:32:17 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 10:34:15 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ char	*check_quote(t_init *param, char *word, t_env *env)
 
 	if (word[0] == 39)
 	{
+		no_quote = char_out(word, 39);
 		if (ft_strlen(word) == 0)
 			return(NULL);
-		// final_word = char_out(word, 39);
-		return (ft_strdup(word));
+		return (no_quote);
 	}
 	if (word[0] == '"')
 	{
@@ -133,6 +133,7 @@ char	*expand_word(t_init *param, char *word)
 void	expand_arg(t_init *param)
 {
 	int			i;
+	int			j;
 	char		*tmp_free;
 	t_list_char	*tmp;
 
@@ -140,12 +141,18 @@ void	expand_arg(t_init *param)
 	while (tmp)
 	{
 		i = 0;
+		tmp->ind_exp = ft_calloc(sizeof(int), nb_exp(tmp->cmd) + 1);
+		if (!tmp->ind_exp)
+			return ;
 		while (tmp->cmd[i])
 		{
+			j = 0;
 			if (ft_strchr(tmp->cmd[i], '$'))
 			{
-				if (i == 0 || ft_strcmp("<<", tmp->cmd[i - 1]))
+				if (i == 0 || ft_strcmp("<<", tmp->cmd[i - 1]) || ft_strcmp(">", tmp->cmd[i - 1]) || ft_strcmp(">>", tmp->cmd[i - 1]) || ft_strcmp("<", tmp->cmd[i - 1]))
 				{
+					if (ft_strlen(tmp->cmd[i]) > 1)
+						tmp->ind_exp[j++] = i;
 					tmp_free = tmp->cmd[i];
 					tmp->cmd[i] = expand_word(param, tmp->cmd[i]);
 					free(tmp_free);
