@@ -27,8 +27,8 @@ int	inputs_len(char *word)
 			i = get_len_w_d(word, i);
 		else
 		{
-			while (word[i]
-				&& (word[i] != '$' && word[i] != '"' && word[i] != 39))
+			while (word[i] && (word[i] != '$' && word[i] != '"'
+					&& word[i] != 39))
 				i++;
 		}
 		len++;
@@ -49,7 +49,7 @@ int	get_len_w_d(char *word, int i)
 	return (i);
 }
 
-int	get_len_w_q(char *word, char quote, int	i)
+int	get_len_w_q(char *word, char quote, int i)
 {
 	i++;
 	while (word[i] && word[i] != quote)

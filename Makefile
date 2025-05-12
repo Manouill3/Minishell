@@ -30,8 +30,10 @@ SRC = main.c\
 	signal/signal.c\
 	free/free_funct.c\
 	utils/utils_funct.c\
+	utils/print_funct.c\
 	parsing/parse_line.c\
 	parsing/token.c\
+	parsing/len_word.c\
 	expand/expand.c\
 	expand/expand_res.c\
 	expand/expand_res2.c\
@@ -40,11 +42,16 @@ SRC = main.c\
 	expand/expand_heredoc.c\
 	heredoc/heredoc.c\
 	heredoc/heredoc_exec.c\
+	heredoc/heredoc_ann.c\
 	exec/exec_init.c\
+	exec/exec_init2.c\
 	exec/exec_cmd.c\
+	exec/exec_cmd2.c\
 	exec/exec_utils.c\
 	exec/exec_utils2.c\
-	exec/exec_file.c \
+	exec/set_args.c\
+	exec/exec_file.c\
+	exec/exec_file2.c\
 	built-in/pwd.c \
 	built-in/cd_utils.c \
 	built-in/cd.c \
@@ -56,7 +63,6 @@ SRC = main.c\
 	built-in/export_add_utils.c \
 	built-in/export_var_utils.c \
 	built-in/unset.c \
-	built-in/exit.c 
 
 OBJ_DIR = build
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))

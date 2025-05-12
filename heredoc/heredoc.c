@@ -37,7 +37,7 @@ char	*get_valid_char(char *buffer)
 
 char	*get_name_h(void)
 {
-	char	*valid_name;	
+	char	*valid_name;
 	char	buffer[1000];
 	int		fd;
 	int		bytes;
@@ -55,7 +55,7 @@ char	*get_name_h(void)
 		close(fd);
 		return (valid_name);
 	}
-	close (fd);
+	close(fd);
 	return (get_name_h());
 }
 
@@ -102,7 +102,6 @@ void	get_eof_tab(t_list_char *tok)
 		}
 		i++;
 	}
-	
 }
 
 char	*get_final_eof(char *str)

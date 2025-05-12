@@ -12,7 +12,7 @@
 
 #include "lib/minishell.h"
 
-int g_exit_code = 0;
+int	g_exit_code = 0;
 
 void	init_heredoc(t_list_char *node)
 {
@@ -32,6 +32,30 @@ int	ft_init(t_init **param)
 	return (0);
 }
 
+void	minishell(t_init *param, int tt_y)
+{
+	while (1)
+	{
+		param->line = readline("Minishell : ");
+		if (param->line == NULL)
+		{
+			printf("exit\n");
+			break ;
+		}
+		if (g_exit_code == 130)
+		{
+			param->status = g_exit_code;
+			g_exit_code = 0;
+		}
+		if (param->line[0] != '\0')
+			add_history(param->line);
+		parsing_line(param);
+		ft_free_all(param);
+		if (!tt_y)
+			break ;
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_init	*param;
@@ -47,26 +71,7 @@ int	main(int ac, char **av, char **env)
 		if (get_env(param, env))
 			return (0);
 		tt_y = isatty(STDIN_FILENO);
-		while (1)
-		{
-			param->line = readline("Minishell : ");
-			if (param->line == NULL)
-			{
-				printf("exit\n");
-				break ;
-			}
-			if (g_exit_code == 130)
-			{
-				param->status = g_exit_code;
-				g_exit_code = 0;
-			}
-			if (param->line[0] != '\0')
-			add_history(param->line);
-			parsing_line(param);
-			ft_free_all(param);
-			if (!tt_y)
-				break;
-		}
+		minishell(param, tt_y);
 		res = param->status;
 		free_struct(param);
 		return (res);

@@ -6,12 +6,13 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
+/*   Updated: 2025/05/09 13:28:25 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void    child_process(t_list_char *tmp, t_init *param, int count)
+void	child_process(t_list_char *tmp, t_init *param, int count)
 {
 	if (tmp->infiles)
 		get_good_fd(param, tmp);
@@ -24,62 +25,22 @@ void    child_process(t_list_char *tmp, t_init *param, int count)
 	{
 		dup2(tmp->fd_infile, STDIN_FILENO);
 		if (tmp->fd_infile != -1)
-			close(tmp->fd_infile);    
+			close(tmp->fd_infile);
 	}
 	ft_dup_file(param, tmp, count);
 	close_all(param, tmp);
 	exec_cmd(param, tmp);
 }
 
-void    parent_process(t_init *param)
+void	parent_process(t_init *param)
 {
 	close(param->fds.pipe_fd[1]);
 	dup2(param->fds.pipe_fd[0], STDIN_FILENO);
 	close (param->fds.pipe_fd[0]);
 }
 
-void    ft_dup_file(t_init *param, t_list_char *tmp, int count)
+void	built_in_fork(t_init *param, t_list_char *tmp)
 {
-	if (param->count_cmd - 1 == count)
-	{
-		if (param->fds.pipe_fd[0] != -1)
-			close(param->fds.pipe_fd[0]);
-		if (param->fds.pipe_fd[1] != -1)
-			close(param->fds.pipe_fd[1]);
-		if (tmp->fd_infile != -1)
-		{
-			dup2(tmp->fd_infile, STDIN_FILENO);
-			close(tmp->fd_infile);
-		}
-		if (tmp->fd_outfile != -1)
-		{
-			dup2(tmp->fd_outfile, STDOUT_FILENO);
-			close(tmp->fd_outfile);
-		}
-		else
-			dup2(param->fds.pipe_fd[1], STDOUT_FILENO);
-	}
-	else
-	{
-		if (param->fds.pipe_fd[0] != -1)
-			close(param->fds.pipe_fd[0]);
-		if (tmp->fd_outfile != -1)
-		{
-			dup2(tmp->fd_outfile, STDOUT_FILENO);
-			close(tmp->fd_outfile);
-		}
-		else
-			dup2(param->fds.pipe_fd[1], STDOUT_FILENO);
-		if (param->fds.pipe_fd[1] != -1)
-			close(param->fds.pipe_fd[1]);
-	}
-}
-
-void    exec_cmd(t_init *param, t_list_char *tmp)
-{
-	char    **path;
-	char    **args;
-	char    **env;
 	int		status;
 
 	if (param->count_cmd > 0 && verif_built(tmp))
@@ -90,6 +51,15 @@ void    exec_cmd(t_init *param, t_list_char *tmp)
 		free_struct(param);
 		exit (status);
 	}
+}
+
+void	exec_cmd(t_init *param, t_list_char *tmp)
+{
+	char	**path;
+	char	**args;
+	char	**env;
+
+	built_in_fork(param, tmp);
 	path = make_path(param->lst_env);
 	if (!path)
 		return ;

@@ -12,16 +12,16 @@
 
 #include "../lib/minishell.h"
 
-void    close_all(t_init *param, t_list_char *tmp)
+void	close_all(t_init *param, t_list_char *tmp)
 {
 	if (tmp->fd_infile != -1)
-		close (tmp->fd_infile);
-    if (tmp->fd_outfile != -1)
-		close (tmp->fd_outfile);
-    if (param->fds.pipe_fd[0] != -1)
-		close (param->fds.pipe_fd[0]);
-    if (param->fds.pipe_fd[1] != -1)
-		close (param->fds.pipe_fd[1]);
+		close(tmp->fd_infile);
+	if (tmp->fd_outfile != -1)
+		close(tmp->fd_outfile);
+	if (param->fds.pipe_fd[0] != -1)
+		close(param->fds.pipe_fd[0]);
+	if (param->fds.pipe_fd[1] != -1)
+		close(param->fds.pipe_fd[1]);
 }
 
 void	clear_files(t_list_char *lst)
@@ -48,7 +48,7 @@ void	free_tab(char **tab)
 		i++;
 	}
 	if (tab)
-		free (tab);
+		free(tab);
 }
 
 void	free_struct(t_init *param)

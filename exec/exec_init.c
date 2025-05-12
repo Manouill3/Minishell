@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/08 14:44:27 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/09 11:42:29 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,80 +14,24 @@
 
 int	verif_built(t_list_char *tok)
 {
-	if(!ft_strcmp(tok->funct, "echo"))
+	if (!ft_strcmp(tok->funct, "echo"))
 		return (1);
-	if(!ft_strcmp(tok->funct, "cd"))
+	if (!ft_strcmp(tok->funct, "cd"))
 		return (2);
-	if(!ft_strcmp(tok->funct, "pwd"))
+	if (!ft_strcmp(tok->funct, "pwd"))
 		return (3);
-	if(!ft_strcmp(tok->funct, "export"))
+	if (!ft_strcmp(tok->funct, "export"))
 		return (4);
-	if(!ft_strcmp(tok->funct, "unset"))
+	if (!ft_strcmp(tok->funct, "unset"))
 		return (5);
-	if(!ft_strcmp(tok->funct, "env"))
+	if (!ft_strcmp(tok->funct, "env"))
 		return (6);
-	if(!ft_strcmp(tok->funct, "exit"))
+	if (!ft_strcmp(tok->funct, "exit"))
 		return (7);
 	return (0);
 }
 
-int	no_red_len(char **tab, t_list_char *tmp)
-{
-	int	i;
-	int	len;
-	
-	i = 0;
-	len = 0;
-	while (i < tmp->len_cmd)
-	{
-		if (ft_strlen(tab[i]) < 1)
-		{
-			i++;
-			continue;
-		}
-		if (tab[i] && ft_strcmp(tab[i], ">") && ft_strcmp(tab[i], "<"))
-			len++;
-		else
-			i++;
-		i++;
-	}
-	return (len);
-}
-
-void	get_no_red(t_list_char *tok)
-{
-	t_list_char *tmp;
-	int	len;
-	int	i;
-	int	j;
-
-	tmp = tok;
-	while(tmp)
-	{
-		i = 0;
-		j = 0;
-		len = no_red_len(tmp->cmd, tmp);
-		tmp->no_red = ft_calloc(len + 1, sizeof(char *));
-		if (!tok->no_red)
-			return ;
-		while (j < len && i < tmp->len_cmd)
-		{
-			if (ft_strlen(tmp->cmd[i]) < 1)
-			{
-				i++;
-				continue;
-			}
-			if (ft_strcmp(">", tmp->cmd[i]) && ft_strcmp("<", tmp->cmd[i]) && ft_strcmp(">>", tmp->cmd[i]) && ft_strcmp("<<", tmp->cmd[i]))
-				tmp->no_red[j++] = ft_strdup(tmp->cmd[i]);
-			else
-				i++;
-			i++;
-		}
-		tmp = tmp->next;
-	}
-}
-
-void    ft_exec_pipe(t_list_char *tmp, t_init *param, int count)
+void	ft_exec_fork(t_list_char *tmp, t_init *param, int count)
 {
 	param->fds.pid = fork();
 	if (param->fds.pid == -1)
@@ -101,10 +45,23 @@ void    ft_exec_pipe(t_list_char *tmp, t_init *param, int count)
 		parent_process(param);
 }
 
-void    exec(t_init *param)
+int	ft_exec_pipe(t_list_char *tmp, t_init *param, int count)
 {
-	t_list_char *tmp;
-	int count;
+	if (pipe(param->fds.pipe_fd) == -1)
+	{
+		perror("pipe");
+		exit (127);
+	}
+	ft_exec_fork(tmp, param, count);
+	close_all(param, tmp);
+	count++;
+	return (count);
+}
+
+void	exec(t_init *param)
+{
+	t_list_char	*tmp;
+	int			count;
 
 	count = 0;
 	tmp = param->tok;
@@ -114,22 +71,16 @@ void    exec(t_init *param)
 		{
 			param->status = 127;
 			tmp = tmp->next;
-			continue;
+			continue ;
 		}
-		if ((verif_built(tmp) == 2 || verif_built(tmp) == 4 || verif_built(tmp) == 5 || verif_built(tmp) == 7))
+		if ((verif_built(tmp) == 2 || verif_built(tmp) == 4
+				|| verif_built(tmp) == 5 || verif_built(tmp) == 7))
 		{
 			ft_exec_built_in(param, tmp);
 			tmp = tmp->next;
-			continue;
+			continue ;
 		}
-		if (pipe(param->fds.pipe_fd) == -1)
-		{
-			perror("pipe");
-			exit (127);
-		}
-		ft_exec_pipe(tmp, param, count);
-		close_all(param, tmp);
-		count++;
+		count = ft_exec_pipe(tmp, param, count);
 		tmp = tmp->next;
 	}
 	ft_wait_child(param);

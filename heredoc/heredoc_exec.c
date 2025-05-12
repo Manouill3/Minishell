@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/08 18:50:18 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/12 09:01:13 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	ft_heredoc_oef_before(t_init *param, t_heredoc *heredoc, int i, t_env *env)
+void	ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env)
 {
-	(void)param;
 	char	*final_eof;
 
 	ft_handle_heredoc_signals();
@@ -22,38 +21,18 @@ void	ft_heredoc_oef_before(t_init *param, t_heredoc *heredoc, int i, t_env *env)
 	{
 		final_eof = get_final_eof(heredoc->eof[i]);
 		heredoc->input = readline("heredoc> ");
-		if (g_exit_code == 130)
-		{
-			if (heredoc->input)
-				free(heredoc->input);
-			free(final_eof);
-			dup2(heredoc->fd_tmp, 0);
-			close(heredoc->fd_tmp);
-			free(final_eof);
-			ft_handle_interrupt_signals();
-			break;
-		}
-		if (!ft_strchr(heredoc->eof[i], '"') && !ft_strchr(heredoc->eof[i], 39))
-		{
-			if (heredoc->input && ft_strchr(heredoc->input, '$'))
-				heredoc->input = exp_heredoc(heredoc->input, env);
-		}
-		if (!heredoc->input || !ft_strcmp(heredoc->input, final_eof))
-		{
-			if (heredoc->input)
-				free(heredoc->input);
-			free(final_eof);
+		if (handle_heredoc_interrupt_before(heredoc, final_eof))
 			break ;
-		}
+		if (handle_heredoc_input(heredoc, env, final_eof, i))
+			break ;
 		free(final_eof);
 		free(heredoc->input);
 	}
 	close(heredoc->fd_tmp);
 }
 
-void	ft_heredoc_oef_last(t_init *param, t_heredoc *heredoc, int i, t_env *env)
+void	ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env)
 {
-	(void)param;
 	char	*final_eof;
 
 	ft_handle_heredoc_signals();
@@ -61,28 +40,10 @@ void	ft_heredoc_oef_last(t_init *param, t_heredoc *heredoc, int i, t_env *env)
 	{
 		final_eof = get_final_eof(heredoc->eof[i]);
 		heredoc->input = readline("heredoc> ");
-		if (g_exit_code == 130)
-		{
-			if (heredoc->input)
-				free(heredoc->input);
-			free(final_eof);
-			dup2(heredoc->fd_tmp, 0);
-			close(heredoc->fd_tmp);
-			ft_handle_interrupt_signals();
+		if (ft_handle_heredoc_interrupt(heredoc, final_eof))
 			break ;
-		}
-		if (!ft_strchr(heredoc->eof[i], '"') && !ft_strchr(heredoc->eof[i], 39))
-		{
-			if (heredoc->input && ft_strchr(heredoc->input, '$'))
-				heredoc->input = exp_heredoc(heredoc->input, env);
-		}
-		if (!heredoc->input || !ft_strcmp(heredoc->input, final_eof))
-		{
-			if (heredoc->input)
-				free(heredoc->input);
-			free(final_eof);
+		if (handle_heredoc_input(heredoc, env, final_eof, i))
 			break ;
-		}
 		ft_putendl_fd(heredoc->input, heredoc->fd);
 		free(heredoc->input);
 		free(final_eof);
@@ -91,13 +52,28 @@ void	ft_heredoc_oef_last(t_init *param, t_heredoc *heredoc, int i, t_env *env)
 	close(heredoc->fd_tmp);
 }
 
-void	exec_heredoc(t_init *param, t_list_char *tmp, t_heredoc *heredoc, t_env *env)
+int	ft_handle_heredoc_interrupt(t_heredoc *heredoc, char *final_eof)
+{
+	if (g_exit_code == 130)
+	{
+		if (heredoc->input)
+			free(heredoc->input);
+		free(final_eof);
+		dup2(heredoc->fd_tmp, 0);
+		close(heredoc->fd_tmp);
+		ft_handle_interrupt_signals();
+		return (1);
+	}
+	return (0);
+}
+
+void	exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env)
 {
 	int	i;
 
 	i = 0;
 	if (heredoc->nb_eof > 0)
-	{	
+	{
 		heredoc->name = get_name_h();
 		heredoc->fd = open(heredoc->name, O_CREAT | O_WRONLY);
 		get_eof_tab(tmp);
@@ -105,9 +81,9 @@ void	exec_heredoc(t_init *param, t_list_char *tmp, t_heredoc *heredoc, t_env *en
 		while (heredoc->eof[i])
 		{
 			if (heredoc->eof[i + 1] != NULL)
-				ft_heredoc_oef_before(param, heredoc, i, env);
+				ft_heredoc_oef_before(heredoc, i, env);
 			else
-				ft_heredoc_oef_last(param, heredoc, i, env);
+				ft_heredoc_oef_last(heredoc, i, env);
 			i++;
 		}
 	}

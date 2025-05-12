@@ -18,7 +18,7 @@ void	get_final_cont(t_env *env)
 	char	*tmp_cont;
 	t_env	*tmp;
 
-	tmp = env;;
+	tmp = env;
 	while (tmp)
 	{
 		i = 0;
@@ -64,7 +64,7 @@ void	get_final_cont_more(t_env *env)
 	char	*tmp_cont;
 	t_env	*tmp;
 
-	tmp = env;;
+	tmp = env;
 	while (tmp)
 	{
 		i = 0;
@@ -88,7 +88,8 @@ int	get_env(t_init *param, char **env)
 	while (env[i])
 	{
 		ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(env[i])));
-		ft_lstadd_back_env(&param->lst_export, ft_lstnew_env(ft_strdup(env[i])));
+		ft_lstadd_back_env(&param->lst_export,
+			ft_lstnew_env(ft_strdup(env[i])));
 		i++;
 	}
 	if (param->lst_env == NULL)

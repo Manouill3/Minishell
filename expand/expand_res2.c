@@ -52,7 +52,7 @@ char	*expand_quote(t_init *param, char *word)
 		return (NULL);
 	res = ft_calloc(final_len(inputs, len) + 1, sizeof(char));
 	if (!res)
-		return(NULL);
+		return (NULL);
 	res = get_final_input(res, inputs, len);
 	i = 0;
 	while (i < len)
@@ -72,11 +72,11 @@ char	*get_actual_word_q(t_init *param, char *word, int i, int len)
 
 	if (i - len == 1 && word[len] == '$')
 	{
-        sub_word = ft_substr(word, len, i - len + 1);
-        if (!sub_word)
-            return (NULL);
+		sub_word = ft_substr(word, len, i - len + 1);
+		if (!sub_word)
+			return (NULL);
 		final_word = one_char_test(param, word, sub_word, i);
-        return (final_word);
+		return (final_word);
 	}
 	sub_word = ft_substr(word, len, i - len);
 	if (!sub_word)
@@ -93,12 +93,12 @@ char	*get_actual_word(t_init *param, char *word, int i, int len)
 
 	if (i - len == 1 && word[len] == '$')
 	{
-        sub_word = ft_substr(word, len, i - len + 1);
-        if (!sub_word)
-            return (NULL);
+		sub_word = ft_substr(word, len, i - len + 1);
+		if (!sub_word)
+			return (NULL);
 		final_word = one_char_test(param, word, sub_word, i);
 		free(sub_word);
-        return (final_word);
+		return (final_word);
 	}
 	sub_word = ft_substr(word, len, i - len);
 	if (!sub_word)
@@ -108,21 +108,21 @@ char	*get_actual_word(t_init *param, char *word, int i, int len)
 	return (final_word);
 }
 
-char    *one_char_test(t_init *param, char *word, char *sub_word, int i)
+char	*one_char_test(t_init *param, char *word, char *sub_word, int i)
 {
-    char    *final_word;
-    
-    if (!ft_strcmp("$?", sub_word))
-        return (ft_itoa(param->status));
-    else if (!ft_strcmp("$_", sub_word))
-    {
-        final_word = check_quote(param, sub_word, param->lst_env);
-        return (final_word);
-    }
+	char	*final_word;
+
+	if (!ft_strcmp("$?", sub_word))
+		return (ft_itoa(param->status));
+	else if (!ft_strcmp("$_", sub_word))
+	{
+		final_word = check_quote(param, sub_word, param->lst_env);
+		return (final_word);
+	}
 	else if (word[i] == '"' || word[i] == 39)
 		return (NULL);
-    else if (!ft_isalnum(word[i]))
-        return (ft_strdup("$"));
-    else
-        return(NULL);
+	else if (!ft_isalnum(word[i]))
+		return (ft_strdup("$"));
+	else
+		return (NULL);
 }
