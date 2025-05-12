@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 16:14:42 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/12 16:46:36 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,43 +33,6 @@ int	check_for_expand(t_list_char *tok, char **cmd, int *i)
 	if ((*i) > save)
 		return (1);
 	return (0);
-}
-
-void	exec_supp(char **cmd, int i)
-{
-	int		j;
-	char	*tmp;
-
-	j = 0;
-	while (cmd[i][j])
-	{
-		if (cmd[i][j] == 39 || cmd[i][j] == '"')
-		{
-			tmp = cmd[i];
-			cmd[i] = char_out(cmd[i], cmd[i][j]);
-			free(tmp);
-			break ;
-		}
-		j++;
-	}
-}
-
-void	ft_supp_quote(t_list_char *tok, char **cmd)
-{
-	int		i;
-	int		nb;
-
-	i = 0;
-	nb = 0;
-	while (cmd[nb])
-		nb++;
-	while (i < nb)
-	{
-		if (check_for_expand(tok, cmd, &i))
-			continue ;
-		exec_supp(cmd, i);
-		i++;
-	}
 }
 
 void	get_funct_ann(t_list_char *tmp, int i)
