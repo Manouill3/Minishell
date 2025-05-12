@@ -6,80 +6,107 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:23:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/09 15:23:45 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/12 15:39:39 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	assign_const_to_envs(t_env *exp, t_env *env, char *new_const, int create)
+int	ft_verif_exp(t_init *param, t_list_char *tok)
 {
-	free(exp->cont);
-	exp->cont = ft_strdup(new_const);
-	if (create == 1 && env)
+	while (tok->cmd[1][param->i_ex] != '=' && tok->cmd[1][param->i_ex])
 	{
-		free(env->cont);
-		env->cont = ft_strdup(new_const);
-	}
-	exp->exp = 0;
-	free(new_const);
-}
-
-char	*extract_const_part(t_list_char *tok, int *start)
-{
-	int		i;
-	int		len;
-	char	*res;
-
-	*start += 1;
-	i = *start;
-	len = 0;
-	while (tok->cmd[1][i])
-	{
-		len++;
-		i++;
-	}
-	res = ft_calloc(len + 1, sizeof(char));
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (tok->cmd[1][*start])
-		res[i++] = tok->cmd[1][(*start)++];
-	res[i] = '\0';
-	return (res);
-}
-
-int	handle_export_conditions(t_env *exp, t_list_char *tok, char *name, int *create, t_env *env)
-{
-	int		i;
-	int		j;
-	char	*new_const;
-	int		exist;
-
-	i = 0;
-	exist = 0;
-	while (tok->cmd[1][i] && tok->cmd[1][i] != '=')
-		i++;
-	while (exp)
-	{
-		if (!ft_strcmp(exp->name, name))
+		if (ft_isalnum(tok->cmd[1][param->i_ex]) == 0)
 		{
-			exist = 1;
-			if (*create == 1 && tok->cmd[1][i] != '=')
-				exp->exp = 0;
-			if (tok->cmd[1][i] != '=' && *create != 2)
-				return (exist);
-			if (tok->cmd[1][i] == '=')
-			{
-				j = i;
-				new_const = extract_const_part(tok, &i);
-				if (new_const)
-					assign_const_to_envs(exp, env, new_const, *create);
-				if (*create != 2)
-					return (exist);
-			}
+			param->status = 1;
+			write(2, " not a valid identifier\n", 24);
+			return (1);
 		}
-		exp = exp->next;
+		param->i_ex++;
 	}
-	return (exist);
+	return (0);
+}
+
+t_env	*ft_verif_env_create(t_env *tmp_env, char *name, t_init *param)
+{
+	while (tmp_env)
+	{
+		if (!ft_strcmp(tmp_env->name, name))
+		{
+			param->create_X = 1;
+			break ;
+		}
+		tmp_env = tmp_env->next;
+	}
+	return (tmp_env);
+}
+
+int	ft_existing_export(char	*name, t_env *tmp_exp,
+		t_init *param, t_list_char *tok)
+{
+	if (!ft_strcmp(tmp_exp->name, name))
+		param->exist_X = 1;
+	if (!ft_strcmp(tmp_exp->name, name) && param->create_X == 1
+		&& tok->cmd[1][param->i_ex] != '=')
+	{
+		tmp_exp->exp = 0;
+		if (param->create_X != 2)
+		{
+			free(name);
+			return (1);
+		}
+	}
+	if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[1][param->i_ex] != '=')
+	{
+		tmp_exp->exp = 1;
+		if (param->create_X != 2)
+		{
+			free(name);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+char	*ft_create_new_const(char *new_const, t_init *param,
+		t_env *tmp_exp, t_env *tmp_env)
+{
+	new_const = ft_calloc(param->len_const_X + 1, sizeof(char));
+	if (!new_const)
+	{
+		new_const = NULL;
+		tmp_exp->cont = NULL;
+		if (param->create_X == 1)
+			tmp_env->cont = NULL;
+	}
+	return (new_const);
+}
+
+void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
+{
+	char	*name;
+	t_env	*tmp_env;
+
+	ft_init_var(param);
+	tmp_env = param->lst_env;
+	if (ft_verif_exp(param, tok) == 1)
+		return ;
+	name = ft_substr(tok->cmd[1], 0, (param->i_ex));
+	tmp_env = ft_verif_env_create(tmp_env, name, param);
+	if (param->create_X == 0 && tok->cmd[1][param->i_ex] == '=')
+		param->create_X = 2;
+	while (tmp_exp)
+	{
+		if (ft_existing_export(name, tmp_exp, param, tok) == 1)
+			return ;
+		if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[1][param->i_ex] == '=')
+		{
+			ft_alloc_new_const(tok, param, tmp_exp, tmp_env);
+			if (ft_return_var(param, name) == 1)
+				return ;
+		}
+		tmp_exp = tmp_exp->next;
+	}
+	ft_rest_var(tmp_env, tmp_exp, param, tok);
+	free(name);
 }

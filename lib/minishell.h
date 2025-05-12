@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 15:52:41 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/12 15:53:51 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,10 @@ typedef struct s_list_char
 
 typedef struct s_init
 {
+	int					i_ex;
+	int					len_const_X;
+	int					exist_X;
+	int					create_X;
 	int					status;
 	int					count_cmd;
 	char				*line;
@@ -141,8 +145,8 @@ void		print_lst_char(t_list_char *lst);
 int			is_red(char *val);
 int			ft_strcmp(char *s1, char *s2);
 int			get_nb_cmd(char **tab);
-int	only_white(char	*line);
-int	nb_exp(char **cmd);
+int			only_white(char	*line);
+int			nb_exp(char **cmd);
 
 ////////////////////////////////////////
 ///			parsing/token.c         ///
@@ -331,26 +335,45 @@ void    ft_env(t_env *env);
 void	env_content(t_env *env, char *add);
 void	export_content(t_env *exp, char *add);
 int 	existing_vars(t_env *env, t_env *exp, char *name, char *add);
-int		add_to_env_if_in_export(t_init *param, char *name, char *add, t_list_char *tok);
-void	add_to_both_lists(t_init *param, t_list_char *tok, char *add, char *name);
-int	ft_add_value_var(t_init *param, int i, t_list_char *tok);
-
-////////////////////////////////////////
-///		built-in.c/export_add.c		///
-//////////////////////////////////////
-
-void	env_content(t_env *env, char *add);
-void	export_content(t_env *exp, char *add);
-int		existing_vars(t_env *env, t_env *exp, char *name, char *add);
-int		add_to_env_if_in_export(t_init *param, char *name, char *add, t_list_char *tok);
+int		add_to_env(t_init *param, char *name, char *add, t_list_char *tok);
 void	add_to_both_lists(t_init *param, t_list_char *tok, char *add, char *name);
 int		ft_add_value_var(t_init *param, int i, t_list_char *tok);
+
+////////////////////////////////////////
+///	built-in.c/export_add_utils.c	///
+//////////////////////////////////////
+
+void	ft_free_env(char *add, char *name);
+void	env_content(t_env *env, char *add);
+void	export_content(t_env *exp, char *add);
+
+////////////////////////////////////////
+///	built-in.c/export_var_utils.c	///
+//////////////////////////////////////
+
+void	ft_add_value(t_env *tmp_exp, t_env *tmp_env, char *new_const, t_init *param);
+void	ft_alloc_new_const(t_list_char *tok, t_init *param, t_env *tmp_exp, t_env *tmp_env);
+void	ft_rest_var(t_env *tmp_env, t_env *tmp_exp, t_init *param, t_list_char *tok);
+void	ft_init_var(t_init *param);
+int		ft_return_var(t_init *param, char *name);
+
+////////////////////////////////////////
+///	built-in.c/export_var.c			///
+//////////////////////////////////////
+
+int		ft_verif_exp(t_init *param, t_list_char *tok);
+t_env	*ft_verif_env_create(t_env *tmp_env, char *name, t_init *param);
+int		ft_existing_export(char	*name, t_env *tmp_exp, t_init *param, t_list_char *tok);
+char	*ft_create_new_const(char *new_const, t_init *param, t_env *tmp_exp, t_env *tmp_env);
+void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp);
 
 ////////////////////////////////////////
 ///			built-in.c/export.c		///
 //////////////////////////////////////
 
 void    ft_export(t_init *param, t_list_char *tok);
+void	ft_add_export_only(t_init *param, t_list_char *tok, t_env *tmp_exp);
+void	ft_create_add_back(t_init *param, t_list_char *tok, t_env *tmp_exp, int exist);
 
 ////////////////////////////////////////
 ///			built-in.c/unset.c		///

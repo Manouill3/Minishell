@@ -11,6 +11,9 @@
         "random": "c",
         "history.h": "c",
         "get_next_line_bonus.h": "c",
-        "functional": "c"
+        "functional": "c",
+        "chrono": "c",
+        "text_encoding": "c",
+        "typeinfo": "c"
     }
 }
