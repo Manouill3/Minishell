@@ -6,66 +6,32 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/05 14:37:27 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:01:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-int	ft_len_word(const char *s, int start)
+int	tab_len_quote(char *tab, int i, int	*count)
 {
-	int		i;
-	int		cmp;
 	char	c;
+	int		save;
 
-	i = start;
-	cmp = 0;
-	if (s[i] == '"' || s[i] == 39)
-	{
-		c = s[i++];
-		cmp++;
-		while (s[i] && s[i] != c)
-		{
-			i++;
-			cmp++;
-		}
+	save = i;
+	c = tab[i++];
+	while (tab[i] && tab[i] != c)
 		i++;
-		cmp++;
-		if (!s[i])
-			return (cmp);
-	}
-	if (s[i] == '<' || s[i] == '>')
-	{
-		while (s[i] && (s[i] == '<' || s[i] == '>'))
-		{
-			i++;
-			cmp++;
-		}
-		return (cmp);
-	}
-	while (s[i] && !is_white(s[i]) && s[i] != '<' && s[i] != '>')
-	{
-		if (s[i] == '"' || s[i] == 39)
-		{
-			c = s[i++];
-			cmp++;
-			while (s[i] && s[i] != c)
-			{
-				i++;
-				cmp++;
-			}
-		}
-		i++;
-		cmp++;
-	}
-	return (cmp);
+	i++;
+	if (tab[i] && is_white(tab[i]))
+		(*count)++;
+	if (!tab[i] && i - save > 2)
+		(*count)++;
+	return (i);
 }
 
 int	get_tab_len(char *tab)
 {
 	int		i;
-	int		save;
-	char	c;
 	int		count;
 
 	i = 0;
@@ -74,15 +40,7 @@ int	get_tab_len(char *tab)
 	{
 		if (tab[i] == '"' || tab[i] == 39)
 		{
-			save = i;
-			c = tab[i++];
-			while (tab[i] && tab[i] != c)
-				i++;
-			i++;
-			if (tab[i] && is_white(tab[i]))
-				count++;
-			if (!tab[i] && i - save > 2)
-				count++;
+			i = tab_len_quote(tab, i, &count);
 			continue ;
 		}
 		if ((tab[i] == '<' || tab[i] == '>') && tab[i + 1] != tab[i])

@@ -6,20 +6,58 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 10:54:49 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/12 15:42:46 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
+int	check_for_expand(t_list_char *tok, char **cmd, int *i)
+{
+	int	j;
+	int	k;
+	int	save;
+	
+	j = 0;
+	k = 0;
+	save = (*i);
+	while (tok->ind_exp[j] && save == (*i))
+	{
+		while (cmd[(*i)][k] && cmd[(*i)][k] != '$')
+			k++;
+		if (tok->ind_exp[j] == (*i) && !is_white(cmd[(*i)][k + 1])
+			&& cmd[(*i)][k + 1] != '"' && cmd[(*i)][k + 1] != 39)
+			(*i)++;
+		j++;
+	}
+	if ((*i) > save)
+		return (1);
+	return (0);
+}
+
+void	exec_supp(char **cmd, int i)
+{
+	int		j;
+	char	*tmp;
+	
+	j = 0;
+	while (cmd[i][j])
+	{
+		if (cmd[i][j] == 39 || cmd[i][j] == '"')
+		{
+			tmp = cmd[i];
+			cmd[i] = char_out(cmd[i], cmd[i][j]);
+			free(tmp);
+			break ;
+		}
+		j++;
+	}
+}
+
 void	ft_supp_quote(t_list_char *tok, char **cmd)
 {
 	int		i;
-	int		j;
-	int		k;
-	int		save;
 	int		nb;
-	char	*tmp;
 
 	i = 0;
 	nb = 0;
@@ -27,83 +65,53 @@ void	ft_supp_quote(t_list_char *tok, char **cmd)
 		nb++;
 	while (i < nb)
 	{
-		j = 0;
-		k = 0;
-		save = i;
-		while (tok->ind_exp[j] && save == i)
-		{
-			while (cmd[i][k] && cmd[i][k] != '$')
-				k++;
-			if (tok->ind_exp[j] == i && !is_white(cmd[i][k + 1]) && cmd[i][k
-				+ 1] != '"' && cmd[i][k + 1] != 39)
-				i++;
-			j++;
-		}
-		if (i > save)
+		if (check_for_expand(tok, cmd, &i))
 			continue ;
-		j = 0;
-		while (cmd[i][j])
+		exec_supp(cmd, i);
+		i++;
+	}
+}
+
+void	get_funct_ann(t_list_char *tmp, int i)
+{
+	while (i < tmp->len_cmd)
+	{
+		if (i > 0)
 		{
-			if (cmd[i][j] == 39 || cmd[i][j] == '"')
+			if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i])
+				&& is_red(tmp->cmd[i - 1]))
 			{
-				tmp = cmd[i];
-				cmd[i] = char_out(cmd[i], cmd[i][j]);
-				free(tmp);
+				tmp->funct = ft_strdup(tmp->cmd[i]);
 				break ;
 			}
-			j++;
+		}
+		else if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i]))
+		{
+			tmp->funct = ft_strdup(tmp->cmd[i]);
+			break ;
 		}
 		i++;
 	}
 }
 
-void	get_funct(t_init *param, t_list_char *lst)
+void	get_funct(t_list_char *lst)
 {
 	int			i;
 	t_list_char	*tmp;
 
-	(void)param;
 	tmp = lst;
 	while (tmp)
 	{
 		i = 0;
-		while (i < tmp->len_cmd)
-		{
-			if (i > 0)
-			{
-				if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i])
-					&& is_red(tmp->cmd[i - 1]))
-				{
-					tmp->funct = ft_strdup(tmp->cmd[i]);
-					break ;
-				}
-			}
-			else if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i]))
-			{
-				tmp->funct = ft_strdup(tmp->cmd[i]);
-				break ;
-			}
-			i++;
-		}
+		get_funct_ann(tmp, i);
 		tmp = tmp->next;
 	}
 }
 
-void	parsing_line(t_init *param)
+void	before_exec(t_init *param)
 {
 	t_list_char	*tmp;
 
-	get_token(param);
-	if (syntax_error(param, param->line))
-		return ;
-	if (param->count_cmd == 1 && !only_white(param->line))
-	{
-		param->status = 0;
-		return ;
-	}
-	expand_arg(param);
-	get_funct(param, param->tok);
-	get_no_red(param->tok);
 	tmp = param->tok;
 	while (tmp)
 	{
@@ -117,12 +125,28 @@ void	parsing_line(t_init *param)
 	tmp = param->tok;
 	while (tmp)
 	{
-		exec_heredoc(param, tmp, tmp->heredoc, param->lst_env);
+		exec_heredoc(tmp, tmp->heredoc, param->lst_env);
 		tmp = tmp->next;
 	}
 	if (!param->tok)
 		return ;
 	exec(param);
+}
+
+void	parsing_line(t_init *param)
+{
+	get_token(param);
+	if (syntax_error(param, param->line))
+		return ;
+	if (param->count_cmd == 1 && !only_white(param->line))
+	{
+		param->status = 0;
+		return ;
+	}
+	expand_arg(param);
+	get_funct(param->tok);
+	get_no_red(param->tok);
+	before_exec(param);
 }
 
 int	syntax_error(t_init *param, char *line)

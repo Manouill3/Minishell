@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 19:23:32 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/27 19:23:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/12 10:24:08 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_handle_interrupt_signals(void)
 
 void	ft_handle_heredoc_signals(void)
 {
-	struct sigaction sig;
+	struct sigaction	sig;
 
 	ft_bzero(&sig, sizeof(sig));
 	sig.sa_handler = &sigint_heredoc_handler;

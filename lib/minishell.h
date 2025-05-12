@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 14:39:39 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/12 14:52:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	nb_exp(char **cmd);
 ///			parsing/token.c         ///
 //////////////////////////////////////
 
-int    		ft_len_word(const char *s, int start);
+int    		ft_len_word(char *s, int start);
 int			get_tab_len(char *tab);
 t_list_char	*set_lst(int count_cmd);
 void		set_cmd(char *tab, t_list_char *tmp);
@@ -160,7 +160,7 @@ void		get_token(t_init *param);
 //////////////////////////////////////
 
 void		ft_supp_quote(t_list_char *tok, char **cmd);
-void		get_funct(t_init *param, t_list_char *lst);
+void		get_funct(t_list_char *lst);
 void		parsing_line(t_init *param);
 int			syntax_error(t_init *param, char *line);
 
@@ -199,6 +199,8 @@ char    	*one_char_test(t_init *param, char *word, char *sub_word, int i);
 //////////////////////////////////////
 
 char		*get_final_input(char *res, char **inputs, int len);
+void		handle_expand(t_init *param, t_list_char *tmp, int i, int *j);
+char		*handle_double_quote(t_init *param, char *word);
 
 ////////////////////////////////////////
 ///			expand/expand_sup.c     ///
@@ -232,9 +234,12 @@ char		*get_final_eof(char *str);
 ///			heredoc/heredoc_exec.c  ///
 //////////////////////////////////////
 
-void		ft_heredoc_oef_before(t_init *param, t_heredoc *heredoc, int i, t_env *env);
-void		ft_heredoc_oef_last(t_init *param, t_heredoc *heredoc, int i, t_env *env);
-void		exec_heredoc(t_init *param, t_list_char *tmp, t_heredoc *heredoc, t_env *env);
+void		ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env);
+int			handle_heredoc_interrupt_before(t_heredoc *heredoc, char *final_eof);
+void		ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env);
+int			handle_heredoc_input(t_heredoc *heredoc, t_env *env, char *final_eof, int i);
+int			ft_handle_heredoc_interrupt(t_heredoc *heredoc, char *final_eof);
+void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env);
 
 ////////////////////////////////////////
 ///			exec/exec_init.c		///

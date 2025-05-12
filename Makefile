@@ -30,8 +30,10 @@ SRC = main.c\
 	signal/signal.c\
 	free/free_funct.c\
 	utils/utils_funct.c\
+	utils/print_funct.c\
 	parsing/parse_line.c\
 	parsing/token.c\
+	parsing/len_word.c\
 	expand/expand.c\
 	expand/expand_res.c\
 	expand/expand_res2.c\
@@ -40,6 +42,7 @@ SRC = main.c\
 	expand/expand_heredoc.c\
 	heredoc/heredoc.c\
 	heredoc/heredoc_exec.c\
+	heredoc/heredoc_ann.c\
 	exec/exec_init.c\
 	exec/exec_init2.c\
 	exec/exec_cmd.c\
