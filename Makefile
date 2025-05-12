@@ -52,13 +52,17 @@ SRC = main.c\
 	exec/set_args.c\
 	exec/exec_file.c\
 	exec/exec_file2.c\
-	built-in/pwd.c\
-	built-in/cd.c\
-	built-in/echo.c\
-	built-in/env_built-in.c\
-	built-in/export.c\
-	built-in/unset.c\
-	built-in/exit.c 
+	built-in/pwd.c \
+	built-in/cd_utils.c \
+	built-in/cd.c \
+	built-in/echo.c \
+	built-in/env_built-in.c \
+	built-in/export.c \
+	built-in/export_var.c \
+	built-in/export_add.c \
+	built-in/export_add_utils.c \
+	built-in/export_var_utils.c \
+	built-in/unset.c \
 
 OBJ_DIR = build
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))

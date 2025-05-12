@@ -10,6 +10,10 @@
         "stdlib.h": "c",
         "random": "c",
         "history.h": "c",
-        "get_next_line_bonus.h": "c"
+        "get_next_line_bonus.h": "c",
+        "functional": "c",
+        "chrono": "c",
+        "text_encoding": "c",
+        "typeinfo": "c"
     }
 }

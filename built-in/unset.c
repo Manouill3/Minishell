@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:06:32 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/02 13:16:59 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/12 13:52:38 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	ft_delete(t_env *tmp, char *name)
 	}
 }
 
-void    ft_unset(t_init *param, t_list_char *tok)
+void	ft_unset(t_init *param, t_list_char *tok)
 {
-	int i;
-	t_env *tmp;
-	char    *name;
+	int		i;
+	t_env	*tmp;
+	char	*name;
 
 	i = 0;
 	tmp = param->lst_env;
-	while(tok->cmd[1] && tok->cmd[1][i])
+	while (tok->cmd[1] && tok->cmd[1][i])
 	{
 		if (ft_isalnum(tok->cmd[1][i]) == 0)
 		{
