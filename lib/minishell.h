@@ -6,6 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
+/*   Updated: 2025/05/12 16:28:36 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +167,12 @@ void		ft_supp_quote(t_list_char *tok, char **cmd);
 void		get_funct(t_list_char *lst);
 void		parsing_line(t_init *param);
 int			syntax_error(t_init *param, char *line);
+
+////////////////////////////////////////
+///		parsing/parse_redirect.c    ///
+//////////////////////////////////////
+
+int	syntax_error(t_init *param, char *line);
 
 ////////////////////////////////////////
 ///			expand/expand.c         ///

@@ -32,6 +32,7 @@ SRC = main.c\
 	utils/utils_funct.c\
 	utils/print_funct.c\
 	parsing/parse_line.c\
+	parsing/parse_syntaxe_error.c\
 	parsing/token.c\
 	parsing/len_word.c\
 	expand/expand.c\
@@ -63,6 +64,7 @@ SRC = main.c\
 	built-in/export_add_utils.c \
 	built-in/export_var_utils.c \
 	built-in/unset.c \
+	built-in/exit.c
 
 OBJ_DIR = build
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o))
