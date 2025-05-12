@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 09:03:06 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/12 16:40:43 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	len_word(const char *s, int start)
 		else
 			i++;
 	}
-	if (s[i] && is_ope(s[i]))
+	if (i < ft_strlen(s) && s[i] && is_ope(s[i]))
 	{
 		while (s[i - 1] && is_white(s[i - 1]))
 			i--;
