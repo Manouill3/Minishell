@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/12 16:51:49 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/12 17:41:04 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,11 @@ int	check_quotes(char *line, int *i)
 int	syntax_error(t_init *param, char *line)
 {
 	int	i;
+	int	len;
 
 	i = 0;
-	while (line[i])
+	len = ft_strlen(line);
+	while (i < len && line[i])
 	{
 		if (check_quotes(line, &i))
 			continue ;

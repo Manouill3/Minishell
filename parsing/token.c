@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 14:01:52 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:32:01 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	tab_len_quote(char *tab, int i, int	*count)
 	c = tab[i++];
 	while (tab[i] && tab[i] != c)
 		i++;
-	i++;
+	if (tab[i])
+		i++;
 	if (tab[i] && is_white(tab[i]))
 		(*count)++;
 	if (!tab[i] && i - save > 2)

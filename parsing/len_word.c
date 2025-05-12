@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   len_word.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:53:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 14:02:02 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:33:17 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	count_for_quote(char *s, int i, int *cmp)
 		i++;
 		(*cmp)++;
 	}
-	i++;
+	if (s[i])
+		i++;
 	(*cmp)++;
 	return (i);
 }

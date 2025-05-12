@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 16:40:43 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/12 17:44:26 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	len_word(const char *s, int start)
 			i++;
 			while (s[i] && s[i] != c)
 				i++;
-			i++;
+			if (s[i])
+				i++;
 		}
 		else
 			i++;
