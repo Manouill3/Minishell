@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:24:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 14:54:23 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/13 13:26:21 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	get_in_fd(t_init *param, t_list_char *node, int i)
 				close(node->fd_infile);
 			node->fd_infile = -1;
 			param->status = 1;
-			write (2, " No such file or directory", 26);
+			write (2, " No such file or directory\n", 27);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/12 16:10:07 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/13 14:04:18 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_verif_nb(t_init *param)
 			|| param->tok->cmd[1][i] == '+' || param->tok->cmd[1][i] == '-'))
 		{
 			param->status = 2;
-			write(2, " numeric argument required", 26);
-			// printf("exit\n");
+			write(2, " numeric argument required\n", 27);
+			ft_putstr_fd("exit", 2);
 			exit(param->status);
 		}
 		i++;
@@ -47,7 +47,7 @@ void	ft_exit(t_init *param)
 	if (nb_arg > 2)
 	{
 		param->status = 1;
-		write(2, " too many arguments", 19);
+		write(2, " too many arguments\n", 20);
 		exit(param->status);
 	}
 	if (param->tok->cmd[1] != NULL)
@@ -55,6 +55,6 @@ void	ft_exit(t_init *param)
 	nb_arg = param->status;
 	ft_free_all(param);
 	free_struct(param);
-	// printf("exit\n");
+	ft_putstr_fd("exit", 2);
 	exit(nb_arg);
 }

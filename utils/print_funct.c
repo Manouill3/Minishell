@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_funct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 10:26:39 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 17:35:59 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/13 12:53:36 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	print_lst_char(t_list_char *lst)
 			printf("cmd[%d] : %s\n", i, curr->cmd[i]);
 			i++;
 		}
-		// i = 0;
-		// while (curr->no_red[i])
-		// {
-		// 	printf("no_red[%d] : %s\n", i, curr->no_red[i]);
-		// 	i++;
-		// }
+		i = 0;
+		while (curr->no_red[i])
+		{
+			printf("no_red[%d] : %s\n", i, curr->no_red[i]);
+			i++;
+		}
 		printf("funct : %s\n", curr->funct);
 		curr = curr->next;
 	}

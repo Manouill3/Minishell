@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 19:23:32 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/12 16:13:00 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/13 15:07:02 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	sigint_handler(int sig)
 	{
 		g_exit_code = 130;
 		write(1, "\n", 1);
-		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}

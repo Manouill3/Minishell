@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 13:46:50 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/13 15:03:22 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	**set_args_ann2(char **args, t_init *param)
 	else
 	{
 		if ((args[0][0] == '.' || args[0][0] == '/'))
-			write(2, " No such file or directory", 26);
+			write(2, " No such file or directory\n", 27);
 		else
 			write(2, " command not found\n", 19);
 		param->status = 127;
@@ -62,9 +62,13 @@ char	**set_args_ann(char **args, char **path, t_init *param, char *free_tmp)
 
 char	**set_args(char **args, char **path, t_init *param)
 {
+	struct stat	mode;
 	char	*free_tmp;
 
 	free_tmp = NULL;
+	stat(args[0], &mode);
+	// if (stat(args[0], &mode) == -1)
+	// 	return (NULL);
 	if (args[0] && !access(args[0], X_OK | F_OK))
 	{
 		if ((args[0][0] != '.' && args[0][0] != '/'))
@@ -74,7 +78,7 @@ char	**set_args(char **args, char **path, t_init *param)
 				write(2, " command not found\n", 19);
 			param->status = 127;
 		}
-		else
+		else if (S_ISDIR(mode.st_mode))
 		{
 			write(2, " Is a directory", 15);
 			param->status = 126;
