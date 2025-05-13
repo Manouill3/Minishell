@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 17:32:01 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/13 19:31:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	tab_len_quote(char *tab, int i, int	*count)
 	if (tab[i] && is_white(tab[i]))
 		(*count)++;
 	if (!tab[i] && i - save > 2)
+		(*count)++;
+	if (i - save == 1 && !is_white(tab[save - 1]))
 		(*count)++;
 	return (i);
 }
@@ -100,7 +102,7 @@ void	set_cmd(char *tab, t_list_char *tmp)
 	}
 }
 
-void	get_token(t_init *param)
+int	get_token(t_init *param)
 {
 	int			i;
 	t_list_char	*tmp;
@@ -116,4 +118,7 @@ void	get_token(t_init *param)
 		i++;
 		tmp = tmp->next;
 	}
+	if (verif_nb_quote(param->tab))
+		return (1);
+	return (0);
 }

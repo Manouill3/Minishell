@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_res2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 09:46:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/07 13:18:04 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/13 19:43:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ char	*get_actual_word_q(t_init *param, char *word, int i, int len)
 		if (!sub_word)
 			return (NULL);
 		final_word = one_char_test(param, word, sub_word, i);
+		free(sub_word);
 		return (final_word);
 	}
 	sub_word = ft_substr(word, len, i - len);

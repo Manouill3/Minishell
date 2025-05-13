@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/13 15:03:22 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/13 17:13:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,10 @@ char	**set_args(char **args, char **path, t_init *param)
 	char	*free_tmp;
 
 	free_tmp = NULL;
-	stat(args[0], &mode);
-	// if (stat(args[0], &mode) == -1)
-	// 	return (NULL);
 	if (args[0] && !access(args[0], X_OK | F_OK))
 	{
+		if (stat(args[0], &mode) == -1)
+			return (NULL);
 		if ((args[0][0] != '.' && args[0][0] != '/'))
 		{
 			if (!access(args[0], F_OK)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/13 15:12:10 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/13 22:24:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,25 @@ int	check_for_expand(t_list_char *tok, char **cmd, int *i)
 	int	save;
 
 	j = 0;
-	k = 0;
 	save = (*i);
 	while (tok->ind_exp[j] && save == (*i))
 	{
+		k = 0;
 		while (cmd[(*i)][k] && cmd[(*i)][k] != '$')
 			k++;
-		if (tok->ind_exp[j] == (*i) && !is_white(cmd[(*i)][k + 1])
+		if (tok->ind_exp[j] == (*i) && cmd[(*i)][k] &&
+			cmd[(*i)][k + 1] && !is_white(cmd[(*i)][k + 1])
 			&& cmd[(*i)][k + 1] != '"' && cmd[(*i)][k + 1] != 39)
+		{
 			(*i)++;
+		}
 		j++;
 	}
 	if ((*i) > save)
 		return (1);
 	return (0);
 }
+
 
 void	get_funct_ann(t_list_char *tmp, int i)
 {
@@ -75,7 +79,6 @@ void	before_exec(t_init *param)
 {
 	t_list_char	*tmp;
 
-	print_lst_char(param->tok);
 	tmp = param->tok;
 	while (tmp)
 	{
@@ -84,6 +87,7 @@ void	before_exec(t_init *param)
 		free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
+	print_lst_char(param->tok);
 	get_in_out(param->tok);
 	get_nb_eof(param->tok);
 	tmp = param->tok;
@@ -99,7 +103,12 @@ void	before_exec(t_init *param)
 
 void	parsing_line(t_init *param)
 {
-	get_token(param);
+	if (get_token(param))
+	{
+		param->status = 2;
+		ft_putstr_fd("Syntax error : open quote\n", 2);
+		return ;
+	}	
 	if (syntax_error(param, param->line))
 		return ;
 	if (param->count_cmd == 1 && !only_white(param->line))

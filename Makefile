@@ -33,6 +33,7 @@ SRC = main.c\
 	utils/print_funct.c\
 	parsing/parse_line.c\
 	parsing/parse_utils.c\
+	parsing/parse_utils2.c\
 	parsing/parse_syntax_error.c\
 	parsing/token.c\
 	parsing/len_word.c\

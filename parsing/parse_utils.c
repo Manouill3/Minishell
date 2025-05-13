@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/12 16:46:44 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/13 23:14:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	ft_supp_quote(t_list_char *tok, char **cmd)
 	{
 		if (check_for_expand(tok, cmd, &i))
 			continue ;
+				
 		exec_supp(cmd, i);
 		i++;
 	}

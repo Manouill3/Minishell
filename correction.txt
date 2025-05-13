@@ -1,24 +1,24 @@
-- /bin/ls => print 'is a directory' (mais lance bien la commande) [KO]
+- /bin/ls => print 'is a directory' (mais lance bien la commande) [OK]
 - double prompt quand fait ctrl + c avec un cat [OK]
-- echo -nnnnjn o' => print pas le deuxieme mot 
-- echo $? => leaks/invalid read
-- /bin/ls/sdfkjhsdjfnk 
-echo $? => 127 au lieu de 126 (not a directory)
-- echo "$"HOME => leak 
+- echo -nnnnjn o' => print pas le deuxieme mot [OK]
+- echo $? => leaks/invalid read [OK]
+- /bin/ls/sdfkjhsdjfnk  
+echo $? => 127 au lieu de 126 (not a directory) [KO]
+- echo "$"HOME => leak [OK]
 - ls '<' cat
-env => env se lance pas
+env => env se lance pas [KO]
 - interprete les redirections quand elles sont entre quote 
-(alors que devrait pas) + cause des soucis ensuite (genre les commandes ne se lancent plus après)
-- ne se lance pas avec env -i
-- commandes en brut (/bin/ls) ne se lancent pas quand unset PATH
-- pas de message d'erreur pour les commandes not found quand unset PATH
+(alors que devrait pas) + cause des soucis ensuite (genre les commandes ne se lancent plus après) [KO]
+- ne se lance pas avec env -i [KO]
+- commandes en brut (/bin/ls) ne se lancent pas quand unset PATH [KO]
+- pas de message d'erreur pour les commandes not found quand unset PATH [KO]
 - export A="echo     salut les gars"
-$A => doit executer echo (mais attentiom : ne doit pas interpréter les pipes, redirs, heredoc...)
+$A => doit executer echo (mais attentiom : ne doit pas interpréter les pipes, redirs, heredoc...) [KO]
 - export 9djj=l
-ls => commandes ne s'executent plus apres un export invalide
+ls => commandes ne s'executent plus apres un export invalide [KO]
 - export A=l
-unset A => segfault
-- cd minishell/ => directory qui n'existe pas, les commandes ne fonctionnent pas après
+unset A => segfault [KO]
+- cd minishell/ => directory qui n'existe pas, les commandes ne fonctionnent pas après [KO]
 - mkdir test
 cd test/
 Minishell : ls
@@ -32,11 +32,11 @@ getcwd: No such file or directory
 (null)
 Minishell : cd ..
 getcwd: No such file or directory
-[1]    108222 segmentation fault  ./minishell
--  echo coucou > in > in2 < out > in3 
-ls => (out n'existe pas, l'erreur s'affiche correctement), les commandes ne fonctionnent plus
-- < => erreur syntaxe provoque un invalid read
-- expand heredoc avec quotes 
-- quand ctrl+c dans heredoc, ecrit deux fois le prompt heredoc 
-- exit 847574534798539478587534897598345987 => exit 130 et pas 2
-- exit 67 => renvoie 2 (verifier le modulo 256 pour les chiffres de exit)
+[1]    108222 segmentation fault  ./minishell [KO]
+-  echo coucou > in > in2 < out > in3
+ls => (out n'existe pas, l'erreur s'affiche correctement), les commandes ne fonctionnent plus [KO]
+- < => erreur syntaxe provoque un invalid read [KO]
+- expand heredoc avec quotes [KO]
+- quand ctrl+c dans heredoc, ecrit deux fois le prompt heredoc [OK] 
+- exit 847574534798539478587534897598345987 => exit 130 et pas 2 [KO]
+- exit 67 => renvoie 2 (verifier le modulo 256 pour les chiffres de exit) [KO]
