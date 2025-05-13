@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 11:51:03 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 09:03:51 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/13 11:39:02 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 uint8_t	ft_atoi(const char *nptr)
 {
-	uint8_t		i;
-	uint8_t		nb;
-	int			sign;
+	int							i;
+	unsigned long long			nb;
+	int							sign;
 
 	sign = 1;
 	nb = 0;
@@ -32,7 +32,10 @@ uint8_t	ft_atoi(const char *nptr)
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		nb = nb * 10 + (nptr[i] - '0');
+		if ((sign == 1 && nb > 9223372036854775807ULL)
+			|| (sign == -1 && nb > 9223372036854775808ULL))
+			return (2);
 		i++;
 	}
-	return (nb * sign);
+	return ((uint8_t)nb * sign);
 }
