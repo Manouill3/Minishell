@@ -40,8 +40,3 @@ int    verif_nb_quote(char **tab)
     return (0);
 }
 
-int no_supp_redir(char *line, int i)
-{
-    
-    return (0);
-}
