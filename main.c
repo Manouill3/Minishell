@@ -47,7 +47,7 @@ void	minishell(t_init *param, int tt_y)
 			param->status = g_exit_code;
 			g_exit_code = 0;
 		}
-		if (param->line[0] != '\0')
+		if (param->line && param->line[0] != '\0')
 			add_history(param->line);
 		parsing_line(param);
 		ft_free_all(param);
@@ -68,8 +68,7 @@ int	main(int ac, char **av, char **env)
 		if (ft_init(&param))
 			return (0);
 		ft_handle_interrupt_signals();
-		if (get_env(param, env))
-			return (0);
+		get_env(param, env);
 		tt_y = isatty(STDIN_FILENO);
 		minishell(param, tt_y);
 		res = param->status;
