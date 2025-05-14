@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 08:58:25 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 09:01:17 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/14 15:27:40 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	handle_heredoc_input(t_heredoc *heredoc, t_env *env, char *final_eof, int i)
 {
 	if (!ft_strchr(heredoc->eof[i], '"') && !ft_strchr(heredoc->eof[i], 39))
 	{
+		printf("%s\n", heredoc->eof[i]);
 		if (heredoc->input && ft_strchr(heredoc->input, '$'))
 			heredoc->input = exp_heredoc(heredoc->input, env);
 	}

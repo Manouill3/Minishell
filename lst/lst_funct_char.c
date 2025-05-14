@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_funct_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:25:44 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/27 20:25:44 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/14 15:50:28 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	ft_lstdelone_char(t_list_char *lst)
 {
 	if (!lst)
 		return ;
+	clear_files(lst);
 	if (lst->heredoc->eof)
 		free_tab(lst->heredoc->eof);
 	if (lst->heredoc)

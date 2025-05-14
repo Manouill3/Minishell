@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 14:36:38 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/14 15:43:31 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,19 @@ void	before_exec(t_init *param)
 	t_list_char	*tmp;
 
 	get_in_out(param->tok);
+	get_nb_eof(param->tok);
+	tmp = param->tok;
+	while (tmp)
+	{
+		exec_heredoc(tmp, tmp->heredoc, param->lst_env);
+		tmp = tmp->next;
+	}
 	tmp = param->tok;
 	while (tmp)
 	{
 		ft_supp_quote(tmp, tmp->cmd);
 		ft_supp_quote(tmp, tmp->no_red);
 		free(tmp->ind_exp);
-		tmp = tmp->next;
-	}
-	// print_lst_char(param->tok);
-	get_nb_eof(param->tok);
-	tmp = param->tok;
-	while (tmp)
-	{
-		exec_heredoc(tmp, tmp->heredoc, param->lst_env);
 		tmp = tmp->next;
 	}
 	if (!param->tok)

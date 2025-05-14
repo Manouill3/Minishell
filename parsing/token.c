@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/13 19:31:18 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/14 15:56:17 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	tab_len_quote(char *tab, int i, int	*count)
 		i++;
 	if (tab[i])
 		i++;
-	if (tab[i] && is_white(tab[i]))
+	if ((tab[i] && is_white(tab[i])) || tab[i] == '\0')
 		(*count)++;
 	if (!tab[i] && i - save > 2)
 		(*count)++;
@@ -109,6 +109,11 @@ int	get_token(t_init *param)
 
 	i = 0;
 	param->tab = ft_split(param->line);
+	if (verif_nb_quote(param->tab))
+	{
+		param->tok = NULL;
+		return (1);
+	}
 	param->count_cmd = get_nb_cmd(param->tab);
 	param->tok = set_lst(param->count_cmd);
 	tmp = param->tok;
@@ -118,7 +123,5 @@ int	get_token(t_init *param)
 		i++;
 		tmp = tmp->next;
 	}
-	if (verif_nb_quote(param->tab))
-		return (1);
 	return (0);
 }

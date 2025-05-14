@@ -9,7 +9,7 @@ echo $? => 127 au lieu de 126 (not a directory) [KO]
 env => env se lance pas
 interprete les redirections quand elles sont entre quote 
 (alors que devrait pas) + cause des soucis ensuite (genre les commandes ne se lancent plus après) [KO]
-- ne se lance pas avec env -i [KO]
+- ne se lance pas avec env -i [OK]
 - commandes en brut (/bin/ls) ne se lancent pas quand unset PATH [KO]
 - pas de message d'erreur pour les commandes not found quand unset PATH [KO]
 - export A="echo     salut les gars"
@@ -35,8 +35,8 @@ getcwd: No such file or directory
 [1]    108222 segmentation fault  ./minishell [KO]
 -  echo coucou > in > in2 < out > in3
 ls => (out n'existe pas, l'erreur s'affiche correctement), les commandes ne fonctionnent plus [KO]
-- < => erreur syntaxe provoque un invalid read [KO]
-- expand heredoc avec quotes [KO]
+- < => erreur syntaxe provoque un invalid read [OK]
+- expand heredoc avec quotes [OK]
 - quand ctrl+c dans heredoc, ecrit deux fois le prompt heredoc [OK] 
 - exit 847574534798539478587534897598345987 => exit 130 et pas 2 [OK]
 - exit 67 => renvoie 2 (verifier le modulo 256 pour les chiffres de exit) [OK]
