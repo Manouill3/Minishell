@@ -12,6 +12,27 @@
 
 #include "../lib/minishell.h"
 
+int verif_odd(char **tab, int count1, int count2)
+{
+    int i;
+
+    while (tab[i])
+    {
+        if (count1 % 2 != 0)
+        {
+            if (count2 % 2 != 0 || count2 == 0)
+                return (1);
+        }
+        if (count2 % 2 != 0)
+        {
+            if (count1 % 2 != 0 || count1 == 0)
+                return (1);
+        }
+        i++;
+    }
+    return (0);
+}
+
 int    verif_nb_quote(char **tab)
 {
     int    i;
@@ -35,7 +56,7 @@ int    verif_nb_quote(char **tab)
         }
         i++;
     }
-    if (count1 % 2 != 0 || count2 % 2 != 0)
+    if (verif_odd(tab, count1, count2))
         return (1);
     return (0);
 }
