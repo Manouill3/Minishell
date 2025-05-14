@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 13:21:04 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/14 14:36:38 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	before_exec(t_init *param)
 		tmp = tmp->next;
 	}
 	// print_lst_char(param->tok);
-	get_in_out(param->tok);
 	get_nb_eof(param->tok);
 	tmp = param->tok;
 	while (tmp)
