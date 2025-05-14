@@ -3,7 +3,7 @@
 - echo -nnnnjn o' => print pas le deuxieme mot [OK]
 - echo $? => leaks/invalid read [OK]
 - /bin/ls/sdfkjhsdjfnk  
-echo $? => 127 au lieu de 126 (not a directory) [KO]
+echo $? => 127 au lieu de 126 (not a directory) [OK]
 - echo "$"HOME => leak [OK]
 - ls '<' cat
 env => env se lance pas

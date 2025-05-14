@@ -16,6 +16,7 @@ int verif_odd(char **tab, int count1, int count2)
 {
     int i;
 
+    i = 0;
     while (tab[i])
     {
         if (count1 % 2 != 0)
