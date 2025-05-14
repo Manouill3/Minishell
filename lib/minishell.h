@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/13 19:24:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/14 22:38:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int		get_token(t_init *param);
 ///			parsing/parse_line.c    ///
 //////////////////////////////////////
 
+void    supp_quote_red(t_list_char *tok);
 int    		verif_nb_quote(char **tab);
 int			check_for_expand(t_list_char *tok, char **cmd, int *i);
 void		get_funct_ann(t_list_char *tmp, int i);

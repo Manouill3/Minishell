@@ -12,10 +12,45 @@
 
 #include "../lib/minishell.h"
 
+void    supp_quote_red(t_list_char *tok)
+{
+    t_list_char    *tmp;
+    char           *str;
+    int            i;
+    int            j;
+
+    tmp = tok;
+    while (tmp)
+    {
+        i = 0;
+        while(tmp->cmd[i])
+        {
+            if (!is_red(tmp->cmd[i]) && ft_strcmp(tmp->cmd[i], "<<"))
+            {
+                j = 0;
+                while (tmp->cmd[i + 1][j])
+                {
+                    if (tmp->cmd[i + 1][j] == '"' || tmp->cmd[i + 1][j] == 39)
+                    {
+                        str = char_out(tmp->cmd[i + 1], tmp->cmd[i + 1][j]);
+                        free(tmp->cmd[i + 1]);
+                        tmp->cmd[i + 1] = str;
+                        break ;
+                    }
+                    j++;
+                }
+            }
+            i++;
+        }
+        tmp = tmp->next;
+    }
+}
+
 int verif_odd(char **tab, int count1, int count2)
 {
     int i;
 
+    i = 0;
     while (tab[i])
     {
         if (count1 % 2 != 0)
