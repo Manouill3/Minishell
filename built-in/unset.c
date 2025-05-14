@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:06:32 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/12 13:52:38 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/14 13:19:47 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_delete(t_env *tmp, char *name)
 {
-	while (tmp)
+	while (tmp->next != NULL)
 	{
 		if (!ft_strcmp(name, tmp->name))
 		{
@@ -49,6 +49,7 @@ void	ft_unset(t_init *param, t_list_char *tok)
 	name = ft_substr(tok->cmd[1], 0, i);
 	if (!name)
 		return ;
+	tmp = param->lst_env;
 	ft_delete(tmp, name);
 	tmp = param->lst_export;
 	ft_delete(tmp, name);
