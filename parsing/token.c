@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 15:56:17 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:36:43 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ int	tab_len_quote(char *tab, int i, int	*count)
 	if (tab[i])
 		i++;
 	if ((tab[i] && is_white(tab[i])) || tab[i] == '\0')
+	{
 		(*count)++;
+		return (i);
+	}
 	if (!tab[i] && i - save > 2)
 		(*count)++;
 	if (i - save == 1 && !is_white(tab[save - 1]))

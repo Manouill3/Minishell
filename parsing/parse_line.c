@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 15:43:31 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/14 16:33:06 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	before_exec(t_init *param)
 		free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
+	print_lst_char(param->tok);
 	if (!param->tok)
 		return ;
 	exec(param);
