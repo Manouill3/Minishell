@@ -39,4 +39,3 @@ int    verif_nb_quote(char **tab)
         return (1);
     return (0);
 }
-

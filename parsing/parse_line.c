@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 11:08:54 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/14 13:21:04 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void	before_exec(t_init *param)
 		free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
-	print_lst_char(param->tok);
+	// print_lst_char(param->tok);
+	get_in_out(param->tok);
 	get_nb_eof(param->tok);
 	tmp = param->tok;
 	while (tmp)
