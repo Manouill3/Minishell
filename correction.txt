@@ -6,8 +6,8 @@
 echo $? => 127 au lieu de 126 (not a directory) [KO]
 - echo "$"HOME => leak [OK]
 - ls '<' cat
-env => env se lance pas [KO]
-- interprete les redirections quand elles sont entre quote 
+env => env se lance pas
+interprete les redirections quand elles sont entre quote 
 (alors que devrait pas) + cause des soucis ensuite (genre les commandes ne se lancent plus après) [KO]
 - ne se lance pas avec env -i [KO]
 - commandes en brut (/bin/ls) ne se lancent pas quand unset PATH [KO]

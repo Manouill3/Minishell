@@ -79,6 +79,7 @@ void	before_exec(t_init *param)
 {
 	t_list_char	*tmp;
 
+	get_in_out(param->tok);
 	tmp = param->tok;
 	while (tmp)
 	{
