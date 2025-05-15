@@ -78,8 +78,7 @@ void	get_funct(t_list_char *lst)
 void	before_exec(t_init *param)
 {
 	t_list_char	*tmp;
-	
-	// print_lst_char(param->tok);
+
 	supp_quote_red(param->tok);
 	get_in_out(param->tok);
 	get_nb_eof(param->tok);

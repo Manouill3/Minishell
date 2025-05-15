@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 10:15:47 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/15 13:30:14 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ char	**set_args_ann2(char **args, t_init *param)
 			write(2, "No such file or directory\n", 27);
 			param->status = 127;
 		}
-		else
-			write(2, " command not found\n", 19);
 		param->status = 127;
 	}
 	return (args);
@@ -70,6 +68,8 @@ char	**set_args(char **args, char **path, t_init *param)
 	struct stat	mode;
 	char	*free_tmp;
 
+	if (!path)
+		return (args);
 	free_tmp = NULL;
 	if (args[0] && !access(args[0], X_OK | F_OK))
 	{
