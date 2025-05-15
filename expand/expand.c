@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 08:42:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:37:40 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,23 @@ void	expand_arg(t_init *param)
 		i = 0;
 		j = 0;
 		tmp->ind_exp = ft_calloc(sizeof(int), nb_exp(tmp->cmd) + 1);
+		param->len_ind_exp = nb_exp(tmp->cmd) + 1;
 		if (!tmp->ind_exp)
 			return ;
 		while (tmp->cmd[i])
 		{
 			handle_expand(param, tmp, i, &j);
+			// printf("cmd[%d] = %s\n", i, param->tok->cmd[i]);
 			i++;
 		}
 		tmp = tmp->next;
 	}
+	// i = 0;
+	// tmp = param->tok;
+	// while (i < param->len_ind_exp)
+	// {
+	// 	printf("nb = %d\n", param->len_ind_exp);
+	// 	printf("----------------------HERE = %d\n", tmp->ind_exp[i]);
+	// 	i++;
+	// }
 }
