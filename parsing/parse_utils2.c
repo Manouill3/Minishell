@@ -165,21 +165,24 @@ void	verif_expand(t_init *param)
 	t_list_char	*tmp;
 
 	i = 0;
-	tmp = param->tok;
-	while (i < param->len_ind_exp)
+	if (param->tok)
 	{
-		if (tmp->ind_exp[i] == i && ft_strcmp(tmp->funct,tmp->cmd[i]) && ft_strchr(tmp->cmd[i], ' '))
+		tmp = param->tok;
+		while (i < param->len_ind_exp)
 		{
-			tmp_val = ft_normal_split(tmp->cmd[i], 32);
-			free(tmp->cmd[i]);
-			tmp->cmd[i] = NULL;
-			len_tmp = 0;
-			ft_count_len( &len_tmp, &i, tmp_val, tmp);
-			tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, tmp_val);
-			param->i_ex = i + len_tmp;
-			ft_test(param, tmp_cmd, tmp_val, len_tmp);
-			ft_free_realoc(param, tmp, tmp_cmd, tmp_val);
+			if (tmp->ind_exp[i] == i && ft_strcmp(tmp->funct,tmp->cmd[i]) && ft_strchr(tmp->cmd[i], ' '))
+			{
+				tmp_val = ft_normal_split(tmp->cmd[i], 32);
+				free(tmp->cmd[i]);
+				tmp->cmd[i] = NULL;
+				len_tmp = 0;
+				ft_count_len( &len_tmp, &i, tmp_val, tmp);
+				tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, tmp_val);
+				param->i_ex = i + len_tmp;
+				ft_test(param, tmp_cmd, tmp_val, len_tmp);
+				ft_free_realoc(param, tmp, tmp_cmd, tmp_val);
+			}
+			i++;
 		}
-		i++;
 	}
 }

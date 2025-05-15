@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/13 23:14:20 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/15 17:34:42 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_mixed_redir(t_init *param, char *line, int i)
 
 int	check_too_many_redir(t_init *param, char *line, int i)
 {
-	if (line[i + 2] == '<' || line[i + 2] == '>')
+	if (i + 2 <= (int)ft_strlen(line) && (line[i + 2] == '<' || line[i + 2] == '>'))
 	{
 		ft_putstr_fd("Error syntax : too many redirections\n", 2);
 		param->status = 2;

@@ -1,30 +1,7 @@
-- /bin/ls => print 'is a directory' (mais lance bien la commande) [OK]
-
-- double prompt quand fait ctrl + c avec un cat [OK]
-
-- echo -nnnnjn o' => print pas le deuxieme mot [OK]
-
-- echo $? => leaks/invalid read [OK]
 
 - /bin/ls/sdfkjhsdjfnk  
 echo $? => 127 au lieu de 126 (not a directory) [OK]
 
-- echo "$"HOME => leak [OK]
-
-- ls < cat
-env => env se lance pas
-interprete les redirections quand elles sont entre quote 
-(alors que devrait pas) + cause des soucis ensuite (genre les commandes ne se lancent plus après) [OK]
-
-- ne se lance pas avec env -i [OK]
-
-- export 9djj=l
-ls => commandes ne s'executent plus apres un export invalide [OK]
-
-- export A=l
-unset A => segfault [OK]
-
-- cd minishell/ => directory qui n'existe pas, les commandes ne fonctionnent pas après [OK]
 
 - mkdir test
 cd test/
@@ -41,15 +18,47 @@ Minishell : cd ..
 getcwd: No such file or directory
 [1]    108222 segmentation fault  ./minishell [KO]
 
--  echo coucou > in > in2 < out > in3
-ls => (out n'existe pas, l'erreur s'affiche correctement), les commandes ne fonctionnent plus [OK]
 
-- < => erreur syntaxe provoque un invalid read [OK]
+-Minishell : echo "''"$USER"''"
+mdegache
 
-- expand heredoc avec quotes [OK]
+Minishell : echo "'$USER'"
+mdegache
 
-- quand ctrl+c dans heredoc, ecrit deux fois le prompt heredoc [OK] 
+Minishell : export a="salut" | echo $a
+==224797== Invalid read of size 4
+==224797==    at 0x40363A: verif_expand (parse_utils2.c:173)
+==224797==    by 0x402BC6: parsing_line (parse_line.c:120)
+==224797==    by 0x401450: minishell (main.c:52)
+==224797==    by 0x4014FF: main (main.c:73)
+==224797==  Address 0x4ba63e4 is 0 bytes after a block of size 4 alloc'd
+==224797==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==224797==    by 0x40B029: ft_calloc (ft_calloc.c:22)
+==224797==    by 0x404C8D: expand_arg (expand.c:129)
+==224797==    by 0x402BBD: parsing_line (parse_line.c:119)
+==224797==    by 0x401450: minishell (main.c:52)
+==224797==    by 0x4014FF: main (main.c:73)
+==224797== 
+==225364== 
 
-- exit 847574534798539478587534897598345987 => exit 130 et pas 2 [OK]
 
-- exit 67 => renvoie 2 (verifier le modulo 256 pour les chiffres de exit) [OK]
+Minishell : export a="kk"
+Minishell : export a="salut" | echo $a
+==225425== 
+==225425== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==225425== 
+==225425== HEAP SUMMARY:
+==225425==     in use at exit: 209,208 bytes in 275 blocks
+==225425==   total heap usage: 1,375 allocs, 1,100 frees, 257,774 bytes allocated
+==225425== 
+==225425== LEAK SUMMARY:
+==225425==    definitely lost: 0 bytes in 0 blocks
+==225425==    indirectly lost: 0 bytes in 0 blocks
+==225425==      possibly lost: 0 bytes in 0 blocks
+==225425==    still reachable: 0 bytes in 0 blocks
+==225425==         suppressed: 209,208 bytes in 275 blocks
+==225425== 
+==225425== For lists of detected and suppressed errors, rerun with: -s
+==225425== ERROR SUMMARY: 2 errors from 1 contexts (suppressed: 0 from 0)
+
+signaux apres un eof valide mais pas tous 
