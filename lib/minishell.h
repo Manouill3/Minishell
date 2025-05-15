@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 22:38:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/15 15:11:20 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_list_char
 	char				**infiles;
 	struct s_heredoc	*heredoc;
 	struct s_list_char	*next;
+	struct s_list_char	*prev;
 }			t_list_char;
 
 typedef struct s_init
@@ -71,6 +72,7 @@ typedef struct s_init
 	int					len_const_x;
 	int					exist_x;
 	int					create_x;
+	int					len_ind_exp;
 	int					status;
 	int					count_cmd;
 	char				*line;
@@ -159,19 +161,20 @@ int			ft_len_word(char *s, int start);
 int			get_tab_len(char *tab);
 t_list_char	*set_lst(int count_cmd);
 void		set_cmd(char *tab, t_list_char *tmp);
-int		get_token(t_init *param);
+int			get_token(t_init *param);
 
 ////////////////////////////////////////
 ///			parsing/parse_line.c    ///
 //////////////////////////////////////
 
-void    supp_quote_red(t_list_char *tok);
-int    		verif_nb_quote(char **tab);
+void		supp_quote_red(t_list_char *tok);
+int			verif_nb_quote(char **tab);
 int			check_for_expand(t_list_char *tok, char **cmd, int *i);
 void		get_funct_ann(t_list_char *tmp, int i);
 void		get_funct(t_list_char *lst);
 void		before_exec(t_init *param);
 void		parsing_line(t_init *param);
+void		verif_expand(t_init *param);
 
 ////////////////////////////////////////
 ///		parsing/parse_utils.c    	///

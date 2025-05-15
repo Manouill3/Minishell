@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 14:50:47 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:13:57 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	parsing_line(t_init *param)
 		return ;
 	}
 	expand_arg(param);
+	verif_expand(param);
 	get_funct(param->tok);
 	get_no_red(param->tok);
 	before_exec(param);

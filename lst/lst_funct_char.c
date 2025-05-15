@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_funct_char.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:25:44 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/14 15:50:28 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/15 14:27:26 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_list_char	*ft_lstnew_char(char **tab)
 	lst->fd_outfile = -1;
 	lst->infiles = NULL;
 	lst->next = NULL;
+	lst->prev = NULL;
 	lst->ind_exp = NULL;
 	lst->heredoc = malloc(sizeof(t_heredoc));
 	if (!lst->heredoc)
@@ -48,6 +49,7 @@ void	ft_lstadd_back_char(t_list_char **lst, t_list_char *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
+	new->prev = tmp;
 }
 
 void	ft_lstclear_char(t_list_char **lst)

@@ -18,13 +18,6 @@ interprete les redirections quand elles sont entre quote
 
 - ne se lance pas avec env -i [OK]
 
-- commandes en brut (/bin/ls) ne se lancent pas quand unset PATH [OK]
-
-- pas de message d'erreur pour les commandes not found quand unset PATH [OK]
-
-- export A="echo     salut les gars"
-$A => doit executer echo (mais attention : ne doit pas interpréter les pipes, redirs, heredoc...) [OK]
-
 - export 9djj=l
 ls => commandes ne s'executent plus apres un export invalide [OK]
 
