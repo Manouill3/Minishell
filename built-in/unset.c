@@ -6,21 +6,44 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:06:32 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/14 13:19:47 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/15 16:13:38 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	ft_delete(t_env *tmp, char *name)
+// void	ft_delete(t_env *tmp, char *name)
+// {
+// 	while (tmp)
+// 	{
+// 		printf("name = %s, tmp->name = %s\n", name, tmp->name);
+// 		if (!ft_strcmp(name, tmp->name))
+// 		{
+// 			if (tmp->next != NULL)
+// 				tmp->prev->next = tmp->next;
+// 			tmp->next->prev = tmp->prev;
+// 			ft_lstdelone_env(tmp);
+// 			return ;
+// 		}
+// 		tmp = tmp->next;
+// 	}
+// }
+
+void	ft_delete(t_env **env, char *name)
 {
-	while (tmp->next != NULL)
+	t_env	*tmp;
+
+	tmp = *env;
+	while (tmp)
 	{
 		if (!ft_strcmp(name, tmp->name))
 		{
-			if (tmp->next != NULL)
+			if (tmp->prev)
 				tmp->prev->next = tmp->next;
-			tmp->next->prev = tmp->prev;
+			else
+				*env = tmp->next;
+			if (tmp->next)
+				tmp->next->prev = tmp->prev;
 			ft_lstdelone_env(tmp);
 			return ;
 		}
@@ -50,9 +73,9 @@ void	ft_unset(t_init *param, t_list_char *tok)
 	if (!name)
 		return ;
 	tmp = param->lst_env;
-	ft_delete(tmp, name);
+	ft_delete(&tmp, name);
 	tmp = param->lst_export;
-	ft_delete(tmp, name);
+	ft_delete(&tmp, name);
 	free(name);
 	param->status = 0;
 }

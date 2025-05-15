@@ -10,10 +10,10 @@ env => env se lance pas
 interprete les redirections quand elles sont entre quote 
 (alors que devrait pas) + cause des soucis ensuite (genre les commandes ne se lancent plus après) [OK]
 - ne se lance pas avec env -i [OK]
-- commandes en brut (/bin/ls) ne se lancent pas quand unset PATH [KO]
-- pas de message d'erreur pour les commandes not found quand unset PATH [KO]
+- commandes en brut (/bin/ls) ne se lancent pas quand unset PATH [OK]
+- pas de message d'erreur pour les commandes not found quand unset PATH [OK]
 - export A="echo     salut les gars"
-$A => doit executer echo (mais attentiom : ne doit pas interpréter les pipes, redirs, heredoc...) [KO]
+$A => doit executer echo (mais attentiom : ne doit pas interpréter les pipes, redirs, heredoc...) [OK]
 - export 9djj=l
 ls => commandes ne s'executent plus apres un export invalide [KO]
 - export A=l
