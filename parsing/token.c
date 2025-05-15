@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 16:36:43 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/14 23:29:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,9 @@ int	get_tab_len(char *tab)
 			i++;
 			continue ;
 		}
-		if (!is_white(tab[i]) && (is_white(tab[i + 1]) || tab[i + 1] == '\0'))
+		if (!is_white(tab[i])
+			&& (tab[i + 1] == '>' || tab[i + 1] == '<'
+				|| is_white(tab[i + 1]) || tab[i + 1] == '\0'))
 			count++;
 		i++;
 	}
