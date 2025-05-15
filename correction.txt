@@ -8,7 +8,7 @@ echo $? => 127 au lieu de 126 (not a directory) [OK]
 - ls '<' cat
 env => env se lance pas
 interprete les redirections quand elles sont entre quote 
-(alors que devrait pas) + cause des soucis ensuite (genre les commandes ne se lancent plus après) [KO]
+(alors que devrait pas) + cause des soucis ensuite (genre les commandes ne se lancent plus après) [OK]
 - ne se lance pas avec env -i [OK]
 - commandes en brut (/bin/ls) ne se lancent pas quand unset PATH [KO]
 - pas de message d'erreur pour les commandes not found quand unset PATH [KO]

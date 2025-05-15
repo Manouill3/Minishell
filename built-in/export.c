@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/12 15:52:56 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/15 10:26:27 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,12 @@ void	ft_export(t_init *param, t_list_char *tok)
 	verif = 0;
 	tmp_exp = param->lst_export;
 	if (tok->cmd[1] == NULL)
-	{
 		ft_print_exp(tmp_exp);
-		return ;
-	}
-	if (ft_isalpha(tok->cmd[1][0]) || tok->cmd[1][0] == '_')
+	else if (ft_isalpha(tok->cmd[1][0]) || tok->cmd[1][0] == '_')
 	{
 		verif = ft_continue_value(param, tok);
 		if (verif == 1)
 			ft_create_var(param, tok, tmp_exp);
-		return ;
 	}
 	else
 	{
