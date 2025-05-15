@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/13 17:13:20 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/14 18:13:51 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	**set_args_ann2(char **args, t_init *param)
 {
-	if (!access(args[0], F_OK) && access(args[0], X_OK)
-		&& (args[0][0] == '.' && args[0][1] == '/'))
+	if (!access(args[0], F_OK) && access(args[0], X_OK) && (args[0][0] == '.'
+			&& args[0][1] == '/'))
 	{
 		write(2, " Permission denied", 18);
 		param->status = 126;
@@ -24,6 +24,11 @@ char	**set_args_ann2(char **args, t_init *param)
 	{
 		if ((args[0][0] == '.' || args[0][0] == '/'))
 			write(2, " No such file or directory\n", 27);
+		else if (!access(args[0], F_OK))
+		{
+			write(2, "No such file or directory\n", 27);
+			param->status = 127;
+		}
 		else
 			write(2, " command not found\n", 19);
 		param->status = 127;
