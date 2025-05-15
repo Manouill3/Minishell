@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 14:06:25 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:05:58 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ void	exec(t_init *param)
 	tmp = param->tok;
 	while (tmp)
 	{
-		if (tmp->len_cmd == 0)
+		if (tmp->len_cmd == 0 || (tmp->len_cmd == 1 && ft_strlen(tmp->cmd[0]) == 0))
 		{
 			param->status = 127;
 			tmp = tmp->next;
 			continue ;
 		}
-		if ((verif_built(tmp) == 2 || verif_built(tmp) == 4
-				|| verif_built(tmp) == 5 || verif_built(tmp) == 7))
+		if (verif_built(tmp) == 2 || verif_built(tmp) == 4
+				|| verif_built(tmp) == 5 || (verif_built(tmp) == 7 && param->count_cmd == 1))
 		{
 			ft_exec_built_in(param, tmp);
 			tmp = tmp->next;

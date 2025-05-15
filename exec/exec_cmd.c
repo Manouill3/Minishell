@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 22:00:31 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/15 15:14:19 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	child_process(t_list_char *tmp, t_init *param, int count)
 {
 	if (tmp->infiles)
 		get_good_fd(param, tmp);
-	if (param->status == 1)
+	if (param->status == 1 && tmp->infiles[0] != NULL)
 	{
 		close_all(param, tmp);
 		exit (param->status);
@@ -43,7 +43,7 @@ void	built_in_fork(t_init *param, t_list_char *tmp)
 {
 	int		status;
 
-	if (param->count_cmd > 0 && verif_built(tmp))
+	if (verif_built(tmp))
 	{
 		ft_exec_built_in(param, tmp);
 		status = param->status;
@@ -61,8 +61,6 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 
 	built_in_fork(param, tmp);
 	path = make_path(param->lst_env);
-	if (!path)
-		return ;
 	args = set_args(tmp->no_red, path, param);
 	env = conv_lst_tab(param->lst_env);
 	if (!args || !args[0])
@@ -77,6 +75,7 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 		free_tab(path);
 		free_tab(args);
 		free_tab(env);
+		ft_putstr_fd(" Command not found\n", 2);
 		exit (param->status);
 	}
 }
