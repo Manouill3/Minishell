@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 14:42:01 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/16 15:02:33 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,12 +181,12 @@ void		verif_expand(t_init *param);
 ///		parsing/parse_utils.c    	///
 //////////////////////////////////////
 
-void	ft_free_realoc(t_init *param, t_list_char *tmp,
-	char **tmp_cmd, char **tmp_val);
+void		ft_free_realoc(t_init *param, t_list_char *tmp,
+				char **tmp_cmd, char **tmp_val);
 int			check_mixed_redir(t_init *param, char *line, int i);
 int			check_too_many_redir(t_init *param, char *line, int i);
 int			check_redir_no_file(t_init *param, char *line, int *i);
-void	check_back_expand(t_list_char *tok, char **cmd);
+void		check_back_expand(t_list_char *tok, char **cmd);
 void		exec_supp(char **cmd, int i);
 void		ft_supp_quote(t_list_char *tok, char **cmd);
 
@@ -351,7 +351,8 @@ void		ft_pwd(void);
 void		ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result);
 void		ft_cd_alone(char *path, char **path_split,
 				t_init *param, int result);
-int			ft_delete_file(t_init *param, char *path, int result, t_list_char *tok);
+int			ft_delete_file(t_init *param, char *path,
+				int result, t_list_char *tok);
 void		ft_error(t_init *param, char *path);
 void		ft_cd(t_init *param, t_list_char *tok);
 
@@ -369,7 +370,7 @@ void		ft_cd_last(t_init *param, t_list_char *tok, int result, char *path);
 ///		built-in.c/cd_utils2.c		///
 //////////////////////////////////////
 
-void    ft_to_much_arg(t_init *param, char *path);
+void		ft_to_much_arg(t_init *param, char *path);
 
 ////////////////////////////////////////
 ///			built-in.c/env.c		///
