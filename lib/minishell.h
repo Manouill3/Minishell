@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 15:11:20 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/16 13:11:56 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_init
 	int					len_ind_exp;
 	int					status;
 	int					count_cmd;
+	char				*old_pwd;
 	char				*line;
 	char				*pwd;
 	char				*tmp_data;
@@ -169,7 +170,7 @@ int			get_token(t_init *param);
 
 void		supp_quote_red(t_list_char *tok);
 int			verif_nb_quote(char **tab);
-int			check_for_expand(t_list_char *tok, char **cmd, int *i);
+int			check_for_expand(t_list_char *tok, int *i);
 void		get_funct_ann(t_list_char *tmp, int i);
 void		get_funct(t_list_char *lst);
 void		before_exec(t_init *param);
@@ -183,6 +184,7 @@ void		verif_expand(t_init *param);
 int			check_mixed_redir(t_init *param, char *line, int i);
 int			check_too_many_redir(t_init *param, char *line, int i);
 int			check_redir_no_file(t_init *param, char *line, int *i);
+void	check_back_expand(t_list_char *tok, char **cmd);
 void		exec_supp(char **cmd, int i);
 void		ft_supp_quote(t_list_char *tok, char **cmd);
 

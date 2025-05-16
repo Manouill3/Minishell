@@ -170,7 +170,7 @@ void	verif_expand(t_init *param)
 		tmp = param->tok;
 		while (i < param->len_ind_exp)
 		{
-			if (tmp->ind_exp[i] == i && ft_strcmp(tmp->funct,tmp->cmd[i]) && ft_strchr(tmp->cmd[i], ' '))
+			if (tmp->cmd[i] && ft_strcmp(tmp->funct,tmp->cmd[i]) && ft_strchr(tmp->cmd[i], ' ') && tmp->ind_exp[i] == i)
 			{
 				tmp_val = ft_normal_split(tmp->cmd[i], 32);
 				free(tmp->cmd[i]);

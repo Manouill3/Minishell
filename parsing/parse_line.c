@@ -3,41 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 16:13:57 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/16 11:05:58 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-int	check_for_expand(t_list_char *tok, char **cmd, int *i)
+int	check_for_expand(t_list_char *tok, int *i)
 {
 	int	j;
-	int	k;
 	int	save;
 
 	j = 0;
 	save = (*i);
 	while (tok->ind_exp[j] && save == (*i))
 	{
-		k = 0;
-		while (cmd[(*i)][k] && cmd[(*i)][k] != '$')
-			k++;
-		if (tok->ind_exp[j] == (*i) && cmd[(*i)][k] &&
-			cmd[(*i)][k + 1] && !is_white(cmd[(*i)][k + 1])
-			&& cmd[(*i)][k + 1] != '"' && cmd[(*i)][k + 1] != 39)
-		{
+		if (tok->ind_exp[j] == (*i))
 			(*i)++;
-		}
 		j++;
 	}
 	if ((*i) > save)
 		return (1);
 	return (0);
 }
-
 
 void	get_funct_ann(t_list_char *tmp, int i)
 {
@@ -92,7 +83,9 @@ void	before_exec(t_init *param)
 	while (tmp)
 	{
 		ft_supp_quote(tmp, tmp->cmd);
+		check_back_expand(tmp, tmp->cmd);
 		ft_supp_quote(tmp, tmp->no_red);
+		check_back_expand(tmp, tmp->no_red);
 		free(tmp->ind_exp);
 		tmp = tmp->next;
 	}

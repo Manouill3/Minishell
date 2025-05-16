@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 09:44:09 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:47:29 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	exec(t_init *param)
 			tmp = tmp->next;
 			continue ;
 		}
-		if (verif_built(tmp) == 2 || verif_built(tmp) == 4
+		if (verif_built(tmp) == 2 || (verif_built(tmp) == 4 && param->count_cmd == 1)
 				|| verif_built(tmp) == 5 || (verif_built(tmp) == 7 && param->count_cmd == 1))
 		{
 			ft_exec_built_in(param, tmp);

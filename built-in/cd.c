@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/09 11:21:17 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/16 14:05:11 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result)
 		param->status = 1;
 		perror("cd");
 	}
-	free(path);
 	free(tmp);
 }
 
@@ -51,6 +50,14 @@ void	ft_cd(t_init *param, t_list_char *tok)
 
 	result = 0;
 	path = get_pwd();
+	if (!path && param->old_pwd)
+	{
+		path = NULL;
+		path = param->old_pwd;
+		ft_cd_rest(param, tok, path, result);
+		return ;
+	}
+	param->old_pwd = path;
 	path_split = NULL;
 	if (tok->len_cmd > 2)
 	{
@@ -61,7 +68,10 @@ void	ft_cd(t_init *param, t_list_char *tok)
 	else if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
 		ft_cd_alone(path, path_split, param, result);
 	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
+	{
 		ft_cd_rest(param, tok, path, result);
+		free(path);
+	}
 	else if (check_inside_path(path, tok) == 0)
 		ft_cd_last(param, tok, result, path);
 	else

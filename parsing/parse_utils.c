@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/15 17:34:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 11:26:22 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,38 @@ int	check_redir_no_file(t_init *param, char *line, int *i)
 	return (0);
 }
 
+void	check_back_expand(t_list_char *tok, char **cmd)
+{
+	int	i;
+	int	k;
+	char	*no_quote;
+
+	i = 0;
+	while (cmd[i])
+	{
+		k = 0;
+		while (tok->ind_exp[k] && tok->ind_exp[k] != i)
+			k++;
+		if (!tok->ind_exp[k])
+		{
+			i++;
+			continue;
+		}
+		no_quote = all_quote_out(cmd[i]);
+		if (ft_strlen(no_quote) == 1)
+			exec_supp(cmd, i);
+		k = 0;
+		while (cmd[i][k])
+		{
+			if (ft_strchr(cmd[i], '$'))
+				exec_supp(cmd, i);
+			k++;
+		}
+		i++;
+		free(no_quote);
+	}
+}
+
 void	exec_supp(char **cmd, int i)
 {
 	int		j;
@@ -80,7 +112,7 @@ void	ft_supp_quote(t_list_char *tok, char **cmd)
 		nb++;
 	while (i < nb)
 	{
-		if (check_for_expand(tok, cmd, &i))
+		if (check_for_expand(tok, &i))
 			continue ;
 				
 		exec_supp(cmd, i);

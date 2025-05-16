@@ -14,6 +14,7 @@
         "functional": "c",
         "chrono": "c",
         "text_encoding": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "cstdlib": "c"
     }
 }
