@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 09:01:13 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 09:46:03 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env)
 		heredoc->name = get_name_h();
 		heredoc->fd = open(heredoc->name, O_CREAT | O_WRONLY);
 		get_eof_tab(tmp);
-		heredoc->fd_tmp = dup(heredoc->fd);
 		while (heredoc->eof[i])
 		{
+			heredoc->fd_tmp = dup(heredoc->fd);
 			if (heredoc->eof[i + 1] != NULL)
 				ft_heredoc_oef_before(heredoc, i, env);
 			else

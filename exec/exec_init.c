@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 15:05:58 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 09:44:09 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	exec(t_init *param)
 	tmp = param->tok;
 	while (tmp)
 	{
-		if (tmp->len_cmd == 0 || (tmp->len_cmd == 1 && ft_strlen(tmp->cmd[0]) == 0))
+		if (tmp->len_cmd == 0 || (tmp->len_cmd == 1 && param->len_ind_exp < 1))
 		{
 			param->status = 127;
 			tmp = tmp->next;

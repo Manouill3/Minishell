@@ -1,7 +1,6 @@
 
 - /bin/ls/sdfkjhsdjfnk  
-echo $? => 127 au lieu de 126 (not a directory) [OK]
-
+echo $? => 127 au lieu de 126 (not a directory) [KO]
 
 - mkdir test
 cd test/
@@ -17,7 +16,6 @@ getcwd: No such file or directory
 Minishell : cd ..
 getcwd: No such file or directory
 [1]    108222 segmentation fault  ./minishell [KO]
-
 
 -Minishell : echo "''"$USER"''"
 mdegache
@@ -41,7 +39,6 @@ Minishell : export a="salut" | echo $a
 ==224797== 
 ==225364== 
 
-
 Minishell : export a="kk"
 Minishell : export a="salut" | echo $a
 ==225425== 
@@ -61,4 +58,55 @@ Minishell : export a="salut" | echo $a
 ==225425== For lists of detected and suppressed errors, rerun with: -s
 ==225425== ERROR SUMMARY: 2 errors from 1 contexts (suppressed: 0 from 0)
 
-signaux apres un eof valide mais pas tous 
+
+
+
+
+
+
+
+
+- /bin/ls => print 'is a directory' (mais lance bien la commande) [OK]
+
+- double prompt quand fait ctrl + c avec un cat [OK]
+
+- echo -nnnnjn o' => print pas le deuxieme mot [OK]
+
+- echo $? => leaks/invalid read [OK]
+
+- echo "$"HOME => leak [OK]
+
+- ls < cat
+env => env se lance pas
+interprete les redirections quand elles sont entre quote 
+(alors que devrait pas) + cause des soucis ensuite (genre les commandes ne se lancent plus après) [OK]
+
+- ne se lance pas avec env -i [OK]
+
+- commandes en brut (/bin/ls) ne se lancent pas quand unset PATH [OK]
+
+- pas de message d'erreur pour les commandes not found quand unset PATH [OK]
+
+- export A="echo     salut les gars"
+$A => doit executer echo (mais attention : ne doit pas interpréter les pipes, redirs, heredoc...) [OK]
+
+- export 9djj=l
+ls => commandes ne s'executent plus apres un export invalide [OK]
+
+- export A=l
+unset A => segfault [OK]
+
+- cd minishell/ => directory qui n'existe pas, les commandes ne fonctionnent pas après [OK]
+
+-  echo coucou > in > in2 < out > in3
+ls => (out n'existe pas, l'erreur s'affiche correctement), les commandes ne fonctionnent plus [OK]
+
+- < => erreur syntaxe provoque un invalid read [OK]
+
+- expand heredoc avec quotes [OK]
+
+- quand ctrl+c dans heredoc, ecrit deux fois le prompt heredoc [OK] 
+
+- exit 847574534798539478587534897598345987 => exit 130 et pas 2 [OK]
+
+- exit 67 => renvoie 2 (verifier le modulo 256 pour les chiffres de exit) [OK]

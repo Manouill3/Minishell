@@ -6,14 +6,55 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 13:30:14 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:42:31 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
+char	*verif_path_split(int len, int j, char *tmp, char **args)
+{
+	while(args[0][len])
+	{
+		tmp[j] = args[0][len];
+		j++;
+		len++;
+	}
+	return (tmp);
+}
+
+int	verif_path(char **args, t_init *param)
+{
+	int		len;
+	int		j;
+	char	*tmp;
+	
+	if (args[0][0] != '.')
+	{
+		len = ft_strlen(args[0]);
+		tmp = ft_calloc((len + 2), sizeof (char));
+		if (!tmp)
+			return (0);
+		tmp[0] = '.';
+		j = 1;
+		len = 0;
+		tmp = verif_path_split(len, j, tmp, args);
+		if (access(tmp, F_OK) && args[0][0] == '/')
+		{
+			free(tmp);
+			write(2, " Not a directory", 16);
+			param->status = 126;
+			return (1);
+		}
+		free(tmp);
+	}
+	return (0);
+}
+
 char	**set_args_ann2(char **args, t_init *param)
 {
+	if (verif_path(args, param) == 1)
+		return (args);
 	if (!access(args[0], F_OK) && access(args[0], X_OK) && (args[0][0] == '.'
 			&& args[0][1] == '/'))
 	{
@@ -24,11 +65,8 @@ char	**set_args_ann2(char **args, t_init *param)
 	{
 		if ((args[0][0] == '.' || args[0][0] == '/'))
 			write(2, " No such file or directory\n", 27);
-		else if (!access(args[0], F_OK))
-		{
-			write(2, "No such file or directory\n", 27);
-			param->status = 127;
-		}
+		else
+			write(2, " command not found\n", 19);
 		param->status = 127;
 	}
 	return (args);

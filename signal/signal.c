@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 19:23:32 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/15 17:28:20 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 10:15:09 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	sigint_handler(int sig)
 	{
 		g_exit_code = 130;
 		write(1, "\n", 1);
-		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
 	}

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 15:14:19 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 09:44:50 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 		free_tab(path);
 		free_tab(args);
 		free_tab(env);
-		ft_putstr_fd(" Command not found\n", 2);
+		if (!path)
+			ft_putstr_fd(" command not found\n", 2);
 		exit (param->status);
 	}
 }
