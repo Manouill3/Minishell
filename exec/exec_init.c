@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 14:50:54 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:55:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ int	ft_exec_pipe(t_list_char *tmp, t_init *param, int count)
 	return (count);
 }
 
+int	secu_cmd(t_init *param, t_list_char *tmp)
+{
+	if (tmp->len_cmd == 0 || (tmp->len_cmd == 1 && param->len_ind_exp < 1))
+	{
+		param->status = 127;
+		tmp = tmp->next;
+		return (1);
+	}
+	return (0);
+}
+
 void	exec(t_init *param)
 {
 	t_list_char	*tmp;
@@ -67,14 +78,12 @@ void	exec(t_init *param)
 	tmp = param->tok;
 	while (tmp)
 	{
-		if (tmp->len_cmd == 0 || (tmp->len_cmd == 1 && param->len_ind_exp < 1))
-		{
-			param->status = 127;
-			tmp = tmp->next;
+		if (secu_cmd(param, tmp))
 			continue ;
-		}
-		if (verif_built(tmp) == 2 || (verif_built(tmp) == 4 && param->count_cmd == 1)
-		|| verif_built(tmp) == 5 || (verif_built(tmp) == 7 && param->count_cmd == 1))
+		if (verif_built(tmp) == 2
+			|| (verif_built(tmp) == 4 && param->count_cmd == 1)
+			|| verif_built(tmp) == 5
+			|| (verif_built(tmp) == 7 && param->count_cmd == 1))
 		{
 			ft_exec_built_in(param, tmp);
 			tmp = tmp->next;
