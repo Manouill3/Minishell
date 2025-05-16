@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 10:42:31 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:56:35 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*verif_path_split(int len, int j, char *tmp, char **args)
 {
-	while(args[0][len])
+	while (args[0][len])
 	{
 		tmp[j] = args[0][len];
 		j++;
@@ -28,7 +28,7 @@ int	verif_path(char **args, t_init *param)
 	int		len;
 	int		j;
 	char	*tmp;
-	
+
 	if (args[0][0] != '.')
 	{
 		len = ft_strlen(args[0]);
@@ -55,8 +55,8 @@ char	**set_args_ann2(char **args, t_init *param)
 {
 	if (verif_path(args, param) == 1)
 		return (args);
-	if (!access(args[0], F_OK) && access(args[0], X_OK) && (args[0][0] == '.'
-			&& args[0][1] == '/'))
+	if (!access(args[0], F_OK) && access(args[0], X_OK)
+		&& (args[0][0] == '.' && args[0][1] == '/'))
 	{
 		write(2, " Permission denied", 18);
 		param->status = 126;
@@ -104,7 +104,7 @@ char	**set_args_ann(char **args, char **path, t_init *param, char *free_tmp)
 char	**set_args(char **args, char **path, t_init *param)
 {
 	struct stat	mode;
-	char	*free_tmp;
+	char		*free_tmp;
 
 	if (!path)
 		return (args);
