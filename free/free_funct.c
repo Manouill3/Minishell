@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_funct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 22:48:49 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/14 15:56:21 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:54:00 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ void	free_struct(t_init *param)
 
 void	ft_free_all(t_init *param)
 {
-	// t_list_char	*tmp;
-
 	if (param->line)
 	{
 		free(param->line);
@@ -72,12 +70,6 @@ void	ft_free_all(t_init *param)
 		free_tab(param->tab);
 		param->tab = NULL;
 	}
-	// tmp = param->tok;
-	// while (tmp)
-	// {
-	// 	clear_files(tmp);
-	// 	tmp = tmp->next;
-	// }
 	if (param->tok)
 	{
 		ft_lstclear_char(&param->tok);
