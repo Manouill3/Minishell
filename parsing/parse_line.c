@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 11:05:58 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:17:34 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	parsing_line(t_init *param)
 		param->status = 2;
 		ft_putstr_fd("Syntax error : open quote\n", 2);
 		return ;
-	}	
+	}
 	if (syntax_error(param, param->line))
 		return ;
 	if (param->count_cmd == 1 && !only_white(param->line))

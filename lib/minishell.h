@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 13:11:56 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:43:31 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,8 @@ void		verif_expand(t_init *param);
 ///		parsing/parse_utils.c    	///
 //////////////////////////////////////
 
+void	ft_free_realoc(t_init *param, t_list_char *tmp,
+	char **tmp_cmd, char **tmp_val);
 int			check_mixed_redir(t_init *param, char *line, int i);
 int			check_too_many_redir(t_init *param, char *line, int i);
 int			check_redir_no_file(t_init *param, char *line, int *i);
