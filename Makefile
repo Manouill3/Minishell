@@ -58,6 +58,7 @@ SRC = main.c\
 	exec/exec_file2.c\
 	built-in/pwd.c\
 	built-in/cd_utils.c\
+	built-in/cd_utils2.c\
 	built-in/cd.c\
 	built-in/echo.c\
 	built-in/env_built-in.c\

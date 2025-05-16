@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/15 15:15:40 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:44:13 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_verif_nb(t_init *param)
 		{
 			param->status = 2;
 			write(2, " numeric argument required\n", 27);
-			// ft_putstr_fd("exit", 2);
 			exit(param->status);
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/16 14:05:11 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:41:29 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,28 @@ void	ft_cd_alone(char *path, char **path_split, t_init *param, int result)
 	free(path);
 }
 
+int	ft_delete_file(t_init *param, char *path, int result, t_list_char *tok)
+{
+	if (!path && param->old_pwd)
+	{
+		path = NULL;
+		path = param->old_pwd;
+		ft_cd_rest(param, tok, path, result);
+		return (1);
+	}
+	param->old_pwd = path;
+	return (0);
+}
+
+void	ft_error(t_init *param, char *path)
+{
+	{
+		free(path);
+		param->status = 1;
+		perror("cd");
+	}
+}
+
 void	ft_cd(t_init *param, t_list_char *tok)
 {
 	int		result;
@@ -50,21 +72,11 @@ void	ft_cd(t_init *param, t_list_char *tok)
 
 	result = 0;
 	path = get_pwd();
-	if (!path && param->old_pwd)
-	{
-		path = NULL;
-		path = param->old_pwd;
-		ft_cd_rest(param, tok, path, result);
+	if (ft_delete_file(param, path, result, tok) == 1)
 		return ;
-	}
-	param->old_pwd = path;
 	path_split = NULL;
 	if (tok->len_cmd > 2)
-	{
-		free(path);
-		param->status = 1;
-		write(2, " too many arguments", 19);
-	}
+		ft_to_much_arg(param, path);
 	else if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
 		ft_cd_alone(path, path_split, param, result);
 	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
@@ -75,9 +87,5 @@ void	ft_cd(t_init *param, t_list_char *tok)
 	else if (check_inside_path(path, tok) == 0)
 		ft_cd_last(param, tok, result, path);
 	else
-	{
-		free(path);
-		param->status = 1;
-		perror("cd");
-	}
+		ft_error(param, path);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 14:43:31 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/16 14:42:01 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,6 +351,8 @@ void		ft_pwd(void);
 void		ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result);
 void		ft_cd_alone(char *path, char **path_split,
 				t_init *param, int result);
+int			ft_delete_file(t_init *param, char *path, int result, t_list_char *tok);
+void		ft_error(t_init *param, char *path);
 void		ft_cd(t_init *param, t_list_char *tok);
 
 ////////////////////////////////////////
@@ -362,6 +364,12 @@ char		*ft_give_home_way(char **path_split, char *lst);
 char		*ft_path_user(char *path, t_list_char *tok);
 int			check_inside_path(char *path, t_list_char *tok);
 void		ft_cd_last(t_init *param, t_list_char *tok, int result, char *path);
+
+////////////////////////////////////////
+///		built-in.c/cd_utils2.c		///
+//////////////////////////////////////
+
+void    ft_to_much_arg(t_init *param, char *path);
 
 ////////////////////////////////////////
 ///			built-in.c/env.c		///
