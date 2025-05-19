@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/19 09:35:31 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:25:45 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -372,6 +372,7 @@ void		ft_cd_last(t_init *param, t_list_char *tok, int result, char *path);
 //////////////////////////////////////
 
 void		ft_to_much_arg(t_init *param, char *path);
+void		ft_cd_slash(t_init *param, char *path);
 
 ////////////////////////////////////////
 ///			built-in.c/env.c		///

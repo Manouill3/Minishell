@@ -117,9 +117,9 @@ ls => (out n'existe pas, l'erreur s'affiche correctement), les commandes ne fonc
 |                             correction ilan                                |
 +----------------------------------------------------------------------------+
 
-- le pwd et le old ne sont pas mit a jour en meme temp que le pwd actuel (tu peux utiliser ton propre export pour modifier ton pwd) [KO]
+- le pwd et le old ne sont pas mis a jour en meme temp que le pwd actuel (tu peux utiliser ton propre export pour modifier ton pwd) [KO]
 
-- cd / (chdir("/")) le pass de root [KO]
+- cd / (chdir("/")) le pass de root [OK]
 
 - peror a enlever et que le premier unset
 Minishell : unset $HOME $USER

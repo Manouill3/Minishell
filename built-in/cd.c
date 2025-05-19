@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/19 10:54:28 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:26:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result)
 		perror("cd");
 	}
 	free(tmp);
+	free(path);
 }
 
 void	ft_cd_alone(char *path, char **path_split, t_init *param, int result)
@@ -31,8 +32,12 @@ void	ft_cd_alone(char *path, char **path_split, t_init *param, int result)
 	free(path);
 	path = NULL;
 	path_split = make_path(param->lst_env);
+	if (!path_split)
+		return ;
 	path = ft_give_home_way(path_split, "homes");
 	free_tab(path_split);
+	if (!path)
+		return ;
 	result = chdir(path);
 	if (result == -1)
 	{
@@ -77,11 +82,10 @@ void	ft_cd(t_init *param, t_list_char *tok)
 		ft_to_much_arg(param, path);
 	else if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
 		ft_cd_alone(path, path_split, param, result);
+	else if (tok->cmd[1] && !ft_strcmp(tok->cmd[1], "/"))
+		ft_cd_slash(param, path);
 	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
-	{
 		ft_cd_rest(param, tok, path, result);
-		free(path);
-	}
 	else if (check_inside_path(path, tok) == 0)
 		ft_cd_last(param, tok, result, path);
 	else
