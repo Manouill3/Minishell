@@ -25,6 +25,7 @@ LIBFT = lib/libft/libft.a
 
 SRC = main.c\
 	env/env.c\
+	env/no_env.c\
 	lst/lst_funct_char.c\
 	lst/lst_funct_env.c\
 	signal/signal.c\

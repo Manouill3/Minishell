@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 15:02:33 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/19 09:35:31 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void		ft_handle_heredoc_signals(void);
 ///			env/env.c	            ///
 //////////////////////////////////////
 
+void    min_env(t_init *param);
 void		get_final_cont(t_env *env);
 void		get_final_cont_more(t_env *env);
 void		get_name_env(t_env *env);

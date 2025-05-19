@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/16 14:41:29 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/19 10:54:28 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ int	ft_delete_file(t_init *param, char *path, int result, t_list_char *tok)
 
 void	ft_error(t_init *param, char *path)
 {
-	{
-		free(path);
-		param->status = 1;
-		perror("cd");
-	}
+	free(path);
+	param->status = 1;
+	perror("cd");
 }
 
 void	ft_cd(t_init *param, t_list_char *tok)

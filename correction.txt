@@ -117,40 +117,32 @@ ls => (out n'existe pas, l'erreur s'affiche correctement), les commandes ne fonc
 |                             correction ilan                                |
 +----------------------------------------------------------------------------+
 
-- le pwd et le old ne sont pas mit a jour en meme temp que le pwd actuel (tu peux utiliser ton propre export pour modifier ton pwd)
-- cd / (chdir("/")) le pass de root
+- le pwd et le old ne sont pas mit a jour en meme temp que le pwd actuel (tu peux utiliser ton propre export pour modifier ton pwd) [KO]
+
+- cd / (chdir("/")) le pass de root [KO]
+
 - peror a enlever et que le premier unset
 Minishell : unset $HOME $USER
 export identifier: Success
 Minishell : unset HOME USER
 Minishell : env | grep HOME
 Minishell : env | grep USER
-USER=mdegache
-***PARSING*** ERROR MANUARII : export _test="echo bonjour"
+USER=mdegache [OK]
 
-- Minishell : cp /bin/ls w
-Minishell : w
- command not found
-build  built-in  correction.txt  env  exec  expand  free  heredoc  lib	lst  main.c  Makefile  minish  minishell  minishell_tester  newdir  newfile  parsing  readline.sup  signal  test  utils  vgclean.sh  w
+***PARSING*** ERROR MANUARII : export _test="echo bonjour" [OK]
 
 env -i ./minishell
 Minishell : env
 Minishell : user
  command not found
 Minishell : export TEST=a
-[1]    258649 segmentation fault  env -i ./minishell
+[1]    258649 segmentation fault  env -i ./minishell [OK]
 
-GROS PB DANS ./minishell dans ./minishell
+GROS PB DANS ./minishell dans ./minishell (crtl + c) [KO]
 
 - pas bonne gestion white space dans
 Minishell : export hello="echo  bonjour"
 Minishell : $hello
  command not found
-Minishell : 
-
-
-mdegache@2E6:~/stud/Minishell$ $PWD $PWD /nfs/homes/mdegache/stud/Minishell $PWD PWD PWD
-bash: /nfs/homes/mdegache/stud/Minishell: Is a directory
-
-
+Minishell : [KO]
 

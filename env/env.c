@@ -89,7 +89,7 @@ int	get_env(t_init *param, char **env)
 	{
 		ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(env[i])));
 		ft_lstadd_back_env(&param->lst_export,
-			ft_lstnew_env(ft_strdup(env[i])));
+				ft_lstnew_env(ft_strdup(env[i])));
 		i++;
 	}
 	if (param->lst_env == NULL)

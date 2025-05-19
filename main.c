@@ -69,6 +69,8 @@ int	main(int ac, char **av, char **env)
 			return (0);
 		ft_handle_interrupt_signals();
 		get_env(param, env);
+		if (param->lst_env == NULL)
+			min_env(param);
 		tt_y = isatty(STDIN_FILENO);
 		minishell(param, tt_y);
 		res = param->status;

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 14:17:34 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/19 09:25:40 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,3 +115,4 @@ void	parsing_line(t_init *param)
 	get_no_red(param->tok);
 	before_exec(param);
 }
+	

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_sup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 17:08:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/03/29 17:08:00 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/19 08:43:22 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_len_w_d(char *word, int i)
 		i++;
 		return (i);
 	}
-	while (word[i] && ft_isalnum(word[i]))
+	while (word[i] && (ft_isalnum(word[i]) || word[i] == '_'))
 		i++;
 	return (i);
 }
