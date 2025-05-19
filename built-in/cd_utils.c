@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/16 14:00:27 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:25:06 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,16 @@ int	check_inside_path(char *path, t_list_char *tok)
 	return (result);
 }
 
-void	ft_cd_last(t_init *param, t_list_char *tok, int result, char *path)
+int	ft_cd_last(t_init *param, t_list_char *tok, int result, char *path)
 {
 	result = chdir(tok->cmd[1]);
 	if (result == -1)
 	{
 		param->status = 1;
 		perror("cd");
+		free(path);
+		return (0);
 	}
 	free(path);
+	return (1);
 }
