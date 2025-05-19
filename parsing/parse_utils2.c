@@ -68,9 +68,9 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 	while (i < param->len_ind_exp)
 	{
 		if (tmp->cmd[i] && ft_strcmp(tmp->funct, tmp->cmd[i])
-			&& ft_strchr(tmp->cmd[i], ' ') && tmp->ind_exp[i] == i)
+			&& white_or_not(tmp->cmd[i]) && tmp->ind_exp[i] == i)
 		{
-			tmp_val = ft_normal_split(tmp->cmd[i], 32);
+			tmp_val = ft_exp_split(tmp->cmd[i]);
 			free(tmp->cmd[i]);
 			tmp->cmd[i] = NULL;
 			len_tmp = 0;

@@ -447,4 +447,9 @@ void		ft_unset(t_init *param, t_list_char *tok);
 
 void		ft_exit(t_init *param);
 
+
+char	**ft_exp_split(char const *s);
+int white_or_not(char *s);
+
+
 #endif
