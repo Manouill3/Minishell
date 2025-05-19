@@ -144,5 +144,7 @@ GROS PB DANS ./minishell dans ./minishell (crtl + c) [KO]
 Minishell : export hello="echo  bonjour"
 Minishell : $hello
  command not found
-Minishell : [KO]
+Minishell : [OK]
+
+
 

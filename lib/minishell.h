@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/19 09:35:31 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:34:28 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -444,5 +444,10 @@ void		ft_unset(t_init *param, t_list_char *tok);
 //////////////////////////////////////
 
 void		ft_exit(t_init *param);
+
+
+char	**ft_exp_split(char const *s);
+int white_or_not(char *s);
+
 
 #endif
