@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_exp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 11:22:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/19 13:41:05 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/19 16:54:44 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,19 @@ static char	**ft_string_exp(size_t word, char const *s, char **str)
 
 static int	ft_count_exp(char const *s, size_t i, size_t word)
 {
-    size_t save;
+	size_t	save;
 
 	while (s[i] != '\0')
 	{
-        save = i;
+		save = i;
 		while (s[i] && is_white(s[i]))
 			i++;
 		if (s[i] && !is_white(s[i]))
 			word++;
 		while (s[i] && is_white(s[i]))
 			i++;
-        if (save == i)
-            i++;
+		if (save == i)
+			i++;
 	}
 	return (word);
 }

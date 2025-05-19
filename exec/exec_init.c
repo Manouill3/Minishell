@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 14:55:52 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:08:36 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,8 @@ void	exec(t_init *param)
 	{
 		if (secu_cmd(param, tmp))
 			continue ;
-		if (verif_built(tmp) == 2
+		if (verif_built(tmp) == 2 || verif_built(tmp) == 5
 			|| (verif_built(tmp) == 4 && param->count_cmd == 1)
-			|| verif_built(tmp) == 5
 			|| (verif_built(tmp) == 7 && param->count_cmd == 1))
 		{
 			ft_exec_built_in(param, tmp);
@@ -92,6 +91,9 @@ void	exec(t_init *param)
 		count = ft_exec_pipe(tmp, param, count);
 		tmp = tmp->next;
 	}
+	signal(SIGINT, sigint_handler_child);
+	signal(SIGQUIT, sigint_handler_child);
 	ft_wait_child(param);
+	ft_handle_interrupt_signals();
 	get_tty();
 }

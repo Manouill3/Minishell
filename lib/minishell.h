@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/19 14:01:16 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/19 18:01:22 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,14 @@ void		sigint_handler(int sig);
 void		sigint_heredoc_handler(int sig);
 void		ft_handle_interrupt_signals(void);
 void		ft_handle_heredoc_signals(void);
+void		sigint_handler_child(int sig);
+void		ft_handle_interrupt_signals_child(void);
 
 ////////////////////////////////////////
 ///			env/env.c	            ///
 //////////////////////////////////////
 
-void    min_env(t_init *param);
+void		min_env(t_init *param);
 void		get_final_cont(t_env *env);
 void		get_final_cont_more(t_env *env);
 void		get_name_env(t_env *env);
@@ -354,7 +356,7 @@ int			ft_cd_alone(char *path, char **path_split,
 				t_init *param, int result);
 int			ft_delete_file(t_init *param, char *path,
 				int result, t_list_char *tok);
-void		ft_error(t_init *param, char *path);
+void		ft_error(t_init *param, char *path, char *old_path);
 void		ft_cd(t_init *param, t_list_char *tok);
 
 ////////////////////////////////////////
@@ -374,6 +376,7 @@ int			ft_cd_last(t_init *param, t_list_char *tok, int result, char *path);
 void		ft_to_much_arg(t_init *param, char *path);
 int			ft_cd_slash(t_init *param, char *path);
 void		ft_modif_pwd(t_init *param, char *old_path);
+int			ft_cd_rest2(t_init *param, t_list_char *tok, char *path, int result);
 
 ////////////////////////////////////////
 ///			built-in.c/env.c		///
@@ -439,6 +442,8 @@ void		ft_create_add_back(t_init *param, t_list_char *tok,
 ///			built-in.c/unset.c		///
 //////////////////////////////////////
 
+void		ft_delete(t_env **env, char *name);
+int			ft_error_unset(t_init *param, t_list_char *tok, int *j, int i);
 void		ft_unset(t_init *param, t_list_char *tok);
 
 ////////////////////////////////////////
@@ -446,10 +451,7 @@ void		ft_unset(t_init *param, t_list_char *tok);
 //////////////////////////////////////
 
 void		ft_exit(t_init *param);
-
-
-char	**ft_exp_split(char const *s);
-int white_or_not(char *s);
-
+char		**ft_exp_split(char const *s);
+int			white_or_not(char *s);
 
 #endif

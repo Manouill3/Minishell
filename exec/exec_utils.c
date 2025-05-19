@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 15:11:52 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:09:07 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_wait_child(t_init *param)
 {
 	int		status;
+	int		sig;
 	pid_t	last_pid;
 
 	last_pid = wait(&status);
@@ -22,6 +23,14 @@ void	ft_wait_child(t_init *param)
 	{
 		if (WIFEXITED(status) && last_pid == param->fds.pid)
 			param->status = WEXITSTATUS(status);
+		if (WIFSIGNALED(status))
+		{
+			sig = 128 + WTERMSIG(status);
+			if (sig == 131)
+				write(2, "Quit\n", 5);
+			if (sig == 130)
+				write(2, "\n", 1);
+		}
 		last_pid = wait(&status);
 	}
 }

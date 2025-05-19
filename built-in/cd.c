@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/19 14:39:15 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/19 18:00:48 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ int	ft_delete_file(t_init *param, char *path, int result, t_list_char *tok)
 	return (0);
 }
 
-void	ft_error(t_init *param, char *path)
+void	ft_error(t_init *param, char *path, char *old_path)
 {
 	free(path);
+	free(old_path);
 	param->status = 1;
 	perror("cd");
 }
@@ -98,7 +99,7 @@ void	ft_cd(t_init *param, t_list_char *tok)
 	else if (check_inside_path(path, tok) == 0)
 		good = ft_cd_last(param, tok, result, path);
 	else if (good == 0)
-		ft_error(param, path);
+		ft_error(param, path, old_path);
 	if (good == 1)
 		ft_modif_pwd(param, old_path);
 }

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:39:52 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/19 14:42:26 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/19 18:00:22 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,22 @@ void	ft_modif_pwd(t_init *param, char *old_path)
 		tmp_exp->cont = ft_strdup(old_path);
 	}
 	ft_modif_split_pwd(param, old_path, pwd);
+}
+
+int	ft_cd_rest2(t_init *param, t_list_char *tok, char *path, int result)
+{
+	char	*tmp;
+
+	tmp = ft_path_user(path, tok);
+	result = chdir(tmp);
+	if (result == -1)
+	{
+		param->status = 1;
+		perror("cd");
+		free(tmp);
+		return (0);
+	}
+	free(tmp);
+	free(path);
+	return (1);
 }
