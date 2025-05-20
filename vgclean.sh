@@ -4,4 +4,4 @@
 for fd in /proc/$$/fd/*; do
   num=${fd##*/}; (( num > 2 )) && eval "exec $num>&-"
 done
-exec valgrind --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=readline.sup "$@"
+exec valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=readline.sup "$@"

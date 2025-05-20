@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_funct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 10:27:08 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 23:42:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ int	nb_exp(char **cmd)
 		}
 		i++;
 	}
+	printf("nb = %d\n", nb);
 	return (nb);
 }
