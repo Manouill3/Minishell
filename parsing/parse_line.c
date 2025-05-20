@@ -6,20 +6,20 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 15:40:58 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:50:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-int	check_for_expand(t_list_char *tok, int *i)
+int	check_for_expand(t_list_char *tok, int *i, t_init *param)
 {
 	int	j;
 	int	save;
 
 	j = 0;
 	save = (*i);
-	while (tok->ind_exp[j] && save == (*i))
+	while (save == (*i) &&  j < param->len_ind_exp)
 	{
 		if (tok->ind_exp[j] == (*i))
 			(*i)++;
@@ -82,10 +82,10 @@ void	before_exec(t_init *param)
 	tmp = param->tok;
 	while (tmp)
 	{
-		ft_supp_quote(tmp, tmp->cmd);
-		check_back_expand(tmp, tmp->cmd);
-		ft_supp_quote(tmp, tmp->no_red);
-		check_back_expand(tmp, tmp->no_red);
+		ft_supp_quote(tmp, tmp->cmd, param);
+		check_back_expand(param, tmp, tmp->cmd);
+		ft_supp_quote(tmp, tmp->no_red, param);
+		check_back_expand(param, tmp, tmp->no_red);
 		free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
