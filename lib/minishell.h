@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 15:49:35 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 16:44:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -463,5 +463,6 @@ void		ft_unset(t_init *param, t_list_char *tok);
 void		ft_exit(t_init *param);
 char		**ft_exp_split(char const *s);
 int			white_or_not(char *s);
+char		*no_quote_exec(char *tmp, char *word);
 
 #endif

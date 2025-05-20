@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 15:40:53 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 16:43:19 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	no_quote_word_len(char *word)
 {
-	int	i;
+	int		i;
 	char	q;
-	int	count;
+	int		count;
 
 	i = 0;
 	count = 0;
@@ -26,7 +26,7 @@ int	no_quote_word_len(char *word)
 		{
 			q = word[i];
 			i++;
-			while(word[i] && word[i] != q)
+			while (word[i] && word[i] != q)
 			{
 				count++;
 				i++;
@@ -43,33 +43,14 @@ int	no_quote_word_len(char *word)
 
 char	*no_quote_word(char *word)
 {
-	int	i;
-	int	j;
-	int	len;
-	char	q;
+	int		len;
 	char	*tmp;
 
-	i = 0;
-	j = 0;
 	len = no_quote_word_len(word);
 	tmp = ft_calloc(len + 1, sizeof(char));
 	if (!tmp)
 		return (NULL);
-	while (word[i])
-	{
-		if (word[i] == 39 || word[i] == '"')
-		{
-			q = word[i];
-			i++;
-			while(word[i] && word[i] != q)
-				tmp[j++] = word[i++];
-			if (word[i])
-				i++;
-		}
-		else
-			while(word[i] && word[i] != 39 && word[i] != '"')
-				tmp[j++] = word[i++];
-	}
+	tmp = no_quote_exec(tmp, word);
 	return (tmp);
 }
 
@@ -85,7 +66,7 @@ void	exec_supp(char **cmd, int i)
 	}
 }
 
-void	ft_supp_quote(t_list_char *tok, char **cmd , t_init *param)
+void	ft_supp_quote(t_list_char *tok, char **cmd, t_init *param)
 {
 	int		i;
 	int		nb;
