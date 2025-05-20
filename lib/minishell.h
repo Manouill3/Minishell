@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 16:44:47 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:47:06 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,6 +387,8 @@ int			ft_cd_rest2(t_init *param, t_list_char *tok,
 //////////////////////////////////////
 
 void		ft_good(t_init *param, char *path, int good, char *old_path);
+char		*ft_path_null(t_init *param);
+char		*ft_old_path_null(t_init *param);
 
 ////////////////////////////////////////
 ///			built-in.c/env.c		///

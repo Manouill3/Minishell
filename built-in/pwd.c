@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:43:24 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 10:56:40 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 16:21:38 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*get_pwd(t_init *param)
 	{
 		free(way);
 		param->status = 1;
-		perror("getcwd");
 		return (NULL);
 	}
 	return (way);

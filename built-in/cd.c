@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 11:28:40 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 16:47:32 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void	ft_cd(t_init *param, t_list_char *tok)
 	param->good_cd = 0;
 	path = get_pwd(param);
 	if (!path)
-		return ;
+		path = ft_path_null(param);
 	old_path = get_pwd(param);
-	if (!path)
-		return ;
+	if (!old_path)
+		old_path = ft_old_path_null(param);
 	if (ft_delete_file(param, path, tok) == 1)
 		return ;
 	path_split = NULL;
