@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/19 17:08:36 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 10:44:07 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ void	exec(t_init *param)
 	{
 		if (secu_cmd(param, tmp))
 			continue ;
-		if (verif_built(tmp) == 2 || verif_built(tmp) == 5
-			|| (verif_built(tmp) == 4 && param->count_cmd == 1)
-			|| (verif_built(tmp) == 7 && param->count_cmd == 1))
+		if (param->count_cmd == 1 && verif_built(tmp))
 		{
 			ft_exec_built_in(param, tmp);
 			tmp = tmp->next;

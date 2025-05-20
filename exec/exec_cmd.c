@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/19 16:32:17 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 11:19:46 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 
 	built_in_fork(param, tmp);
 	path = make_path(param->lst_env);
-	args = set_args(tmp->no_red, path, param);
+	args = basic_args(tmp->no_red);
+	args = set_args(args, path, param);
 	env = conv_lst_tab(param->lst_env);
 	if (!args || !args[0])
 	{
@@ -71,12 +72,5 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 		exit(param->status);
 	}
 	if (execve(args[0], args, env) == -1)
-	{
-		free_tab(path);
-		free_tab(args);
-		free_tab(env);
-		if (!path)
-			ft_putstr_fd(" command not found\n", 2);
-		exit (param->status);
-	}
+		fail_execve(args, path, env, param);
 }
