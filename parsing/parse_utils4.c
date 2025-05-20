@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 15:40:53 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 16:29:22 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int	no_quote_word_len(char *word)
 
 char	*no_quote_word(char *word)
 {
-	int	i;
-	int	j;
-	int	len;
+	int		i;
+	int		j;
+	int		len;
 	char	q;
 	char	*tmp;
 
