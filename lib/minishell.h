@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 16:47:06 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 17:33:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ void		sigint_heredoc_handler(int sig);
 void		ft_handle_interrupt_signals(void);
 void		ft_handle_heredoc_signals(void);
 void		sigint_handler_child(int sig);
-void		ft_handle_interrupt_signals_child(void);
 
 ////////////////////////////////////////
 ///			env/env.c	            ///
@@ -150,8 +149,6 @@ void		ft_free_all(t_init *param);
 ///			utils/utils_fucnt.c     ///
 //////////////////////////////////////
 
-void		print_lst_env(t_env *lst);
-void		print_lst_char(t_list_char *lst);
 int			is_red(char *val);
 int			ft_strcmp(char *s1, char *s2);
 int			get_nb_cmd(char **tab);
@@ -159,10 +156,19 @@ int			only_white(char	*line);
 int			nb_exp(char **cmd);
 
 ////////////////////////////////////////
+///			parsing/len_word.c      ///
+//////////////////////////////////////
+
+int			count_for_other(char *s, int i, int *cmp);
+int			count_for_red(char *s, int i, int cmp);
+int			count_for_quote(char *s, int i, int *cmp);
+int			ft_len_word(char *s, int start);
+
+////////////////////////////////////////
 ///			parsing/token.c         ///
 //////////////////////////////////////
 
-int			ft_len_word(char *s, int start);
+int			tab_len_quote(char *tab, int i, int	*count);
 int			get_tab_len(char *tab);
 t_list_char	*set_lst(int count_cmd);
 void		set_cmd(char *tab, t_list_char *tmp);
@@ -187,12 +193,25 @@ void		verif_expand(t_init *param);
 
 void		ft_free_realoc(t_init *param, t_list_char *tmp,
 				char **tmp_cmd, char **tmp_val);
+void		process_cmd_if_expand(char **cmd, int i);
+int			is_expand_index(t_list_char *tok, int i, t_init *param);
 int			check_mixed_redir(t_init *param, char *line, int i);
 int			check_too_many_redir(t_init *param, char *line, int i);
 int			check_redir_no_file(t_init *param, char *line, int *i);
 void		check_back_expand(t_init *param, t_list_char *tok, char **cmd);
 void		exec_supp(char **cmd, int i);
 void		ft_supp_quote(t_list_char *tok, char **cmd, t_init *param);
+void		end_verif_exp(t_init *param, char **tmp_cmd,
+				char **tmp_val, int len_tmp);
+void		ft_count_len(int *len_tmp, int *i,
+				char **tmp_val, t_list_char *tmp);
+char		**ft_create_tmp_cmd(char **tmp_cmd, int i,
+				int len_tmp, char **tmp_val);
+void		exec_verif_exp(t_init *param, t_list_char *tmp);
+int			no_quote_word_len(char *word);
+char		*no_quote_word(char *word);
+void		exec_supp_quote_red(t_list_char *tmp, int i);
+int			verif_odd(char **tab, int count1, int count2);
 
 ////////////////////////////////////////
 ///	parsing/parse_syntax_error.c    ///
@@ -287,6 +306,9 @@ void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env);
 ///			exec/exec_init.c		///
 //////////////////////////////////////
 
+void		no_red_ann(int i, int j, int len, t_list_char *tmp);
+int			secu_cmd(t_init *param, t_list_char *tmp);
+int			ft_exec_pipe(t_list_char *tmp, t_init *param, int count);
 int			verif_built(t_list_char *tok);
 int			no_red_len(char **tab, t_list_char *tmp);
 void		get_no_red(t_list_char *tok);
@@ -297,6 +319,8 @@ void		exec(t_init *param);
 ///			exec/exec_cmd.c	    	///
 //////////////////////////////////////
 
+void		ft_dup_file_ann(t_init *param, t_list_char *tmp);
+void		built_in_fork(t_init *param, t_list_char *tmp);
 void		fail_execve(char **args, char **path, char **env, t_init *param);
 char		**basic_args(char **tab);
 void		child_process(t_list_char *tmp, t_init *param, int count);
@@ -308,6 +332,11 @@ void		exec_cmd(t_init *param, t_list_char *tmp);
 ///			exec/exec_utils.c		///
 //////////////////////////////////////
 
+char		**set_args_ann(char **args, char **path,
+				t_init *param, char *free_tmp);
+char		**set_args_ann2(char **args, t_init *param);
+int			verif_path(char **args, t_init *param);
+char		*verif_path_split(int len, int j, char *tmp, char **args);
 void		ft_wait_child(t_init *param);
 char		**conv_lst_tab(t_env *env);
 char		**make_path(t_env *env);
@@ -318,8 +347,11 @@ void		verif_fd(int count, t_init *param);
 ///			exec/exec_file.c		///
 //////////////////////////////////////
 
-void		get_in_complet_list(t_list_char *node);
-void		get_out_complet_list(t_list_char *node, int *i, int	*j);
+void		get_in_h(t_init *param, t_list_char *node, int i);
+void		handle_redirection(t_init *param, t_list_char *node,
+				int i, int *check);
+void		add_redirection(t_list_char *node, int *i, int *j, char *red);
+void		get_in_out_complet_list(t_list_char *node);
 void		get_in_out(t_list_char *tok);
 void		get_good_fd(t_init *param, t_list_char *node);
 void		get_in_fd(t_init *param, t_list_char *node, int i);
@@ -340,6 +372,8 @@ int			get_outfile_nb(char **cmd);
 ///			built-in.c/echo.c		///
 //////////////////////////////////////
 
+void		ft_print_arg(int *n, int *i, t_list_char *tok);
+int			ft_echo_option(t_list_char *tok, int *i, int *n);
 void		ft_echo(t_init *param, t_list_char *tok);
 
 ////////////////////////////////////////
@@ -378,6 +412,7 @@ int			ft_cd_last(t_init *param, t_list_char *tok, char *path);
 
 int			ft_to_much_arg(t_init *param);
 int			ft_cd_slash(t_init *param, char *path);
+void		ft_modif_split_pwd(t_init *param, char *old_path, char *pwd);
 void		ft_modif_pwd(t_init *param, char *old_path);
 int			ft_cd_rest2(t_init *param, t_list_char *tok,
 				char *path);
@@ -391,7 +426,7 @@ char		*ft_path_null(t_init *param);
 char		*ft_old_path_null(t_init *param);
 
 ////////////////////////////////////////
-///			built-in.c/env.c		///
+///		built-in.c/env_bulit_in.c	///
 //////////////////////////////////////
 
 void		ft_env(t_env *env);	
@@ -400,7 +435,6 @@ void		ft_env(t_env *env);
 ///		built-in.c/export_add.c		///
 //////////////////////////////////////
 
-void		env_content(t_env *env, char *add);
 void		export_content(t_env *exp, char *add);
 int			existing_vars(t_env *env, t_env *exp, char *name, char *add);
 int			add_to_env(t_init *param, char *name, char *add, t_list_char *tok);
@@ -445,6 +479,8 @@ void		ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp);
 ///			built-in.c/export.c		///
 //////////////////////////////////////
 
+void		ft_print_exp(t_env *tmp_exp);
+int			ft_continue_value(t_init *param, t_list_char *tok);
 void		ft_export(t_init *param, t_list_char *tok);
 void		ft_add_export_only(t_init *param, t_list_char *tok, t_env *tmp_exp);
 void		ft_create_add_back(t_init *param, t_list_char *tok,
@@ -462,7 +498,10 @@ void		ft_unset(t_init *param, t_list_char *tok);
 ///			built-in.c/exit.c		///
 //////////////////////////////////////
 
+void		ft_verif_nb(t_init *param);
+int			ft_free_param(t_init *param, int nb_arg);
 void		ft_exit(t_init *param);
+
 char		**ft_exp_split(char const *s);
 int			white_or_not(char *s);
 char		*no_quote_exec(char *tmp, char *word);
