@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 11:10:28 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 11:33:27 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	ft_free_param(t_init *param, int nb_arg)
 	ft_verif_nb(param);
 	if (param->status == 2)
 		write(2, " numeric argument required\n", 27);
+	if (param->count_cmd == 1)
+		ft_putstr_fd("exit", 2);
 	nb_arg = param->status;
 	ft_free_all(param);
 	free_struct(param);
@@ -70,7 +72,5 @@ void	ft_exit(t_init *param)
 		return ;
 	}
 	nb_arg = ft_free_param(param, nb_arg);
-	if (param->count_cmd == 1)
-		ft_putstr_fd("exit", 2);
 	exit(nb_arg);
 }

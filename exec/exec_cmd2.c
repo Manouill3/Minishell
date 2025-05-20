@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:25:16 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 11:21:06 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:36:01 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	ft_dup_file(t_init *param, t_list_char *tmp, int count)
 
 char	**basic_args(char **tab)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	**args;
-	
+
 	len = 0;
 	i = 0;
 	while (tab[len])
