@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 15:50:08 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 16:38:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_for_expand(t_list_char *tok, int *i, t_init *param)
 
 	j = 0;
 	save = (*i);
-	while (save == (*i) &&  j < param->len_ind_exp)
+	while (save == (*i) && j < param->len_ind_exp)
 	{
 		if (tok->ind_exp[j] == (*i))
 			(*i)++;

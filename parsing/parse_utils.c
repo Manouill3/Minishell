@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 15:53:01 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 16:39:23 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,14 @@ int	is_expand_index(t_list_char *tok, int i, t_init *param)
 	k = 0;
 	while (k < param->len_ind_exp && tok->ind_exp[k] != i)
 		k++;
-	if ( k >= param->len_ind_exp || tok->ind_exp[k] == 0)
+	if (k >= param->len_ind_exp || tok->ind_exp[k] == 0)
 		return (0);
 	return (1);
 }
 
 void	process_cmd_if_expand(char **cmd, int i)
 {
-	int	j;
+	int		j;
 	char	*no_quote;
 
 	no_quote = all_quote_out(cmd[i]);
@@ -64,7 +64,8 @@ void	process_cmd_if_expand(char **cmd, int i)
 		j = 0;
 		while (cmd[i][j] && cmd[i][j] != '$')
 			j++;
-		if (cmd[i][j + 1] && (is_white(cmd[i][j + 1]) || cmd[i][j + 1] == '"' || cmd[i][j + 1] == 39))
+		if (cmd[i][j + 1] && (is_white(cmd[i][j + 1])
+		|| cmd[i][j + 1] == '"' || cmd[i][j + 1] == 39))
 			exec_supp(cmd, i);
 	}
 	free(no_quote);
