@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/16 14:46:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:53:01 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int	check_redir_no_file(t_init *param, char *line, int *i)
 	return (0);
 }
 
-int	is_expand_index(t_list_char *tok, int i)
+int	is_expand_index(t_list_char *tok, int i, t_init *param)
 {
 	int	k;
 
 	k = 0;
-	while (tok->ind_exp[k] && tok->ind_exp[k] != i)
+	while (k < param->len_ind_exp && tok->ind_exp[k] != i)
 		k++;
-	if (!tok->ind_exp[k])
+	if ( k >= param->len_ind_exp || tok->ind_exp[k] == 0)
 		return (0);
 	return (1);
 }
@@ -63,14 +63,14 @@ void	process_cmd_if_expand(char **cmd, int i)
 	free(no_quote);
 }
 
-void	check_back_expand(t_list_char *tok, char **cmd)
+void	check_back_expand(t_init *param, t_list_char *tok, char **cmd)
 {
 	int	i;
 
 	i = 0;
 	while (cmd[i])
 	{
-		if (!is_expand_index(tok, i))
+		if (!is_expand_index(tok, i, param))
 		{
 			i++;
 			continue ;

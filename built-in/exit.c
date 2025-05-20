@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 11:33:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:15:50 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,14 @@ void	ft_verif_nb(t_init *param)
 	int	i;
 
 	i = 0;
+	while (param->tok->cmd[1][i] && is_white(param->tok->cmd[1][i]))
+		i++;
 	while (param->tok->cmd[1][i])
 	{
 		if (!((param->tok->cmd[1][i] >= 48 && param->tok->cmd[1][i] <= 57)
-			|| param->tok->cmd[1][i] == '+' || param->tok->cmd[1][i] == '-'))
-		{
-			param->status = 2;
-			write(2, " numeric argument required\n", 27);
-			exit(param->status);
-		}
-		if (param->tok->cmd[1][1] == '+' || param->tok->cmd[1][1] == '-')
+			|| ((param->tok->cmd[1][i] == '+' || param->tok->cmd[1][i] == '-')
+			&& (param->tok->cmd[1][i + 1] >= 48
+			&& param->tok->cmd[1][i + 1] <= 57))))
 		{
 			param->status = 2;
 			write(2, " numeric argument required\n", 27);

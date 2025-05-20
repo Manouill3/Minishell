@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 11:23:59 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 15:49:35 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ int			get_token(t_init *param);
 
 void		supp_quote_red(t_list_char *tok);
 int			verif_nb_quote(char **tab);
-int			check_for_expand(t_list_char *tok, int *i);
+int			check_for_expand(t_list_char *tok, int *i, t_init *param);
 void		get_funct_ann(t_list_char *tmp, int i);
 void		get_funct(t_list_char *lst);
 void		before_exec(t_init *param);
@@ -190,9 +190,9 @@ void		ft_free_realoc(t_init *param, t_list_char *tmp,
 int			check_mixed_redir(t_init *param, char *line, int i);
 int			check_too_many_redir(t_init *param, char *line, int i);
 int			check_redir_no_file(t_init *param, char *line, int *i);
-void		check_back_expand(t_list_char *tok, char **cmd);
+void		check_back_expand(t_init *param, t_list_char *tok, char **cmd);
 void		exec_supp(char **cmd, int i);
-void		ft_supp_quote(t_list_char *tok, char **cmd);
+void		ft_supp_quote(t_list_char *tok, char **cmd, t_init *param);
 
 ////////////////////////////////////////
 ///	parsing/parse_syntax_error.c    ///

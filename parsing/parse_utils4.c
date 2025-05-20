@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils4.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 14:46:46 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:40:53 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	exec_supp(char **cmd, int i)
 	}
 }
 
-void	ft_supp_quote(t_list_char *tok, char **cmd)
+void	ft_supp_quote(t_list_char *tok, char **cmd , t_init *param)
 {
 	int		i;
 	int		nb;
@@ -42,7 +42,7 @@ void	ft_supp_quote(t_list_char *tok, char **cmd)
 		nb++;
 	while (i < nb)
 	{
-		if (check_for_expand(tok, &i))
+		if (check_for_expand(tok, &i, param))
 			continue ;
 		exec_supp(cmd, i);
 		i++;

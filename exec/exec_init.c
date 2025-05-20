@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 10:44:07 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 14:23:48 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	exec(t_init *param)
 
 	count = 0;
 	tmp = param->tok;
+	signal(SIGINT, sigint_handler_child);
+	signal(SIGQUIT, sigint_handler_child);
 	while (tmp)
 	{
 		if (secu_cmd(param, tmp))
@@ -89,9 +91,7 @@ void	exec(t_init *param)
 		count = ft_exec_pipe(tmp, param, count);
 		tmp = tmp->next;
 	}
-	signal(SIGINT, sigint_handler_child);
-	signal(SIGQUIT, sigint_handler_child);
 	ft_wait_child(param);
-	ft_handle_interrupt_signals();
 	get_tty();
+	ft_handle_interrupt_signals();
 }
