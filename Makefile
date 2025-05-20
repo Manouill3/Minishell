@@ -31,7 +31,6 @@ SRC = main.c\
 	signal/signal.c\
 	free/free_funct.c\
 	utils/utils_funct.c\
-	utils/print_funct.c\
 	utils/split_exp.c\
 	utils/utils_exp_split.c\
 	parsing/parse_line.c\
