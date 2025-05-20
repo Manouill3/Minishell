@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 10:13:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 11:20:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,6 +296,8 @@ void		exec(t_init *param);
 ///			exec/exec_cmd.c	    	///
 //////////////////////////////////////
 
+void		fail_execve(char **args, char **path, char **env, t_init *param);
+char		**basic_args(char **tab);
 void		child_process(t_list_char *tmp, t_init *param, int count);
 void		parent_process(t_init *param);
 void		ft_dup_file(t_init *param, t_list_char *tmp, int count);
@@ -449,7 +451,7 @@ void		ft_create_add_back(t_init *param, t_list_char *tok,
 ///			built-in.c/unset.c		///
 //////////////////////////////////////
 
-void		ft_delete(t_env **env, char *name);
+void		ft_delete(t_env *env, char *name);
 int			ft_error_unset(t_init *param, t_list_char *tok, int *j, int i);
 void		ft_unset(t_init *param, t_list_char *tok);
 

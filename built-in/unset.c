@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:06:32 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/19 17:23:50 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 10:48:41 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	ft_delete(t_env **env, char *name)
+void	ft_delete(t_env *env, char *name)
 {
 	t_env	*tmp;
 
-	tmp = *env;
+	tmp = env;
 	while (tmp)
 	{
 		if (!ft_strcmp(name, tmp->name))
@@ -24,7 +24,7 @@ void	ft_delete(t_env **env, char *name)
 			if (tmp->prev)
 				tmp->prev->next = tmp->next;
 			else
-				*env = tmp->next;
+				env = tmp->next;
 			if (tmp->next)
 				tmp->next->prev = tmp->prev;
 			ft_lstdelone_env(tmp);
@@ -65,9 +65,9 @@ void	ft_unset(t_init *param, t_list_char *tok)
 		if (!name)
 			return ;
 		tmp = param->lst_env;
-		ft_delete(&tmp, name);
+		ft_delete(tmp, name);
 		tmp = param->lst_export;
-		ft_delete(&tmp, name);
+		ft_delete(tmp, name);
 		free(name);
 		param->status = 0;
 		i++;
