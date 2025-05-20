@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 10:44:07 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:16:35 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	exec(t_init *param)
 	{
 		if (secu_cmd(param, tmp))
 			continue ;
-		if (param->count_cmd == 1 && verif_built(tmp))
+		if (param->count_cmd == 1 && (verif_built(tmp) == 2
+				|| verif_built(tmp) == 4
+				|| verif_built(tmp) == 5 || verif_built(tmp) == 7))
 		{
 			ft_exec_built_in(param, tmp);
 			tmp = tmp->next;
