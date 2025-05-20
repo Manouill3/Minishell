@@ -6,13 +6,13 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:43:24 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/15 16:01:35 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 10:56:40 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char	*get_pwd(void)
+char	*get_pwd(t_init *param)
 {
 	char	*way;
 
@@ -20,17 +20,18 @@ char	*get_pwd(void)
 	if (!way)
 	{
 		free(way);
+		param->status = 1;
 		perror("getcwd");
 		return (NULL);
 	}
 	return (way);
 }
 
-void	ft_pwd(void)
+void	ft_pwd(t_init *param)
 {
 	char	*pwd;
 
-	pwd = get_pwd();
+	pwd = get_pwd(param);
 	printf("%s\n", pwd);
 	free(pwd);
 }
@@ -42,7 +43,7 @@ void	ft_exec_built_in(t_init *param, t_list_char *tok)
 	if (!ft_strcmp(tok->funct, "cd"))
 		ft_cd(param, tok);
 	if (!ft_strcmp(tok->funct, "pwd"))
-		ft_pwd();
+		ft_pwd(param);
 	if (!ft_strcmp(tok->funct, "export"))
 		ft_export(param, tok);
 	if (!ft_strcmp(tok->funct, "unset"))

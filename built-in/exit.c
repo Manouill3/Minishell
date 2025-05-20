@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 11:08:04 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:10:28 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void	ft_verif_nb(t_init *param)
 	{
 		if (!((param->tok->cmd[1][i] >= 48 && param->tok->cmd[1][i] <= 57)
 			|| param->tok->cmd[1][i] == '+' || param->tok->cmd[1][i] == '-'))
+		{
+			param->status = 2;
+			write(2, " numeric argument required\n", 27);
+			exit(param->status);
+		}
+		if (param->tok->cmd[1][1] == '+' || param->tok->cmd[1][1] == '-')
 		{
 			param->status = 2;
 			write(2, " numeric argument required\n", 27);
@@ -64,6 +70,7 @@ void	ft_exit(t_init *param)
 		return ;
 	}
 	nb_arg = ft_free_param(param, nb_arg);
-	ft_putstr_fd("exit\n", 2);
+	if (param->count_cmd == 1)
+		ft_putstr_fd("exit", 2);
 	exit(nb_arg);
 }
