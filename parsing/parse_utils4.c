@@ -12,22 +12,76 @@
 
 #include "../lib/minishell.h"
 
-void	exec_supp(char **cmd, int i)
+int	no_quote_word_len(char *word)
 {
-	int		j;
+	int	i;
+	char	q;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (word[i])
+	{
+		if (word[i] == 39 || word[i] == '"')
+		{
+			q = word[i];
+			i++;
+			while(word[i] && word[i] != q)
+			{
+				count++;
+				i++;
+			}
+			if (word[i])
+				i++;
+			continue ;
+		}
+		i++;
+		count++;
+	}
+	return (count);
+}
+
+char	*no_quote_word(char *word)
+{
+	int	i;
+	int	j;
+	int	len;
+	char	q;
 	char	*tmp;
 
+	i = 0;
 	j = 0;
-	while (cmd[i][j])
+	len = no_quote_word_len(word);
+	tmp = ft_calloc(len + 1, sizeof(char));
+	if (!tmp)
+		return (NULL);
+	while (word[i])
 	{
-		if (cmd[i][j] == 39 || cmd[i][j] == '"')
+		if (word[i] == 39 || word[i] == '"')
 		{
-			tmp = cmd[i];
-			cmd[i] = char_out(cmd[i], cmd[i][j]);
-			free(tmp);
-			break ;
+			q = word[i];
+			i++;
+			while(word[i] && word[i] != q)
+				tmp[j++] = word[i++];
+			if (word[i])
+				i++;
 		}
-		j++;
+		else
+			while(word[i] && word[i] != 39 && word[i] != '"')
+				tmp[j++] = word[i++];
+	}
+	return (tmp);
+}
+
+void	exec_supp(char **cmd, int i)
+{
+	char	*tmp;
+
+	if (ft_strchr(cmd[i], 39) || ft_strchr(cmd[i], '"'))
+	{
+		tmp = no_quote_word(cmd[i]);
+		free(cmd[i]);
+		cmd[i] = tmp;
 	}
 }
 

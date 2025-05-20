@@ -146,5 +146,18 @@ Minishell : $hello
  command not found
 Minishell : [OK]
 
+-----------------------------------------------
+
+ echo ''te""st
+
+ echo "'"'$USER'"'"
+
+Minishell : exit "    -10"
+ numeric argument required
+
+signal dans cat control-\
+
+Minishell : echo test | <"$PWD" cat
+
 
 

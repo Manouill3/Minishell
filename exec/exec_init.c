@@ -82,7 +82,9 @@ void	exec(t_init *param)
 	{
 		if (secu_cmd(param, tmp))
 			continue ;
-		if (param->count_cmd == 1 && verif_built(tmp))
+		if (param->count_cmd == 1 && (verif_built(tmp) == 2
+				|| verif_built(tmp) == 4
+				|| verif_built(tmp) == 5 || verif_built(tmp) == 7))
 		{
 			ft_exec_built_in(param, tmp);
 			tmp = tmp->next;
