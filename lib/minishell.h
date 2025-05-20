@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 10:13:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 11:23:59 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_list_char
 
 typedef struct s_init
 {
+	int					good_cd;
 	int					i_ex;
 	int					len_const_x;
 	int					exist_x;
@@ -344,18 +345,18 @@ void		ft_echo(t_init *param, t_list_char *tok);
 //////////////////////////////////////
 
 void		ft_exec_built_in(t_init *param, t_list_char *tok);
-char		*get_pwd(void);
-void		ft_pwd(void);
+char		*get_pwd(t_init *param);
+void		ft_pwd(t_init *param);
 
 ////////////////////////////////////////
 ///			built-in.c/cd.c			///
 //////////////////////////////////////
 
-void		ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result);
+void		ft_cd_rest(t_init *param, t_list_char *tok, char *path);
 int			ft_cd_alone(char *path, char **path_split,
-				t_init *param, int result);
+				t_init *param);
 int			ft_delete_file(t_init *param, char *path,
-				int result, t_list_char *tok);
+				t_list_char *tok);
 void		ft_error(t_init *param, char *path, char *old_path);
 void		ft_cd(t_init *param, t_list_char *tok);
 
@@ -367,7 +368,7 @@ char		*ft_split_home_way(char **path_split, int i, int *j, char *lst);
 char		*ft_give_home_way(char **path_split, char *lst);
 char		*ft_path_user(char *path, t_list_char *tok);
 int			check_inside_path(char *path, t_list_char *tok);
-int			ft_cd_last(t_init *param, t_list_char *tok, int result, char *path);
+int			ft_cd_last(t_init *param, t_list_char *tok, char *path);
 
 ////////////////////////////////////////
 ///		built-in.c/cd_utils2.c		///
@@ -377,7 +378,7 @@ int			ft_to_much_arg(t_init *param);
 int			ft_cd_slash(t_init *param, char *path);
 void		ft_modif_pwd(t_init *param, char *old_path);
 int			ft_cd_rest2(t_init *param, t_list_char *tok,
-				char *path, int result);
+				char *path);
 
 ////////////////////////////////////////
 ///		built-in.c/cd_utils3.c		///

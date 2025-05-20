@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:39:52 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 10:13:38 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 11:27:07 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_modif_pwd(t_init *param, char *old_path)
 
 	tmp_env = param->lst_env;
 	tmp_exp = param->lst_export;
-	pwd = get_pwd();
+	pwd = get_pwd(param);
 	while (tmp_env && ft_strcmp("OLDPWD", tmp_env->name))
 		tmp_env = tmp_env->next;
 	if (tmp_env && !ft_strcmp("OLDPWD", tmp_env->name))
@@ -89,8 +89,9 @@ void	ft_modif_pwd(t_init *param, char *old_path)
 	ft_modif_split_pwd(param, old_path, pwd);
 }
 
-int	ft_cd_rest2(t_init *param, t_list_char *tok, char *path, int result)
+int	ft_cd_rest2(t_init *param, t_list_char *tok, char *path)
 {
+	int		result;
 	char	*tmp;
 
 	tmp = ft_path_user(path, tok);

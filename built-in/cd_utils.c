@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 10:07:25 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 11:19:27 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,10 @@ int	check_inside_path(char *path, t_list_char *tok)
 	return (result);
 }
 
-int	ft_cd_last(t_init *param, t_list_char *tok, int result, char *path)
+int	ft_cd_last(t_init *param, t_list_char *tok, char *path)
 {
+	int	result;
+
 	result = chdir(tok->cmd[1]);
 	if (result == -1)
 	{

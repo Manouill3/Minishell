@@ -6,14 +6,15 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 10:09:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 11:28:40 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result)
+void	ft_cd_rest(t_init *param, t_list_char *tok, char *path)
 {
+	int		result;
 	char	*tmp;
 
 	tmp = ft_path_user(path, tok);
@@ -21,17 +22,19 @@ void	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result)
 	if (result == -1)
 	{
 		param->status = 1;
-		perror("cd");
 		free(tmp);
 		free(path);
+		perror("cd");
 		return ;
 	}
-	free(tmp);
 	free(path);
+	free(tmp);
 }
 
-int	ft_cd_alone(char *path, char **path_split, t_init *param, int result)
+int	ft_cd_alone(char *path, char **path_split, t_init *param)
 {
+	int		result;
+
 	free(path);
 	path = NULL;
 	path_split = make_path(param->lst_env);
@@ -51,13 +54,13 @@ int	ft_cd_alone(char *path, char **path_split, t_init *param, int result)
 	return (1);
 }
 
-int	ft_delete_file(t_init *param, char *path, int result, t_list_char *tok)
+int	ft_delete_file(t_init *param, char *path, t_list_char *tok)
 {
 	if (!path && param->old_pwd)
 	{
 		path = NULL;
 		path = param->old_pwd;
-		ft_cd_rest(param, tok, path, result);
+		ft_cd_rest(param, tok, path);
 		return (1);
 	}
 	param->old_pwd = path;
@@ -75,28 +78,29 @@ void	ft_error(t_init *param, char *path, char *old_path)
 
 void	ft_cd(t_init *param, t_list_char *tok)
 {
-	int		result;
-	int		good;
 	char	*path;
 	char	*old_path;
 	char	**path_split;
 
-	result = 0;
-	good = 0;
-	path = get_pwd();
-	old_path = get_pwd();
-	if (ft_delete_file(param, path, result, tok) == 1)
+	param->good_cd = 0;
+	path = get_pwd(param);
+	if (!path)
+		return ;
+	old_path = get_pwd(param);
+	if (!path)
+		return ;
+	if (ft_delete_file(param, path, tok) == 1)
 		return ;
 	path_split = NULL;
 	if (tok->len_cmd > 2)
-		good = ft_to_much_arg(param);
+		param->good_cd = ft_to_much_arg(param);
 	else if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
-		good = ft_cd_alone(path, path_split, param, result);
+		param->good_cd = ft_cd_alone(path, path_split, param);
 	else if (tok->cmd[1] && !ft_strcmp(tok->cmd[1], "/"))
-		good = ft_cd_slash(param, path);
+		param->good_cd = ft_cd_slash(param, path);
 	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
-		good = ft_cd_rest2(param, tok, path, result);
+		param->good_cd = ft_cd_rest2(param, tok, path);
 	else if (check_inside_path(path, tok) == 0)
-		good = ft_cd_last(param, tok, result, path);
-	ft_good(param, path, good, old_path);
+		param->good_cd = ft_cd_last(param, tok, path);
+	ft_good(param, path, param->good_cd, old_path);
 }
