@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/16 14:46:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:40:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,20 @@ int	is_expand_index(t_list_char *tok, int i)
 
 void	process_cmd_if_expand(char **cmd, int i)
 {
+	int	j;
 	char	*no_quote;
 
 	no_quote = all_quote_out(cmd[i]);
-	if (ft_strlen(no_quote) == 1)
+	if (ft_strlen(no_quote) == 1 && no_quote[0] == '$')
 		exec_supp(cmd, i);
 	if (ft_strchr(cmd[i], '$'))
-		exec_supp(cmd, i);
+	{
+		j = 0;
+		while (cmd[i][j] && cmd[i][j] != '$')
+			j++;
+		if (cmd[i][j + 1] && (is_white(cmd[i][j + 1]) || cmd[i][j + 1] == '"' || cmd[i][j + 1] == 39))
+			exec_supp(cmd, i);
+	}
 	free(no_quote);
 }
 
