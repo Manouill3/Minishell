@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/19 18:01:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 10:13:12 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,7 +351,7 @@ void		ft_pwd(void);
 ///			built-in.c/cd.c			///
 //////////////////////////////////////
 
-int			ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result);
+void		ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result);
 int			ft_cd_alone(char *path, char **path_split,
 				t_init *param, int result);
 int			ft_delete_file(t_init *param, char *path,
@@ -373,10 +373,17 @@ int			ft_cd_last(t_init *param, t_list_char *tok, int result, char *path);
 ///		built-in.c/cd_utils2.c		///
 //////////////////////////////////////
 
-void		ft_to_much_arg(t_init *param, char *path);
+int			ft_to_much_arg(t_init *param);
 int			ft_cd_slash(t_init *param, char *path);
 void		ft_modif_pwd(t_init *param, char *old_path);
-int			ft_cd_rest2(t_init *param, t_list_char *tok, char *path, int result);
+int			ft_cd_rest2(t_init *param, t_list_char *tok,
+				char *path, int result);
+
+////////////////////////////////////////
+///		built-in.c/cd_utils3.c		///
+//////////////////////////////////////
+
+void		ft_good(t_init *param, char *path, int good, char *old_path);
 
 ////////////////////////////////////////
 ///			built-in.c/env.c		///

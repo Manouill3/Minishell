@@ -6,13 +6,13 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/19 18:00:48 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/20 10:09:22 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-int	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result)
+void	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result)
 {
 	char	*tmp;
 
@@ -24,11 +24,10 @@ int	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int result)
 		perror("cd");
 		free(tmp);
 		free(path);
-		return (0);
+		return ;
 	}
 	free(tmp);
 	free(path);
-	return (1);
 }
 
 int	ft_cd_alone(char *path, char **path_split, t_init *param, int result)
@@ -67,10 +66,11 @@ int	ft_delete_file(t_init *param, char *path, int result, t_list_char *tok)
 
 void	ft_error(t_init *param, char *path, char *old_path)
 {
-	free(path);
-	free(old_path);
+	if (path)
+		free(path);
+	if (old_path)
+		free(old_path);
 	param->status = 1;
-	perror("cd");
 }
 
 void	ft_cd(t_init *param, t_list_char *tok)
@@ -89,17 +89,14 @@ void	ft_cd(t_init *param, t_list_char *tok)
 		return ;
 	path_split = NULL;
 	if (tok->len_cmd > 2)
-		ft_to_much_arg(param, path);
+		good = ft_to_much_arg(param);
 	else if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
 		good = ft_cd_alone(path, path_split, param, result);
 	else if (tok->cmd[1] && !ft_strcmp(tok->cmd[1], "/"))
 		good = ft_cd_slash(param, path);
 	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
-		good = ft_cd_rest(param, tok, path, result);
+		good = ft_cd_rest2(param, tok, path, result);
 	else if (check_inside_path(path, tok) == 0)
 		good = ft_cd_last(param, tok, result, path);
-	else if (good == 0)
-		ft_error(param, path, old_path);
-	if (good == 1)
-		ft_modif_pwd(param, old_path);
+	ft_good(param, path, good, old_path);
 }
