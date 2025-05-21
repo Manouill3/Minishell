@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 23:39:19 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/21 14:03:46 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-int	check_for_expand(t_list_char *tok, int *i, t_init *param)
+int	check_for_expand(t_list_char *tok, int *i)
 {
 	int	j;
 	int	save;
 
 	j = 0;
 	save = (*i);
-	while (save == (*i) && j < param->len_ind_exp)
+	while (save == (*i) && j < tok->len_ind_exp)
 	{
 		if (tok->ind_exp[j] == (*i))
 			(*i)++;
@@ -82,14 +82,13 @@ void	before_exec(t_init *param)
 	tmp = param->tok;
 	while (tmp)
 	{
-		ft_supp_quote(tmp, tmp->cmd, param);
-		check_back_expand(param, tmp, tmp->cmd);
-		ft_supp_quote(tmp, tmp->no_red, param);
-		check_back_expand(param, tmp, tmp->no_red);
+		ft_supp_quote(tmp, tmp->cmd);
+		check_back_expand(tmp, tmp->cmd);
+		ft_supp_quote(tmp, tmp->no_red);
+		check_back_expand(tmp, tmp->no_red);
 		free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
-	printf("%s\n", param->tok->cmd[0]);
 	if (!param->tok)
 		return ;
 	exec(param);

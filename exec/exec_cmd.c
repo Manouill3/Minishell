@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 11:19:46 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:12:04 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 void	child_process(t_list_char *tmp, t_init *param, int count)
 {
+	int	status;
+
 	if (tmp->infiles)
 		get_good_fd(param, tmp);
 	if (param->status == 1 && tmp->infiles[0] != NULL)
 	{
+		status = param->status;
+		ft_free_all(param);
+		free_struct(param);
 		close_all(param, tmp);
-		exit (param->status);
+		exit (status);
 	}
 	if (count == 0)
 	{
@@ -55,6 +60,7 @@ void	built_in_fork(t_init *param, t_list_char *tmp)
 
 void	exec_cmd(t_init *param, t_list_char *tmp)
 {
+	int		status;
 	char	**path;
 	char	**args;
 	char	**env;
@@ -66,10 +72,16 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 	env = conv_lst_tab(param->lst_env);
 	if (!args || !args[0])
 	{
+		ft_putstr_fd("command not found\n", 2);
+		param->status = 127;
+		status = param->status;
 		if (args)
 			free_tab(args);
 		free_tab(path);
-		exit(param->status);
+		free_tab(env);
+		ft_free_all(param);
+		free_struct(param);
+		exit(status);
 	}
 	if (execve(args[0], args, env) == -1)
 		fail_execve(args, path, env, param);

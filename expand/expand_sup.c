@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 17:08:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/19 08:43:22 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:29:33 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int	get_len_w_q(char *word, char quote, int i)
 	i++;
 	while (word[i] && word[i] != quote)
 		i++;
-	i++;
+	if (word[i])
+		i++;
 	return (i);
 }
 

@@ -65,7 +65,7 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 	char		**tmp_cmd;
 
 	i = 0;
-	while (i < param->len_ind_exp)
+	while (i < tmp->len_ind_exp)
 	{
 		if (tmp->cmd[i] && ft_strcmp(tmp->funct, tmp->cmd[i])
 			&& white_or_not(tmp->cmd[i]) && tmp->ind_exp[i] == i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 14:56:35 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/21 13:49:00 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**set_args_ann(char **args, char **path, t_init *param, char *free_tmp)
 	char	*tmp;
 
 	i = 0;
-	if (!args[0])
+	if (!args[0] || ft_strlen(args[0]) < 1)
 	{
 		free_tab(args);
 		return (NULL);

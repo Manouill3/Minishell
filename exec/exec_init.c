@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 14:23:48 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/21 14:35:07 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,10 @@ int	ft_exec_pipe(t_list_char *tmp, t_init *param, int count)
 	return (count);
 }
 
-int	secu_cmd(t_init *param, t_list_char *tmp)
+int	secu_cmd(t_list_char *tmp)
 {
-	if (tmp->len_cmd == 0 || (tmp->len_cmd == 1 && param->len_ind_exp < 1))
-	{
-		param->status = 127;
-		tmp = tmp->next;
+	if (tmp->len_cmd > 0 && tmp->len_ind_exp == tmp->len_cmd && ft_strlen(tmp->cmd[0]) < 1)
 		return (1);
-	}
 	return (0);
 }
 
@@ -80,8 +76,11 @@ void	exec(t_init *param)
 	signal(SIGQUIT, sigint_handler_child);
 	while (tmp)
 	{
-		if (secu_cmd(param, tmp))
+		if (secu_cmd(tmp))
+		{
+			tmp = tmp->next;
 			continue ;
+		}
 		if (param->count_cmd == 1 && (verif_built(tmp) == 2
 				|| verif_built(tmp) == 4
 				|| verif_built(tmp) == 5 || verif_built(tmp) == 7))

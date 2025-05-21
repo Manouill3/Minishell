@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 16:39:23 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/21 14:02:55 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int	check_redir_no_file(t_init *param, char *line, int *i)
 	return (0);
 }
 
-int	is_expand_index(t_list_char *tok, int i, t_init *param)
+int	is_expand_index(t_list_char *tok, int i)
 {
 	int	k;
 
 	k = 0;
-	while (k < param->len_ind_exp && tok->ind_exp[k] != i)
+	while (k < tok->len_ind_exp && tok->ind_exp[k] != i)
 		k++;
-	if (k >= param->len_ind_exp || tok->ind_exp[k] == 0)
+	if (k >= tok->len_ind_exp || tok->ind_exp[k] == 0)
 		return (0);
 	return (1);
 }
@@ -71,14 +71,14 @@ void	process_cmd_if_expand(char **cmd, int i)
 	free(no_quote);
 }
 
-void	check_back_expand(t_init *param, t_list_char *tok, char **cmd)
+void	check_back_expand(t_list_char *tok, char **cmd)
 {
 	int	i;
 
 	i = 0;
 	while (cmd[i])
 	{
-		if (!is_expand_index(tok, i, param))
+		if (!is_expand_index(tok, i))
 		{
 			i++;
 			continue ;

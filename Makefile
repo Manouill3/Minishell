@@ -90,9 +90,6 @@ $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-val:
-	valgrind --leak-check=full --track-origins=yes --track-fds=yes --trace-children=yes --suppressions=readline.sup ./minishell
-
 clean:
 	@rm -rf $(OBJ_DIR)
 	@$(MAKE) -s -C $(LIB) clean
