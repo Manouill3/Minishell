@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_var_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:22:16 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/13 17:14:50 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/21 15:51:42 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_alloc_new_const(t_list_char *tok, t_init *param,
 	param->len_const_x = 0;
 	new_const = NULL;
 	j = param->i_ex;
-	while (tok->cmd[1][param->i_ex])
+	while (tok->cmd[tok->ex_j][param->i_ex])
 	{
 		param->len_const_x++;
 		param->i_ex++;
@@ -47,9 +47,9 @@ void	ft_alloc_new_const(t_list_char *tok, t_init *param,
 	if (new_const)
 	{
 		param->i_ex = 0;
-		while (tok->cmd[1][j])
+		while (tok->cmd[tok->ex_j][j])
 		{
-			new_const[param->i_ex] = tok->cmd[1][j];
+			new_const[param->i_ex] = tok->cmd[tok->ex_j][j];
 			param->i_ex++;
 			j++;
 		}

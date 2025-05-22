@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:33:03 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/19 13:47:40 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/21 15:55:38 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	add_to_env(t_init *param, char *name, char *add, t_list_char *tok)
 		if (!ft_strcmp(name, exp->name))
 		{
 			ft_lstadd_back_env(&param->lst_env,
-				ft_lstnew_env(ft_strdup(tok->cmd[1])));
+				ft_lstnew_env(ft_strdup(tok->cmd[tok->ex_j])));
 			while (env->next)
 				env = env->next;
 			get_name_env_more(env);
@@ -63,12 +63,14 @@ int	add_to_env(t_init *param, char *name, char *add, t_list_char *tok)
 void	add_to_both_lists(t_init *param, t_list_char *tok,
 		char *add, char *name)
 {
+	int		j;
 	t_env	*env;
 	t_env	*exp;
 
-	ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(tok->cmd[1])));
+	j = tok->ex_j;
+	ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(tok->cmd[j])));
 	ft_lstadd_back_env(&param->lst_export,
-		ft_lstnew_env(ft_strdup(tok->cmd[1])));
+		ft_lstnew_env(ft_strdup(tok->cmd[j])));
 	env = param->lst_env;
 	exp = param->lst_export;
 	while (env->next)
@@ -85,12 +87,14 @@ void	add_to_both_lists(t_init *param, t_list_char *tok,
 int	ft_add_value_var(t_init *param, int i, t_list_char *tok)
 {
 	int		len;
+	int		j;
 	char	*add;
 	char	*name;
 
-	len = ft_strlen(tok->cmd[1]) - i;
-	add = ft_substr(tok->cmd[1], i, len);
-	name = ft_substr(tok->cmd[1], 0, (i - 2));
+	j = tok->ex_j;
+	len = ft_strlen(tok->cmd[j]) - i;
+	add = ft_substr(tok->cmd[j], i, len);
+	name = ft_substr(tok->cmd[j], 0, (i - 2));
 	if (existing_vars(param->lst_env, param->lst_export, name, add) == 1)
 		return (0);
 	if (add_to_env(param, name, add, tok) == 1)

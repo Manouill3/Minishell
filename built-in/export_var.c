@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:23:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/12 17:04:04 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/21 15:53:49 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 int	ft_verif_exp(t_init *param, t_list_char *tok)
 {
-	while (tok->cmd[1][param->i_ex] != '=' && tok->cmd[1][param->i_ex])
+	int	j;
+
+	j = tok->ex_j;
+	while (tok->cmd[j][param->i_ex] != '=' && tok->cmd[j][param->i_ex])
 	{
-		if (ft_isalnum(tok->cmd[1][param->i_ex]) == 0)
+		if (ft_isalnum(tok->cmd[j][param->i_ex]) == 0)
 		{
 			param->status = 1;
 			write(2, " not a valid identifier\n", 24);
@@ -44,10 +47,13 @@ t_env	*ft_verif_env_create(t_env *tmp_env, char *name, t_init *param)
 int	ft_existing_export(char	*name, t_env *tmp_exp,
 		t_init *param, t_list_char *tok)
 {
+	int	j;
+
+	j = tok->ex_j;
 	if (!ft_strcmp(tmp_exp->name, name))
 		param->exist_x = 1;
 	if (!ft_strcmp(tmp_exp->name, name) && param->create_x == 1
-		&& tok->cmd[1][param->i_ex] != '=')
+		&& tok->cmd[j][param->i_ex] != '=')
 	{
 		tmp_exp->exp = 0;
 		if (param->create_x != 2)
@@ -56,7 +62,7 @@ int	ft_existing_export(char	*name, t_env *tmp_exp,
 			return (1);
 		}
 	}
-	if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[1][param->i_ex] != '=')
+	if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[j][param->i_ex] != '=')
 	{
 		tmp_exp->exp = 1;
 		if (param->create_x != 2)
@@ -91,15 +97,15 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 	tmp_env = param->lst_env;
 	if (ft_verif_exp(param, tok) == 1)
 		return ;
-	name = ft_substr(tok->cmd[1], 0, (param->i_ex));
+	name = ft_substr(tok->cmd[tok->ex_j], 0, (param->i_ex));
 	tmp_env = ft_verif_env_create(tmp_env, name, param);
-	if (param->create_x == 0 && tok->cmd[1][param->i_ex] == '=')
+	if (param->create_x == 0 && tok->cmd[tok->ex_j][param->i_ex] == '=')
 		param->create_x = 2;
 	while (tmp_exp)
 	{
 		if (ft_existing_export(name, tmp_exp, param, tok) == 1)
 			return ;
-		if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[1][param->i_ex] == '=')
+		if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[tok->ex_j][param->i_ex] == '=')
 		{
 			ft_alloc_new_const(tok, param, tmp_exp, tmp_env);
 			if (ft_return_var(param, name) == 1)

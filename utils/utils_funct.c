@@ -94,6 +94,6 @@ int	nb_exp(char **cmd)
 		}
 		i++;
 	}
-	printf("nb = %d\n", nb);
+	// printf("nb = %d\n", nb);
 	return (nb);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 17:33:32 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:44:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_env
 
 typedef struct s_list_char
 {
+	int					ex_j;
 	int					len_cmd;
 	int					fd_infile;
 	int					fd_outfile;
@@ -293,14 +294,14 @@ char		*get_final_eof(char *str);
 ///			heredoc/heredoc_exec.c  ///
 //////////////////////////////////////
 
-void		ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env);
-int			handle_heredoc_interrupt_before(t_heredoc *heredoc,
+void		ft_heredoc_oef_before(t_init *param, t_heredoc *heredoc, int i, t_env *env);
+int			handle_heredoc_interrupt_before(t_init *param, t_heredoc *heredoc,
 				char *final_eof);
-void		ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env);
+void		ft_heredoc_oef_last(t_init *param, t_heredoc *heredoc, int i, t_env *env);
 int			handle_heredoc_input(t_heredoc *heredoc, t_env *env,
 				char *final_eof, int i);
-int			ft_handle_heredoc_interrupt(t_heredoc *heredoc, char *final_eof);
-void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env);
+int			ft_handle_heredoc_interrupt(t_init *param, t_heredoc *heredoc, char *final_eof);
+void		exec_heredoc(t_init *param, t_list_char *tmp, t_heredoc *heredoc, t_env *env);
 
 ////////////////////////////////////////
 ///			exec/exec_init.c		///

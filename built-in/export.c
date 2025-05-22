@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/19 13:39:38 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/21 16:09:38 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	ft_add_export_only(t_init *param, t_list_char *tok, t_env *tmp_exp)
 {
+	int	j;
+	j = tok->ex_j;
 	ft_lstadd_back_env(&param->lst_export,
-		ft_lstnew_env(ft_strdup(tok->cmd[1])));
+		ft_lstnew_env(ft_strdup(tok->cmd[j])));
 	while (tmp_exp->next != NULL)
 		tmp_exp = tmp_exp->next;
 	get_name_env(tmp_exp);
@@ -27,20 +29,22 @@ void	ft_add_export_only(t_init *param, t_list_char *tok, t_env *tmp_exp)
 int	ft_continue_value(t_init *param, t_list_char *tok)
 {
 	int	i;
+	int	j;
 
 	i = 1;
-	while ((tok->cmd[1][i] != '=' && tok->cmd[1][i]))
+	j = tok->ex_j;
+	while ((tok->cmd[j][i] != '=' && tok->cmd[j][i]))
 	{
-		if (tok->cmd[1][i] == '+' && tok->cmd[1][i + 1] == '=')
+		if (tok->cmd[j][i] == '+' && tok->cmd[j][i + 1] == '=')
 		{
 			i = i + 2;
 			ft_add_value_var(param, i, tok);
 			return (0);
 		}
-		if (ft_isalnum(tok->cmd[1][i]) == 0)
+		if (ft_isalnum(tok->cmd[j][i]) == 0)
 		{
 			param->status = 1;
-			write(2, " not a valid identifier\n", 24);
+			write(2, "not a valid identifier\n", 24);
 			return (0);
 		}
 		i++;
@@ -51,19 +55,21 @@ int	ft_continue_value(t_init *param, t_list_char *tok)
 void	ft_create_add_back(t_init *param, t_list_char *tok,
 		t_env *tmp_exp, int exist)
 {
+	int		j;
 	t_env	*tmp_env;
 
+	j = tok->ex_j;
 	tmp_env = param->lst_env;
 	if (exist != 1)
 	{
 		ft_lstadd_back_env(&param->lst_export,
-			ft_lstnew_env(ft_strdup(tok->cmd[1])));
+			ft_lstnew_env(ft_strdup(tok->cmd[j])));
 		while (tmp_exp->next != NULL)
 			tmp_exp = tmp_exp->next;
 		get_name_env(tmp_exp);
 		get_final_cont(tmp_exp);
 	}
-	ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(tok->cmd[1])));
+	ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(tok->cmd[j])));
 	while (tmp_env->next != NULL)
 		tmp_env = tmp_env->next;
 	get_name_env(tmp_env);
@@ -95,15 +101,23 @@ void	ft_export(t_init *param, t_list_char *tok)
 	tmp_exp = param->lst_export;
 	if (tok->cmd[1] == NULL)
 		ft_print_exp(tmp_exp);
-	else if (ft_isalpha(tok->cmd[1][0]) || tok->cmd[1][0] == '_')
+	tok->ex_j = 1;
+	while (tok->ex_j < tok->len_cmd && tok->ex_j)
 	{
-		verif = ft_continue_value(param, tok);
-		if (verif == 1)
-			ft_create_var(param, tok, tmp_exp);
-	}
-	else
-	{
-		param->status = 1;
-		write(2, " not a valid identifier\n", 24);
+		printf("cmd_no_red = %s\n", tok->no_red[tok->ex_j]);
+		printf("cmd = %s\n", tok->cmd[tok->ex_j]);
+		if (ft_isalpha(tok->cmd[tok->ex_j][0]) || tok->cmd[tok->ex_j][0] == '_')
+		{
+			verif = ft_continue_value(param, tok);
+			if (verif == 1)
+				ft_create_var(param, tok, tmp_exp);
+		}
+		else
+		{
+			param->status = 1;
+			write(2, " not a valid identifier\n", 24);
+			break;
+		}
+		tok->ex_j++;
 	}
 }

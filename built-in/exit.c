@@ -77,11 +77,9 @@ void	ft_exit(t_init *param)
 		ft_verif_nb(param);
 		param->status = 1;
 		write(2, " too many arguments\n", 20);
-		status = param->status;
-		ft_free_all(param);
-		free_struct(param);
-		exit(status);
+		return ;
 	}
 	nb_arg = ft_free_param(param, nb_arg);
 	exit(nb_arg);
 }
+
