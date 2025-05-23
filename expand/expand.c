@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/16 14:53:44 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/22 15:12:37 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	expand_arg(t_init *param)
 		i = 0;
 		j = 0;
 		tmp->ind_exp = ft_calloc(sizeof(int), nb_exp(tmp->cmd) + 1);
-		param->len_ind_exp = nb_exp(tmp->cmd) + 1;
+		tmp->len_ind_exp = nb_exp(tmp->cmd) + 1;
 		if (!tmp->ind_exp)
 			return ;
 		while (tmp->cmd[i])

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 14:23:48 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/22 15:25:34 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_exec_pipe(t_list_char *tmp, t_init *param, int count)
 
 int	secu_cmd(t_init *param, t_list_char *tmp)
 {
-	if (tmp->len_cmd == 0 || (tmp->len_cmd == 1 && param->len_ind_exp < 1))
+	if (tmp->len_cmd == 0 || (tmp->len_cmd == 1 && tmp->len_ind_exp < 1))
 	{
 		param->status = 127;
 		tmp = tmp->next;

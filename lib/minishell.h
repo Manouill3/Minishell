@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/21 15:44:08 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/23 16:39:47 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_list_char
 	int					len_cmd;
 	int					fd_infile;
 	int					fd_outfile;
+	int					len_ind_exp;
 	int					*ind_exp;
 	char				**cmd_path;
 	char				**cmd;
@@ -74,7 +75,6 @@ typedef struct s_init
 	int					len_const_x;
 	int					exist_x;
 	int					create_x;
-	int					len_ind_exp;
 	int					status;
 	int					count_cmd;
 	char				*old_pwd;
@@ -181,7 +181,7 @@ int			get_token(t_init *param);
 
 void		supp_quote_red(t_list_char *tok);
 int			verif_nb_quote(char **tab);
-int			check_for_expand(t_list_char *tok, int *i, t_init *param);
+int			check_for_expand(t_list_char *tok, int *i);
 void		get_funct_ann(t_list_char *tmp, int i);
 void		get_funct(t_list_char *lst);
 void		before_exec(t_init *param);
@@ -195,13 +195,13 @@ void		verif_expand(t_init *param);
 void		ft_free_realoc(t_init *param, t_list_char *tmp,
 				char **tmp_cmd, char **tmp_val);
 void		process_cmd_if_expand(char **cmd, int i);
-int			is_expand_index(t_list_char *tok, int i, t_init *param);
+int			is_expand_index(t_list_char *tok, int i);
 int			check_mixed_redir(t_init *param, char *line, int i);
 int			check_too_many_redir(t_init *param, char *line, int i);
 int			check_redir_no_file(t_init *param, char *line, int *i);
-void		check_back_expand(t_init *param, t_list_char *tok, char **cmd);
+void		check_back_expand(t_list_char *tok, char **cmd);
 void		exec_supp(char **cmd, int i);
-void		ft_supp_quote(t_list_char *tok, char **cmd, t_init *param);
+void		ft_supp_quote(t_list_char *tok, char **cmd);
 void		end_verif_exp(t_init *param, char **tmp_cmd,
 				char **tmp_val, int len_tmp);
 void		ft_count_len(int *len_tmp, int *i,
@@ -213,6 +213,7 @@ int			no_quote_word_len(char *word);
 char		*no_quote_word(char *word);
 void		exec_supp_quote_red(t_list_char *tmp, int i);
 int			verif_odd(char **tab, int count1, int count2);
+int			verif_built_par(t_list_char *tok);
 
 ////////////////////////////////////////
 ///	parsing/parse_syntax_error.c    ///

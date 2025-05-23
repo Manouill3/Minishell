@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:40:34 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 16:29:39 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/23 16:38:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,25 @@ int	verif_nb_quote(char **tab)
 	return (0);
 }
 
+int	verif_built_par(t_list_char *tok)
+{
+	if (!ft_strcmp(tok->cmd[0], "echo"))
+		return (1);
+	if (!ft_strcmp(tok->cmd[0], "cd"))
+		return (2);
+	if (!ft_strcmp(tok->cmd[0], "pwd"))
+		return (3);
+	if (!ft_strcmp(tok->cmd[0], "export"))
+		return (4);
+	if (!ft_strcmp(tok->cmd[0], "unset"))
+		return (5);
+	if (!ft_strcmp(tok->cmd[0], "env"))
+		return (6);
+	if (!ft_strcmp(tok->cmd[0], "exit"))
+		return (7);
+	return (0);
+}
+
 void	ft_free_realoc(t_init *param, t_list_char *tmp,
 		char **tmp_cmd, char **tmp_val)
 {
@@ -111,7 +130,8 @@ void	ft_free_realoc(t_init *param, t_list_char *tmp,
 	free_tab(tmp->cmd);
 	free_tab(tmp->no_red);
 	tmp->cmd = tmp_cmd;
-	param->tok->funct = tmp->cmd[0];
+	if (verif_built_par(tmp) != 0)
+		param->tok->funct = tmp->cmd[0];
 	free(tmp_val);
 	i = 0;
 	while (tmp->cmd[i])

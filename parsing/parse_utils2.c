@@ -57,6 +57,7 @@ char	**ft_create_tmp_cmd(char **tmp_cmd, int i, int len_tmp, char **tmp_val)
 	return (tmp_cmd);
 }
 
+
 void	exec_verif_exp(t_init *param, t_list_char *tmp)
 {
 	int			i;
@@ -65,11 +66,18 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 	char		**tmp_cmd;
 
 	i = 0;
-	while (i < param->len_ind_exp)
+	while (i < tmp->len_ind_exp)
 	{
-		if (tmp->cmd[i] && ft_strcmp(tmp->funct, tmp->cmd[i])
-			&& white_or_not(tmp->cmd[i]) && tmp->ind_exp[i] == i)
+		printf("tmp->cmd[%d] + 1 = %s\n", i, tmp->cmd[i+1]);
+		printf("tmp->funct = %s\n", tmp->funct);
+		printf("tok->ind_exp[%d] = %d\n", i, tmp->ind_exp[i]);
+		printf("tok->len_ind_exp[] = %d\n", tmp->len_ind_exp);
+		if (tmp->cmd[i] && tmp->len_ind_exp > 1 && ((white_or_not(tmp->cmd[i]) && tmp->ind_exp[i] == i)))
 		{
+			printf("++++tmp->cmd[%d] + 1 = %s\n", i, tmp->cmd[i]);
+			printf("+++tmp->funct = %s\n", tmp->funct);
+			printf("++++tok->ind_exp[%d] = %d\n", i, tmp->ind_exp[i]);
+			printf("++++tok->len_ind_exp[] = %d\n", tmp->len_ind_exp);
 			tmp_val = ft_exp_split(tmp->cmd[i]);
 			free(tmp->cmd[i]);
 			tmp->cmd[i] = NULL;
@@ -79,6 +87,22 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 			param->i_ex = i + len_tmp;
 			end_verif_exp(param, tmp_cmd, tmp_val, len_tmp);
 			ft_free_realoc(param, tmp, tmp_cmd, tmp_val);
+		}
+		else if (!ft_strcmp("export", tmp->cmd[0]) && tmp->cmd[i + 1] && tmp->len_ind_exp > 1)
+		{
+			tmp_val = ft_exp_split(tmp->cmd[i + 1]);
+			int k = 0;
+			while (tmp_val[k])
+			{
+				tmp_val[k] = "hello";
+				printf("%s\n",tmp_val[k]);
+				k++;
+			}
+			free_tab(tmp_val);
+			printf("----tmp->cmd[%d] + 1 = %s\n", i, tmp->cmd[i]);
+			printf("----tmp->funct = %s\n", tmp->funct);
+			printf("----tok->ind_exp[%d] = %d\n", i, tmp->ind_exp[i]);
+			printf("----tok->len_ind_exp[] = %d\n", tmp->len_ind_exp);
 		}
 		i++;
 	}
