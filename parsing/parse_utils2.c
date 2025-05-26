@@ -42,7 +42,7 @@ void	ft_count_len(int *len_tmp, int *i, char **tmp_val, t_list_char *tmp)
 {
 	while (tmp_val[(*len_tmp)])
 		(*len_tmp)++;
-	while (tmp->cmd[(*i) + 1])
+	while (tmp && tmp->cmd && tmp->cmd[*i] && tmp->cmd[(*i) + 1])
 		(*i)++;
 }
 
@@ -72,7 +72,6 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 			&& white_or_not(tmp->cmd[i]) && tmp->ind_exp[i] == i)
 		{
 			tmp_val = ft_exp_split(tmp->cmd[i], param->mal);
-			// free(tmp->cmd[i]);
 			tmp->cmd[i] = NULL;
 			len_tmp = 0;
 			ft_count_len(&len_tmp, &i, tmp_val, tmp);
@@ -81,8 +80,10 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 			end_verif_exp(param, tmp_cmd, tmp_val, len_tmp);
 			ft_free_realoc(param, tmp, tmp_cmd, tmp_val);
 		}
+		exec_verif_exp2(param, tmp, i);
 		i++;
 	}
+	
 }
 
 void	verif_expand(t_init *param)

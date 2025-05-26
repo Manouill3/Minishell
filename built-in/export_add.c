@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:33:03 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/26 10:37:20 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/26 13:29:20 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,16 @@ int	add_to_env(t_init *param, char *name, char *add, t_list_char *tok)
 	return (0);
 }
 
-void	add_to_both_lists(t_init *param, t_list_char *tok,
-		char *add, char *name)
+void	add_to_both_lists(t_init *param, t_list_char *tok)
 {
+	int		j;
 	t_env	*env;
 	t_env	*exp;
 
-	(void)add;
-	(void)name;
-	ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(tok->cmd[1], param->mal), param->mal));
+	j = tok->ex_j;
+	ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(tok->cmd[j], param->mal), param->mal));
 	ft_lstadd_back_env(&param->lst_export,
-		ft_lstnew_env(ft_strdup(tok->cmd[1], param->mal), param->mal));
+		ft_lstnew_env(ft_strdup(tok->cmd[j], param->mal), param->mal));
 	env = param->lst_env;
 	exp = param->lst_export;
 	while (env->next)
@@ -86,17 +85,19 @@ void	add_to_both_lists(t_init *param, t_list_char *tok,
 
 int	ft_add_value_var(t_init *param, int i, t_list_char *tok)
 {
+	int		j;
 	int		len;
 	char	*add;
 	char	*name;
 
-	len = ft_strlen(tok->cmd[1]) - i;
-	add = ft_substr(tok->cmd[1], i, len, param->mal);
-	name = ft_substr(tok->cmd[1], 0, (i - 2), param->mal);
+	j = tok->ex_j;
+	len = ft_strlen(tok->cmd[j]) - i;
+	add = ft_substr(tok->cmd[j], i, len, param->mal);
+	name = ft_substr(tok->cmd[j], 0, (i - 2), param->mal);
 	if (existing_vars(param->lst_env, param->lst_export, name, add, param->mal) == 1)
 		return (0);
 	if (add_to_env(param, name, add, tok) == 1)
 		return (0);
-	add_to_both_lists(param, tok, add, name);
+	add_to_both_lists(param, tok);
 	return (0);
 }

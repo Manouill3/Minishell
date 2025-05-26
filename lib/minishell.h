@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/26 10:34:25 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:53:18 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_env
 
 typedef struct s_list_char
 {
+	int					ex_j;
 	int					len_cmd;
 	int					fd_infile;
 	int					fd_outfile;
@@ -191,6 +192,13 @@ char		*no_quote_word(char *word, t_mal *mal);
 void		exec_supp(char **cmd, int i, t_mal *mal);
 void		ft_supp_quote(t_list_char *tok, char **cmd, t_mal *mal);
 int			check_mixed_redir(t_init *param, char *line, int i);
+
+////////////////////////////////////////
+///			parsing/parse_utils5.c  ///
+//////////////////////////////////////
+
+char    **ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp);
+void	exec_verif_exp2(t_init *param, t_list_char *tmp, int i);
 
 ////////////////////////////////////////
 ///			parsing/parsing_utils3.c///
@@ -506,8 +514,7 @@ void		export_content(t_env *exp, char *add, t_mal *mal);
 void		export_content(t_env *exp, char *add, t_mal *mal);
 int			existing_vars(t_env *env, t_env *exp, char *name, char *add, t_mal *mal);
 int			add_to_env(t_init *param, char *name, char *add, t_list_char *tok);
-void		add_to_both_lists(t_init *param, t_list_char *tok,
-				char *add, char *name);
+void		add_to_both_lists(t_init *param, t_list_char *tok);
 int			ft_add_value_var(t_init *param, int i, t_list_char *tok);
 
 ////////////////////////////////////////
@@ -521,7 +528,7 @@ void		ft_alloc_new_const(t_list_char *tok, t_init *param,
 void		ft_rest_var(t_env *tmp_env, t_env *tmp_exp,
 				t_init *param, t_list_char *tok);
 void		ft_init_var(t_init *param);
-int			ft_return_var(t_init *param, char *name);
+int			ft_return_var(t_init *param);
 							
 ////////////////////////////////////////
 ///	        built-in.c/export_var.c	///
