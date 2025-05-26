@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:55:11 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 15:01:19 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:13:44 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ char	*check_quote_q(t_init *param, char *word, t_env *env)
 	char	*no_quote;
 	char	*final_word;
 
-	no_quote = char_out(word, 39);
+	no_quote = char_out(word, 39, param->mal);
 	if (!ft_strcmp(no_quote, "$?"))
 	{
-		free(no_quote);
+		// free(no_quote);
 		return (get_exit_value(param, word));
 	}
 	if (ft_strlen(no_quote) == 1 && no_quote[0] == '$')
 	{
-		free(no_quote);
-		return (ft_strdup(word));
+		// free(no_quote);
+		return (ft_strdup(word, param->mal));
 	}
-	free(no_quote);
+	// free(no_quote);
 	if (!ft_strchr(word, '$'))
-		return (ft_strdup(word));
-	final_word = get_env_value(env, word);
+		return (ft_strdup(word, param->mal));
+	final_word = get_env_value(env, word, param);
 	return (final_word);
 }
 
@@ -73,9 +73,9 @@ char	*get_exit_value(t_init *param, char *word)
 
 	i = 0;
 	j = 0;
-	len = len_get_exit_value(param->status, word);
-	value = ft_itoa(param->status);
-	final_word = ft_calloc(len + 1, sizeof(char));
+	len = len_get_exit_value(param->status, word, param->mal);
+	value = ft_itoa(param->status, param->mal);
+	final_word = add_calloc(param->mal, len + 1, sizeof(char));
 	if (!final_word)
 		return (NULL);
 	len = 0;
@@ -87,11 +87,11 @@ char	*get_exit_value(t_init *param, char *word)
 		i++;
 	while (word[i])
 		final_word[j++] = word[i++];
-	free(value);
+	// free(value);
 	return (final_word);
 }
 
-int	len_get_exit_value(int status, char *word)
+int	len_get_exit_value(int status, char *word, t_mal *mal)
 {
 	int		i;
 	int		j;
@@ -101,7 +101,7 @@ int	len_get_exit_value(int status, char *word)
 	i = 0;
 	j = 0;
 	count = 0;
-	value = ft_itoa(status);
+	value = ft_itoa(status, mal);
 	while (word[i] && word[i++] != '$')
 		count++;
 	while (value[j++])
@@ -110,7 +110,7 @@ int	len_get_exit_value(int status, char *word)
 		i++;
 	while (word[i++])
 		count++;
-	free(value);
+	// free(value);
 	return (count);
 }
 

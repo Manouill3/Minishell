@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_utils_split.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/04/24 20:37:26 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/22 14:18:34 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_quote(int i, const char *s, char c)
 	return (i);
 }
 
-char	**ft_extract_word(const char *s, int *k, int *i, char **tab)
+char	**ft_extract_word(const char *s, int *k, int *i, char **tab, t_mal *mal)
 {
 	int		j;
 	int		len;
@@ -38,7 +38,7 @@ char	**ft_extract_word(const char *s, int *k, int *i, char **tab)
 
 	j = 0;
 	len = len_word(s, (*k));
-	tab[(*i) - 1] = ft_calloc(len + 1, sizeof(char));
+	tab[(*i) - 1] = add_calloc(mal, len + 1, sizeof(char));
 	if (!tab[(*i) - 1])
 		free_all(tab);
 	while (s[(*k)] && j < len)
@@ -57,7 +57,7 @@ char	**ft_extract_word(const char *s, int *k, int *i, char **tab)
 	return (tab);
 }
 
-char	**split_ope(const char *s, int k, int i, char **tab)
+char	**split_ope(const char *s, int k, int i, char **tab, t_mal *mal)
 {
 	int	nb_word;
 
@@ -66,12 +66,12 @@ char	**split_ope(const char *s, int k, int i, char **tab)
 	{
 		k = secu(k, s);
 		if (k < (int)ft_strlen(s) && i - 1 < nb_word)
-			ft_extract_word(s, &k, &i, tab);
+			ft_extract_word(s, &k, &i, tab, mal);
 	}
 	return (tab);
 }
 
-char	**handle_quote(const char *s, int *k, char **tab, int i)
+char	**handle_quote(const char *s, int *k, char **tab, int i, t_mal *mal)
 {
 	int		j;
 	int		len;
@@ -80,7 +80,7 @@ char	**handle_quote(const char *s, int *k, char **tab, int i)
 	j = 0;
 	(*k) = secu((*k), s);
 	len = len_word(s, (*k));
-	tab[i - 1] = ft_calloc(len + 1, sizeof(char));
+	tab[i - 1] = add_calloc(mal, len + 1, sizeof(char));
 	if (!tab[i - 1])
 		free_all(tab);
 	while (j < len && s[(*k)])

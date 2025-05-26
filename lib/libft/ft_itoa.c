@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:29:00 by mdegache          #+#    #+#             */
-/*   Updated: 2024/10/16 14:27:46 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:26:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 static int	nb_len(long int nb)
@@ -33,7 +34,7 @@ static int	nb_len(long int nb)
 	return (i);
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa(int n, t_mal *mal)
 {
 	int			len;
 	char		*str;
@@ -41,7 +42,7 @@ char	*ft_itoa(int n)
 
 	nb = n;
 	len = nb_len(nb);
-	str = malloc(sizeof(char) * len + 1);
+	str = add_malloc(mal, sizeof(char) * len + 1);
 	if (!str)
 		return (NULL);
 	str[len--] = '\0';

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 16:47:32 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/26 10:21:21 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,31 @@ void	ft_cd_rest(t_init *param, t_list_char *tok, char *path)
 	int		result;
 	char	*tmp;
 
-	tmp = ft_path_user(path, tok);
+	tmp = ft_path_user(path, tok, param->mal);
 	result = chdir(tmp);
 	if (result == -1)
 	{
 		param->status = 1;
-		free(tmp);
-		free(path);
+		// free(tmp);
+		// free(path);
 		perror("cd");
 		return ;
 	}
-	free(path);
-	free(tmp);
+	// free(path);
+	// free(tmp);
 }
 
 int	ft_cd_alone(char *path, char **path_split, t_init *param)
 {
 	int		result;
 
-	free(path);
+	// free(path);
 	path = NULL;
-	path_split = make_path(param->lst_env);
+	path_split = make_path(param->lst_env, param->mal);
 	if (!path_split)
 		return (0);
-	path = ft_give_home_way(path_split, "homes");
-	free_tab(path_split);
+	path = ft_give_home_way(path_split, "homes", param->mal);
+	// free_tab(path_split);
 	if (!path)
 		return (0);
 	result = chdir(path);
@@ -50,7 +50,7 @@ int	ft_cd_alone(char *path, char **path_split, t_init *param)
 		param->status = 1;
 		perror("cd");
 	}
-	free(path);
+	// free(path);
 	return (1);
 }
 

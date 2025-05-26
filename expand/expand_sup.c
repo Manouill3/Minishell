@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_sup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 17:08:00 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/21 14:29:33 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:28:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	get_len_w_q(char *word, char quote, int i)
 	return (i);
 }
 
-char	*all_quote_out(char *str)
+char	*all_quote_out(char *str, t_mal *mal)
 {
 	char	*new;
 	int		i;
@@ -67,7 +67,7 @@ char	*all_quote_out(char *str)
 
 	i = 0;
 	j = 0;
-	new = ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	new = add_calloc(mal, ft_strlen(str) + 1, sizeof(char));
 	if (!new)
 		return (NULL);
 	while (str[i])
@@ -82,7 +82,7 @@ char	*all_quote_out(char *str)
 	return (new);
 }
 
-char	*char_out(char *str, char c)
+char	*char_out(char *str, char c, t_mal *mal)
 {
 	char	*new;
 	int		i;
@@ -90,7 +90,7 @@ char	*char_out(char *str, char c)
 
 	i = 0;
 	j = 0;
-	new = ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	new = add_calloc(mal, ft_strlen(str) + 1, sizeof(char));
 	if (!new)
 		return (NULL);
 	while (str[i])

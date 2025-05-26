@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/21 14:12:04 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:43:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	child_process(t_list_char *tmp, t_init *param, int count)
 	if (param->status == 1 && tmp->infiles[0] != NULL)
 	{
 		status = param->status;
-		ft_free_all(param);
-		free_struct(param);
+		ft_lstclear_mal(&param->mal);
 		close_all(param, tmp);
 		exit (status);
 	}
@@ -52,8 +51,7 @@ void	built_in_fork(t_init *param, t_list_char *tmp)
 	{
 		ft_exec_built_in(param, tmp);
 		status = param->status;
-		ft_free_all(param);
-		free_struct(param);
+		ft_lstclear_mal(&param->mal);
 		exit (status);
 	}
 }
@@ -66,21 +64,16 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 	char	**env;
 
 	built_in_fork(param, tmp);
-	path = make_path(param->lst_env);
-	args = basic_args(tmp->no_red);
+	path = make_path(param->lst_env, param->mal);
+	args = basic_args(tmp->no_red, param->mal);
 	args = set_args(args, path, param);
-	env = conv_lst_tab(param->lst_env);
+	env = conv_lst_tab(param->lst_env, param->mal);
 	if (!args || !args[0])
 	{
 		ft_putstr_fd("command not found\n", 2);
 		param->status = 127;
 		status = param->status;
-		if (args)
-			free_tab(args);
-		free_tab(path);
-		free_tab(env);
-		ft_free_all(param);
-		free_struct(param);
+		ft_lstclear_mal(&param->mal);
 		exit(status);
 	}
 	if (execve(args[0], args, env) == -1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:25:16 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/21 13:50:10 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:43:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_dup_file(t_init *param, t_list_char *tmp, int count)
 		ft_dup_file_ann(param, tmp);
 }
 
-char	**basic_args(char **tab)
+char	**basic_args(char **tab, t_mal *mal)
 {
 	int		i;
 	int		len;
@@ -62,10 +62,10 @@ char	**basic_args(char **tab)
 	i = 0;
 	while (tab[len])
 		len++;
-	args = ft_calloc(len + 1, sizeof(char *));
+	args = add_calloc(mal, len + 1, sizeof(char *));
 	while (tab[i])
 	{
-		args[i] = ft_strdup(tab[i]);
+		args[i] = ft_strdup(tab[i], mal);
 		i++;
 	}
 	return (args);
@@ -76,13 +76,12 @@ void	fail_execve(char **args, char **path,
 {
 	int		status;
 
+	(void)args;
+	(void)path;
+	(void)env;
 	status = param->status;
 	if (!path)
 		ft_putstr_fd(" command not found\n", 2);
-	free_tab(path);
-	free_tab(args);
-	free_tab(env);
-	ft_free_all(param);
-	free_struct(param);
+	ft_lstclear_mal(&param->mal);
 	exit (status);
 }

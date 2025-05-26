@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_funct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 22:48:49 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/16 14:54:00 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/23 11:08:46 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	close_all(t_init *param, t_list_char *tmp)
 		close(param->fds.pipe_fd[1]);
 }
 
-void	clear_files(t_list_char *lst)
-{
-	if (lst->heredoc->fd != -1)
-		close(lst->heredoc->fd);
-	if (lst->heredoc->name)
-	{
-		unlink(lst->heredoc->name);
-		free(lst->heredoc->name);
-		lst->heredoc->name = NULL;
-	}
-}
+// void	clear_files(t_list_char *lst)
+// {
+// 	if (lst->heredoc->fd != -1)
+// 		close(lst->heredoc->fd);
+// 	if (lst->heredoc->name)
+// 	{
+// 		unlink(lst->heredoc->name);
+// 		free(lst->heredoc->name);
+// 		lst->heredoc->name = NULL;
+// 	}
+// }
 
 void	free_tab(char **tab)
 {
@@ -53,26 +53,26 @@ void	free_tab(char **tab)
 
 void	free_struct(t_init *param)
 {
-	ft_lstclear_env(&param->lst_env);
-	ft_lstclear_env(&param->lst_export);
-	free(param);
+	ft_lstclear_mal(&param->mal);
+	// ft_lstclear_env(&param->lst_env);
+	// ft_lstclear_env(&param->lst_export);
 }
 
-void	ft_free_all(t_init *param)
-{
-	if (param->line)
-	{
-		free(param->line);
-		param->line = NULL;
-	}
-	if (param->tab)
-	{
-		free_tab(param->tab);
-		param->tab = NULL;
-	}
-	if (param->tok)
-	{
-		ft_lstclear_char(&param->tok);
-		param->tok = NULL;
-	}
-}
+// void	ft_free_all(t_init *param)
+// {
+// 	if (param->line)
+// 	{
+// 		free(param->line);
+// 		param->line = NULL;
+// 	}
+// 	if (param->tab)
+// 	{
+// 		free_tab(param->tab);
+// 		param->tab = NULL;
+// 	}
+// 	if (param->tok)
+// 	{
+// 		ft_lstclear_char(&param->tok);
+// 		param->tok = NULL;
+// 	}
+// }

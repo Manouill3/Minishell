@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/21 13:49:00 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/24 21:25:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	verif_path(char **args, t_init *param)
 	if (args[0][0] != '.')
 	{
 		len = ft_strlen(args[0]);
-		tmp = ft_calloc((len + 2), sizeof (char));
+		tmp = add_calloc(param->mal, (len + 2), sizeof (char));
 		if (!tmp)
 			return (0);
 		tmp[0] = '.';
@@ -41,12 +41,12 @@ int	verif_path(char **args, t_init *param)
 		tmp = verif_path_split(len, j, tmp, args);
 		if (access(tmp, F_OK) && args[0][0] == '/')
 		{
-			free(tmp);
+			// free(tmp);
 			write(2, " Not a directory", 16);
 			param->status = 126;
 			return (1);
 		}
-		free(tmp);
+		// free(tmp);
 	}
 	return (0);
 }
@@ -77,25 +77,26 @@ char	**set_args_ann(char **args, char **path, t_init *param, char *free_tmp)
 	int		i;
 	char	*tmp;
 
+	(void)free_tmp;
 	i = 0;
 	if (!args[0] || ft_strlen(args[0]) < 1)
 	{
-		free_tab(args);
+		// free_tab(args);
 		return (NULL);
 	}
 	while (path[i])
 	{
-		tmp = ft_strjoin(path[i], "/");
+		tmp = ft_strjoin(path[i], "/", param->mal);
 		free_tmp = tmp;
-		tmp = ft_strjoin(tmp, args[0]);
-		free(free_tmp);
+		tmp = ft_strjoin(tmp, args[0], param->mal);
+		// free(free_tmp);
 		if (access(tmp, X_OK | F_OK) != -1)
 		{
-			free(args[0]);
+			// free(args[0]);
 			args[0] = tmp;
 			return (args);
 		}
-		free(tmp);
+		// free(tmp);
 		i++;
 	}
 	return (set_args_ann2(args, param));

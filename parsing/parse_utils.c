@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/21 14:02:55 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:48:27 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ int	is_expand_index(t_list_char *tok, int i)
 	return (1);
 }
 
-void	process_cmd_if_expand(char **cmd, int i)
+void	process_cmd_if_expand(char **cmd, int i, t_mal *mal)
 {
 	int		j;
 	char	*no_quote;
 
-	no_quote = all_quote_out(cmd[i]);
+	no_quote = all_quote_out(cmd[i], mal);
 	if (ft_strlen(no_quote) == 1 && no_quote[0] == '$')
-		exec_supp(cmd, i);
+		exec_supp(cmd, i, mal);
 	if (ft_strchr(cmd[i], '$'))
 	{
 		j = 0;
@@ -66,12 +66,12 @@ void	process_cmd_if_expand(char **cmd, int i)
 			j++;
 		if (cmd[i][j + 1] && (is_white(cmd[i][j + 1])
 		|| cmd[i][j + 1] == '"' || cmd[i][j + 1] == 39))
-			exec_supp(cmd, i);
+			exec_supp(cmd, i, mal);
 	}
-	free(no_quote);
+	// free(no_quote);
 }
 
-void	check_back_expand(t_list_char *tok, char **cmd)
+void	check_back_expand(t_list_char *tok, char **cmd, t_mal *mal)
 {
 	int	i;
 
@@ -83,7 +83,7 @@ void	check_back_expand(t_list_char *tok, char **cmd)
 			i++;
 			continue ;
 		}
-		process_cmd_if_expand(cmd, i);
+		process_cmd_if_expand(cmd, i, mal);
 		i++;
 	}
 }

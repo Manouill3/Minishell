@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/09 14:01:00 by mdegache          #+#    #+#              #
-#    Updated: 2025/03/27 23:19:50 by marvin           ###   ########.fr        #
+#    Updated: 2025/05/23 13:09:40 by mdegache         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ SRC = ft_atoi.c\
 	ft_split.c\
 	ft_normal_split.c\
 	ft_utils_split.c \
-	ft_utils_split2.c 
+	ft_utils_split2.c \
 
 OBJ = $(SRC:.c=.o)
 

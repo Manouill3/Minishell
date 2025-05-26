@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:43:24 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 17:37:17 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:33:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,4 @@ void	ft_pwd(t_init *param)
 	pwd = get_pwd(param);
 	printf("%s\n", pwd);
 	free(pwd);
-}
-
-void	ft_exec_built_in(t_init *param, t_list_char *tok)
-{
-	if (!ft_strcmp(tok->funct, "echo"))
-		ft_echo(param, tok);
-	if (!ft_strcmp(tok->funct, "cd"))
-		ft_cd(param, tok);
-	if (!ft_strcmp(tok->funct, "pwd"))
-		ft_pwd(param);
-	if (!ft_strcmp(tok->funct, "export"))
-		ft_export(param, tok);
-	if (!ft_strcmp(tok->funct, "unset"))
-		ft_unset(param, tok);
-	if (!ft_strcmp(tok->funct, "env"))
-		ft_env(param->lst_env);
-	if (!ft_strcmp(tok->funct, "exit"))
-		ft_exit(param);
 }

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/21 14:03:44 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:47:50 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,32 +41,32 @@ int	no_quote_word_len(char *word)
 	return (count);
 }
 
-char	*no_quote_word(char *word)
+char	*no_quote_word(char *word, t_mal *mal)
 {
 	int		len;
 	char	*tmp;
 
 	len = no_quote_word_len(word);
-	tmp = ft_calloc(len + 1, sizeof(char));
+	tmp = add_calloc(mal, len + 1, sizeof(char));
 	if (!tmp)
 		return (NULL);
 	tmp = no_quote_exec(tmp, word);
 	return (tmp);
 }
 
-void	exec_supp(char **cmd, int i)
+void	exec_supp(char **cmd, int i, t_mal *mal)
 {
 	char	*tmp;
 
 	if (ft_strchr(cmd[i], 39) || ft_strchr(cmd[i], '"'))
 	{
-		tmp = no_quote_word(cmd[i]);
-		free(cmd[i]);
+		tmp = no_quote_word(cmd[i], mal);
+		// free(cmd[i]);
 		cmd[i] = tmp;
 	}
 }
 
-void	ft_supp_quote(t_list_char *tok, char **cmd)
+void	ft_supp_quote(t_list_char *tok, char **cmd, t_mal *mal)
 {
 	int		i;
 	int		nb;
@@ -79,7 +79,7 @@ void	ft_supp_quote(t_list_char *tok, char **cmd)
 	{
 		if (check_for_expand(tok, &i))
 			continue ;
-		exec_supp(cmd, i);
+		exec_supp(cmd, i, mal);
 		i++;
 	}
 }

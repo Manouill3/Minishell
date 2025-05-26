@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:40:34 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 16:29:39 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/23 11:10:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	exec_supp_quote_red(t_list_char *tmp, int i)
+void	exec_supp_quote_red(t_list_char *tmp, int i, t_mal *mal)
 {
 	int			j;
 	char		*str;
@@ -24,8 +24,8 @@ void	exec_supp_quote_red(t_list_char *tmp, int i)
 		{
 			if (tmp->cmd[i + 1][j] == '"' || tmp->cmd[i + 1][j] == 39)
 			{
-				str = char_out(tmp->cmd[i + 1], tmp->cmd[i + 1][j]);
-				free(tmp->cmd[i + 1]);
+				str = char_out(tmp->cmd[i + 1], tmp->cmd[i + 1][j], mal);
+				// free(tmp->cmd[i + 1]);
 				tmp->cmd[i + 1] = str;
 				break ;
 			}
@@ -34,7 +34,7 @@ void	exec_supp_quote_red(t_list_char *tmp, int i)
 	}
 }
 
-void	supp_quote_red(t_list_char *tok)
+void	supp_quote_red(t_list_char *tok, t_mal *mal)
 {
 	t_list_char	*tmp;
 	int			i;
@@ -45,7 +45,7 @@ void	supp_quote_red(t_list_char *tok)
 		i = 0;
 		while (tmp->cmd[i])
 		{
-			exec_supp_quote_red(tmp, i);
+			exec_supp_quote_red(tmp, i, mal);
 			i++;
 		}
 		tmp = tmp->next;
@@ -107,12 +107,13 @@ void	ft_free_realoc(t_init *param, t_list_char *tmp,
 {
 	int	i;
 
+	(void)tmp_val;
 	i = 0;
-	free_tab(tmp->cmd);
-	free_tab(tmp->no_red);
+	// free_tab(tmp->cmd);
+	// free_tab(tmp->no_red);
 	tmp->cmd = tmp_cmd;
 	param->tok->funct = tmp->cmd[0];
-	free(tmp_val);
+	// free(tmp_val);
 	i = 0;
 	while (tmp->cmd[i])
 		i++;

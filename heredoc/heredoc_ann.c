@@ -6,24 +6,24 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 08:58:25 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 18:06:32 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:15:20 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-int	handle_heredoc_input(t_heredoc *heredoc, t_env *env, char *final_eof, int i)
+int	handle_heredoc_input(t_heredoc *heredoc, t_env *env, char *final_eof, int i, t_mal *mal)
 {
 	if (!ft_strchr(heredoc->eof[i], '"') && !ft_strchr(heredoc->eof[i], 39))
 	{
 		if (heredoc->input && ft_strchr(heredoc->input, '$'))
-			heredoc->input = exp_heredoc(heredoc->input, env);
+			heredoc->input = exp_heredoc(heredoc->input, env, mal);
 	}
 	if (!heredoc->input || !ft_strcmp(heredoc->input, final_eof))
 	{
 		if (heredoc->input)
 			free(heredoc->input);
-		free(final_eof);
+		// free(final_eof);
 		return (1);
 	}
 	return (0);
@@ -31,11 +31,12 @@ int	handle_heredoc_input(t_heredoc *heredoc, t_env *env, char *final_eof, int i)
 
 int	handle_heredoc_interrupt_before(t_heredoc *heredoc, char *final_eof)
 {
+	(void)final_eof;
 	if (g_exit_code == 130)
 	{
 		if (heredoc->input)
 			free(heredoc->input);
-		free(final_eof);
+		// free(final_eof);
 		dup2(heredoc->fd_tmp, 0);
 		close(heredoc->fd_tmp);
 		ft_handle_interrupt_signals();

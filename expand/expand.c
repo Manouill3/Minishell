@@ -6,13 +6,13 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/21 13:56:46 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/23 11:11:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char	*get_result(char *cont, char *sub_word)
+char	*get_result(char *cont, char *sub_word, t_init *param)
 {
 	int		i;
 	int		j;
@@ -24,7 +24,7 @@ char	*get_result(char *cont, char *sub_word)
 	j = 0;
 	k = 0;
 	len = count_quote(sub_word) + ft_strlen(cont);
-	res = ft_calloc(len + 1, sizeof(char));
+	res = add_calloc(param->mal, len + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	while (sub_word[i] == 39 || sub_word[i] == '"')
@@ -45,7 +45,7 @@ char	*check_quote(t_init *param, char *word, t_env *env)
 
 	if (word[0] == 39)
 	{
-		no_quote = char_out(word, 39);
+		no_quote = char_out(word, 39, param->mal);
 		if (ft_strlen(word) == 0)
 			return (NULL);
 		return (no_quote);
@@ -53,8 +53,8 @@ char	*check_quote(t_init *param, char *word, t_env *env)
 	if (word[0] == '"')
 		return (handle_double_quote(param, word));
 	if (!ft_strchr(word, '$'))
-		return (ft_strdup(word));
-	final_word = get_env_value(env, word);
+		return (ft_strdup(word, param->mal));
+	final_word = get_env_value(env, word, param);
 	return (final_word);
 }
 
@@ -95,23 +95,23 @@ char	*expand_word(t_init *param, char *word)
 
 	i = 0;
 	len = inputs_len(word);
-	inputs = ft_calloc(len + 1, sizeof(char *));
+	inputs = add_calloc(param->mal, len + 1, sizeof(char *));
 	if (!inputs)
 		return (NULL);
 	inputs = expand_input(param, word, inputs);
 	if (!inputs)
 		return (NULL);
-	res = ft_calloc(final_len(inputs, len) + 1, sizeof(char));
+	res = add_calloc(param->mal, final_len(inputs, len) + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	res = get_final_input(res, inputs, len);
 	while (i < len)
 	{
 		if (!inputs[i])
-			inputs[i] = ft_strdup(res);
+			inputs[i] = ft_strdup(res, param->mal);
 		i++;
 	}
-	free_tab(inputs);
+	// free_tab(inputs);
 	return (res);
 }
 
@@ -127,9 +127,9 @@ void	expand_arg(t_init *param)
 		i = 0;
 		j = 0;
 		tmp->len_ind_exp = nb_exp(tmp->cmd);
-		tmp->ind_exp = ft_calloc(sizeof(int), nb_exp(tmp->cmd));
-		if (!tmp->ind_exp)
-			return ;
+		tmp->ind_exp = add_calloc(param->mal, sizeof(int), nb_exp(tmp->cmd));
+		// if (!tmp->ind_exp)
+		// 	return ;
 		while (tmp->cmd[i])
 		{
 			handle_expand(param, tmp, i, &j);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/19 13:39:38 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/24 22:33:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	ft_add_export_only(t_init *param, t_list_char *tok, t_env *tmp_exp)
 {
 	ft_lstadd_back_env(&param->lst_export,
-		ft_lstnew_env(ft_strdup(tok->cmd[1])));
+		ft_lstnew_env(ft_strdup(tok->cmd[1], param->mal), param->mal));
 	while (tmp_exp->next != NULL)
 		tmp_exp = tmp_exp->next;
-	get_name_env(tmp_exp);
-	get_final_cont(tmp_exp);
+	get_name_env(tmp_exp, param->mal);
+	get_final_cont(tmp_exp, param->mal);
 	tmp_exp->exp = 1;
 	return ;
 }
@@ -57,17 +57,17 @@ void	ft_create_add_back(t_init *param, t_list_char *tok,
 	if (exist != 1)
 	{
 		ft_lstadd_back_env(&param->lst_export,
-			ft_lstnew_env(ft_strdup(tok->cmd[1])));
+			ft_lstnew_env(ft_strdup(tok->cmd[1], param->mal), param->mal));
 		while (tmp_exp->next != NULL)
 			tmp_exp = tmp_exp->next;
-		get_name_env(tmp_exp);
-		get_final_cont(tmp_exp);
+		get_name_env(tmp_exp, param->mal);
+		get_final_cont(tmp_exp, param->mal);
 	}
-	ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(tok->cmd[1])));
+	ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(tok->cmd[1], param->mal), param->mal));
 	while (tmp_env->next != NULL)
 		tmp_env = tmp_env->next;
-	get_name_env(tmp_env);
-	get_final_cont(tmp_env);
+	get_name_env(tmp_env, param->mal);
+	get_final_cont(tmp_env, param->mal);
 }
 
 void	ft_print_exp(t_env *tmp_exp)

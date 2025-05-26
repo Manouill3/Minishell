@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 13:03:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/12 17:44:26 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/22 14:14:36 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,19 @@ int	secu(int k, char const *s)
 	return (k);
 }
 
-char	**ft_split(char const *s)
+char	**ft_split(char const *s, t_mal *mal)
 {
-	int			i;
 	int			k;
 	int			nb_word;
 	char		**tab;
 
-	i = 0;
 	k = 0;
 	if (!s)
 		return (0);
 	nb_word = len_first_tab(s);
-	tab = ft_calloc(nb_word + 1, sizeof(char *));
+	tab = add_calloc(mal, nb_word + 1, sizeof(char *));
 	if (!tab)
 		return (0);
-	tab = exec_all(s, k, i, tab);
+	tab = exec_all(s, k, mal, tab);
 	return (tab);
 }

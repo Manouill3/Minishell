@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 10:57:58 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/22 21:48:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	add_redirection(t_list_char *node, int *i, int *j, char *red)
+void	add_redirection(t_list_char *node, int *i, int *j, char *red, t_mal *mal)
 {
 	if (!ft_strcmp(node->cmd[*i], red) && node->cmd[*i + 1])
 	{
-		node->infiles[(*j)++] = ft_strdup(node->cmd[(*i)++]);
-		node->infiles[(*j)++] = ft_strdup(node->cmd[*i]);
+		node->infiles[(*j)++] = ft_strdup(node->cmd[(*i)++], mal);
+		node->infiles[(*j)++] = ft_strdup(node->cmd[*i], mal);
 	}
 }
 
-void	get_in_out_complet_list(t_list_char *node)
+void	get_in_out_complet_list(t_list_char *node, t_mal *mal)
 {
 	int	i;
 	int	j;
@@ -32,15 +32,15 @@ void	get_in_out_complet_list(t_list_char *node)
 	{
 		while (node->cmd[i] && ft_strlen(node->cmd[i]) <= 0)
 			i++;
-		add_redirection(node, &i, &j, "<");
-		add_redirection(node, &i, &j, "<<");
-		add_redirection(node, &i, &j, ">");
-		add_redirection(node, &i, &j, ">>");
+		add_redirection(node, &i, &j, "<", mal);
+		add_redirection(node, &i, &j, "<<", mal);
+		add_redirection(node, &i, &j, ">", mal);
+		add_redirection(node, &i, &j, ">>", mal);
 		i++;
 	}
 }
 
-void	get_in_out(t_list_char *tok)
+void	get_in_out(t_list_char *tok, t_mal *mal)
 {
 	int			file_output;
 	int			file_input;
@@ -51,11 +51,11 @@ void	get_in_out(t_list_char *tok)
 	{
 		file_input = get_infile_nb(tmp->cmd);
 		file_output = get_outfile_nb(tmp->cmd);
-		tmp->infiles = ft_calloc((file_input + file_output + 1),
+		tmp->infiles = add_calloc(mal, (file_input + file_output + 1),
 				sizeof(char *));
 		if (!tmp->infiles)
 			return ;
-		get_in_out_complet_list(tmp);
+		get_in_out_complet_list(tmp, mal);
 		tmp = tmp->next;
 	}
 }

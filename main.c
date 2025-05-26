@@ -23,15 +23,6 @@ void	init_heredoc(t_list_char *node)
 	node->heredoc->nb_eof = 0;
 }
 
-int	ft_init(t_init **param)
-{
-	(*param) = malloc(sizeof(t_init));
-	if (!(*param))
-		return (1);
-	(*param)->status = 0;
-	return (0);
-}
-
 void	minishell(t_init *param, int tt_y)
 {
 	while (1)
@@ -50,7 +41,7 @@ void	minishell(t_init *param, int tt_y)
 		if (param->line && param->line[0] != '\0')
 			add_history(param->line);
 		parsing_line(param);
-		ft_free_all(param);
+		// ft_lstclear_mal(&param->mal);
 		if (!tt_y)
 			break ;
 	}
@@ -64,9 +55,11 @@ int	main(int ac, char **av, char **env)
 
 	if (ac == 1 && av[0] != NULL)
 	{
-		param = NULL;
-		if (ft_init(&param))
+		param = malloc(sizeof(t_init));
+		param->mal = ft_lstnew_mal(param);
+		if (!param || !param->mal)
 			return (0);
+		param->status = 0;
 		ft_handle_interrupt_signals();
 		get_env(param, env);
 		if (param->lst_env == NULL)
@@ -74,7 +67,7 @@ int	main(int ac, char **av, char **env)
 		tt_y = isatty(STDIN_FILENO);
 		minishell(param, tt_y);
 		res = param->status;
-		free_struct(param);
+		ft_lstclear_mal(&param->mal);
 		return (res);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_var_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:22:16 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/13 17:14:50 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/26 10:36:29 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	ft_add_value(t_env *tmp_exp, t_env *tmp_env,
 	char *new_const, t_init *param)
 {
-	free(tmp_exp->cont);
+	// free(tmp_exp->cont);
 	tmp_exp->cont = NULL;
-	tmp_exp->cont = ft_strdup(new_const);
+	tmp_exp->cont = ft_strdup(new_const, param->mal);
 	if (param->create_x == 1)
 	{
-		free(tmp_env->cont);
+		// free(tmp_env->cont);
 		tmp_env->cont = NULL;
-		tmp_env->cont = ft_strdup(new_const);
+		tmp_env->cont = ft_strdup(new_const, param->mal);
 	}
 	tmp_exp->exp = 0;
-	free(new_const);
+	// free(new_const);
 }
 
 void	ft_alloc_new_const(t_list_char *tok, t_init *param,
@@ -78,9 +78,10 @@ void	ft_init_var(t_init *param)
 
 int	ft_return_var(t_init *param, char *name)
 {
+	(void)name;
 	if (param->create_x != 2)
 	{
-		free(name);
+		// free(name);
 		return (1);
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 22:23:54 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/26 10:36:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ void	ft_verif_nb(t_init *param)
 			param->status = 2;
 			write(2, " numeric argument required\n", 27);
 			status = param->status;
-			ft_free_all(param);
-			free_struct(param);
+			// ft_free_all(param);
+			// free_struct(param);
+			ft_lstclear_mal(&param->mal);
 			exit(status);
 		}
 		i++;
@@ -47,8 +48,9 @@ int	ft_free_param(t_init *param, int nb_arg)
 	if (param->count_cmd == 1)
 		ft_putstr_fd("exit\n", 2);
 	nb_arg = param->status;
-	ft_free_all(param);
-	free_struct(param);
+	// ft_free_all(param);
+	// free_struct(param);
+	ft_lstclear_mal(&param->mal);
 	return (nb_arg);
 }
 
@@ -68,8 +70,9 @@ void	ft_exit(t_init *param)
 	if (nb_arg == 1)
 	{
 		status = param->status;
-		ft_free_all(param);
-		free_struct(param);
+		// ft_free_all(param);
+		// free_struct(param);
+		ft_lstclear_mal(&param->mal);
 		exit(status);
 	}
 	if (nb_arg > 2)
@@ -78,8 +81,9 @@ void	ft_exit(t_init *param)
 		param->status = 1;
 		write(2, " too many arguments\n", 20);
 		status = param->status;
-		ft_free_all(param);
-		free_struct(param);
+		// ft_free_all(param);
+		// free_struct(param);
+		ft_lstclear_mal(&param->mal);
 		exit(status);
 	}
 	nb_arg = ft_free_param(param, nb_arg);

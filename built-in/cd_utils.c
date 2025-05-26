@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 11:19:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/26 10:03:57 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char	*ft_split_home_way(char **path_split, int i, int *j, char *lst)
+char	*ft_split_home_way(char **path_split, int i, int *j, char *lst, t_mal *mal)
 {
 	int	start;
 
@@ -26,7 +26,7 @@ char	*ft_split_home_way(char **path_split, int i, int *j, char *lst)
 				(*j) = (*j) + 2;
 				while (path_split[i][(*j)] != '/')
 					(*j)++;
-				return (ft_substr(path_split[i], 0, (*j)));
+				return (ft_substr(path_split[i], 0, (*j), mal));
 			}
 			(*j)++;
 			start++;
@@ -36,7 +36,7 @@ char	*ft_split_home_way(char **path_split, int i, int *j, char *lst)
 	return (NULL);
 }
 
-char	*ft_give_home_way(char **path_split, char *lst)
+char	*ft_give_home_way(char **path_split, char *lst, t_mal *mal)
 {
 	int		i;
 	int		j;
@@ -49,7 +49,7 @@ char	*ft_give_home_way(char **path_split, char *lst)
 		j = 0;
 		while (path_split[i][j])
 		{
-			path_home = ft_split_home_way(path_split, i, &j, lst);
+			path_home = ft_split_home_way(path_split, i, &j, lst, mal);
 			if (path_home != NULL)
 				return (path_home);
 		}
@@ -58,7 +58,7 @@ char	*ft_give_home_way(char **path_split, char *lst)
 	return (NULL);
 }
 
-char	*ft_path_user(char *path, t_list_char *tok)
+char	*ft_path_user(char *path, t_list_char *tok, t_mal *mal)
 {
 	int		i;
 	int		j;
@@ -68,11 +68,11 @@ char	*ft_path_user(char *path, t_list_char *tok)
 	i = 0;
 	j = 0;
 	if (tok->cmd[1][0] == '/')
-		tmp = ft_strjoin(path, tok->cmd[1]);
+		tmp = ft_strjoin(path, tok->cmd[1], mal);
 	else
 	{
 		len = ft_strlen(tok->cmd[1]);
-		tmp = ft_calloc(sizeof(char), (len + 2));
+		tmp = add_calloc(mal, sizeof(char), (len + 2));
 		if (!tmp)
 			return (NULL);
 		tmp[0] = '/';
@@ -100,6 +100,7 @@ int	ft_cd_last(t_init *param, t_list_char *tok, char *path)
 {
 	int	result;
 
+	(void)path;;
 	result = chdir(tok->cmd[1]);
 	if (result == -1)
 	{
@@ -107,6 +108,6 @@ int	ft_cd_last(t_init *param, t_list_char *tok, char *path)
 		perror("cd");
 		return (0);
 	}
-	free(path);
+	// free(path);
 	return (1);
 }

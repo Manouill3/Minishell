@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/20 14:25:24 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/23 10:54:11 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_wait_child(t_init *param)
 	}
 }
 
-char	**conv_lst_tab(t_env *env)
+char	**conv_lst_tab(t_env *env, t_mal *mal)
 {
 	int		i;
 	char	*tmp_tab;
@@ -49,22 +49,22 @@ char	**conv_lst_tab(t_env *env)
 		i++;
 		tmp = tmp->next;
 	}
-	tab = ft_calloc(i + 1, sizeof(char *));
+	tab = add_calloc(mal, i + 1, sizeof(char *));
 	if (!tab)
 		return (NULL);
 	tmp = env;
 	i = 0;
 	while (tmp)
 	{
-		tmp_tab = ft_strjoin(tmp->name, "=");
-		tab[i++] = ft_strjoin(tmp_tab, tmp->cont);
-		free(tmp_tab);
+		tmp_tab = ft_strjoin(tmp->name, "=", mal);
+		tab[i++] = ft_strjoin(tmp_tab, tmp->cont, mal);
+		// free(tmp_tab);
 		tmp = tmp->next;
 	}
 	return (tab);
 }
 
-char	**make_path(t_env *env)
+char	**make_path(t_env *env, t_mal *mal)
 {
 	t_env	*tmp;
 
@@ -72,7 +72,7 @@ char	**make_path(t_env *env)
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->name, "PATH"))
-			return (ft_normal_split(tmp->cont, ':'));
+			return (ft_normal_split(tmp->cont, ':', mal));
 		tmp = tmp->next;
 	}
 	return (NULL);

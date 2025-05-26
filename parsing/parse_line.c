@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/21 14:03:46 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/23 10:48:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_for_expand(t_list_char *tok, int *i)
 	return (0);
 }
 
-void	get_funct_ann(t_list_char *tmp, int i)
+void	get_funct_ann(t_list_char *tmp, int i, t_mal *mal)
 {
 	while (i < tmp->len_cmd)
 	{
@@ -39,20 +39,20 @@ void	get_funct_ann(t_list_char *tmp, int i)
 			if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i])
 				&& is_red(tmp->cmd[i - 1]))
 			{
-				tmp->funct = ft_strdup(tmp->cmd[i]);
+				tmp->funct = ft_strdup(tmp->cmd[i], mal);
 				break ;
 			}
 		}
 		else if (ft_strlen(tmp->cmd[i]) > 0 && is_red(tmp->cmd[i]))
 		{
-			tmp->funct = ft_strdup(tmp->cmd[i]);
+			tmp->funct = ft_strdup(tmp->cmd[i], mal);
 			break ;
 		}
 		i++;
 	}
 }
 
-void	get_funct(t_list_char *lst)
+void	get_funct(t_list_char *lst, t_mal *mal)
 {
 	int			i;
 	t_list_char	*tmp;
@@ -61,32 +61,32 @@ void	get_funct(t_list_char *lst)
 	while (tmp)
 	{
 		i = 0;
-		get_funct_ann(tmp, i);
+		get_funct_ann(tmp, i, mal);
 		tmp = tmp->next;
 	}
 }
 
-void	before_exec(t_init *param)
+void	before_exec(t_init *param, t_mal *mal)
 {
 	t_list_char	*tmp;
 
-	supp_quote_red(param->tok);
-	get_in_out(param->tok);
+	supp_quote_red(param->tok, mal);
+	get_in_out(param->tok, mal);
 	get_nb_eof(param->tok);
 	tmp = param->tok;
 	while (tmp)
 	{
-		exec_heredoc(tmp, tmp->heredoc, param->lst_env);
+		exec_heredoc(tmp, tmp->heredoc, param->lst_env, mal);
 		tmp = tmp->next;
 	}
 	tmp = param->tok;
 	while (tmp)
 	{
-		ft_supp_quote(tmp, tmp->cmd);
-		check_back_expand(tmp, tmp->cmd);
-		ft_supp_quote(tmp, tmp->no_red);
-		check_back_expand(tmp, tmp->no_red);
-		free(tmp->ind_exp);
+		ft_supp_quote(tmp, tmp->cmd, mal);
+		check_back_expand(tmp, tmp->cmd, mal);
+		ft_supp_quote(tmp, tmp->no_red, mal);
+		check_back_expand(tmp, tmp->no_red, mal);
+		// free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
 	if (!param->tok)
@@ -111,7 +111,7 @@ void	parsing_line(t_init *param)
 	}
 	expand_arg(param);
 	verif_expand(param);
-	get_funct(param->tok);
-	get_no_red(param->tok);
-	before_exec(param);
+	get_funct(param->tok, param->mal);
+	get_no_red(param->tok, param);
+	before_exec(param, param->mal);
 }

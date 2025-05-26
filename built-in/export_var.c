@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:23:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/12 17:04:04 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/24 22:30:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_existing_export(char	*name, t_env *tmp_exp,
 		tmp_exp->exp = 0;
 		if (param->create_x != 2)
 		{
-			free(name);
+			// free(name);
 			return (1);
 		}
 	}
@@ -61,7 +61,7 @@ int	ft_existing_export(char	*name, t_env *tmp_exp,
 		tmp_exp->exp = 1;
 		if (param->create_x != 2)
 		{
-			free(name);
+			// free(name);
 			return (1);
 		}
 	}
@@ -71,7 +71,7 @@ int	ft_existing_export(char	*name, t_env *tmp_exp,
 char	*ft_create_new_const(char *new_const, t_init *param,
 		t_env *tmp_exp, t_env *tmp_env)
 {
-	new_const = ft_calloc(param->len_const_x + 1, sizeof(char));
+	new_const = add_calloc(param->mal, param->len_const_x + 1, sizeof(char));
 	if (!new_const)
 	{
 		new_const = NULL;
@@ -91,7 +91,7 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 	tmp_env = param->lst_env;
 	if (ft_verif_exp(param, tok) == 1)
 		return ;
-	name = ft_substr(tok->cmd[1], 0, (param->i_ex));
+	name = ft_substr(tok->cmd[1], 0, (param->i_ex), param->mal);
 	tmp_env = ft_verif_env_create(tmp_env, name, param);
 	if (param->create_x == 0 && tok->cmd[1][param->i_ex] == '=')
 		param->create_x = 2;
@@ -108,5 +108,5 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 		tmp_exp = tmp_exp->next;
 	}
 	ft_rest_var(tmp_env, tmp_exp, param, tok);
-	free(name);
+	// free(name);
 }

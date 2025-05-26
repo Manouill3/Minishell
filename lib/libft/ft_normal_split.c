@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_normal_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 11:02:49 by tcybak            #+#    #+#             */
-/*   Updated: 2025/03/21 14:19:17 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/24 21:28:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_free(int j, char **str)
 	free(str);
 }
 
-static char	**ft_string(size_t word, char const *s, char **str, char c)
+static char	**ft_string(size_t word, char const *s, char **str, char c, t_mal *mal)
 {
 	size_t	j;
 	size_t	h;
@@ -39,7 +39,7 @@ static char	**ft_string(size_t word, char const *s, char **str, char c)
 			i++;
 		while (s[i + h] != c && s[i + h] != '\0')
 			h++;
-		str[j] = ft_substr(s, i, h);
+		str[j] = ft_substr(s, i, h, mal);
 		if (str[j] == 0)
 		{
 			ft_free(j, str);
@@ -64,7 +64,7 @@ static int	ft_count(char const *s, char c, size_t i, size_t word)
 	return (word);
 }
 
-char	**ft_normal_split(char const *s, char c)
+char	**ft_normal_split(char const *s, char c, t_mal *mal)
 {
 	char	**str;
 	size_t	i;
@@ -75,14 +75,14 @@ char	**ft_normal_split(char const *s, char c)
 	if (s == 0)
 		return (0);
 	if (ft_strlen(s) == 0)
-		return (ft_calloc(1, sizeof(char *)));
+		return (add_calloc(mal, 1, sizeof(char *)));
 	word = ft_count(s, c, i, word);
 	if (word == 0)
-		return (ft_calloc(1, sizeof(char *)));
-	str = ft_calloc(word + 1, sizeof(char *));
+		return (add_calloc(mal, 1, sizeof(char *)));
+	str = add_calloc(mal, word + 1, sizeof(char *));
 	if (str == 0)
 		return (0);
 	i = 0;
-	str = ft_string(word, s, str, c);
+	str = ft_string(word, s, str, c, mal);
 	return (str);
 }

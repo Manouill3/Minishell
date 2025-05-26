@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 09:49:48 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/20 16:54:41 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/24 22:21:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_path_null(t_init *param)
 	tmp_env = param->lst_env;
 	while (tmp_env && ft_strcmp("OLDPWD", tmp_env->name))
 		tmp_env = tmp_env->next;
-	path = ft_strdup(tmp_env->cont);
+	path = ft_strdup(tmp_env->cont, param->mal);
 	if (!path)
 		return (NULL);
 	return (path);
@@ -42,7 +42,7 @@ char	*ft_old_path_null(t_init *param)
 	tmp_env = param->lst_env;
 	while (tmp_env && ft_strcmp("PWD", tmp_env->name))
 		tmp_env = tmp_env->next;
-	path = ft_strdup(tmp_env->cont);
+	path = ft_strdup(tmp_env->cont, param->mal);
 	if (!path)
 		return (NULL);
 	return (path);

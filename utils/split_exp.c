@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_exp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 11:22:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/19 16:54:44 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/23 09:07:29 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_free_exp(int j, char **str)
 	free(str);
 }
 
-static char	**ft_string_exp(size_t word, char const *s, char **str)
+static char	**ft_string_exp(size_t word, char const *s, char **str, t_mal *mal)
 {
 	size_t	j;
 	size_t	h;
@@ -39,7 +39,7 @@ static char	**ft_string_exp(size_t word, char const *s, char **str)
 			i++;
 		while (!is_white(s[i + h]) && s[i + h] != '\0')
 			h++;
-		str[j] = ft_substr(s, i, h);
+		str[j] = ft_substr(s, i, h, mal);
 		if (str[j] == 0)
 		{
 			ft_free_exp(j, str);
@@ -69,7 +69,7 @@ static int	ft_count_exp(char const *s, size_t i, size_t word)
 	return (word);
 }
 
-char	**ft_exp_split(char const *s)
+char	**ft_exp_split(char const *s, t_mal *mal)
 {
 	char	**str;
 	size_t	i;
@@ -80,14 +80,14 @@ char	**ft_exp_split(char const *s)
 	if (s == 0)
 		return (0);
 	if (ft_strlen(s) == 0)
-		return (ft_calloc(1, sizeof(char *)));
+		return (add_calloc(mal, 1, sizeof(char *)));
 	word = ft_count_exp(s, i, word);
 	if (word == 0)
-		return (ft_calloc(1, sizeof(char *)));
-	str = ft_calloc(word + 1, sizeof(char *));
+		return (add_calloc(mal, 1, sizeof(char *)));
+	str = add_calloc(mal, word + 1, sizeof(char *));
 	if (str == 0)
 		return (0);
 	i = 0;
-	str = ft_string_exp(word, s, str);
+	str = ft_string_exp(word, s, str, mal);
 	return (str);
 }

@@ -6,13 +6,13 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 20:19:32 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/14 15:22:24 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/23 08:54:32 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char	*get_valid_char(char *buffer)
+char	*get_valid_char(char *buffer, t_mal *mal)
 {
 	int		i;
 	int		j;
@@ -20,7 +20,7 @@ char	*get_valid_char(char *buffer)
 
 	i = 0;
 	j = 0;
-	res = ft_calloc(10, sizeof(char));
+	res = add_calloc(mal, 10, sizeof(char));
 	if (res == NULL)
 		return (NULL);
 	while (buffer[j] && i < 9)
@@ -35,7 +35,7 @@ char	*get_valid_char(char *buffer)
 	return (res);
 }
 
-char	*get_name_h(void)
+char	*get_name_h(t_mal *mal)
 {
 	char	*valid_name;
 	char	buffer[1000];
@@ -49,14 +49,14 @@ char	*get_name_h(void)
 	if (bytes == -1)
 		return (NULL);
 	buffer[bytes] = '\0';
-	valid_name = get_valid_char(buffer);
+	valid_name = get_valid_char(buffer, mal);
 	if (access(valid_name, F_OK))
 	{
 		close(fd);
 		return (valid_name);
 	}
 	close(fd);
-	return (get_name_h());
+	return (get_name_h(mal));
 }
 
 void	get_nb_eof(t_list_char *tok)
@@ -81,7 +81,7 @@ void	get_nb_eof(t_list_char *tok)
 	}
 }
 
-void	get_eof_tab(t_list_char *tok)
+void	get_eof_tab(t_list_char *tok, t_mal *mal)
 {
 	int			i;
 	int			j;
@@ -90,7 +90,7 @@ void	get_eof_tab(t_list_char *tok)
 	i = 0;
 	j = 0;
 	heredoc = tok->heredoc;
-	heredoc->eof = ft_calloc(heredoc->nb_eof + 1, sizeof(char *));
+	heredoc->eof = add_calloc(mal, heredoc->nb_eof + 1, sizeof(char *));
 	if (!heredoc->eof)
 		return ;
 	while (tok->cmd[i])
@@ -98,13 +98,13 @@ void	get_eof_tab(t_list_char *tok)
 		if (!ft_strcmp("<<", tok->cmd[i]))
 		{
 			if (tok->cmd[i + 1])
-				heredoc->eof[j++] = ft_strdup(tok->cmd[i + 1]);
+				heredoc->eof[j++] = ft_strdup(tok->cmd[i + 1], mal);
 		}
 		i++;
 	}
 }
 
-char	*get_final_eof(char *str)
+char	*get_final_eof(char *str, t_mal *mal)
 {
 	int		i;
 	int		j;
@@ -112,7 +112,7 @@ char	*get_final_eof(char *str)
 
 	i = 0;
 	j = 0;
-	eof = ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	eof = add_calloc(mal, ft_strlen(str) + 1, sizeof(char));
 	while (str[i])
 	{
 		if (str[i] != '"' && str[i] != 39)

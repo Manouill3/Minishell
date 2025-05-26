@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/15 13:15:09 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/22 16:16:35 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	get_tab_len(char *tab)
 	return (count);
 }
 
-t_list_char	*set_lst(int count_cmd)
+t_list_char	*set_lst(int count_cmd, t_mal *mal)
 {
 	int			i;
 	t_list_char	*lst;
@@ -73,13 +73,13 @@ t_list_char	*set_lst(int count_cmd)
 	lst = NULL;
 	while (i < count_cmd)
 	{
-		ft_lstadd_back_char(&lst, ft_lstnew_char(NULL));
+		ft_lstadd_back_char(&lst, ft_lstnew_char(NULL, mal));
 		i++;
 	}
 	return (lst);
 }
 
-void	set_cmd(char *tab, t_list_char *tmp)
+void	set_cmd(char *tab, t_list_char *tmp, t_mal *mal)
 {
 	int	i;
 	int	j;
@@ -89,18 +89,18 @@ void	set_cmd(char *tab, t_list_char *tmp)
 	i = 0;
 	j = 0;
 	tmp->len_cmd = get_tab_len(tab);
-	tmp->cmd = ft_calloc(tmp->len_cmd + 1, sizeof(char *));
-	if (!tmp->cmd)
-		return ;
+	tmp->cmd = add_calloc(mal, tmp->len_cmd + 1, sizeof(char *));
+	// if (!tmp->cmd)
+	// 	return ;
 	while (i < tmp->len_cmd)
 	{
 		k = 0;
 		while (tab[j] && is_white(tab[j]))
 			j++;
 		len = ft_len_word(tab, j);
-		tmp->cmd[i] = ft_calloc(len + 1, sizeof(char));
-		if (!tmp->cmd[i])
-			return ;
+		tmp->cmd[i] = add_calloc(mal, len + 1, sizeof(char));
+		// if (!tmp->cmd[i])
+		// 	return ;
 		while (k < len)
 			tmp->cmd[i][k++] = tab[j++];
 		i++;
@@ -113,18 +113,18 @@ int	get_token(t_init *param)
 	t_list_char	*tmp;
 
 	i = 0;
-	param->tab = ft_split(param->line);
+	param->tab = ft_split(param->line, param->mal);
 	if (verif_nb_quote(param->tab))
 	{
 		param->tok = NULL;
 		return (1);
 	}
 	param->count_cmd = get_nb_cmd(param->tab);
-	param->tok = set_lst(param->count_cmd);
+	param->tok = set_lst(param->count_cmd, param->mal);
 	tmp = param->tok;
 	while (i < param->count_cmd)
 	{
-		set_cmd(param->tab[i], tmp);
+		set_cmd(param->tab[i], tmp, param->mal);
 		i++;
 		tmp = tmp->next;
 	}

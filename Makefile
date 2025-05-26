@@ -30,6 +30,8 @@ SRC = main.c\
 	lst/lst_funct_env.c\
 	signal/signal.c\
 	free/free_funct.c\
+	free/free_calloc.c\
+	free/secu_malloc.c\
 	utils/utils_funct.c\
 	utils/split_exp.c\
 	utils/utils_exp_split.c\
