@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils5.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:39:28 by tcybak            #+#    #+#             */
 /*   Updated: 2025/05/27 13:45:14 by tcybak           ###   ########.fr       */
@@ -88,6 +88,6 @@ void	exec_verif_exp2(t_init *param, t_list_char *tmp, int i)
 		tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, tmp_val, param->mal);
 		param->i_ex = i + len_tmp;
 		end_verif_exp(param, tmp_cmd, tmp_val, len_tmp);
-		ft_free_realoc(param, tmp, tmp_cmd, tmp_val);
+		ft_free_realoc(param, tmp, tmp_cmd);
 	}
 }

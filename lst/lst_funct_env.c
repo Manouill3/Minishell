@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:29:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/23 11:08:04 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:49:19 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_env	*ft_lstnew_env(char *str, t_mal *mal)
 	t_env	*lst;
 
 	lst = add_malloc(mal, sizeof(t_env));
-	// if (!lst)
-	// 	return (NULL);
 	lst->name = NULL;
 	lst->cont = str;
 	lst->next = NULL;
@@ -41,29 +39,3 @@ void	ft_lstadd_back_env(t_env **lst, t_env *new)
 	tmp->next = new;
 	new->prev = tmp;
 }
-
-// void	ft_lstclear_env(t_env **lst)
-// {
-// 	t_env	*tmp;
-
-// 	if (!lst || !*lst)
-// 		return ;
-// 	while (*lst)
-// 	{
-// 		tmp = (*lst)->next;
-// 		ft_lstdelone_env(*lst);
-// 		*lst = tmp;
-// 	}
-// 	*lst = NULL;
-// }
-
-// void	ft_lstdelone_env(t_env *lst)
-// {
-// 	if (!lst)
-// 		return ;
-// 	if (lst->cont)
-// 		free(lst->cont);
-// 	if (lst->name)
-// 		free(lst->name);
-// 	free(lst);
-// }

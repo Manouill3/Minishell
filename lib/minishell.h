@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 10:50:02 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 14:39:09 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,8 +209,7 @@ void		exec_supp_quote_red(t_list_char *tmp, int i, t_mal *mal);
 void		supp_quote_red(t_list_char *tok, t_mal *mal);
 int			verif_odd(char **tab, int count1, int count2);
 int			verif_nb_quote(char **tab);
-void		ft_free_realoc(t_init *param, t_list_char *tmp,
-				char **tmp_cmd, char **tmp_val);
+void		ft_free_realoc(t_init *param, t_list_char *tmp, char **tmp_cmd);
 
 ////////////////////////////////////////
 ///			parsing/token.c         ///
@@ -276,7 +275,6 @@ void		close_all(t_init *param, t_list_char *tmp);
 void		clear_files(t_list_char *lst);
 void		free_tab(char **tab);
 void		free_struct(t_init *param);
-void		ft_free_all(t_init *param);
 
 ////////////////////////////////////////
 ///			expand/expand_heredoc.c ///
@@ -338,6 +336,13 @@ void		expand_arg(t_init *param);
 ///			exec/exec_cmd.c	    	///
 //////////////////////////////////////
 
+void		add_redirection_in(t_list_char *node, int *i, int *j, t_mal *mal);
+void		add_redirection_out(t_list_char *node, int *i, int *j, t_mal *mal);
+
+////////////////////////////////////////
+///			exec/exec_cmd.c	    	///
+//////////////////////////////////////
+
 void		built_in_fork(t_init *param, t_list_char *tmp);
 void		child_process(t_list_char *tmp, t_init *param, int count);
 void		parent_process(t_init *param);
@@ -358,7 +363,6 @@ void		fail_execve(char **args, char **path, char **env, t_init *param);
 
 void		handle_redirection(t_init *param, t_list_char *node,
 int i, int *check);
-void		add_redirection(t_list_char *node, int *i, int *j, char *red, t_mal *mal);
 void		get_in_out_complet_list(t_list_char *node, t_mal *mal);
 void		get_in_out(t_list_char *tok, t_mal *mal);
 void		get_good_fd(t_init *param, t_list_char *node);
@@ -391,6 +395,7 @@ int			no_red_len(char **tab, t_list_char *tmp);
 void		no_red_ann(int len, t_list_char *tmp, t_init *param);
 void		get_no_red(t_list_char *tok, t_init *param);
 void		ft_exec_built_in(t_init *param, t_list_char *tok);
+void		pipe_or_built(t_init *param, t_list_char *tmp, int count);
 
 ////////////////////////////////////////
 ///			exec/exec_utils.c		///
@@ -417,8 +422,7 @@ int			get_outfile_nb(char **cmd);
 char		*verif_path_split(int len, int j, char *tmp, char **args);
 int			verif_path(char **args, t_init *param);
 char		**set_args_ann2(char **args, t_init *param);
-char		**set_args_ann(char **args, char **path,
-				t_init *param, char *free_tmp);
+char		**set_args_ann(char **args, char **path, t_init *param);
 char		**set_args(char **args, char **path, t_init *param);
 
 ////////////////////////////////////////
@@ -498,6 +502,7 @@ void		ft_env(t_env *env);
 
 void		ft_verif_nb(t_init *param);
 int			ft_free_param(t_init *param, int nb_arg);
+void		check_exit_arg(t_init *param, int nb_arg);
 void		ft_exit(t_init *param);
 
 ////////////////////////////////////////

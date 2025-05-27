@@ -25,7 +25,6 @@ void	exec_supp_quote_red(t_list_char *tmp, int i, t_mal *mal)
 			if (tmp->cmd[i + 1][j] == '"' || tmp->cmd[i + 1][j] == 39)
 			{
 				str = char_out(tmp->cmd[i + 1], tmp->cmd[i + 1][j], mal);
-				// free(tmp->cmd[i + 1]);
 				tmp->cmd[i + 1] = str;
 				break ;
 			}
@@ -102,18 +101,13 @@ int	verif_nb_quote(char **tab)
 	return (0);
 }
 
-void	ft_free_realoc(t_init *param, t_list_char *tmp,
-		char **tmp_cmd, char **tmp_val)
+void	ft_free_realoc(t_init *param, t_list_char *tmp, char **tmp_cmd)
 {
 	int	i;
 
-	(void)tmp_val;
 	i = 0;
-	// free_tab(tmp->cmd);
-	// free_tab(tmp->no_red);
 	tmp->cmd = tmp_cmd;
 	param->tok->funct = tmp->cmd[0];
-	// free(tmp_val);
 	i = 0;
 	while (tmp->cmd[i])
 		i++;

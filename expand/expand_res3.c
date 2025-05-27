@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_res3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:33:56 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/24 21:25:03 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 13:42:34 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ char	*get_final_input(char *res, char **inputs, int len)
 
 void	handle_expand(t_init *param, t_list_char *tmp, int i, int *j)
 {
-	// char	*tmp_free;
-
 	if (ft_strchr(tmp->cmd[i], '$'))
 	{
 		if (i == 0 || ft_strcmp("<<", tmp->cmd[i - 1])
@@ -42,9 +40,7 @@ void	handle_expand(t_init *param, t_list_char *tmp, int i, int *j)
 			|| ft_strcmp("<", tmp->cmd[i - 1]))
 		{
 			tmp->ind_exp[(*j)++] = i;
-			// tmp_free = tmp->cmd[i];
 			tmp->cmd[i] = expand_word(param, tmp->cmd[i]);
-			// free(tmp_free);
 		}
 	}
 }
@@ -62,10 +58,7 @@ char	*handle_double_quote(t_init *param, char *word)
 	final_word = expand_quote(param, no_quote);
 	if (!ft_strcmp(final_word, no_quote))
 	{
-		// free(no_quote);
-		// free(final_word);
 		return (ft_strdup(word, param->mal));
 	}
-	// free(no_quote);
 	return (final_word);
 }

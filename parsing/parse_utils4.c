@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:45:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/23 10:47:50 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:38:08 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	exec_supp(char **cmd, int i, t_mal *mal)
 	if (ft_strchr(cmd[i], 39) || ft_strchr(cmd[i], '"'))
 	{
 		tmp = no_quote_word(cmd[i], mal);
-		// free(cmd[i]);
 		cmd[i] = tmp;
 	}
 }

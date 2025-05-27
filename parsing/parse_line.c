@@ -86,7 +86,6 @@ void	before_exec(t_init *param, t_mal *mal)
 		check_back_expand(tmp, tmp->cmd, mal);
 		ft_supp_quote(tmp, tmp->no_red, mal);
 		check_back_expand(tmp, tmp->no_red, mal);
-		// free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
 	exec(param);

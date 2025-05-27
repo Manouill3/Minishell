@@ -62,6 +62,7 @@ SRC = main.c\
 	exec/set_args.c\
 	exec/exec_file.c\
 	exec/exec_file2.c\
+	exec/add_red.c\
 	built-in/pwd.c\
 	built-in/cd_utils.c\
 	built-in/cd_utils2.c\

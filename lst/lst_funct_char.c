@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:25:44 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/22 14:30:09 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:49:39 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ t_list_char	*ft_lstnew_char(char **tab, t_mal *mal)
 	t_list_char	*lst;
 
 	lst = add_malloc(mal, sizeof(t_list_char));
-	// if (!lst)
-	// 	return (NULL);
 	lst->cmd_path = NULL;
 	lst->cmd = tab;
 	lst->no_red = NULL;
@@ -51,38 +49,3 @@ void	ft_lstadd_back_char(t_list_char **lst, t_list_char *new)
 	tmp->next = new;
 	new->prev = tmp;
 }
-
-// void	ft_lstclear_char(t_list_char **lst)
-// {
-// 	t_list_char	*tmp;
-
-// 	if (!lst || !*lst)
-// 		return ;
-// 	while (*lst)
-// 	{
-// 		tmp = (*lst)->next;
-// 		ft_lstdelone_char(*lst);
-// 		*lst = tmp;
-// 	}
-// 	*lst = NULL;
-// }
-
-// void	ft_lstdelone_char(t_list_char *lst)
-// {
-// 	if (!lst)
-// 		return ;
-// 	clear_files(lst);
-// 	if (lst->heredoc->eof)
-// 		free_tab(lst->heredoc->eof);
-// 	if (lst->heredoc)
-// 		free(lst->heredoc);
-// 	if (lst->infiles)
-// 		free_tab(lst->infiles);
-// 	if (lst->no_red)
-// 		free_tab(lst->no_red);
-// 	if (lst->cmd)
-// 		free_tab(lst->cmd);
-// 	if (lst->funct)
-// 		free(lst->funct);
-// 	free(lst);
-// }

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 14:54:38 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/23 14:30:33 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:48:43 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,28 @@ void	ft_lstdelone_mal(t_mal *lst)
 		return ;
 	if (lst->content)
 		free(lst->content);
-    lst->content = NULL;
+	lst->content = NULL;
 	free(lst);
-    lst = NULL;
+	lst = NULL;
 }
 
-void    *add_malloc(t_mal *mal, size_t size)
+void	*add_malloc(t_mal *mal, size_t size)
 {
-    void    *tmp;
-    t_mal   *new;
+	void	*tmp;
+	t_mal	*new;
 
-    tmp = malloc(size);
-    if (!tmp)
-    {
-        ft_lstclear_mal(&mal);
-        exit (1);
-    }
-    new = ft_lstnew_mal(tmp);
-    if (!new)
-    {
-        ft_lstclear_mal(&mal);
-        exit (1);
-    }
-     ft_lstadd_back_mal(&mal, new);
-    return (tmp);
+	tmp = malloc(size);
+	if (!tmp)
+	{
+		ft_lstclear_mal(&mal);
+		exit (1);
+	}
+	new = ft_lstnew_mal(tmp);
+	if (!new)
+	{
+		ft_lstclear_mal(&mal);
+		exit (1);
+	}
+	ft_lstadd_back_mal(&mal, new);
+	return (tmp);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:06:32 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/24 22:34:03 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 13:34:26 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_delete(t_env *env, char *name)
 				env = tmp->next;
 			if (tmp->next)
 				tmp->next->prev = tmp->prev;
-			// ft_lstdelone_env(tmp);
 			return ;
 		}
 		tmp = tmp->next;
@@ -68,7 +67,6 @@ void	ft_unset(t_init *param, t_list_char *tok)
 		ft_delete(tmp, name);
 		tmp = param->lst_export;
 		ft_delete(tmp, name);
-		// free(name);
 		param->status = 0;
 		i++;
 	}

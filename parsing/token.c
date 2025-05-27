@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 10:55:15 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:35:19 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,6 @@ void	set_cmd(char *tab, t_list_char *tmp, t_mal *mal)
 	j = 0;
 	tmp->len_cmd = get_tab_len(tab);
 	tmp->cmd = add_calloc(mal, tmp->len_cmd + 1, sizeof(char *));
-	// if (!tmp->cmd)
-	// 	return ;
 	while (i < tmp->len_cmd)
 	{
 		k = 0;
@@ -99,8 +97,6 @@ void	set_cmd(char *tab, t_list_char *tmp, t_mal *mal)
 			j++;
 		len = ft_len_word(tab, j);
 		tmp->cmd[i] = add_calloc(mal, len + 1, sizeof(char));
-		// if (!tmp->cmd[i])
-		// 	return ;
 		while (k < len)
 			tmp->cmd[i][k++] = tab[j++];
 		i++;

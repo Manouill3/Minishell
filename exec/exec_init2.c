@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/24 22:12:46 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 14:53:21 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,26 @@ void	ft_exec_built_in(t_init *param, t_list_char *tok)
 		ft_env(param->lst_env);
 	if (!ft_strcmp(tok->funct, "exit"))
 		ft_exit(param);
+}
+
+void	pipe_or_built(t_init *param, t_list_char *tmp, int count)
+{
+	while (tmp)
+	{
+		if (secu_cmd(tmp))
+		{
+			tmp = tmp->next;
+			continue ;
+		}
+		if (param->count_cmd == 1 && (verif_built(tmp) == 2
+				|| verif_built(tmp) == 4
+				|| verif_built(tmp) == 5 || verif_built(tmp) == 7))
+		{
+			ft_exec_built_in(param, tmp);
+			tmp = tmp->next;
+			continue ;
+		}
+		count = ft_exec_pipe(tmp, param, count);
+		tmp = tmp->next;
+	}
 }

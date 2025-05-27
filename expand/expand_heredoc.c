@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 08:17:50 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/23 10:53:01 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:43:02 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,5 @@ char	*exp_heredoc(char *input, t_env *env, t_mal *mal)
 	if (!tmp_env)
 		return (NULL);
 	res = change_to_var(word, tmp_env);
-	// free(word);
-	// free(no_quote);
 	return (res);
 }

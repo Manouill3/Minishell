@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 10:21:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/22 21:48:20 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 14:41:46 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
-
-void	add_redirection(t_list_char *node, int *i, int *j, char *red, t_mal *mal)
-{
-	if (!ft_strcmp(node->cmd[*i], red) && node->cmd[*i + 1])
-	{
-		node->infiles[(*j)++] = ft_strdup(node->cmd[(*i)++], mal);
-		node->infiles[(*j)++] = ft_strdup(node->cmd[*i], mal);
-	}
-}
 
 void	get_in_out_complet_list(t_list_char *node, t_mal *mal)
 {
@@ -32,10 +23,10 @@ void	get_in_out_complet_list(t_list_char *node, t_mal *mal)
 	{
 		while (node->cmd[i] && ft_strlen(node->cmd[i]) <= 0)
 			i++;
-		add_redirection(node, &i, &j, "<", mal);
-		add_redirection(node, &i, &j, "<<", mal);
-		add_redirection(node, &i, &j, ">", mal);
-		add_redirection(node, &i, &j, ">>", mal);
+		if (ft_strcmp(node->cmd[i], "<<") || ft_strcmp(node->cmd[i], "<"))
+			add_redirection_in(node, &i, &j, mal);
+		if (ft_strcmp(node->cmd[i], ">>") || ft_strcmp(node->cmd[i], ">"))
+			add_redirection_out(node, &i, &j, mal);
 		i++;
 	}
 }

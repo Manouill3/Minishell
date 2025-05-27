@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/24 21:41:13 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 13:07:46 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	ft_exec_pipe(t_list_char *tmp, t_init *param, int count)
 
 int	secu_cmd(t_list_char *tmp)
 {
-	if (tmp->len_cmd > 0 && tmp->len_ind_exp == tmp->len_cmd && ft_strlen(tmp->cmd[0]) < 1)
+	if (tmp->len_cmd > 0 && tmp->len_ind_exp == tmp->len_cmd
+		&& ft_strlen(tmp->cmd[0]) < 1)
 		return (1);
 	return (0);
 }
@@ -74,24 +75,7 @@ void	exec(t_init *param)
 	tmp = param->tok;
 	signal(SIGINT, sigint_handler_child);
 	signal(SIGQUIT, sigint_handler_child);
-	while (tmp)
-	{
-		if (secu_cmd(tmp))
-		{
-			tmp = tmp->next;
-			continue ;
-		}
-		if (param->count_cmd == 1 && (verif_built(tmp) == 2
-				|| verif_built(tmp) == 4
-				|| verif_built(tmp) == 5 || verif_built(tmp) == 7))
-		{
-			ft_exec_built_in(param, tmp);
-			tmp = tmp->next;
-			continue ;
-		}
-		count = ft_exec_pipe(tmp, param, count);
-		tmp = tmp->next;
-	}
+	pipe_or_built(param, tmp, count);
 	ft_wait_child(param);
 	get_tty();
 	ft_handle_interrupt_signals();

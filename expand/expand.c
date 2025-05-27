@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 13:27:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/23 11:11:39 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:41:23 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ char	*expand_word(t_init *param, char *word)
 			inputs[i] = ft_strdup(res, param->mal);
 		i++;
 	}
-	// free_tab(inputs);
 	return (res);
 }
 
@@ -128,8 +127,6 @@ void	expand_arg(t_init *param)
 		j = 0;
 		tmp->len_ind_exp = nb_exp(tmp->cmd);
 		tmp->ind_exp = add_calloc(param->mal, sizeof(int), nb_exp(tmp->cmd));
-		// if (!tmp->ind_exp)
-		// 	return ;
 		while (tmp->cmd[i])
 		{
 			handle_expand(param, tmp, i, &j);
