@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 10:14:42 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 10:55:43 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ void	before_exec(t_init *param, t_mal *mal)
 		// free(tmp->ind_exp);
 		tmp = tmp->next;
 	}
-	if (!param->tok)
-		return ;
 	exec(param);
 }
 
@@ -102,6 +100,8 @@ void	parsing_line(t_init *param)
 		ft_putstr_fd("Syntax error : open quote\n", 2);
 		return ;
 	}
+	if (!param->tok)
+		return ;
 	if (syntax_error(param, param->line))
 		return ;
 	if (param->count_cmd == 1 && !only_white(param->line))
@@ -109,6 +109,12 @@ void	parsing_line(t_init *param)
 		param->status = 0;
 		return ;
 	}
+	int    i = 0;
+    while (param->tok->cmd[i])
+    {
+        printf("cmd [%d] %s\n", i, param->tok->cmd[i]);
+        i++;
+    }
 	expand_arg(param);
 	verif_expand(param);
 	get_funct(param->tok, param->mal);

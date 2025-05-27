@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 13:53:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/14 15:46:24 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:51:58 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	count_for_other(char *s, int i, int *cmp)
 		c = s[i++];
 		(*cmp)++;
 		while (s[i] && s[i] != c)
+		{
+			i++;
+			(*cmp)++;
+		}
+		if (s[i])
 		{
 			i++;
 			(*cmp)++;
@@ -73,7 +78,7 @@ int	ft_len_word(char *s, int start)
 	if (s[i] == '"' || s[i] == 39)
 	{
 		i = count_for_quote(s, i, &cmp);
-		if (!s[i])
+		if (!s[i] || is_white(s[i]))
 			return (cmp);
 	}
 	if (s[i] == '<' || s[i] == '>')
