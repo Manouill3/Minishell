@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:43:24 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/24 22:33:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 14:45:12 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 char	*get_pwd(t_init *param)
 {
 	char	*way;
+	char	*tmp;
+
 
 	way = getcwd(NULL, 0);
 	if (!way)
@@ -23,7 +25,9 @@ char	*get_pwd(t_init *param)
 		param->status = 1;
 		return (NULL);
 	}
-	return (way);
+	tmp = ft_strdup(way, param->mal);
+	free(way);
+	return (tmp);
 }
 
 void	ft_pwd(t_init *param)
@@ -32,5 +36,4 @@ void	ft_pwd(t_init *param)
 
 	pwd = get_pwd(param);
 	printf("%s\n", pwd);
-	free(pwd);
 }

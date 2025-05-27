@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 10:55:43 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:20:47 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,12 +109,6 @@ void	parsing_line(t_init *param)
 		param->status = 0;
 		return ;
 	}
-	int    i = 0;
-    while (param->tok->cmd[i])
-    {
-        printf("cmd [%d] %s\n", i, param->tok->cmd[i]);
-        i++;
-    }
 	expand_arg(param);
 	verif_expand(param);
 	get_funct(param->tok, param->mal);
