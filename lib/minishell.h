@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 16:20:19 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 16:34:56 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,9 +197,10 @@ int			check_mixed_redir(t_init *param, char *line, int i);
 ///			parsing/parse_utils5.c  ///
 //////////////////////////////////////
 
-char    **ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp);
-char	**ft_create_calloc_exp(t_init *param, char **tmp_cmd, t_list_char *tmp);
-void	exec_verif_exp2(t_init *param, t_list_char *tmp, int i);
+char		**ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp);
+char		**ft_create_calloc_exp(t_init *param, char **tmp_cmd,
+				t_list_char *tmp);
+void		exec_verif_exp2(t_init *param, t_list_char *tmp, int i);
 
 ////////////////////////////////////////
 ///			parsing/parsing_utils3.c///
@@ -220,7 +221,7 @@ int			get_tab_len(char *tab);
 t_list_char	*set_lst(int count_cmd, t_mal *mal);
 void		set_cmd(char *tab, t_list_char *tmp, t_mal *mal);
 int			get_token(t_init *param);
-				
+
 ////////////////////////////////////////
 ///			lst/lst_funct_char.c    ///
 //////////////////////////////////////
@@ -250,11 +251,14 @@ int			handle_heredoc_interrupt_before(t_heredoc *heredoc);
 ///			heredoc/heredoc_exec.c  ///
 //////////////////////////////////////
 
-void		ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env, t_mal *mal);
-void		ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env, t_mal *mal);
+void		ft_heredoc_oef_before(t_heredoc *heredoc, int i,
+				t_env *env, t_mal *mal);
+void		ft_heredoc_oef_last(t_heredoc *heredoc, int i,
+				t_env *env, t_mal *mal);
 int			ft_handle_heredoc_interrupt(t_heredoc *heredoc);
-void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env, t_mal *mal);
-		
+void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc,
+				t_env *env, t_mal *mal);
+
 ////////////////////////////////////////
 ///			heredoc/heredoc.c       ///
 //////////////////////////////////////
@@ -262,7 +266,7 @@ void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env, t_mal *mal)
 char		*get_valid_char(char *buffer, t_mal *mal);
 char		*get_name_h(t_mal *mal);
 void		get_nb_eof(t_list_char *tok);
-void		get_eof_tab(t_list_char *tok, t_mal * mal);
+void		get_eof_tab(t_list_char *tok, t_mal *mal);
 char		*get_final_eof(char *str, t_mal *mal);
 
 ////////////////////////////////////////
@@ -360,7 +364,7 @@ void		fail_execve(char **args, char **path, char **env, t_init *param);
 //////////////////////////////////////
 
 void		handle_redirection(t_init *param, t_list_char *node,
-int i, int *check);
+				int i, int *check);
 void		get_in_out_complet_list(t_list_char *node, t_mal *mal);
 void		get_in_out(t_list_char *tok, t_mal *mal);
 void		get_good_fd(t_init *param, t_list_char *node);
@@ -403,7 +407,7 @@ void		ft_wait_child(t_init *param);
 char		**conv_lst_tab(t_env *env, t_mal *mal);
 char		**make_path(t_env *env, t_mal *mal);
 void		verif_fd(int count, t_init *param);
-	
+
 ////////////////////////////////////////
 ///			exec/exec_utils2.c		///
 //////////////////////////////////////
@@ -458,7 +462,7 @@ int			ft_cd_slash(t_init *param, char *path);
 void		ft_modif_split_pwd(t_init *param, char *old_path, char *pwd);
 void		ft_modif_pwd(t_init *param, char *old_path);
 int			ft_cd_rest2(t_init *param, t_list_char *tok,
-char *path);
+				char *path);
 
 ////////////////////////////////////////
 ///		built-in.c/cd_utils3.c		///
@@ -531,7 +535,7 @@ void		ft_rest_var(t_env *tmp_env, t_env *tmp_exp,
 				t_init *param, t_list_char *tok);
 void		ft_init_var(t_init *param);
 int			ft_return_var(t_init *param);
-							
+
 ////////////////////////////////////////
 ///	        built-in.c/export_var.c	///
 //////////////////////////////////////
@@ -542,7 +546,8 @@ int			ft_existing_export(char	*name, t_env *tmp_exp,
 				t_init *param, t_list_char *tok);
 char		*ft_create_new_const(char *new_const, t_init *param,
 				t_env *tmp_exp, t_env *tmp_env);
-void		ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp);									
+void		ft_create_var(t_init *param, t_list_char *tok,
+				t_env *tmp_exp);									
 
 ////////////////////////////////////////
 ///			built-in.c/export.c		///
@@ -569,5 +574,5 @@ void		ft_pwd(t_init *param);
 void		ft_delete(t_env *env, char *name);
 int			ft_error_unset(t_init *param, t_list_char *tok, int *j, int i);
 void		ft_unset(t_init *param, t_list_char *tok);
-				
+
 #endif
