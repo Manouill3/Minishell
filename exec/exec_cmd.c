@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/24 21:43:22 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 17:15:17 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 	args = basic_args(tmp->no_red, param->mal);
 	args = set_args(args, path, param);
 	env = conv_lst_tab(param->lst_env, param->mal);
-	if (!args || !args[0])
+	if (!args || !args[0]) // si que des redirections pas executer
 	{
 		ft_putstr_fd("command not found\n", 2);
 		param->status = 127;

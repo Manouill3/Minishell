@@ -1,0 +1,87 @@
+Minishell : echo test | > test
+
+Minishell : << a << b << c
+heredoc> a
+heredoc> command not found
+
+Minishell : echo $USER "$$"
+mdegache "$$"
+
+Minishell : echo $USER $"'"test"test'$"
+mdegache test"test$
+
+Minishell : export caca="echo "test" < test"
+Minishell : $caca
+==36116== Invalid write of size 8
+==36116==    at 0x403918: exec_verif_exp (parse_utils2.c:74)
+==36116==    by 0x4039D3: verif_expand (parse_utils2.c:92)
+==36116==    by 0x40311A: parsing_line (parse_line.c:112)
+==36116==    by 0x401400: minishell (main.c:43)
+==36116==    by 0x4014E4: main (main.c:67)
+==36116==  Address 0x4bcbb90 is 16 bytes after a block of size 16 alloc'd
+==36116==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==36116==    by 0x40CF29: ft_calloc (ft_calloc.c:22)
+==36116==    by 0x401FE0: add_calloc (free_calloc.c:20)
+==36116==    by 0x404DDE: set_cmd (token.c:92)
+==36116==    by 0x404FC2: get_token (token.c:123)
+==36116==    by 0x403074: parsing_line (parse_line.c:96)
+==36116==    by 0x401400: minishell (main.c:43)
+==36116==    by 0x4014E4: main (main.c:67)
+==36116== 
+==36116== Invalid read of size 8
+==36116==    at 0x403764: ft_count_len (parse_utils2.c:45)
+==36116==    by 0x40393B: exec_verif_exp (parse_utils2.c:76)
+==36116==    by 0x4039D3: verif_expand (parse_utils2.c:92)
+==36116==    by 0x40311A: parsing_line (parse_line.c:112)
+==36116==    by 0x401400: minishell (main.c:43)
+==36116==    by 0x4014E4: main (main.c:67)
+==36116==  Address 0x4bcbb90 is 16 bytes after a block of size 16 alloc'd
+==36116==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==36116==    by 0x40CF29: ft_calloc (ft_calloc.c:22)
+==36116==    by 0x401FE0: add_calloc (free_calloc.c:20)
+==36116==    by 0x404DDE: set_cmd (token.c:92)
+==36116==    by 0x404FC2: get_token (token.c:123)
+==36116==    by 0x403074: parsing_line (parse_line.c:96)
+==36116==    by 0x401400: minishell (main.c:43)
+==36116==    by 0x4014E4: main (main.c:67)
+==36116== 
+==36116== Invalid read of size 8
+==36116==    at 0x4036BA: end_verif_exp (parse_utils2.c:34)
+==36116==    by 0x403977: exec_verif_exp (parse_utils2.c:79)
+==36116==    by 0x4039D3: verif_expand (parse_utils2.c:92)
+==36116==    by 0x40311A: parsing_line (parse_line.c:112)
+==36116==    by 0x401400: minishell (main.c:43)
+==36116==    by 0x4014E4: main (main.c:67)
+==36116==  Address 0x4bcbb80 is 0 bytes after a block of size 16 alloc'd
+==36116==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==36116==    by 0x40CF29: ft_calloc (ft_calloc.c:22)
+==36116==    by 0x401FE0: add_calloc (free_calloc.c:20)
+==36116==    by 0x404DDE: set_cmd (token.c:92)
+==36116==    by 0x404FC2: get_token (token.c:123)
+==36116==    by 0x403074: parsing_line (parse_line.c:96)
+==36116==    by 0x401400: minishell (main.c:43)
+==36116==    by 0x4014E4: main (main.c:67)
+
+Minishell : export caca+=test
+Minishell : env
+caca=test
+
+cat + control-c -> echo $? = 0 alors normalement 130 
+
+Minishell : >"<" ls
+Error syntax : too many redirections
+
+Minishell : !
+command not found
+
+$e $e e"c"ho test
+command not found
+
+ pwd > test | cat ""
+
+AIDE :
+
+export caca="echo test < test"
+export caca='echo test "<" test'
+
+expand -> $caca -> caca=echo test < test -> reparcourir expand -> si < || > || << || >> || | -> ducoup ex "<" -> echo "test" "<" test
