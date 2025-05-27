@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
 /*   Updated: 2025/05/27 16:20:19 by tcybak           ###   ########.fr       */
@@ -243,10 +243,8 @@ void		ft_lstadd_back_env(t_env **lst, t_env *new);
 ///			heredoc/heredoc_ann.c   ///
 //////////////////////////////////////
 
-int			handle_heredoc_input(t_heredoc *heredoc, t_env *env,
-				char *final_eof, int i, t_mal *mal);
-int			handle_heredoc_interrupt_before(t_heredoc *heredoc,
-				char *final_eof);
+int			handle_heredoc_input(t_heredoc *heredoc, char *final_eof);
+int			handle_heredoc_interrupt_before(t_heredoc *heredoc);
 
 ////////////////////////////////////////
 ///			heredoc/heredoc_exec.c  ///
@@ -254,7 +252,7 @@ int			handle_heredoc_interrupt_before(t_heredoc *heredoc,
 
 void		ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env, t_mal *mal);
 void		ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env, t_mal *mal);
-int			ft_handle_heredoc_interrupt(t_heredoc *heredoc, char *final_eof);
+int			ft_handle_heredoc_interrupt(t_heredoc *heredoc);
 void		exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env, t_mal *mal);
 		
 ////////////////////////////////////////

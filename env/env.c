@@ -15,7 +15,6 @@
 void	get_final_cont(t_env *env, t_mal *mal)
 {
 	int		i;
-	// char	*tmp_cont;
 	t_env	*tmp;
 
 	tmp = env;
@@ -25,9 +24,7 @@ void	get_final_cont(t_env *env, t_mal *mal)
 		while (tmp->name[i])
 			i++;
 		i++;
-		// tmp_cont = tmp->cont;
 		tmp->cont = ft_substr(tmp->cont, i, ft_strlen(tmp->cont) - 1, mal);
-		// free(tmp_cont);
 		tmp = tmp->next;
 	}
 }
@@ -61,7 +58,6 @@ void	get_name_env_more(t_env *env, t_mal *mal)
 void	get_final_cont_more(t_env *env, t_mal *mal)
 {
 	int		i;
-	// char	*tmp_cont;
 	t_env	*tmp;
 
 	tmp = env;
@@ -71,9 +67,7 @@ void	get_final_cont_more(t_env *env, t_mal *mal)
 		while (tmp->name[i])
 			i++;
 		i = i + 2;
-		// tmp_cont = tmp->cont;
 		tmp->cont = ft_substr(tmp->cont, i, ft_strlen(tmp->cont) - 1, mal);
-		// free(tmp_cont);
 		tmp = tmp->next;
 	}
 }

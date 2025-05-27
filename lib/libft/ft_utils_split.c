@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/22 14:18:34 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:23:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_quote(int i, const char *s, char c)
 	return (i);
 }
 
-char	**ft_extract_word(const char *s, int *k, int *i, char **tab, t_mal *mal)
+char	*ft_extract_word(const char *s, int *k, char *tab, t_mal *mal)
 {
 	int		j;
 	int		len;
@@ -38,40 +38,40 @@ char	**ft_extract_word(const char *s, int *k, int *i, char **tab, t_mal *mal)
 
 	j = 0;
 	len = len_word(s, (*k));
-	tab[(*i) - 1] = add_calloc(mal, len + 1, sizeof(char));
-	if (!tab[(*i) - 1])
-		free_all(tab);
+	tab = add_calloc(mal, len + 1, sizeof(char));
 	while (s[(*k)] && j < len)
 	{
 		if (s[(*k)] == '"' || s[(*k)] == 39)
 		{
 			c = s[(*k)];
-			tab[(*i) - 1][j++] = s[(*k)++];
+			tab[j++] = s[(*k)++];
 			while (s[(*k)] && s[(*k)] != c)
-				tab[(*i) - 1][j++] = s[(*k)++];
-			tab[(*i) - 1][j++] = s[(*k)++];
+				tab[j++] = s[(*k)++];
+			tab[j++] = s[(*k)++];
 		}
 		else
-			tab[((*i)) - 1][j++] = s[((*k))++];
+			tab[j++] = s[((*k))++];
 	}
 	return (tab);
 }
 
-char	**split_ope(const char *s, int k, int i, char **tab, t_mal *mal)
+char	**split_ope(const char *s, int k, char **tab, t_mal *mal)
 {
 	int	nb_word;
+	int	i;
 
+	i = 0;
 	nb_word = len_first_tab(s);
 	while (i++ < nb_word)
 	{
 		k = secu(k, s);
 		if (k < (int)ft_strlen(s) && i - 1 < nb_word)
-			ft_extract_word(s, &k, &i, tab, mal);
+			tab[i - 1] = ft_extract_word(s, &k, tab[i - 1], mal);
 	}
 	return (tab);
 }
 
-char	**handle_quote(const char *s, int *k, char **tab, int i, t_mal *mal)
+char	*handle_quote(const char *s, int *k, char *tab, t_mal *mal)
 {
 	int		j;
 	int		len;
@@ -80,21 +80,19 @@ char	**handle_quote(const char *s, int *k, char **tab, int i, t_mal *mal)
 	j = 0;
 	(*k) = secu((*k), s);
 	len = len_word(s, (*k));
-	tab[i - 1] = add_calloc(mal, len + 1, sizeof(char));
-	if (!tab[i - 1])
-		free_all(tab);
+	tab = add_calloc(mal, len + 1, sizeof(char));
 	while (j < len && s[(*k)])
 	{
 		if (s[(*k)] == '"' || s[(*k)] == 39)
 		{
 			c = s[(*k)];
-			tab[i - 1][j++] = s[(*k)++];
+			tab[j++] = s[(*k)++];
 			while (s[(*k)] && s[(*k)] != c)
-				tab[i - 1][j++] = s[(*k)++];
-			tab[i - 1][j++] = s[(*k)++];
+				tab[j++] = s[(*k)++];
+			tab[j++] = s[(*k)++];
 		}
 		else
-			tab[i - 1][j++] = s[(*k)++];
+			tab[j++] = s[(*k)++];
 	}
 	return (tab);
 }
