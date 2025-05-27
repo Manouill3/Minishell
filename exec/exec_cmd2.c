@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:25:16 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/24 21:43:56 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 10:42:24 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	fail_execve(char **args, char **path,
 	(void)env;
 	status = param->status;
 	if (!path)
-		ft_putstr_fd(" command not found\n", 2);
+		ft_putstr_fd("command not found\n", 2);
 	ft_lstclear_mal(&param->mal);
 	exit (status);
 }

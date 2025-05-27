@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:24:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/13 13:26:21 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:42:16 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	get_in_fd(t_init *param, t_list_char *node, int i)
 				close(node->fd_infile);
 			node->fd_infile = -1;
 			param->status = 1;
-			write (2, " No such file or directory\n", 27);
+			write (2, "No such file or directory\n", 27);
 		}
 	}
 }
@@ -59,7 +59,7 @@ void	get_out_fd(t_init *param, t_list_char *node, int i)
 	if (node->fd_outfile == -1)
 	{
 		param->status = 1;
-		write(2, " Permission denied", 18);
+		write(2, "Permission denied", 18);
 	}
 }
 

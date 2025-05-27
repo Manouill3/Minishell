@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/26 10:36:47 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:43:07 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_verif_nb(t_init *param)
 			&& param->tok->cmd[1][i + 1] <= 57))))
 		{
 			param->status = 2;
-			write(2, " numeric argument required\n", 27);
+			write(2, "numeric argument required\n", 27);
 			status = param->status;
 			// ft_free_all(param);
 			// free_struct(param);
@@ -44,7 +44,7 @@ int	ft_free_param(t_init *param, int nb_arg)
 {
 	ft_verif_nb(param);
 	if (param->status == 2)
-		write(2, " numeric argument required\n", 27);
+		write(2, "numeric argument required\n", 27);
 	if (param->count_cmd == 1)
 		ft_putstr_fd("exit\n", 2);
 	nb_arg = param->status;
@@ -79,7 +79,7 @@ void	ft_exit(t_init *param)
 	{
 		ft_verif_nb(param);
 		param->status = 1;
-		write(2, " too many arguments\n", 20);
+		write(2, "too many arguments\n", 20);
 		status = param->status;
 		// ft_free_all(param);
 		// free_struct(param);
