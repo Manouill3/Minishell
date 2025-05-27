@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 14:19:28 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 14:49:00 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,5 @@ int	ft_cd_last(t_init *param, t_list_char *tok, char *path)
 		perror("cd");
 		return (0);
 	}
-	// free(path);
 	return (1);
 }
