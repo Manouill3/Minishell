@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_normal_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 11:02:49 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/24 21:28:44 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 09:24:50 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	**ft_string(size_t word, char const *s, char **str, char c, t_mal *m
 		str[j] = ft_substr(s, i, h, mal);
 		if (str[j] == 0)
 		{
-			ft_free(j, str);
+			// ft_free(j, str);
 			return (0);
 		}
 		j++;

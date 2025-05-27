@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 11:22:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/23 09:07:29 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 09:25:34 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	**ft_string_exp(size_t word, char const *s, char **str, t_mal *mal)
 		str[j] = ft_substr(s, i, h, mal);
 		if (str[j] == 0)
 		{
-			ft_free_exp(j, str);
+			// ft_free_exp(j, str);
 			return (0);
 		}
 		j++;
