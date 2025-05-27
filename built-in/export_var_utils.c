@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:22:16 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/26 13:26:18 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 15:48:21 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,14 @@
 void	ft_add_value(t_env *tmp_exp, t_env *tmp_env,
 	char *new_const, t_init *param)
 {
-	// free(tmp_exp->cont);
 	tmp_exp->cont = NULL;
 	tmp_exp->cont = ft_strdup(new_const, param->mal);
 	if (param->create_x == 1)
 	{
-		// free(tmp_env->cont);
 		tmp_env->cont = NULL;
 		tmp_env->cont = ft_strdup(new_const, param->mal);
 	}
 	tmp_exp->exp = 0;
-	// free(new_const);
 }
 
 void	ft_alloc_new_const(t_list_char *tok, t_init *param,
@@ -79,9 +76,6 @@ void	ft_init_var(t_init *param)
 int	ft_return_var(t_init *param)
 {
 	if (param->create_x != 2)
-	{
-		// free(name);
 		return (1);
-	}
 	return (0);
 }

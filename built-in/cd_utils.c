@@ -6,16 +6,18 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 14:49:00 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 16:15:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char	*ft_split_home_way(char **path_split, int i, int *j, char *lst, t_mal *mal)
+char	*ft_split_home_way(char **path_split, int i, int *j, t_mal *mal)
 {
-	int	start;
+	int		start;
+	char	*lst;
 
+	lst = "homes";
 	start = 0;
 	if (path_split[i][(*j)] == lst[start])
 	{
@@ -36,7 +38,7 @@ char	*ft_split_home_way(char **path_split, int i, int *j, char *lst, t_mal *mal)
 	return (NULL);
 }
 
-char	*ft_give_home_way(char **path_split, char *lst, t_mal *mal)
+char	*ft_give_home_way(char **path_split, t_mal *mal)
 {
 	int		i;
 	int		j;
@@ -49,7 +51,7 @@ char	*ft_give_home_way(char **path_split, char *lst, t_mal *mal)
 		j = 0;
 		while (path_split[i][j])
 		{
-			path_home = ft_split_home_way(path_split, i, &j, lst, mal);
+			path_home = ft_split_home_way(path_split, i, &j, mal);
 			if (path_home != NULL)
 				return (path_home);
 		}
@@ -96,11 +98,10 @@ int	check_inside_path(char *path, t_list_char *tok)
 	return (result);
 }
 
-int	ft_cd_last(t_init *param, t_list_char *tok, char *path)
+int	ft_cd_last(t_init *param, t_list_char *tok)
 {
 	int	result;
 
-	(void)path;;
 	result = chdir(tok->cmd[1]);
 	if (result == -1)
 	{

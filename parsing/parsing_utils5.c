@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils5.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:39:28 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 13:45:14 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 16:25:44 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-char    **ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
+char	**ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 {
 	int	x;
 	int	y;
 	int	len;
-	
+
 	x = 0;
 	len = 0;
 	free_tab(tmp_cmd);
@@ -61,7 +61,7 @@ char	**ft_create_calloc_exp(t_init *param, char **tmp_cmd, t_list_char *tmp)
 	tmp_cmd = add_calloc(param->mal, sizeof(char *), 2);
 	if (!tmp_cmd)
 		return (NULL);
-	tmp_cmd[0] = add_calloc(param->mal,sizeof(char), (len + 1));
+	tmp_cmd[0] = add_calloc(param->mal, sizeof(char), (len + 1));
 	if (!tmp_cmd[0])
 		return (NULL);
 	return (tmp_cmd);
@@ -69,15 +69,14 @@ char	**ft_create_calloc_exp(t_init *param, char **tmp_cmd, t_list_char *tmp)
 
 void	exec_verif_exp2(t_init *param, t_list_char *tmp, int i)
 {
-
 	int			len_tmp;
 	char		**tmp_val;
 	char		**tmp_cmd;
 
 	tmp_val = NULL;
 	tmp_cmd = NULL;
-
-	if (!ft_strcmp("export", tmp->cmd[0]) && tmp->cmd[i + 1] && tmp->len_ind_exp >= 1)
+	if (!ft_strcmp("export", tmp->cmd[0]) && tmp->cmd[i + 1]
+		&& tmp->len_ind_exp >= 1)
 	{
 		tmp_cmd = ft_all_one_ligne(param, tmp_cmd, tmp);
 		tmp_val = ft_exp_split(tmp_cmd[0], param->mal);
@@ -85,7 +84,7 @@ void	exec_verif_exp2(t_init *param, t_list_char *tmp, int i)
 		tmp->cmd[i] = NULL;
 		len_tmp = 0;
 		ft_count_len(&len_tmp, &i, tmp_val, tmp);
-		tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, tmp_val, param->mal);
+		tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, param->mal);
 		param->i_ex = i + len_tmp;
 		end_verif_exp(param, tmp_cmd, tmp_val, len_tmp);
 		ft_free_realoc(param, tmp, tmp_cmd);

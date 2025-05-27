@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:23:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 11:14:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 15:49:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,19 +57,13 @@ int	ft_existing_export(char	*name, t_env *tmp_exp,
 	{
 		tmp_exp->exp = 0;
 		if (param->create_x != 2)
-		{
-			// free(name);
 			return (1);
-		}
 	}
 	if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[j][param->i_ex] != '=')
 	{
 		tmp_exp->exp = 1;
 		if (param->create_x != 2)
-		{
-			// free(name);
 			return (1);
-		}
 	}
 	return (0);
 }
@@ -105,7 +99,8 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 	{
 		if (ft_existing_export(name, tmp_exp, param, tok) == 1)
 			return ;
-		if (!ft_strcmp(tmp_exp->name, name) && tok->cmd[tok->ex_j][param->i_ex] == '=')
+		if (!ft_strcmp(tmp_exp->name, name)
+			&& tok->cmd[tok->ex_j][param->i_ex] == '=')
 		{
 			ft_alloc_new_const(tok, param, tmp_exp, tmp_env);
 			if (ft_return_var(param) == 1)
@@ -114,5 +109,4 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 		tmp_exp = tmp_exp->next;
 	}
 	ft_rest_var(tmp_env, tmp_exp, param, tok);
-	// free(name);
 }

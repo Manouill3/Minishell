@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:43:24 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 14:45:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 15:06:33 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*get_pwd(t_init *param)
 {
 	char	*way;
 	char	*tmp;
-
 
 	way = getcwd(NULL, 0);
 	if (!way)

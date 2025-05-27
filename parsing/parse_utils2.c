@@ -46,15 +46,11 @@ void	ft_count_len(int *len_tmp, int *i, char **tmp_val, t_list_char *tmp)
 		(*i)++;
 }
 
-char	**ft_create_tmp_cmd(char **tmp_cmd, int i, int len_tmp, char **tmp_val, t_mal *mal)
+char	**ft_create_tmp_cmd(char **tmp_cmd, int i, int len_tmp, t_mal *mal)
 {
-	(void)tmp_val;
 	tmp_cmd = add_calloc(mal, (i + len_tmp + 1), (sizeof(char *)));
 	if (!tmp_cmd)
-	{
-		// free(tmp_val);
 		return (NULL);
-	}
 	return (tmp_cmd);
 }
 
@@ -78,7 +74,7 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 		tmp->cmd[i] = NULL;
 		len_tmp = 0;
 		ft_count_len(&len_tmp, &i, tmp_val, tmp);
-		tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, tmp_val, param->mal);
+		tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, param->mal);
 		param->i_ex = i + len_tmp;
 		end_verif_exp(param, tmp_cmd, tmp_val, len_tmp);
 		ft_free_realoc(param, tmp, tmp_cmd);
