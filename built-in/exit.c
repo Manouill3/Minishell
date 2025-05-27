@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 10:43:07 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 13:33:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	ft_verif_nb(t_init *param)
 			param->status = 2;
 			write(2, "numeric argument required\n", 27);
 			status = param->status;
-			// ft_free_all(param);
-			// free_struct(param);
 			ft_lstclear_mal(&param->mal);
 			exit(status);
 		}
@@ -48,15 +46,33 @@ int	ft_free_param(t_init *param, int nb_arg)
 	if (param->count_cmd == 1)
 		ft_putstr_fd("exit\n", 2);
 	nb_arg = param->status;
-	// ft_free_all(param);
-	// free_struct(param);
 	ft_lstclear_mal(&param->mal);
 	return (nb_arg);
 }
 
-void	ft_exit(t_init *param)
+void	check_exit_arg(t_init *param, int nb_arg)
 {
 	int	status;
+
+	if (nb_arg == 1)
+	{
+		status = param->status;
+		ft_lstclear_mal(&param->mal);
+		exit(status);
+	}
+	if (nb_arg > 2)
+	{
+		ft_verif_nb(param);
+		param->status = 1;
+		write(2, "too many arguments\n", 20);
+		status = param->status;
+		ft_lstclear_mal(&param->mal);
+		exit(status);
+	}
+}
+
+void	ft_exit(t_init *param)
+{
 	int	nb_arg;
 	int	i;
 
@@ -67,25 +83,7 @@ void	ft_exit(t_init *param)
 		nb_arg++;
 		i++;
 	}
-	if (nb_arg == 1)
-	{
-		status = param->status;
-		// ft_free_all(param);
-		// free_struct(param);
-		ft_lstclear_mal(&param->mal);
-		exit(status);
-	}
-	if (nb_arg > 2)
-	{
-		ft_verif_nb(param);
-		param->status = 1;
-		write(2, "too many arguments\n", 20);
-		status = param->status;
-		// ft_free_all(param);
-		// free_struct(param);
-		ft_lstclear_mal(&param->mal);
-		exit(status);
-	}
+	check_exit_arg(param, nb_arg);
 	nb_arg = ft_free_param(param, nb_arg);
 	exit(nb_arg);
 }

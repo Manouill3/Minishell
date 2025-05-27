@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/23 10:48:27 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:39:11 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	process_cmd_if_expand(char **cmd, int i, t_mal *mal)
 		|| cmd[i][j + 1] == '"' || cmd[i][j + 1] == 39))
 			exec_supp(cmd, i, mal);
 	}
-	// free(no_quote);
 }
 
 void	check_back_expand(t_list_char *tok, char **cmd, t_mal *mal)

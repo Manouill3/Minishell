@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:55:11 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/23 11:13:44 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:42:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,9 @@ char	*check_quote_q(t_init *param, char *word, t_env *env)
 
 	no_quote = char_out(word, 39, param->mal);
 	if (!ft_strcmp(no_quote, "$?"))
-	{
-		// free(no_quote);
 		return (get_exit_value(param, word));
-	}
 	if (ft_strlen(no_quote) == 1 && no_quote[0] == '$')
-	{
-		// free(no_quote);
 		return (ft_strdup(word, param->mal));
-	}
-	// free(no_quote);
 	if (!ft_strchr(word, '$'))
 		return (ft_strdup(word, param->mal));
 	final_word = get_env_value(env, word, param);
@@ -87,7 +80,6 @@ char	*get_exit_value(t_init *param, char *word)
 		i++;
 	while (word[i])
 		final_word[j++] = word[i++];
-	// free(value);
 	return (final_word);
 }
 
@@ -110,7 +102,6 @@ int	len_get_exit_value(int status, char *word, t_mal *mal)
 		i++;
 	while (word[i++])
 		count++;
-	// free(value);
 	return (count);
 }
 

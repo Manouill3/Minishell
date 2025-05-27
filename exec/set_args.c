@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 10:41:47 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 13:16:01 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ int	verif_path(char **args, t_init *param)
 		tmp = verif_path_split(len, j, tmp, args);
 		if (access(tmp, F_OK) && args[0][0] == '/')
 		{
-			// free(tmp);
 			write(2, "Not a directory", 16);
 			param->status = 126;
 			return (1);
 		}
-		// free(tmp);
 	}
 	return (0);
 }
@@ -72,31 +70,23 @@ char	**set_args_ann2(char **args, t_init *param)
 	return (args);
 }
 
-char	**set_args_ann(char **args, char **path, t_init *param, char *free_tmp)
+char	**set_args_ann(char **args, char **path, t_init *param)
 {
 	int		i;
 	char	*tmp;
 
-	(void)free_tmp;
 	i = 0;
 	if (!args[0] || ft_strlen(args[0]) < 1)
-	{
-		// free_tab(args);
 		return (NULL);
-	}
 	while (path[i])
 	{
 		tmp = ft_strjoin(path[i], "/", param->mal);
-		free_tmp = tmp;
 		tmp = ft_strjoin(tmp, args[0], param->mal);
-		// free(free_tmp);
 		if (access(tmp, X_OK | F_OK) != -1)
 		{
-			// free(args[0]);
 			args[0] = tmp;
 			return (args);
 		}
-		// free(tmp);
 		i++;
 	}
 	return (set_args_ann2(args, param));
@@ -105,11 +95,9 @@ char	**set_args_ann(char **args, char **path, t_init *param, char *free_tmp)
 char	**set_args(char **args, char **path, t_init *param)
 {
 	struct stat	mode;
-	char		*free_tmp;
 
 	if (!path)
 		return (args);
-	free_tmp = NULL;
 	if (args[0] && !access(args[0], X_OK | F_OK))
 	{
 		if (stat(args[0], &mode) == -1)
@@ -128,5 +116,5 @@ char	**set_args(char **args, char **path, t_init *param)
 		}
 		return (args);
 	}
-	return (set_args_ann(args, path, param, free_tmp));
+	return (set_args_ann(args, path, param));
 }

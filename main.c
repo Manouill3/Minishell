@@ -41,7 +41,6 @@ void	minishell(t_init *param, int tt_y)
 		if (param->line && param->line[0] != '\0')
 			add_history(param->line);
 		parsing_line(param);
-		// ft_lstclear_mal(&param->mal);
 		if (!tt_y)
 			break ;
 	}
@@ -67,7 +66,7 @@ int	main(int ac, char **av, char **env)
 		tt_y = isatty(STDIN_FILENO);
 		minishell(param, tt_y);
 		res = param->status;
-		ft_lstclear_mal(&param->mal);
+		free_struct(param);
 		return (res);
 	}
 }

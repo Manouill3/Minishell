@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/23 10:54:11 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:12:42 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	**conv_lst_tab(t_env *env, t_mal *mal)
 	{
 		tmp_tab = ft_strjoin(tmp->name, "=", mal);
 		tab[i++] = ft_strjoin(tmp_tab, tmp->cont, mal);
-		// free(tmp_tab);
 		tmp = tmp->next;
 	}
 	return (tab);

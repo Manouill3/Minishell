@@ -78,7 +78,7 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 			tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, tmp_val, param->mal);
 			param->i_ex = i + len_tmp;
 			end_verif_exp(param, tmp_cmd, tmp_val, len_tmp);
-			ft_free_realoc(param, tmp, tmp_cmd, tmp_val);
+			ft_free_realoc(param, tmp, tmp_cmd);
 		}
 		exec_verif_exp2(param, tmp, i);
 		i++;
