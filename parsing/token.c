@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:14:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 15:19:13 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 01:48:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ int	get_token(t_init *param)
 	t_list_char	*tmp;
 
 	i = 0;
+	if (syntax_error(param, param->line))
+		return (2);
 	param->tab = ft_split(param->line, param->mal);
 	if (verif_nb_quote(param->tab))
 	{

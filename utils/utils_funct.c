@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_funct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/21 13:19:46 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 23:40:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,29 @@ int	nb_exp(char **cmd)
 		i++;
 	}
 	return (nb);
+}
+
+void	print_lst_char(t_list_char *lst)
+{
+	int			i;
+	t_list_char	*curr;
+
+	curr = lst;
+	while (curr)
+	{
+		i = 0;
+		while (curr->cmd[i])
+		{
+			printf("cmd[%d] : %s\n", i, curr->cmd[i]);
+			i++;
+		}
+		i = 0;
+		while (curr->no_red[i])
+		{
+			printf("no_red[%d] : %s\n", i, curr->no_red[i]);
+			i++;
+		}
+		printf("funct : %s\n", curr->funct);
+		curr = curr->next;
+	}
 }

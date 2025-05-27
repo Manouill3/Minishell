@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 13:39:11 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:58:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	check_too_many_redir(t_init *param, char *line, int i)
 {
 	if (i + 2 <= (int)ft_strlen(line)
+		&& (line[i + 1] == '<' || line[i + 1] == '>')
 		&& (line[i + 2] == '<' || line[i + 2] == '>'))
 	{
 		ft_putstr_fd("Error syntax : too many redirections\n", 2);
@@ -47,8 +48,8 @@ int	is_expand_index(t_list_char *tok, int i)
 	while (k < tok->len_ind_exp && tok->ind_exp[k] != i)
 		k++;
 	if (k >= tok->len_ind_exp || tok->ind_exp[k] == 0)
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }
 
 void	process_cmd_if_expand(char **cmd, int i, t_mal *mal)
@@ -65,7 +66,8 @@ void	process_cmd_if_expand(char **cmd, int i, t_mal *mal)
 		while (cmd[i][j] && cmd[i][j] != '$')
 			j++;
 		if (cmd[i][j + 1] && (is_white(cmd[i][j + 1])
-		|| cmd[i][j + 1] == '"' || cmd[i][j + 1] == 39))
+		|| cmd[i][j + 1] == '"' || cmd[i][j + 1] == 39
+		|| cmd[i][j + 1] == '$')) 
 			exec_supp(cmd, i, mal);
 	}
 }

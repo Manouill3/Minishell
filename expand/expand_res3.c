@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_res3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 10:33:56 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 13:42:34 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 00:24:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ char	*handle_double_quote(t_init *param, char *word)
 		return (no_quote);
 	final_word = expand_quote(param, no_quote);
 	if (!ft_strcmp(final_word, no_quote))
-	{
-		return (ft_strdup(word, param->mal));
-	}
+		return (ft_strdup(no_quote, param->mal));
 	return (final_word);
 }

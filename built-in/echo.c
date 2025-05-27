@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:35:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/09 13:31:03 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 01:22:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_echo(t_init *param, t_list_char *tok)
 		printf("\n");
 		return ;
 	}
-	while (ft_strcmp(tok->no_red[i], "echo") || ft_strlen(tok->no_red[i]) <= 0)
+	while (ft_strlen(tok->no_red[i]) <= 0 || ft_strcmp(tok->no_red[i], "echo"))
 		i++;
 	i++;
 	if (ft_echo_option(tok, &i, &n) == 0)

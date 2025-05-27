@@ -2,12 +2,12 @@ Minishell : echo test | > test
 
 Minishell : << a << b << c
 heredoc> a
-heredoc> command not found
+heredoc> command not found[
 
-Minishell : echo $USER "$$"
+[Minishell : echo $USER "$$" 
 mdegache "$$"
 
-Minishell : echo $USER $"'"test"test'$"
+[Minishell : echo $USER $"'"test"test'$"
 mdegache test"test$
 
 Minishell : export caca="echo "test" < test"
@@ -68,16 +68,16 @@ caca=test
 
 cat + control-c -> echo $? = 0 alors normalement 130 
 
-Minishell : >"<" ls
+[Minishell : >"<" ls
 Error syntax : too many redirections
 
-Minishell : ! et :
+[Minishell : ! et :
 command not found
 
-$e $e e"c"ho test
+[$e $e e"c"ho test
 command not found
 
- pwd > test | cat ""
+ pwd > test | cat ""[
 
 Minishell : export caca='echo -n bonjour -n'
 Minishell : $caca
@@ -151,7 +151,7 @@ bonjour -n==149973==
 Minishell : export ca_ca='cat -e copains '
 not a valid identifier
 
-Minishell : | | |
+[Minishell : | | |
 Minishell : echo $?
 0
 manque message erreur + status

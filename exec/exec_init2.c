@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 14:53:21 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 01:32:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	no_red_len(char **tab, t_list_char *tmp)
 	len = 0;
 	while (i < tmp->len_cmd)
 	{
-		if (ft_strlen(tab[i]) < 1)
-		{
-			i++;
-			continue ;
-		}
+		// if (ft_strlen(tab[i]) < 1)
+		// {
+		// 	i++;
+		// 	continue ;
+		// }
 		if (tab[i] && ft_strcmp(tab[i], ">") && ft_strcmp(tab[i], "<"))
 			len++;
 		else
@@ -44,11 +44,11 @@ void	no_red_ann(int len, t_list_char *tmp, t_init *param)
 	j = 0;
 	while (j < len && i < tmp->len_cmd)
 	{
-		if (ft_strlen(tmp->cmd[i]) < 1)
-		{
-			i++;
-			continue ;
-		}
+		// if (ft_strlen(tmp->cmd[i]) < 1)
+		// {
+		// 	i++;
+		// 	continue ;
+		// }
 		if (ft_strcmp(">", tmp->cmd[i]) && ft_strcmp("<", tmp->cmd[i])
 			&& ft_strcmp(">>", tmp->cmd[i]) && ft_strcmp("<<", tmp->cmd[i]))
 			tmp->no_red[j++] = ft_strdup(tmp->cmd[i], param->mal);
@@ -68,8 +68,6 @@ void	get_no_red(t_list_char *tok, t_init *param)
 	{
 		len = no_red_len(tmp->cmd, tmp);
 		tmp->no_red = add_calloc(param->mal, len + 1, sizeof(char *));
-		if (!tok->no_red)
-			return ;
 		no_red_ann(len, tmp, param);
 		tmp = tmp->next;
 	}

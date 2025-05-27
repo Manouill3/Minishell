@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_syntax_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/12 17:41:04 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 01:45:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	syntax_error(t_init *param, char *line)
 
 	i = 0;
 	len = ft_strlen(line);
+	if (len == 1 && (line[0] == '!' || line[0] == ':'))
+		return (1);
 	while (i < len && line[i])
 	{
 		if (check_quotes(line, &i))
