@@ -6,11 +6,11 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:39:28 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/26 17:56:18 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 10:02:59 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include "../lib/minishell.h"
 
 char    **ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 {
@@ -36,10 +36,10 @@ char    **ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 	}
 	tmp_cmd = add_calloc(param->mal, sizeof(char *), 2);
 	if (!tmp_cmd)
-		return; 
+	return (NULL);
 	tmp_cmd[0] = add_calloc(param->mal,sizeof(char), (len + 1));
 	if (!tmp_cmd[0])
-		return;
+		return (NULL);
 	x = 0;
 	len = 0;
 	while (tmp->cmd && tmp->cmd[x])
@@ -55,6 +55,7 @@ char    **ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 		len++;
 		x++;
 	}
+	return (tmp_cmd);
 }
 
 void	exec_verif_exp2(t_init *param, t_list_char *tmp, int i)
@@ -69,7 +70,7 @@ void	exec_verif_exp2(t_init *param, t_list_char *tmp, int i)
 
 	if (!ft_strcmp("export", tmp->cmd[0]) && tmp->cmd[i + 1] && tmp->len_ind_exp >= 1)
 	{
-		tmp_cmd = ft_all_one_ligne(param, tmp_cmd, t_list_char *tmp);
+		tmp_cmd = ft_all_one_ligne(param, tmp_cmd, tmp);
 		tmp_val = ft_exp_split(tmp_cmd[0], param->mal);
 		tmp_cmd = NULL;
 		tmp->cmd[i] = NULL;
