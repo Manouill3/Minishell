@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 09:46:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 09:23:36 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/26 10:38:41 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*expand_quote(t_init *param, char *word)
 			inputs[i] = ft_strdup(res, param->mal);
 		i++;
 	}
-	// free_tab(inputs);
+	free_tab(inputs);
 	return (res);
 }
 
@@ -76,14 +76,14 @@ char	*get_actual_word_q(t_init *param, char *word, int i, int len)
 		// if (!sub_word)
 		// 	return (NULL);
 		final_word = one_char_test(param, word, sub_word, i);
-		// free(sub_word);
+		free(sub_word);
 		return (final_word);
 	}
 	sub_word = ft_substr(word, len, i - len, param->mal);
 	// if (!sub_word)
 	// 	return (NULL);
 	final_word = check_quote_q(param, sub_word, param->lst_env);
-	// free(sub_word);
+	free(sub_word);
 	return (final_word);
 }
 
@@ -98,7 +98,7 @@ char	*get_actual_word(t_init *param, char *word, int i, int len)
 		// if (!sub_word)
 		// 	return (NULL);
 		final_word = one_char_test(param, word, sub_word, i);
-		// free(sub_word);
+		free(sub_word);
 		return (final_word);
 	}
 	sub_word = ft_substr(word, len, i - len, param->mal);

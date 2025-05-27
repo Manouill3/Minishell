@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:28:15 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 09:25:22 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:18:34 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**ft_extract_word(const char *s, int *k, int *i, char **tab, t_mal *mal)
 	len = len_word(s, (*k));
 	tab[(*i) - 1] = add_calloc(mal, len + 1, sizeof(char));
 	if (!tab[(*i) - 1])
-		// free_all(tab);
+		free_all(tab);
 	while (s[(*k)] && j < len)
 	{
 		if (s[(*k)] == '"' || s[(*k)] == 39)
@@ -82,7 +82,7 @@ char	**handle_quote(const char *s, int *k, char **tab, int i, t_mal *mal)
 	len = len_word(s, (*k));
 	tab[i - 1] = add_calloc(mal, len + 1, sizeof(char));
 	if (!tab[i - 1])
-		// free_all(tab);
+		free_all(tab);
 	while (j < len && s[(*k)])
 	{
 		if (s[(*k)] == '"' || s[(*k)] == 39)
