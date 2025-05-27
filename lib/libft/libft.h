@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 14:10:23 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/23 14:27:56 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:27:53 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 # include <stdio.h>
 # include <stdint.h>
 
-typedef	struct s_mal
+typedef struct s_mal
 {
-	void		*content;
+	void			*content;
 	struct s_mal	*next;
 }			t_mal;
 
@@ -53,7 +53,8 @@ int			ft_tolower(int c);
 int			ft_toupper(int c);
 void		*ft_calloc(size_t nmemb, size_t size);
 char		*ft_strdup(const char *s, t_mal *mal);
-char		*ft_substr(char const *s, unsigned int start, size_t len, t_mal *mal);
+char		*ft_substr(char const *s, unsigned int start,
+				size_t len, t_mal *mal);
 char		*ft_itoa(int n, t_mal *mal);
 void		ft_putchar_fd(char c, int fd);
 void		ft_putstr_fd(char *s, int fd);
@@ -82,9 +83,9 @@ int			len_first_tab(const char *s);
 int			is_white(char c);
 int			is_ope(char c);
 char		**ft_normal_split(char const *s, char c, t_mal *mal);
-char		**handle_quote(const char *s, int *k, char **tab, int i, t_mal *mal);
-char		**ft_extract_word(const char *s, int *k, int *i, char **tab, t_mal *mal);
-char		**split_ope(const char *s, int k, int i, char **tab, t_mal *mal);
+char		*handle_quote(const char *s, int *k, char *tab, t_mal *mal);
+char		*ft_extract_word(const char *s, int *k, char *tab, t_mal *mal);
+char		**split_ope(const char *s, int k, char **tab, t_mal *mal);
 
 t_mal		*ft_lstnew_mal(void *str);
 void		ft_lstadd_back_mal(t_mal **lst, t_mal *new);

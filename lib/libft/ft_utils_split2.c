@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 14:12:37 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/22 14:24:56 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 16:24:38 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ char	**exec_all(const char *s, int k, t_mal *mal, char **tab)
 	nb_word = len_first_tab(s);
 	if (ft_strchr(s, '|'))
 	{
-		tab = split_ope(s, k, i, tab, mal);
+		tab = split_ope(s, k, tab, mal);
 		return (tab);
 	}
 	while (i++ < nb_word)
-		tab = handle_quote(s, &k, tab, i, mal);
+		tab[i - 1] = handle_quote(s, &k, tab[i - 1], mal);
 	return (tab);
 }
 

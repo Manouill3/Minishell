@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/23 11:14:51 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 15:42:29 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ void	ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env, t_mal *mal)
 	{
 		final_eof = get_final_eof(heredoc->eof[i], mal);
 		heredoc->input = readline("heredoc> ");
-		if (handle_heredoc_interrupt_before(heredoc, final_eof))
+		if (handle_heredoc_interrupt_before(heredoc))
 			break ;
-		if (handle_heredoc_input(heredoc, env, final_eof, i, mal))
+		if (!ft_strchr(heredoc->eof[i], '"') && !ft_strchr(heredoc->eof[i], 39))
+		{
+			if (heredoc->input && ft_strchr(heredoc->input, '$'))
+				heredoc->input = exp_heredoc(heredoc->input, env, mal);
+		}
+		if (handle_heredoc_input(heredoc, final_eof))
 			break ;
-		// free(final_eof);
 		free(heredoc->input);
 	}
 	close(heredoc->fd_tmp);
@@ -40,26 +44,28 @@ void	ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env, t_mal *mal)
 	{
 		final_eof = get_final_eof(heredoc->eof[i], mal);
 		heredoc->input = readline("heredoc> ");
-		if (ft_handle_heredoc_interrupt(heredoc, final_eof))
+		if (ft_handle_heredoc_interrupt(heredoc))
 			break ;
-		if (handle_heredoc_input(heredoc, env, final_eof, i, mal))
+		if (!ft_strchr(heredoc->eof[i], '"') && !ft_strchr(heredoc->eof[i], 39))
+		{
+			if (heredoc->input && ft_strchr(heredoc->input, '$'))
+				heredoc->input = exp_heredoc(heredoc->input, env, mal);
+		}
+		if (handle_heredoc_input(heredoc, final_eof))
 			break ;
 		ft_putendl_fd(heredoc->input, heredoc->fd);
 		free(heredoc->input);
-		// free(final_eof);
 	}
 	close(heredoc->fd);
 	close(heredoc->fd_tmp);
 }
 
-int	ft_handle_heredoc_interrupt(t_heredoc *heredoc, char *final_eof)
+int	ft_handle_heredoc_interrupt(t_heredoc *heredoc)
 {
-	(void)final_eof;
 	if (g_exit_code == 130)
 	{
 		if (heredoc->input)
 			free(heredoc->input);
-		// free(final_eof);
 		dup2(heredoc->fd_tmp, 0);
 		close(heredoc->fd_tmp);
 		ft_handle_interrupt_signals();
@@ -68,7 +74,8 @@ int	ft_handle_heredoc_interrupt(t_heredoc *heredoc, char *final_eof)
 	return (0);
 }
 
-void	exec_heredoc(t_list_char *tmp, t_heredoc *heredoc, t_env *env, t_mal *mal)
+void	exec_heredoc(t_list_char *tmp, t_heredoc *heredoc,
+	t_env *env, t_mal *mal)
 {
 	int	i;
 
