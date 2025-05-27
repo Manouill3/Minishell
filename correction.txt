@@ -71,7 +71,7 @@ cat + control-c -> echo $? = 0 alors normalement 130
 Minishell : >"<" ls
 Error syntax : too many redirections
 
-Minishell : !
+Minishell : ! et :
 command not found
 
 $e $e e"c"ho test
@@ -79,9 +79,101 @@ command not found
 
  pwd > test | cat ""
 
+Minishell : export caca='echo -n bonjour -n'
+Minishell : $caca
+==148836== Invalid write of size 8
+==148836==    at 0x403918: exec_verif_exp (parse_utils2.c:74)
+==148836==    by 0x4039D3: verif_expand (parse_utils2.c:92)
+==148836==    by 0x40311A: parsing_line (parse_line.c:112)
+==148836==    by 0x401400: minishell (main.c:43)
+==148836==    by 0x4014E4: main (main.c:67)
+==148836==  Address 0x4c01a80 is 16 bytes after a block of size 16 alloc'd
+==148836==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==148836==    by 0x40CF29: ft_calloc (ft_calloc.c:22)
+==148836==    by 0x401FE0: add_calloc (free_calloc.c:20)
+==148836==    by 0x404DDE: set_cmd (token.c:92)
+==148836==    by 0x404FC2: get_token (token.c:123)
+==148836==    by 0x403074: parsing_line (parse_line.c:96)
+==148836==    by 0x401400: minishell (main.c:43)
+==148836==    by 0x4014E4: main (main.c:67)
+==148836== 
+==148836== Invalid read of size 8
+==148836==    at 0x403764: ft_count_len (parse_utils2.c:45)
+==148836==    by 0x40393B: exec_verif_exp (parse_utils2.c:76)
+==148836==    by 0x4039D3: verif_expand (parse_utils2.c:92)
+==148836==    by 0x40311A: parsing_line (parse_line.c:112)
+==148836==    by 0x401400: minishell (main.c:43)
+==148836==    by 0x4014E4: main (main.c:67)
+==148836==  Address 0x4c01a80 is 16 bytes after a block of size 16 alloc'd
+==148836==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==148836==    by 0x40CF29: ft_calloc (ft_calloc.c:22)
+==148836==    by 0x401FE0: add_calloc (free_calloc.c:20)
+==148836==    by 0x404DDE: set_cmd (token.c:92)
+==148836==    by 0x404FC2: get_token (token.c:123)
+==148836==    by 0x403074: parsing_line (parse_line.c:96)
+==148836==    by 0x401400: minishell (main.c:43)
+==148836==    by 0x4014E4: main (main.c:67)
+==148836== 
+==148836== Invalid read of size 8
+==148836==    at 0x4036BA: end_verif_exp (parse_utils2.c:34)
+==148836==    by 0x403977: exec_verif_exp (parse_utils2.c:79)
+==148836==    by 0x4039D3: verif_expand (parse_utils2.c:92)
+==148836==    by 0x40311A: parsing_line (parse_line.c:112)
+==148836==    by 0x401400: minishell (main.c:43)
+==148836==    by 0x4014E4: main (main.c:67)
+==148836==  Address 0x4c01a70 is 0 bytes after a block of size 16 alloc'd
+==148836==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==148836==    by 0x40CF29: ft_calloc (ft_calloc.c:22)
+==148836==    by 0x401FE0: add_calloc (free_calloc.c:20)
+==148836==    by 0x404DDE: set_cmd (token.c:92)
+==148836==    by 0x404FC2: get_token (token.c:123)
+==148836==    by 0x403074: parsing_line (parse_line.c:96)
+==148836==    by 0x401400: minishell (main.c:43)
+==148836==    by 0x4014E4: main (main.c:67)
+==148836== 
+bonjour -n==149973== 
+==149973== FILE DESCRIPTORS: 3 open (3 std) at exit.
+==149973== 
+==149973== HEAP SUMMARY:
+==149973==     in use at exit: 209,642 bytes in 288 blocks
+==149973==   total heap usage: 2,651 allocs, 2,363 frees, 541,620 bytes allocated
+==149973== 
+==149973== LEAK SUMMARY:
+==149973==    definitely lost: 0 bytes in 0 blocks
+==149973==    indirectly lost: 0 bytes in 0 blocks
+==149973==      possibly lost: 0 bytes in 0 blocks
+==149973==    still reachable: 0 bytes in 0 blocks
+==149973==         suppressed: 209,642 bytes in 288 blocks
+==149973== 
+==149973== For lists of detected and suppressed errors, rerun with: -s
+==149973== ERROR SUMMARY: 5 errors from 3 contexts (suppressed: 1 from 1)
+
+Minishell : export ca_ca='cat -e copains '
+not a valid identifier
+
+Minishell : | | |
+Minishell : echo $?
+0
+manque message erreur + status
+
+
+Minishell : cd $HOME
+cd: No such file or directory
+
+Minishell : unset $HOME
+unset: Success
+
+Minishell : env $HOME
+normalement ne le fait pas mais chez nous oui
+
+verifier avec tout les builts si $HOME bonne reaction
+
 AIDE :
 
 export caca="echo test < test"
 export caca='echo test "<" test'
 
+
 expand -> $caca -> caca=echo test < test -> reparcourir expand -> si < || > || << || >> || | -> ducoup ex "<" -> echo "test" "<" test
+
+
