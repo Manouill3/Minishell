@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 09:49:48 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/24 22:21:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 15:01:59 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	ft_good(t_init *param, char *path, int good, char *old_path)
+void	ft_good(t_init *param, int good, char *old_path)
 {
 	if (good == 0)
-		ft_error(param, path, old_path);
+		param->status = 1;
 	else if (good == 1)
 		ft_modif_pwd(param, old_path);
 }

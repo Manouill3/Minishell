@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 14:39:09 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 15:02:29 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -466,7 +466,7 @@ char *path);
 ///		built-in.c/cd_utils3.c		///
 //////////////////////////////////////
 
-void		ft_good(t_init *param, char *path, int good, char *old_path);
+void		ft_good(t_init *param, int good, char *old_path);
 char		*ft_path_null(t_init *param);
 char		*ft_old_path_null(t_init *param);
 
@@ -479,7 +479,6 @@ int			ft_cd_alone(char *path, char **path_split,
 				t_init *param);
 int			ft_delete_file(t_init *param, char *path,
 				t_list_char *tok);
-void		ft_error(t_init *param, char *path, char *old_path);
 void		ft_cd(t_init *param, t_list_char *tok);
 
 ////////////////////////////////////////
