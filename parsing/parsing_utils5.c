@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:39:28 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 14:29:17 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 13:45:14 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char    **ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 	
 	x = 0;
 	len = 0;
+	free_tab(tmp_cmd);
 	tmp_cmd = ft_create_calloc_exp(param, tmp_cmd, tmp);
 	while (tmp->cmd && tmp->cmd[x])
 	{

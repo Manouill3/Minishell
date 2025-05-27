@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 10:43:45 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 13:45:57 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	ft_export(t_init *param, t_list_char *tok)
 	if (tok->cmd[1] == NULL)
 		ft_print_exp(tmp_exp);
 	tok->ex_j = 1;
+	printf(" tok->len_cmd = %d\n",  tok->len_cmd);
 	while (tok->ex_j < tok->len_cmd && tok->ex_j)
 	{
 		if (ft_isalpha(tok->cmd[tok->ex_j][0]) || tok->cmd[tok->ex_j][0] == '_')

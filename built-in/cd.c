@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/26 10:21:21 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 14:49:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,20 @@ void	ft_cd_rest(t_init *param, t_list_char *tok, char *path)
 	if (result == -1)
 	{
 		param->status = 1;
-		// free(tmp);
-		// free(path);
 		perror("cd");
 		return ;
 	}
-	// free(path);
-	// free(tmp);
 }
 
 int	ft_cd_alone(char *path, char **path_split, t_init *param)
 {
 	int		result;
 
-	// free(path);
 	path = NULL;
 	path_split = make_path(param->lst_env, param->mal);
 	if (!path_split)
 		return (0);
 	path = ft_give_home_way(path_split, "homes", param->mal);
-	// free_tab(path_split);
 	if (!path)
 		return (0);
 	result = chdir(path);
@@ -50,7 +44,6 @@ int	ft_cd_alone(char *path, char **path_split, t_init *param)
 		param->status = 1;
 		perror("cd");
 	}
-	// free(path);
 	return (1);
 }
 
@@ -69,10 +62,6 @@ int	ft_delete_file(t_init *param, char *path, t_list_char *tok)
 
 void	ft_error(t_init *param, char *path, char *old_path)
 {
-	if (path)
-		free(path);
-	if (old_path)
-		free(old_path);
 	param->status = 1;
 }
 

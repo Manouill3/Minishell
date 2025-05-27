@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:39:52 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 10:42:44 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 14:48:56 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	ft_cd_slash(t_init *param, char *path)
 		perror("cd");
 		return (0);
 	}
-	// free(path);
 	return (1);
 }
 
@@ -47,7 +46,6 @@ void	ft_modif_split_pwd(t_init *param, char *old_path, char *pwd)
 		tmp_env = tmp_env->next;
 	if (tmp_env && !ft_strcmp("PWD", tmp_env->name))
 	{
-		// free(tmp_env->cont);
 		tmp_env->cont = NULL;
 		tmp_env->cont = ft_strdup(pwd, param->mal);
 	}
@@ -55,12 +53,9 @@ void	ft_modif_split_pwd(t_init *param, char *old_path, char *pwd)
 		tmp_exp = tmp_exp->next;
 	if (tmp_env && !ft_strcmp("PWD", tmp_exp->name))
 	{
-		// free(tmp_exp->cont);
 		tmp_exp->cont = NULL;
 		tmp_exp->cont = ft_strdup(pwd, param->mal);
 	}
-	// free(pwd);
-	// free(old_path);
 }
 
 void	ft_modif_pwd(t_init *param, char *old_path)
@@ -76,7 +71,6 @@ void	ft_modif_pwd(t_init *param, char *old_path)
 		tmp_env = tmp_env->next;
 	if (tmp_env && !ft_strcmp("OLDPWD", tmp_env->name))
 	{
-		// free(tmp_env->cont);
 		tmp_env->cont = NULL;
 		tmp_env->cont = ft_strdup(old_path, param->mal);
 	}
@@ -84,7 +78,6 @@ void	ft_modif_pwd(t_init *param, char *old_path)
 		tmp_exp = tmp_exp->next;
 	if (tmp_env && !ft_strcmp("OLDPWD", tmp_exp->name))
 	{
-		// free(tmp_exp->cont);
 		tmp_exp->cont = NULL;
 		tmp_exp->cont = ft_strdup(old_path, param->mal);
 	}
@@ -102,10 +95,7 @@ int	ft_cd_rest2(t_init *param, t_list_char *tok, char *path)
 	{
 		param->status = 1;
 		perror("cd");
-		free(tmp);
 		return (0);
 	}
-	// free(tmp);
-	// free(path);
 	return (1);
 }
