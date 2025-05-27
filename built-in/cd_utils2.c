@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:39:52 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/26 10:05:20 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:42:44 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_to_much_arg(t_init *param)
 {
 	param->status = 1;
-	write(2, " too many arguments\n", 20);
+	write(2, "too many arguments\n", 20);
 	return (0);
 }
 

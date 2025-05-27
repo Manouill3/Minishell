@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 10:06:44 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 10:43:45 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_continue_value(t_init *param, t_list_char *tok)
 		if (ft_isalnum(tok->cmd[j][i]) == 0)
 		{
 			param->status = 1;
-			write(2, " not a valid identifier\n", 24);
+			write(2, "not a valid identifier\n", 24);
 			return (0);
 		}
 		i++;
@@ -114,7 +114,7 @@ void	ft_export(t_init *param, t_list_char *tok)
 		else
 		{
 			param->status = 1;
-			write(2, " not a valid identifier\n", 24);
+			write(2, "not a valid identifier\n", 24);
 			break;
 		}
 		tok->ex_j++;

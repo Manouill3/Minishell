@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:39:28 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 10:02:59 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 11:02:26 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,10 @@ char    **ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 	int	x;
 	int	y;
 	int	len;
-	int i;
 	
 	x = 0;
-	y = 0;
 	len = 0;
-	i = 0;
-	while (tmp->cmd[x])
-	{
-		y = 0;
-		while (tmp->cmd[x][y])
-		{
-			y++;
-			len++;
-		}
-		len++;
-		x++;
-	}
-	tmp_cmd = add_calloc(param->mal, sizeof(char *), 2);
-	if (!tmp_cmd)
-	return (NULL);
-	tmp_cmd[0] = add_calloc(param->mal,sizeof(char), (len + 1));
-	if (!tmp_cmd[0])
-		return (NULL);
-	x = 0;
-	len = 0;
+	tmp_cmd = ft_create_calloc_exp(param, tmp_cmd, tmp);
 	while (tmp->cmd && tmp->cmd[x])
 	{
 		y = 0;
@@ -55,6 +34,35 @@ char    **ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 		len++;
 		x++;
 	}
+	return (tmp_cmd);
+}
+
+char	**ft_create_calloc_exp(t_init *param, char **tmp_cmd, t_list_char *tmp)
+{
+	int	x;
+	int	y;
+	int	len;
+
+	x = 0;
+	y = 0;
+	len = 0;
+	while (tmp->cmd[x])
+	{
+		y = 0;
+		while (tmp->cmd[x][y])
+		{
+			y++;
+			len++;
+		}
+		len++;
+		x++;
+	}
+	tmp_cmd = add_calloc(param->mal, sizeof(char *), 2);
+	if (!tmp_cmd)
+		return (NULL);
+	tmp_cmd[0] = add_calloc(param->mal,sizeof(char), (len + 1));
+	if (!tmp_cmd[0])
+		return (NULL);
 	return (tmp_cmd);
 }
 

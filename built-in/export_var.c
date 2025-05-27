@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:23:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/26 13:29:52 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 10:43:19 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_verif_exp(t_init *param, t_list_char *tok)
 		if (ft_isalnum(tok->cmd[j][param->i_ex]) == 0)
 		{
 			param->status = 1;
-			write(2, " not a valid identifier\n", 24);
+			write(2, "not a valid identifier\n", 24);
 			return (1);
 		}
 		param->i_ex++;

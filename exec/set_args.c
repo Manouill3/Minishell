@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_args.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/24 21:25:55 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/27 10:41:47 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	verif_path(char **args, t_init *param)
 		if (access(tmp, F_OK) && args[0][0] == '/')
 		{
 			// free(tmp);
-			write(2, " Not a directory", 16);
+			write(2, "Not a directory", 16);
 			param->status = 126;
 			return (1);
 		}
@@ -58,15 +58,15 @@ char	**set_args_ann2(char **args, t_init *param)
 	if (!access(args[0], F_OK) && access(args[0], X_OK)
 		&& (args[0][0] == '.' && args[0][1] == '/'))
 	{
-		write(2, " Permission denied", 18);
+		write(2, "Permission denied", 18);
 		param->status = 126;
 	}
 	else
 	{
 		if ((args[0][0] == '.' || args[0][0] == '/'))
-			write(2, " No such file or directory\n", 27);
+			write(2, "No such file or directory\n", 27);
 		else
-			write(2, " command not found\n", 19);
+			write(2, "command not found\n", 19);
 		param->status = 127;
 	}
 	return (args);
@@ -118,12 +118,12 @@ char	**set_args(char **args, char **path, t_init *param)
 		{
 			if (!access(args[0], F_OK)
 				&& (args[0][0] != '.' && args[0][1] != '/'))
-				write(2, " command not found\n", 19);
+				write(2, "command not found\n", 19);
 			param->status = 127;
 		}
 		else if (S_ISDIR(mode.st_mode))
 		{
-			write(2, " Is a directory", 15);
+			write(2, "Is a directory", 15);
 			param->status = 126;
 		}
 		return (args);
