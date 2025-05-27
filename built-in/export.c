@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 13:45:57 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 15:47:50 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void	ft_create_add_back(t_init *param, t_list_char *tok,
 		get_name_env(tmp_exp, param->mal);
 		get_final_cont(tmp_exp, param->mal);
 	}
-	ft_lstadd_back_env(&param->lst_env, ft_lstnew_env(ft_strdup(tok->cmd[j], param->mal), param->mal));
+	ft_lstadd_back_env(&param->lst_env,
+		ft_lstnew_env(ft_strdup(tok->cmd[j], param->mal), param->mal));
 	while (tmp_env->next != NULL)
 		tmp_env = tmp_env->next;
 	get_name_env(tmp_env, param->mal);
@@ -103,7 +104,6 @@ void	ft_export(t_init *param, t_list_char *tok)
 	if (tok->cmd[1] == NULL)
 		ft_print_exp(tmp_exp);
 	tok->ex_j = 1;
-	printf(" tok->len_cmd = %d\n",  tok->len_cmd);
 	while (tok->ex_j < tok->len_cmd && tok->ex_j)
 	{
 		if (ft_isalpha(tok->cmd[tok->ex_j][0]) || tok->cmd[tok->ex_j][0] == '_')
@@ -116,7 +116,7 @@ void	ft_export(t_init *param, t_list_char *tok)
 		{
 			param->status = 1;
 			write(2, "not a valid identifier\n", 24);
-			break;
+			break ;
 		}
 		tok->ex_j++;
 	}

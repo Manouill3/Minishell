@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 15:02:54 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 16:15:55 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_cd_alone(char *path, char **path_split, t_init *param)
 	path_split = make_path(param->lst_env, param->mal);
 	if (!path_split)
 		return (0);
-	path = ft_give_home_way(path_split, "homes", param->mal);
+	path = ft_give_home_way(path_split, param->mal);
 	if (!path)
 		return (0);
 	result = chdir(path);
@@ -85,6 +85,6 @@ void	ft_cd(t_init *param, t_list_char *tok)
 	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
 		param->good_cd = ft_cd_rest2(param, tok, path);
 	else if (check_inside_path(path, tok) == 0)
-		param->good_cd = ft_cd_last(param, tok, path);
+		param->good_cd = ft_cd_last(param, tok);
 	ft_good(param, param->good_cd, old_path);
 }

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 15:02:29 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/27 16:20:19 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ void		end_verif_exp(t_init *param, char **tmp_cmd,
 void		ft_count_len(int *len_tmp, int *i,
 				char **tmp_val, t_list_char *tmp);
 char		**ft_create_tmp_cmd(char **tmp_cmd, int i,
-				int len_tmp, char **tmp_val, t_mal *mal);
+				int len_tmp, t_mal *mal);
 void		exec_verif_exp(t_init *param, t_list_char *tmp);
 void		verif_expand(t_init *param);
 
@@ -445,11 +445,11 @@ void		min_env(t_init *param);
 ///		built-in.c/cd_utils.c		///
 //////////////////////////////////////
 
-char		*ft_split_home_way(char **path_split, int i, int *j, char *lst, t_mal *mal);
-char		*ft_give_home_way(char **path_split, char *lst, t_mal *mal);
+char		*ft_split_home_way(char **path_split, int i, int *j, t_mal *mal);
+char		*ft_give_home_way(char **path_split, t_mal *mal);
 char		*ft_path_user(char *path, t_list_char *tok, t_mal *mal);
 int			check_inside_path(char *path, t_list_char *tok);
-int			ft_cd_last(t_init *param, t_list_char *tok, char *path);
+int			ft_cd_last(t_init *param, t_list_char *tok);
 
 ////////////////////////////////////////
 ///		built-in.c/cd_utils2.c		///
@@ -475,8 +475,7 @@ char		*ft_old_path_null(t_init *param);
 //////////////////////////////////////
 
 void		ft_cd_rest(t_init *param, t_list_char *tok, char *path);
-int			ft_cd_alone(char *path, char **path_split,
-				t_init *param);
+int			ft_cd_alone(char *path, char **path_split, t_init *param);
 int			ft_delete_file(t_init *param, char *path,
 				t_list_char *tok);
 void		ft_cd(t_init *param, t_list_char *tok);
@@ -517,7 +516,7 @@ void		export_content(t_env *exp, char *add, t_mal *mal);
 //////////////////////////////////////
 
 void		export_content(t_env *exp, char *add, t_mal *mal);
-int			existing_vars(t_env *env, t_env *exp, char *name, char *add, t_mal *mal);
+int			existing_vars(t_init *param, char *name, char *add, t_mal *mal);
 int			add_to_env(t_init *param, char *name, char *add, t_list_char *tok);
 void		add_to_both_lists(t_init *param, t_list_char *tok);
 int			ft_add_value_var(t_init *param, int i, t_list_char *tok);
