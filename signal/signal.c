@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 19:23:32 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/28 17:12:08 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 18:37:39 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sigint_handler(int sig)
 {
-	if (sig == 2)
+	if (sig == SIGINT)
 	{
 		g_exit_code = 130;
 		rl_on_new_line();
@@ -36,22 +36,14 @@ void	sigint_heredoc_handler(int sig)
 
 void	ft_handle_interrupt_signals(void)
 {
-	struct sigaction	sigint;
-
-	ft_bzero(&sigint, sizeof(sigint));
-	sigint.sa_handler = &sigint_handler;
-	sigaction(SIGINT, &sigint, NULL);
-	sigaction(SIGQUIT, &(struct sigaction){.sa_handler = SIG_IGN}, NULL);
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	ft_handle_heredoc_signals(void)
 {
-	struct sigaction	sig;
-
-	ft_bzero(&sig, sizeof(sig));
-	sig.sa_handler = &sigint_heredoc_handler;
-	sigaction(SIGINT, &sig, NULL);
-	sigaction(SIGQUIT, &(struct sigaction){.sa_handler = SIG_IGN}, NULL);
+	signal(SIGINT, sigint_heredoc_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 void	sigint_handler_child(int sig)

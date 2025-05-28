@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:39:28 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 14:55:02 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 18:52:55 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ char	**ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 	int	y;
 	int	len;
 
-	x = 0;
+	x = -1;
 	len = 0;
 	free_tab(tmp_cmd);
 	tmp_cmd = ft_create_calloc_exp(param, tmp_cmd, tmp);
-	while (tmp->cmd && tmp->cmd[x])
+	while (tmp->cmd && tmp->cmd[++x])
 	{
 		y = 0;
 		while (tmp->cmd && tmp->cmd[x][y])
@@ -36,9 +36,7 @@ char	**ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 			else
 				tmp_cmd[0][len++] = tmp->cmd[x][y++];
 		}
-		tmp_cmd[0][len] = ' ';
-		len++;
-		x++;
+		tmp_cmd[0][len++] = ' ';
 	}
 	return (tmp_cmd);
 }
@@ -49,10 +47,9 @@ char	**ft_create_calloc_exp(t_init *param, char **tmp_cmd, t_list_char *tmp)
 	int	y;
 	int	len;
 
-	x = 0;
-	y = 0;
+	x = -1;
 	len = 0;
-	while (tmp->cmd[x])
+	while (tmp->cmd[++x])
 	{
 		y = 0;
 		while (tmp->cmd[x][y])
@@ -63,7 +60,6 @@ char	**ft_create_calloc_exp(t_init *param, char **tmp_cmd, t_list_char *tmp)
 			len++;
 		}
 		len++;
-		x++;
 	}
 	tmp_cmd = add_calloc(param->mal, sizeof(char *), 2);
 	if (!tmp_cmd)

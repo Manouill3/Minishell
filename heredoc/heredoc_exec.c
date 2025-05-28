@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 17:27:23 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 18:38:16 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	ft_handle_heredoc_interrupt(t_heredoc *heredoc)
 			free(heredoc->input);
 		dup2(heredoc->fd_tmp, 0);
 		close(heredoc->fd_tmp);
+		ft_handle_interrupt_signals();
 		return (1);
 	}
 	return (0);
@@ -94,9 +95,9 @@ void	exec_heredoc(t_list_char *tmp, t_heredoc *heredoc,
 		heredoc->name = get_name_h(mal);
 		heredoc->fd = open(heredoc->name, O_CREAT | O_WRONLY);
 		get_eof_tab(tmp, mal);
-		heredoc->fd_tmp = dup(0);
 		while (heredoc->eof[i])
 		{
+			heredoc->fd_tmp = dup(0);
 			if (heredoc->eof[i + 1] != NULL)
 				j = ft_heredoc_oef_before(heredoc, i, env, mal);
 			else
@@ -106,5 +107,4 @@ void	exec_heredoc(t_list_char *tmp, t_heredoc *heredoc,
 				break ;
 		}
 	}
-	ft_handle_interrupt_signals();
 }

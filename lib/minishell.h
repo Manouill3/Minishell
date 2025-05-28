@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 17:16:19 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 18:54:21 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -577,6 +577,6 @@ void		ft_delete(t_env *env, char *name);
 int			ft_error_unset(t_init *param, t_list_char *tok, int *j, int i);
 void		ft_unset(t_init *param, t_list_char *tok);
 
-void	print_lst_char(t_list_char *lst);
+void		print_lst_char(t_list_char *lst);
 
 #endif
