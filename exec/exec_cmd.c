@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 17:15:17 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:58:29 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	child_process(t_list_char *tmp, t_init *param, int count)
 	if (param->status == 1 && tmp->infiles[0] != NULL)
 	{
 		status = param->status;
-		ft_lstclear_mal(&param->mal);
 		close_all(param, tmp);
+		ft_lstclear_mal(&param->mal);
 		exit (status);
 	}
 	if (count == 0)
 	{
 		dup2(tmp->fd_infile, STDIN_FILENO);
 		if (tmp->fd_infile != -1)
-			close(tmp->fd_infile);
+		close(tmp->fd_infile);
 	}
 	ft_dup_file(param, tmp, count);
 	close_all(param, tmp);
@@ -68,7 +68,7 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 	args = basic_args(tmp->no_red, param->mal);
 	args = set_args(args, path, param);
 	env = conv_lst_tab(param->lst_env, param->mal);
-	if (!args || !args[0]) // si que des redirections pas executer
+	if (!args || !args[0])
 	{
 		ft_putstr_fd("command not found\n", 2);
 		param->status = 127;

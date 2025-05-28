@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 13:07:46 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:27:38 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	secu_cmd(t_list_char *tmp)
 {
 	if (tmp->len_cmd > 0 && tmp->len_ind_exp == tmp->len_cmd
 		&& ft_strlen(tmp->cmd[0]) < 1)
+		return (1);
+	if (!ft_strcmp(tmp->cmd[0], ":"))
 		return (1);
 	return (0);
 }

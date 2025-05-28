@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_res2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 09:46:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 00:49:22 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/28 13:45:12 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ char	*get_actual_word(t_init *param, char *word, int i, int len)
 	if (i - len == 1 && word[len] == '$')
 	{
 		sub_word = ft_substr(word, len, i - len + 1, param->mal);
-		if (sub_word[1] == '"' || sub_word[1] == 39)
-			return (ft_strdup("$", param->mal));
 		final_word = one_char_test(param, word, sub_word, i);
 		return (final_word);
 	}

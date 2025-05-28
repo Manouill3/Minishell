@@ -41,6 +41,8 @@ void	minishell(t_init *param, int tt_y)
 		if (param->line && param->line[0] != '\0')
 			add_history(param->line);
 		parsing_line(param);
+		if (param->tok)
+			clear_files(param->tok);
 		if (!tt_y)
 			break ;
 	}
@@ -58,6 +60,7 @@ int	main(int ac, char **av, char **env)
 		param->mal = ft_lstnew_mal(param);
 		if (!param || !param->mal)
 			return (0);
+		param->tok = NULL;
 		param->status = 0;
 		ft_handle_interrupt_signals();
 		get_env(param, env);

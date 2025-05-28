@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_syntax_error.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 01:45:39 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/28 14:04:51 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_pipe_context(t_init *param, char *line, int *i)
 		save = *i - 1;
 		while (save > 0 && is_white(line[save]))
 			save--;
-		if (*i == 0 || save == 0)
+		if (*i == 0 || (save == 0 && is_white(line[save])))
 			return (ft_putstr_fd("Error syntax : nothing before pipe\n", 2),
 				param->status = 2, 1);
 		while (line[*i] && (is_white(line[*i]) || line[*i] == '|'))

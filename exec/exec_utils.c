@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:03:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 13:12:42 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:15:50 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_wait_child(t_init *param)
 			if (sig == 130)
 				write(2, "\n", 1);
 		}
+		if (status == 2)
+			param->status = 130;
 		last_pid = wait(&status);
 	}
 }
