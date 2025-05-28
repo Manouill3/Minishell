@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 14:50:02 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:31:07 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	ft_handle_heredoc_interrupt(t_heredoc *heredoc)
 {
 	if (g_exit_code == 130)
 	{
+		printf("heredoc->fd_tmp = %d\n", heredoc->fd_tmp);
+		printf("heredoc->fd = %d\n", heredoc->fd);
 		if (heredoc->input)
 			free(heredoc->input);
 		dup2(heredoc->fd_tmp, 0);
@@ -88,6 +90,8 @@ void	exec_heredoc(t_list_char *tmp, t_heredoc *heredoc,
 		while (heredoc->eof[i])
 		{
 			heredoc->fd_tmp = dup(heredoc->fd);
+			printf("heredoc->fd_tmp = %d\n", heredoc->fd_tmp);
+			printf("heredoc->fd = %d\n", heredoc->fd);
 			if (heredoc->eof[i + 1] != NULL)
 				ft_heredoc_oef_before(heredoc, i, env, mal);
 			else
