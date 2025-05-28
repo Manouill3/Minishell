@@ -73,7 +73,6 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 		ft_free_realoc(param, tmp, tmp_cmd);
 	}
 	exec_verif_exp2(param, tmp, i);
-
 }
 
 void	verif_expand(t_init *param)

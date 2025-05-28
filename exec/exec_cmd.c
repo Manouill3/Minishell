@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 14:58:29 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:18:35 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	child_process(t_list_char *tmp, t_init *param, int count)
 	{
 		dup2(tmp->fd_infile, STDIN_FILENO);
 		if (tmp->fd_infile != -1)
-		close(tmp->fd_infile);
+			close(tmp->fd_infile);
 	}
 	ft_dup_file(param, tmp, count);
 	close_all(param, tmp);

@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 13:46:21 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:05:47 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	before_exec(t_init *param, t_mal *mal)
 void	parsing_line(t_init *param)
 {
 	int	stat;
-	
+
 	stat = get_token(param);
 	if (stat == 1)
 	{

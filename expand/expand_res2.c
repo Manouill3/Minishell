@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 09:46:26 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 13:45:12 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:29:43 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*get_env_value(t_env *env, char *sub_word, t_init *param)
 
 char	*expand_quote(t_init *param, char *word)
 {
-	// int		i;
 	int		len;
 	char	*res;
 	char	**inputs;
@@ -44,13 +43,6 @@ char	*expand_quote(t_init *param, char *word)
 	inputs = expand_input_q(param, word, inputs);
 	res = add_calloc(param->mal, final_len(inputs, len) + 1, sizeof(char));
 	res = get_final_input(res, inputs, len);
-	// i = 0;
-	// while (i < len)
-	// {
-	// 	if (!inputs[i])
-	// 		inputs[i] = ft_strdup(res, param->mal);
-	// 	i++;
-	// }
 	return (res);
 }
 
