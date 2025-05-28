@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 16:15:55 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 13:53:20 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ft_cd(t_init *param, t_list_char *tok)
 		param->good_cd = ft_cd_slash(param, path);
 	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
 		param->good_cd = ft_cd_rest2(param, tok, path);
-	else if (check_inside_path(path, tok) == 0)
+	else
 		param->good_cd = ft_cd_last(param, tok);
 	ft_good(param, param->good_cd, old_path);
 }

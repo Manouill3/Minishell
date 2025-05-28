@@ -29,21 +29,16 @@ void	end_verif_exp(t_init *param, char **tmp_cmd,
 			tmp_cmd[i] = tmp_val[i];
 			i++;
 		}
-		while (i < param->i_ex)
-		{
-			tmp_cmd[i] = tmp->cmd[j + 1];
-			i++;
-			j++;
-		}
+		i++;
 	}
 }
 
 void	ft_count_len(int *len_tmp, int *i, char **tmp_val, t_list_char *tmp)
 {
+	(void)	*i;
+	(void)	*tmp;
 	while (tmp_val[(*len_tmp)])
 		(*len_tmp)++;
-	while (tmp && tmp->cmd && tmp->cmd[*i] && tmp->cmd[(*i) + 1])
-		(*i)++;
 }
 
 char	**ft_create_tmp_cmd(char **tmp_cmd, int i, int len_tmp, t_mal *mal)
@@ -67,11 +62,9 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 		&& white_or_not(tmp->cmd[i]) && tmp->ind_exp[i] == i)
 	{
 		tmp_cmd = ft_all_one_ligne(param, tmp_cmd, tmp);
-		tmp_val = ft_exp_split(tmp->cmd[0], param->mal);
-		while (tmp_val[i])
+		tmp_val = ft_exp_split_par(tmp_cmd[0], param->mal);
+		while (tmp_val && tmp_val[i])
 			i++;
-		tmp_cmd = NULL;
-		tmp->cmd[i] = NULL;
 		len_tmp = 0;
 		ft_count_len(&len_tmp, &i, tmp_val, tmp);
 		tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, param->mal);
@@ -80,6 +73,7 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 		ft_free_realoc(param, tmp, tmp_cmd);
 	}
 	exec_verif_exp2(param, tmp, i);
+
 }
 
 void	verif_expand(t_init *param)

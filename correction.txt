@@ -10,7 +10,7 @@ mdegache "$$"
 [Minishell : echo $USER $"'"test"test'$"
 mdegache test"test$
 
-Minishell : export caca="echo "test" < test"
+[Minishell : export caca="echo "test" < test"
 Minishell : $caca
 ==36116== Invalid write of size 8
 ==36116==    at 0x403918: exec_verif_exp (parse_utils2.c:74)
@@ -62,7 +62,7 @@ Minishell : $caca
 ==36116==    by 0x401400: minishell (main.c:43)
 ==36116==    by 0x4014E4: main (main.c:67)
 
-Minishell : export caca+=test
+[Minishell : export caca+=test
 Minishell : env
 caca=test
 
@@ -79,7 +79,7 @@ command not found
 
 [pwd > test | cat ""
 
-Minishell : export caca='echo -n bonjour -n'
+[Minishell : export caca='echo -n bonjour -n'
 Minishell : $caca
 ==148836== Invalid write of size 8
 ==148836==    at 0x403918: exec_verif_exp (parse_utils2.c:74)
@@ -148,7 +148,7 @@ bonjour -n==149973==
 ==149973== For lists of detected and suppressed errors, rerun with: -s
 ==149973== ERROR SUMMARY: 5 errors from 3 contexts (suppressed: 1 from 1)
 
-Minishell : export ca_ca='cat -e copains '
+[Minishell : export ca_ca='cat -e copains '
 not a valid identifier
 
 [Minishell : | | |
@@ -157,13 +157,13 @@ Minishell : echo $?
 manque message erreur + status
 
 
-Minishell : cd $HOME
+[Minishell : cd $HOME
 cd: No such file or directory
 
-Minishell : unset $HOME
+[Minishell : unset $HOME
 unset: Success
 
-Minishell : env $HOME
+[Minishell : env $HOME
 normalement ne le fait pas mais chez nous oui
 
 verifier avec tout les builts si $HOME bonne reaction

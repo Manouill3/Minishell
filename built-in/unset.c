@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:06:32 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 13:34:26 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 09:57:21 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,22 @@ void	ft_delete(t_env *env, char *name)
 
 int	ft_error_unset(t_init *param, t_list_char *tok, int *j, int i)
 {
-	if (ft_isalnum(tok->cmd[i][(*j)]) == 0)
+	if (tok->cmd[i][(*j)] == '|' || tok->cmd[i][(*j)] == ';')
 	{
-		param->status = 1;
-		perror("unset");
+		param->status = 127;
+		write(2, "command not found\n", 18);
+		return (1);
+	}
+	if (tok->cmd[i][(0)] == '-')
+	{
+		param->status = 2;
+		write(2, "invalid option usage\n", 21);
+		return (1);
+	}
+	if (tok->cmd[i][(*j)] == '!')
+	{
+		param->status = 0;
+		write(2, "event not found\n", 16);
 		return (1);
 	}
 	(*j)++;

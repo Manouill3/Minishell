@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:39:28 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 16:25:44 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 14:55:02 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,14 @@ char	**ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp)
 		y = 0;
 		while (tmp->cmd && tmp->cmd[x][y])
 		{
-			tmp_cmd[0][len] = tmp->cmd[x][y];
-			y++;
-			len++;
+			if (tmp->cmd[x][y] == '<' || tmp->cmd[x][y] == '>')
+			{
+				tmp_cmd[0][len++] = '"';
+				tmp_cmd[0][len++] = tmp->cmd[x][y++];
+				tmp_cmd[0][len++] = '"';
+			}
+			else
+				tmp_cmd[0][len++] = tmp->cmd[x][y++];
 		}
 		tmp_cmd[0][len] = ' ';
 		len++;
@@ -52,6 +57,8 @@ char	**ft_create_calloc_exp(t_init *param, char **tmp_cmd, t_list_char *tmp)
 		y = 0;
 		while (tmp->cmd[x][y])
 		{
+			if (tmp->cmd[x][y] == '<' || tmp->cmd[x][y] == '>')
+				len += 2;
 			y++;
 			len++;
 		}
@@ -79,9 +86,7 @@ void	exec_verif_exp2(t_init *param, t_list_char *tmp, int i)
 		&& tmp->len_ind_exp >= 1)
 	{
 		tmp_cmd = ft_all_one_ligne(param, tmp_cmd, tmp);
-		tmp_val = ft_exp_split(tmp_cmd[0], param->mal);
-		tmp_cmd = NULL;
-		tmp->cmd[i] = NULL;
+		tmp_val = ft_exp_split_par(tmp_cmd[0], param->mal);
 		len_tmp = 0;
 		ft_count_len(&len_tmp, &i, tmp_val, tmp);
 		tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, param->mal);

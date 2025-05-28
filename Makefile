@@ -41,6 +41,7 @@ SRC = main.c\
 	parsing/parsing_utils3.c\
 	parsing/parse_utils4.c\
 	parsing/parsing_utils5.c\
+	parsing/parsing_utils6.c\
 	parsing/parse_syntax_error.c\
 	parsing/token.c\
 	parsing/len_word.c\
