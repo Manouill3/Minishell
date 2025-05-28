@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 13:17:24 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/09 13:46:34 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 15:24:00 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,17 @@ int	get_outfile_nb(char **cmd)
 	}
 	nb = nb * 2;
 	return (nb);
+}
+
+void	not_command(t_list_char *tmp)
+{
+	int	i;
+
+	i = 0;
+	while (tmp->cmd[i] && ft_strlen(tmp->cmd[i]) < 1)
+		i++;
+	if ((!ft_strcmp(tmp->cmd[i], ">") || !ft_strcmp(tmp->cmd[i], "<"))
+		&& (ft_strchr(tmp->cmd[i + 1], '>')
+			|| ft_strchr(tmp->cmd[i + 1], '<')))
+		ft_putstr_fd("command not found\n", 2);
 }

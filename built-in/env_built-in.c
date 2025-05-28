@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   env_built-in.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:32:09 by tcybak            #+#    #+#             */
 /*   Updated: 2025/05/28 16:08:09 by tcybak           ###   ########.fr       */

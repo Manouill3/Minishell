@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:40 by mdegache          #+#    #+#             */
 /*   Updated: 2025/05/28 17:25:09 by tcybak           ###   ########.fr       */
@@ -83,11 +83,8 @@ void	ft_exec_built_in(t_init *param, t_list_char *tok)
 
 void	pipe_or_built(t_init *param, t_list_char *tmp, int count)
 {
-	int	i;
-
 	while (tmp)
 	{
-		i = 0;
 		if (secu_cmd(tmp))
 		{
 			count++;
@@ -105,13 +102,7 @@ void	pipe_or_built(t_init *param, t_list_char *tmp, int count)
 		if (tmp->funct != NULL && ft_strlen(tmp->funct) > 0)
 			count = ft_exec_pipe(tmp, param, count);
 		else
-		{
-			while (tmp->cmd[i] && ft_strlen(tmp->cmd[i]) < 1)
-				i++;
-			if ((!ft_strcmp(tmp->cmd[i], ">") || !ft_strcmp(tmp->cmd[i], "<"))
-				&& (ft_strchr(tmp->cmd[i + 1], '>') ||ft_strchr(tmp->cmd[i + 1], '<')))
-				ft_putstr_fd("command not found\n", 2);
-		}
+			not_command(tmp);
 		tmp = tmp->next;
 	}
 }

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
 /*   Updated: 2025/05/28 17:16:19 by tcybak           ###   ########.fr       */
@@ -234,8 +234,6 @@ int			get_token(t_init *param);
 
 t_list_char	*ft_lstnew_char(char **tab, t_mal *mal);
 void		ft_lstadd_back_char(t_list_char **lst, t_list_char *new);
-// void		ft_lstclear_char(t_list_char **lst);
-// void		ft_lstdelone_char(t_list_char *lst);
 
 ////////////////////////////////////////
 ///			lst/lst_funct_env.c	    ///
@@ -243,8 +241,6 @@ void		ft_lstadd_back_char(t_list_char **lst, t_list_char *new);
 
 t_env		*ft_lstnew_env(char *str, t_mal *mal);
 void		ft_lstadd_back_env(t_env **lst, t_env *new);
-// void		ft_lstclear_env(t_env **lst);
-// void		ft_lstdelone_env(t_env *lst);
 
 ////////////////////////////////////////
 ///			heredoc/heredoc_ann.c   ///
@@ -421,6 +417,7 @@ void		get_tty(void);
 char		*get_last_eof(char **cmd);
 int			get_infile_nb(char **cmd);
 int			get_outfile_nb(char **cmd);
+void		not_command(t_list_char *tmp);
 
 ////////////////////////////////////////
 ///			exec/set_args.c		    ///

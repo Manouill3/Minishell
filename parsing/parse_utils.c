@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 00:58:21 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/28 15:28:40 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	process_cmd_if_expand(char **cmd, int i, t_mal *mal)
 			j++;
 		if (cmd[i][j + 1] && (is_white(cmd[i][j + 1])
 		|| cmd[i][j + 1] == '"' || cmd[i][j + 1] == 39
-		|| cmd[i][j + 1] == '$')) 
+		|| cmd[i][j + 1] == '$'))
 			exec_supp(cmd, i, mal);
 	}
 }

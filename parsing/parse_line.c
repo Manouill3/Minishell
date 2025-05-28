@@ -96,7 +96,7 @@ void	before_exec(t_init *param, t_mal *mal)
 void	parsing_line(t_init *param)
 {
 	int	stat;
-	
+
 	stat = get_token(param);
 	if (stat == 1)
 	{
