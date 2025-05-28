@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_ann.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 08:58:25 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 15:42:56 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:17:46 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,6 @@ int	handle_heredoc_input(t_heredoc *heredoc, char *final_eof)
 	{
 		if (heredoc->input)
 			free(heredoc->input);
-		return (1);
-	}
-	return (0);
-}
-
-int	handle_heredoc_interrupt_before(t_heredoc *heredoc)
-{
-	if (g_exit_code == 130)
-	{
-		if (heredoc->input)
-			free(heredoc->input);
-		dup2(heredoc->fd_tmp, 0);
-		close(heredoc->fd_tmp);
-		ft_handle_interrupt_signals();
 		return (1);
 	}
 	return (0);

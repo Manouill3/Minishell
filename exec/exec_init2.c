@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 13:53:02 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 17:25:09 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ int	no_red_len(char **tab, t_list_char *tmp)
 	len = 0;
 	while (i < tmp->len_cmd)
 	{
-		// if (ft_strlen(tab[i]) < 1)
-		// {
-		// 	i++;
-		// 	continue ;
-		// }
 		if (tab[i] && ft_strcmp(tab[i], ">") && ft_strcmp(tab[i], "<"))
 			len++;
 		else
@@ -44,11 +39,6 @@ void	no_red_ann(int len, t_list_char *tmp, t_init *param)
 	j = 0;
 	while (j < len && i < tmp->len_cmd)
 	{
-		// if (ft_strlen(tmp->cmd[i]) < 1)
-		// {
-		// 	i++;
-		// 	continue ;
-		// }
 		if (ft_strcmp(">", tmp->cmd[i]) && ft_strcmp("<", tmp->cmd[i])
 			&& ft_strcmp(">>", tmp->cmd[i]) && ft_strcmp("<<", tmp->cmd[i]))
 			tmp->no_red[j++] = ft_strdup(tmp->cmd[i], param->mal);
@@ -83,7 +73,7 @@ void	ft_exec_built_in(t_init *param, t_list_char *tok)
 		ft_pwd(param);
 	if (!ft_strcmp(tok->funct, "export"))
 		ft_export(param, tok);
-	if (!ft_strcmp(tok->funct, "unset"))	
+	if (!ft_strcmp(tok->funct, "unset"))
 		ft_unset(param, tok);
 	if (!ft_strcmp(tok->funct, "env"))
 		ft_env(param, param->lst_env);
@@ -94,7 +84,7 @@ void	ft_exec_built_in(t_init *param, t_list_char *tok)
 void	pipe_or_built(t_init *param, t_list_char *tmp, int count)
 {
 	int	i;
-	
+
 	while (tmp)
 	{
 		i = 0;

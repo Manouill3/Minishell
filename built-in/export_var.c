@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:23:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 12:52:48 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 16:08:23 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	ft_verif_exp(t_init *param, t_list_char *tok)
 	j = tok->ex_j;
 	while (tok->cmd[j][param->i_ex] != '=' && tok->cmd[j][param->i_ex])
 	{
-		if (ft_isalnum(tok->cmd[j][param->i_ex]) == 0 && tok->cmd[j][param->i_ex] != '_')
+		if (ft_isalnum(tok->cmd[j][param->i_ex]) == 0
+			&& tok->cmd[j][param->i_ex] != '_')
 		{
 			param->status = 1;
 			write(2, "not a valid identifier\n", 24);

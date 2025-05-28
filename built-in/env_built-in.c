@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:32:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 10:44:30 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 16:08:09 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_error_env(t_init *param, t_list_char *tmp_tok, int i)
 		param->status = 126;
 		write(2, "Permission denied\n", 18);
 	}
-	else 
+	else
 	{
 		param->status = 127;
 		write(2, "No such file or directory\n", 26);
@@ -35,7 +35,6 @@ void	ft_env(t_init *param, t_env *env)
 	i = 1;
 	tmp = env;
 	tmp_tok = param->tok;
-
 	while (tmp_tok->cmd[i])
 	{
 		if (ft_strlen(tmp_tok->cmd[i]) != 0)

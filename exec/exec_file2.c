@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:24:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 14:57:48 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:07:45 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	get_in_h(t_init *param, t_list_char *node, int i)
 {
 	int	status;
-	
+
 	if (!ft_strcmp(node->infiles[i], "<<"))
 	{
 		if (node->fd_infile != -1)
