@@ -1,8 +1,8 @@
-Minishell : echo test | > test
+[Minishell : echo test | > test
 
-Minishell : << a << b << c
+[Minishell : << a << b << c
 heredoc> a
-heredoc> command not found[
+heredoc> command not found
 
 [Minishell : echo $USER "$$" 
 mdegache "$$"
@@ -66,7 +66,7 @@ Minishell : $caca
 Minishell : env
 caca=test
 
-cat + control-c -> echo $? = 0 alors normalement 130 
+[cat + control-c -> echo $? = 0 alors normalement 130 
 
 [Minishell : >"<" ls
 Error syntax : too many redirections
@@ -77,7 +77,7 @@ command not found
 [$e $e e"c"ho test
 command not found
 
- pwd > test | cat ""[
+[pwd > test | cat ""
 
 [Minishell : export caca='echo -n bonjour -n'
 Minishell : $caca
@@ -177,3 +177,21 @@ export caca='echo test "<" test'
 expand -> $caca -> caca=echo test < test -> reparcourir expand -> si < || > || << || >> || | -> ducoup ex "<" -> echo "test" "<" test
 
 
+------------------------------------------------------------------------------------------------------
+
+[Minishell : echo "'$$'" "test"
+ test
+
+["<" "<"
+
+[ : | echo test
+Error syntax : nothing before pipe
+
+[echo "c'est moi"  >> kk et kk chmod 000
+
+Minishell : << a << b
+heredoc> $USER
+heredoc> Minishell : 
+
+[echo $USER$"$"USER
+mdegache$$USER

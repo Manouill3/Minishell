@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:24:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 10:42:16 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 14:57:48 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	get_in_h(t_init *param, t_list_char *node, int i)
 {
+	int	status;
+	
 	if (!ft_strcmp(node->infiles[i], "<<"))
 	{
 		if (node->fd_infile != -1)
@@ -22,8 +24,10 @@ void	get_in_h(t_init *param, t_list_char *node, int i)
 			node->fd_infile = open(node->heredoc->name, O_RDONLY, 0644);
 		else if (!ft_strcmp(node->funct, "cat"))
 		{
+			status = param->status;
 			close_all(param, node);
-			exit (param->status);
+			ft_lstclear_mal(&param->mal);
+			exit (status);
 		}
 	}
 }
@@ -59,7 +63,7 @@ void	get_out_fd(t_init *param, t_list_char *node, int i)
 	if (node->fd_outfile == -1)
 	{
 		param->status = 1;
-		write(2, "Permission denied", 18);
+		write(2, "Permission denied\n", 19);
 	}
 }
 

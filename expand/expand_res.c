@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 10:55:11 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 13:42:01 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 13:43:02 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	*check_quote_q(t_init *param, char *word, t_env *env)
 	char	*final_word;
 
 	no_quote = char_out(word, 39, param->mal);
+	if (!ft_strcmp(no_quote, "$$"))
+		return (word);
 	if (!ft_strcmp(no_quote, "$?"))
 		return (get_exit_value(param, word));
 	if (ft_strlen(no_quote) == 1 && no_quote[0] == '$')

@@ -93,10 +93,14 @@ void	ft_exec_built_in(t_init *param, t_list_char *tok)
 
 void	pipe_or_built(t_init *param, t_list_char *tmp, int count)
 {
+	int	i;
+	
 	while (tmp)
 	{
+		i = 0;
 		if (secu_cmd(tmp))
 		{
+			count++;
 			tmp = tmp->next;
 			continue ;
 		}
@@ -108,7 +112,16 @@ void	pipe_or_built(t_init *param, t_list_char *tmp, int count)
 			tmp = tmp->next;
 			continue ;
 		}
-		count = ft_exec_pipe(tmp, param, count);
+		if (tmp->funct != NULL && ft_strlen(tmp->funct) > 0)
+			count = ft_exec_pipe(tmp, param, count);
+		else
+		{
+			while (tmp->cmd[i] && ft_strlen(tmp->cmd[i]) < 1)
+				i++;
+			if ((!ft_strcmp(tmp->cmd[i], ">") || !ft_strcmp(tmp->cmd[i], "<"))
+				&& (ft_strchr(tmp->cmd[i + 1], '>') ||ft_strchr(tmp->cmd[i + 1], '<')))
+				ft_putstr_fd("command not found\n", 2);
+		}
 		tmp = tmp->next;
 	}
 }

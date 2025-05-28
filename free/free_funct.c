@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 22:48:49 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/27 14:38:41 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:15:21 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ void	clear_files(t_list_char *lst)
 	if (lst->heredoc->fd != -1)
 		close(lst->heredoc->fd);
 	if (lst->heredoc->name)
-	{
 		unlink(lst->heredoc->name);
-		free(lst->heredoc->name);
-		lst->heredoc->name = NULL;
-	}
 }
 
 void	free_tab(char **tab)
