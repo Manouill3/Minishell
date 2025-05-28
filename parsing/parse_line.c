@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:08:09 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 16:05:47 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:53:18 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	before_exec(t_init *param, t_mal *mal)
 		exec_heredoc(tmp, tmp->heredoc, param->lst_env, mal);
 		tmp = tmp->next;
 	}
+	ft_handle_interrupt_signals();
 	tmp = param->tok;
 	while (tmp)
 	{
