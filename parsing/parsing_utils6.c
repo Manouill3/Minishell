@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_exp.c                                        :+:      :+:    :+:   */
+/*   parsing_utils6.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/19 11:22:33 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 14:25:13 by tcybak           ###   ########.fr       */
+/*   Created: 2025/05/28 14:26:27 by tcybak            #+#    #+#             */
+/*   Updated: 2025/05/28 14:52:10 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static char	**ft_string_exp(size_t word, char const *s, char **str, t_mal *mal)
 	{
 		i = i + h;
 		h = 0;
-		while (s[i] && is_white(s[i]))
+		while (s[i] && is_white(s[i]) && s[i] != '"')
 			i++;
-		while (!is_white(s[i + h]) && s[i + h] != '\0')
+		while ((!is_white(s[i + h]) || s[i + h] == '"') && s[i + h] != '\0')
 			h++;
 		str[j] = ft_substr(s, i, h, mal);
 		if (str[j] == 0)
@@ -57,11 +57,11 @@ static int	ft_count_exp(char const *s, size_t i, size_t word)
 	while (s[i] != '\0')
 	{
 		save = i;
-		while (s[i] && is_white(s[i]))
+		while (s[i] && is_white(s[i]) && s[i] != '"')
 			i++;
-		if (s[i] && !is_white(s[i]))
+		if (s[i] && (!is_white(s[i]) || s[i] == '"'))
 			word++;
-		while (s[i] && !is_white(s[i]))
+		while (s[i] && (!is_white(s[i]) || s[i] == '"'))
 			i++;
 		if (save == i)
 			i++;
@@ -69,7 +69,7 @@ static int	ft_count_exp(char const *s, size_t i, size_t word)
 	return (word);
 }
 
-char	**ft_exp_split(char const *s, t_mal *mal)
+char	**ft_exp_split_par(char const *s, t_mal *mal)
 {
 	char	**str;
 	size_t	i;

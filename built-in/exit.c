@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 13:33:47 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/28 09:50:42 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_verif_nb(t_init *param)
 			&& param->tok->cmd[1][i + 1] <= 57))))
 		{
 			param->status = 2;
-			write(2, "numeric argument required\n", 27);
+			write(2, "numeric argument required2\n", 27);
 			status = param->status;
 			ft_lstclear_mal(&param->mal);
 			exit(status);
@@ -42,7 +42,7 @@ int	ft_free_param(t_init *param, int nb_arg)
 {
 	ft_verif_nb(param);
 	if (param->status == 2)
-		write(2, "numeric argument required\n", 27);
+		write(2, "numeric argument required1\n", 27);
 	if (param->count_cmd == 1)
 		ft_putstr_fd("exit\n", 2);
 	nb_arg = param->status;

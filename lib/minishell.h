@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 23:41:01 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/28 14:29:32 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,12 @@ char		**ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp);
 char		**ft_create_calloc_exp(t_init *param, char **tmp_cmd,
 				t_list_char *tmp);
 void		exec_verif_exp2(t_init *param, t_list_char *tmp, int i);
+
+////////////////////////////////////////
+///			parsing/parse_utils6.c  ///
+//////////////////////////////////////
+
+char		**ft_exp_split_par(char const *s, t_mal *mal);
 
 ////////////////////////////////////////
 ///			parsing/parsing_utils3.c///
@@ -494,7 +500,7 @@ void		ft_echo(t_init *param, t_list_char *tok);
 ///		built-in.c/env_bulit_in.c	///
 //////////////////////////////////////
 
-void		ft_env(t_env *env);	
+void		ft_env(t_init *param, t_env *env);	
 
 ////////////////////////////////////////
 ///			built-in.c/exit.c		///

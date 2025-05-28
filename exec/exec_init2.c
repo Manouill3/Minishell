@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 01:32:12 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/28 13:53:02 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,10 @@ void	ft_exec_built_in(t_init *param, t_list_char *tok)
 		ft_pwd(param);
 	if (!ft_strcmp(tok->funct, "export"))
 		ft_export(param, tok);
-	if (!ft_strcmp(tok->funct, "unset"))
+	if (!ft_strcmp(tok->funct, "unset"))	
 		ft_unset(param, tok);
 	if (!ft_strcmp(tok->funct, "env"))
-		ft_env(param->lst_env);
+		ft_env(param, param->lst_env);
 	if (!ft_strcmp(tok->funct, "exit"))
 		ft_exit(param);
 }

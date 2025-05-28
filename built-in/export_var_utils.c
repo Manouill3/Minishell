@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:22:16 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/27 15:48:21 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/28 13:08:08 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	ft_alloc_new_const(t_list_char *tok, t_init *param,
 void	ft_rest_var(t_env *tmp_env, t_env *tmp_exp,
 	t_init *param, t_list_char *tok)
 {
-	(void)tmp_env;
 	tmp_env = param->lst_env;
 	tmp_exp = param->lst_export;
 	if (param->create_x == 2)
