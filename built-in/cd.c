@@ -6,18 +6,18 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 13:53:20 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 17:41:45 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/minishell.h"
 
-void	ft_cd_rest(t_init *param, t_list_char *tok, char *path)
+void	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int h)
 {
 	int		result;
 	char	*tmp;
 
-	tmp = ft_path_user(path, tok, param->mal);
+	tmp = ft_path_user(path, tok, param->mal, h);
 	result = chdir(tmp);
 	if (result == -1)
 	{
@@ -47,20 +47,20 @@ int	ft_cd_alone(char *path, char **path_split, t_init *param)
 	return (1);
 }
 
-int	ft_delete_file(t_init *param, char *path, t_list_char *tok)
+int	ft_delete_file(t_init *param, char *path, t_list_char *tok, int h)
 {
 	if (!path && param->old_pwd)
 	{
 		path = NULL;
 		path = param->old_pwd;
-		ft_cd_rest(param, tok, path);
+		ft_cd_rest(param, tok, path, h);
 		return (1);
 	}
 	param->old_pwd = path;
 	return (0);
 }
 
-void	ft_cd(t_init *param, t_list_char *tok)
+void	ft_cd(t_init *param, t_list_char *tok, int i, int j)
 {
 	char	*path;
 	char	*old_path;
@@ -73,17 +73,17 @@ void	ft_cd(t_init *param, t_list_char *tok)
 	old_path = get_pwd(param);
 	if (!old_path)
 		old_path = ft_old_path_null(param);
-	if (ft_delete_file(param, path, tok) == 1)
+	if (ft_delete_file(param, path, tok, i) == 1)
 		return ;
 	path_split = NULL;
-	if (tok->len_cmd > 2)
+	if (j > 2)
 		param->good_cd = ft_to_much_arg(param);
-	else if (tok->cmd[1] == NULL || !ft_strcmp(tok->cmd[1], "~"))
+	else if (tok->cmd[i + 1] == NULL || !ft_strcmp(tok->cmd[i + 1], "~"))
 		param->good_cd = ft_cd_alone(path, path_split, param);
-	else if (tok->cmd[1] && !ft_strcmp(tok->cmd[1], "/"))
-		param->good_cd = ft_cd_slash(param, path);
-	else if (tok->cmd[1] != NULL && check_inside_path(path, tok) != 0)
-		param->good_cd = ft_cd_rest2(param, tok, path);
+	else if (tok->cmd[i + 1] && !ft_strcmp(tok->cmd[i + 1], "/"))
+		param->good_cd = ft_cd_slash(param);
+	else if (tok->cmd[i + 1] != NULL && check_inside_path(path, tok) != 0)
+		param->good_cd = ft_cd_rest2(param, tok, path, i);
 	else
 		param->good_cd = ft_cd_last(param, tok);
 	ft_good(param, param->good_cd, old_path);

@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 11:45:13 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 17:24:45 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,21 @@ void	get_no_red(t_list_char *tok, t_init *param)
 
 void	ft_exec_built_in(t_init *param, t_list_char *tok)
 {
+	int	i;
+	int	j;
+
 	if (!ft_strcmp(tok->funct, "echo"))
 		ft_echo(param, tok);
 	if (!ft_strcmp(tok->funct, "cd"))
-		ft_cd(param, tok);
+	{
+		i = 0;
+		j = 0;
+		while (tok->cmd[i] && ft_strcmp("cd", tok->cmd[i]))
+			i++;
+		while (tok->cmd[i + j])
+			j++;
+		ft_cd(param, tok, i, j);
+	}
 	if (!ft_strcmp(tok->funct, "pwd"))
 		ft_pwd(param);
 	if (!ft_strcmp(tok->funct, "export"))

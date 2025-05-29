@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 17:19:27 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 17:41:22 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 		exit(status);
 	}
 	if (execve(args[0], args, env) == -1)
-		fail_execve(args, path, env, param);
+		fail_execve(path, param);
 }

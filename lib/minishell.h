@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 11:35:19 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 18:01:07 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,8 +176,7 @@ void		check_back_expand(t_list_char *tok, char **cmd, t_mal *mal);
 
 void		end_verif_exp(t_init *param, char **tmp_cmd,
 				char **tmp_val, int len_tmp);
-void		ft_count_len(int *len_tmp, int *i,
-				char **tmp_val, t_list_char *tmp);
+void		ft_count_len(int *len_tmp, char **tmp_val);
 char		**ft_create_tmp_cmd(char **tmp_cmd, int i,
 				int len_tmp, t_mal *mal);
 void		exec_verif_exp(t_init *param, t_list_char *tmp);
@@ -201,6 +200,7 @@ char		**ft_all_one_ligne(t_init *param, char **tmp_cmd, t_list_char *tmp);
 char		**ft_create_calloc_exp(t_init *param, char **tmp_cmd,
 				t_list_char *tmp);
 void		exec_verif_exp2(t_init *param, t_list_char *tmp, int i);
+int			ft_verif_expand_good(t_list_char *tmp);
 
 ////////////////////////////////////////
 ///			parsing/parse_utils6.c  ///
@@ -358,7 +358,7 @@ void		exec_cmd(t_init *param, t_list_char *tmp);
 void		ft_dup_file_ann(t_init *param, t_list_char *tmp);
 void		ft_dup_file(t_init *param, t_list_char *tmp, int count);
 char		**basic_args(char **tab, t_mal *mal);
-void		fail_execve(char **args, char **path, char **env, t_init *param);
+void		fail_execve(char **path, t_init *param);
 
 ////////////////////////////////////////
 ///			exec/exec_file.c		///
@@ -451,7 +451,7 @@ void		min_env(t_init *param);
 
 char		*ft_split_home_way(char **path_split, int i, int *j, t_mal *mal);
 char		*ft_give_home_way(char **path_split, t_mal *mal);
-char		*ft_path_user(char *path, t_list_char *tok, t_mal *mal);
+char		*ft_path_user(char *path, t_list_char *tok, t_mal *mal, int h);
 int			check_inside_path(char *path, t_list_char *tok);
 int			ft_cd_last(t_init *param, t_list_char *tok);
 
@@ -460,11 +460,11 @@ int			ft_cd_last(t_init *param, t_list_char *tok);
 //////////////////////////////////////
 
 int			ft_to_much_arg(t_init *param);
-int			ft_cd_slash(t_init *param, char *path);
-void		ft_modif_split_pwd(t_init *param, char *old_path, char *pwd);
+int			ft_cd_slash(t_init *param);
+void		ft_modif_split_pwd(t_init *param, char *pwd);
 void		ft_modif_pwd(t_init *param, char *old_path);
 int			ft_cd_rest2(t_init *param, t_list_char *tok,
-				char *path);
+				char *path, int h);
 
 ////////////////////////////////////////
 ///		built-in.c/cd_utils3.c		///
@@ -478,11 +478,11 @@ char		*ft_old_path_null(t_init *param);
 ///			built-in.c/cd.c			///
 //////////////////////////////////////
 
-void		ft_cd_rest(t_init *param, t_list_char *tok, char *path);
+void		ft_cd_rest(t_init *param, t_list_char *tok, char *path, int h);
 int			ft_cd_alone(char *path, char **path_split, t_init *param);
 int			ft_delete_file(t_init *param, char *path,
-				t_list_char *tok);
-void		ft_cd(t_init *param, t_list_char *tok);
+				t_list_char *tok, int h);
+void		ft_cd(t_init *param, t_list_char *tok, int i, int j);
 
 ////////////////////////////////////////
 ///			built-in.c/echo.c		///
@@ -502,8 +502,8 @@ void		ft_env(t_init *param, t_env *env, t_list_char *tok);
 ///			built-in.c/exit.c		///
 //////////////////////////////////////
 
-void		ft_verif_nb(t_init *param, t_list_char *tok);
-int			ft_free_param(t_init *param, int nb_arg, t_list_char *tok);
+void		ft_verif_nb(t_init *param, t_list_char *tok, int j);
+int			ft_free_param(t_init *param, int nb_arg, t_list_char *tok, int j);
 void		check_exit_arg(t_init *param, int nb_arg);
 void		ft_exit(t_init *param, t_list_char *tok);
 

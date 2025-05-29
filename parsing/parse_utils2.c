@@ -33,10 +33,8 @@ void	end_verif_exp(t_init *param, char **tmp_cmd,
 	}
 }
 
-void	ft_count_len(int *len_tmp, int *i, char **tmp_val, t_list_char *tmp)
+void	ft_count_len(int *len_tmp, char **tmp_val)
 {
-	(void)	*i;
-	(void)	*tmp;
 	while (tmp_val[(*len_tmp)])
 		(*len_tmp)++;
 }
@@ -66,7 +64,7 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 		while (tmp_val && tmp_val[i])
 			i++;
 		len_tmp = 0;
-		ft_count_len(&len_tmp, &i, tmp_val, tmp);
+		ft_count_len(&len_tmp, tmp_val);
 		tmp_cmd = ft_create_tmp_cmd(tmp_cmd, i, len_tmp, param->mal);
 		param->i_ex = i + len_tmp;
 		end_verif_exp(param, tmp_cmd, tmp_val, len_tmp);

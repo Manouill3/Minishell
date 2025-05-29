@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:32:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 11:22:57 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 16:46:50 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ void	ft_env(t_init *param, t_env *env, t_list_char *tok)
 	t_list_char	*tmp_tok;
 	t_env		*tmp;
 
-	i = 1;
+	i = 0;
 	tmp = env;
 	tmp_tok = tok;
+	while (tmp_tok->cmd[i] && ft_strcmp("env", tmp_tok->cmd[i]))
+		i++;
+	i++;
 	while (tmp_tok->cmd[i])
 	{
 		if (ft_strlen(tmp_tok->cmd[i]) != 0)

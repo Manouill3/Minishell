@@ -200,11 +200,11 @@ mdegache$$USER
 
 "" echo 
 
-Minishell : $e echo -> manque \n
+[ Minishell : $e echo -> manque \n [
 
 Minishell : cat << a << b'' << c""test -> plusieur a la suite rien dans le here doc
 
-export a -> dans export a=""
+[ export a -> dans export a="" [
 
 cp /bin/cat ls
 {

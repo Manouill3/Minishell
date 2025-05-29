@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 13:53:38 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 17:16:05 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_give_home_way(char **path_split, t_mal *mal)
 	return (NULL);
 }
 
-char	*ft_path_user(char *path, t_list_char *tok, t_mal *mal)
+char	*ft_path_user(char *path, t_list_char *tok, t_mal *mal, int h)
 {
 	int		i;
 	int		j;
@@ -69,18 +69,18 @@ char	*ft_path_user(char *path, t_list_char *tok, t_mal *mal)
 
 	i = 0;
 	j = 0;
-	if (tok->cmd[1][0] == '/')
-		tmp = ft_strjoin(path, tok->cmd[1], mal);
+	if (tok->cmd[h + 1][0] == '/')
+		tmp = ft_strjoin(path, tok->cmd[h + 1], mal);
 	else
 	{
-		len = ft_strlen(tok->cmd[1]);
+		len = ft_strlen(tok->cmd[h + 1]);
 		tmp = add_calloc(mal, sizeof(char), (len + 2));
 		if (!tmp)
 			return (NULL);
 		tmp[0] = '/';
-		while (tok->cmd[1][i])
+		while (tok->cmd[h + 1][i])
 		{
-			tmp[j] = tok->cmd[1][i];
+			tmp[j] = tok->cmd[h + 1][i];
 			j++;
 			i++;
 		}

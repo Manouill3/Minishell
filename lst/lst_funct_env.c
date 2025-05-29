@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:29:40 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/29 10:07:01 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 15:33:29 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_env	*ft_lstnew_env(char *str, t_mal *mal)
 	lst = add_malloc(mal, sizeof(t_env));
 	lst->name = NULL;
 	lst->cont = str;
+	lst->exp = 0;
 	lst->next = NULL;
 	lst->prev = NULL;
 	return (lst);
