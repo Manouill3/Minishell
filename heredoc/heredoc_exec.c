@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 18:38:16 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 10:39:03 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env, t_mal *mal)
 			break ;
 		free(heredoc->input);
 	}
+	close(heredoc->fd);
 	close(heredoc->fd_tmp);
 	return (0);
 }
