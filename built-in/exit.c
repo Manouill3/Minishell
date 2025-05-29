@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 11:36:04 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 11:45:36 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	check_exit_arg(t_init *param, int nb_arg)
 
 void	ft_exit(t_init *param, t_list_char *tok)
 {
-	int	nb_arg;
-	int	i;
+	int			nb_arg;
+	int			i;
 	t_list_char	*tmp;
 
 	i = 0;
