@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:39:52 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 13:47:18 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 17:40:41 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ int	ft_to_much_arg(t_init *param)
 	return (0);
 }
 
-int	ft_cd_slash(t_init *param, char *path)
+int	ft_cd_slash(t_init *param)
 {
 	int	result;
 
-	(void)path;
 	result = chdir(param->tok->cmd[1]);
 	if (result == -1)
 	{
@@ -34,12 +33,11 @@ int	ft_cd_slash(t_init *param, char *path)
 	return (1);
 }
 
-void	ft_modif_split_pwd(t_init *param, char *old_path, char *pwd)
+void	ft_modif_split_pwd(t_init *param, char *pwd)
 {
 	t_env	*tmp_env;
 	t_env	*tmp_exp;
 
-	(void)old_path;
 	tmp_env = param->lst_env;
 	tmp_exp = param->lst_export;
 	while (tmp_env && ft_strcmp("PWD", tmp_env->name))
@@ -81,15 +79,15 @@ void	ft_modif_pwd(t_init *param, char *old_path)
 		tmp_exp->cont = NULL;
 		tmp_exp->cont = ft_strdup(old_path, param->mal);
 	}
-	ft_modif_split_pwd(param, old_path, pwd);
+	ft_modif_split_pwd(param, pwd);
 }
 
-int	ft_cd_rest2(t_init *param, t_list_char *tok, char *path)
+int	ft_cd_rest2(t_init *param, t_list_char *tok, char *path, int h)
 {
 	int		result;
 	char	*tmp;
 
-	tmp = ft_path_user(path, tok, param->mal);
+	tmp = ft_path_user(path, tok, param->mal, h);
 	result = chdir(tmp);
 	if (result == -1)
 	{

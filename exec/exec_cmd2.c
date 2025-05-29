@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:25:16 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 16:45:14 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/29 17:37:22 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,10 @@ char	**basic_args(char **tab, t_mal *mal)
 	return (args);
 }
 
-void	fail_execve(char **args, char **path,
-		char **env, t_init *param)
+void	fail_execve(char **path, t_init *param)
 {
 	int		status;
 
-	(void)args;
-	(void)path;
-	(void)env;
 	status = param->status;
 	if (!path)
 		ft_putstr_fd("command not found\n", 2);

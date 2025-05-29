@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 13:35:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 01:22:02 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/29 15:59:27 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ void	ft_echo(t_init *param, t_list_char *tok)
 
 	i = 0;
 	n = 0;
-	if (tok->no_red[1] == NULL)
+	while (ft_strcmp("echo", tok->no_red[i]) && tok->no_red[i] != NULL)
+		i++;
+	if (tok->no_red[i + 1] == NULL)
 	{
 		printf("\n");
 		return ;
