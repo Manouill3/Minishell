@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
 /*   Updated: 2025/05/29 18:01:07 by tcybak           ###   ########.fr       */
@@ -95,7 +95,6 @@ typedef struct s_init
 //////////////////////////////////////
 
 void		init_heredoc(t_list_char *node);
-int			ft_init(t_init *param);
 void		minishell(t_init *param, int tt_y);
 
 ////////////////////////////////////////
@@ -284,7 +283,7 @@ void		free_struct(t_init *param);
 //////////////////////////////////////
 
 int			count_quote(char *input);
-char		*change_to_var(char *input, t_env *env);
+char		*change_to_var(char *input, t_env *env, t_mal *mal);
 char		*exp_heredoc(char *input, t_env *env, t_mal *mal);
 
 ////////////////////////////////////////
@@ -387,7 +386,7 @@ void		check_access_app(t_list_char *node, int i);
 int			verif_built(t_list_char *tok);
 void		ft_exec_fork( t_list_char *tmp, t_init *param, int count);
 int			ft_exec_pipe(t_list_char *tmp, t_init *param, int count);
-int			secu_cmd(t_list_char *tmp);
+int			secu_cmd(t_init *param, t_list_char *tmp);
 void		exec(t_init *param);
 
 ////////////////////////////////////////

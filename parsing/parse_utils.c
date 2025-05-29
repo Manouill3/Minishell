@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:45:46 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 15:28:40 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:18:03 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_too_many_redir(t_init *param, char *line, int i)
 int	check_redir_no_file(t_init *param, char *line, int *i)
 {
 	while (line[*i] && (is_white(line[*i]) || line[*i] == '<'
-			|| line[*i] == '>'))
+			|| line[*i] == '>' || line[*i] == '"' || line[*i] == 39))
 		(*i)++;
 	if (*i >= (int)ft_strlen(line)
 		|| line[*i] == '<' || line[*i] == '>' || line[*i] == '|')

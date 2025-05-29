@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 17:14:44 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/29 16:48:08 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	**set_args(char **args, char **path, t_init *param)
 		if ((args[0][0] != '.' && args[0][0] != '/'))
 		{
 			if (!access(args[0], F_OK)
-				&& (args[0][0] != '.' && args[0][1] != '/'))
+				&& (args[0][0] != '.' && args[0][1] != '/') && access(args[0], X_OK))
 				write(2, "command not found\n", 19);
 			param->status = 127;
 		}

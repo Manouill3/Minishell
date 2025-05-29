@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
 /*   Updated: 2025/05/29 17:41:22 by tcybak           ###   ########.fr       */
@@ -22,6 +22,7 @@ void	child_process(t_list_char *tmp, t_init *param, int count)
 	{
 		status = param->status;
 		close_all(param, tmp);
+		rl_clear_history();
 		ft_lstclear_mal(&param->mal);
 		exit (status);
 	}
@@ -47,10 +48,20 @@ void	built_in_fork(t_init *param, t_list_char *tmp)
 {
 	int		status;
 
+	if (ft_strlen(tmp->cmd[0]) < 1 && (tmp->len_ind_exp < 1 || tmp->ind_exp[0] != 0))
+	{
+		ft_putstr_fd("command not found\n", 2);
+		param->status = 127;
+		status = param->status;
+		rl_clear_history();
+		ft_lstclear_mal(&param->mal);
+		exit (status);
+	}
 	if (verif_built(tmp))
 	{
 		ft_exec_built_in(param, tmp);
 		status = param->status;
+		rl_clear_history();
 		ft_lstclear_mal(&param->mal);
 		exit (status);
 	}
@@ -68,11 +79,12 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 	args = basic_args(tmp->no_red, param->mal);
 	args = set_args(args, path, param);
 	env = conv_lst_tab(param->lst_env, param->mal);
-	if (!args || !args[0])
+	if (!args || !args[0] || ft_strlen(tmp->cmd[0]) < 1)
 	{
 		ft_putstr_fd("command not found\n", 2);
 		param->status = 127;
 		status = param->status;
+		rl_clear_history();
 		ft_lstclear_mal(&param->mal);
 		exit(status);
 	}

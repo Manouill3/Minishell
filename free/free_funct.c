@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 22:48:49 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/28 14:15:21 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:26:37 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,17 @@ void	close_all(t_init *param, t_list_char *tmp)
 
 void	clear_files(t_list_char *lst)
 {
-	if (lst->heredoc->fd != -1)
-		close(lst->heredoc->fd);
-	if (lst->heredoc->name)
-		unlink(lst->heredoc->name);
+	t_list_char *tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		if (tmp->heredoc->fd != -1)
+			close(tmp->heredoc->fd);
+		if (tmp->heredoc->name)
+			unlink(tmp->heredoc->name);
+		tmp = tmp->next;
+	}
 }
 
 void	free_tab(char **tab)
@@ -49,6 +56,7 @@ void	free_tab(char **tab)
 
 void	free_struct(t_init *param)
 {
+	rl_clear_history();
 	free(param->line);
 	ft_lstclear_mal(&param->mal);
 }

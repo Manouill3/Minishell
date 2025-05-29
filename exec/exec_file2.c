@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:24:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 16:07:45 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 15:04:53 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	get_in_h(t_init *param, t_list_char *node, int i)
 		{
 			status = param->status;
 			close_all(param, node);
+			rl_clear_history();
 			ft_lstclear_mal(&param->mal);
 			exit (status);
 		}
