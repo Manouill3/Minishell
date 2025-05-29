@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 17:25:09 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 11:22:25 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	ft_exec_built_in(t_init *param, t_list_char *tok)
 	if (!ft_strcmp(tok->funct, "unset"))
 		ft_unset(param, tok);
 	if (!ft_strcmp(tok->funct, "env"))
-		ft_env(param, param->lst_env);
+		ft_env(param, param->lst_env, tok);
 	if (!ft_strcmp(tok->funct, "exit"))
-		ft_exit(param);
+		ft_exit(param , tok);
 }
 
 void	pipe_or_built(t_init *param, t_list_char *tmp, int count)

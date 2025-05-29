@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 17:32:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 10:43:56 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 11:22:57 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_error_env(t_init *param, t_list_char *tmp_tok, int i)
 	}
 }
 
-void	ft_env(t_init *param, t_env *env)
+void	ft_env(t_init *param, t_env *env, t_list_char *tok)
 {
 	int			i;
 	t_list_char	*tmp_tok;
@@ -35,7 +35,7 @@ void	ft_env(t_init *param, t_env *env)
 
 	i = 1;
 	tmp = env;
-	tmp_tok = param->tok;
+	tmp_tok = tok;
 	while (tmp_tok->cmd[i])
 	{
 		if (ft_strlen(tmp_tok->cmd[i]) != 0)

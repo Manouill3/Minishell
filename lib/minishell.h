@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 18:54:21 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 11:35:19 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -496,16 +496,16 @@ void		ft_echo(t_init *param, t_list_char *tok);
 ///		built-in.c/env_bulit_in.c	///
 //////////////////////////////////////
 
-void		ft_env(t_init *param, t_env *env);	
+void		ft_env(t_init *param, t_env *env, t_list_char *tok);	
 
 ////////////////////////////////////////
 ///			built-in.c/exit.c		///
 //////////////////////////////////////
 
-void		ft_verif_nb(t_init *param);
-int			ft_free_param(t_init *param, int nb_arg);
+void		ft_verif_nb(t_init *param, t_list_char *tok);
+int			ft_free_param(t_init *param, int nb_arg, t_list_char *tok);
 void		check_exit_arg(t_init *param, int nb_arg);
-void		ft_exit(t_init *param);
+void		ft_exit(t_init *param, t_list_char *tok);
 
 ////////////////////////////////////////
 ///	built-in.c/export_add_utils.c	///
