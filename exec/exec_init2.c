@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:40 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 11:45:13 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 16:10:52 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	pipe_or_built(t_init *param, t_list_char *tmp, int count)
 {
 	while (tmp)
 	{
-		if (secu_cmd(tmp))
+		if (secu_cmd(param, tmp))
 		{
 			count++;
 			tmp = tmp->next;

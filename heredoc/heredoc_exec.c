@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 10:39:03 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 16:53:11 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env, t_mal *mal)
 	char	*final_eof;
 
 	ft_handle_heredoc_signals();
-	while (1)
+	while (g_exit_code != 130)
 	{
 		final_eof = get_final_eof(heredoc->eof[i], mal);
 		heredoc->input = readline("heredoc> ");
@@ -35,7 +35,6 @@ int	ft_heredoc_oef_before(t_heredoc *heredoc, int i, t_env *env, t_mal *mal)
 			break ;
 		free(heredoc->input);
 	}
-	close(heredoc->fd);
 	close(heredoc->fd_tmp);
 	return (0);
 }
@@ -45,7 +44,7 @@ int	ft_heredoc_oef_last(t_heredoc *heredoc, int i, t_env *env, t_mal *mal)
 	char	*final_eof;
 
 	ft_handle_heredoc_signals();
-	while (1)
+	while (g_exit_code != 130)
 	{
 		final_eof = get_final_eof(heredoc->eof[i], mal);
 		heredoc->input = readline("heredoc> ");

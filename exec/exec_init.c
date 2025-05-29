@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 10:15:48 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 18:33:14 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 16:12:23 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,16 @@ int	ft_exec_pipe(t_list_char *tmp, t_init *param, int count)
 	return (count);
 }
 
-int	secu_cmd(t_list_char *tmp)
+int	secu_cmd(t_init *param, t_list_char *tmp)
 {
 	if (tmp->len_cmd > 0 && tmp->len_ind_exp == tmp->len_cmd
 		&& ft_strlen(tmp->cmd[0]) < 1)
 		return (1);
+	if (tmp->len_cmd == 1 && ft_strlen(tmp->cmd[0]) < 1)
+	{
+		param->status = 127;
+		ft_putstr_fd("command not found\n", 2);
+	}
 	if (!ft_strcmp(tmp->cmd[0], ":"))
 		return (1);
 	return (0);

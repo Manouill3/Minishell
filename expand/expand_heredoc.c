@@ -6,7 +6,7 @@
 /*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 08:17:50 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/27 13:43:02 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:36:36 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count_quote(char *input)
 	return (len);
 }
 
-char	*change_to_var(char *input, t_env *env)
+char	*change_to_var(char *input, t_env *env, t_mal *mal)
 {
 	int		i;
 	int		j;
@@ -38,7 +38,7 @@ char	*change_to_var(char *input, t_env *env)
 	i = 0;
 	j = 0;
 	len = ft_strlen(env->cont) + count_quote(input);
-	res = ft_calloc(len + 1, sizeof(char));
+	res = add_calloc(mal, len + 1, sizeof(char));
 	if (!res)
 		return (NULL);
 	while (input[i] == 39 || input[i] == '"')
@@ -66,6 +66,6 @@ char	*exp_heredoc(char *input, t_env *env, t_mal *mal)
 		tmp_env = tmp_env->next;
 	if (!tmp_env)
 		return (NULL);
-	res = change_to_var(word, tmp_env);
+	res = change_to_var(word, tmp_env, mal);
 	return (res);
 }
