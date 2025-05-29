@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_var_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:22:16 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 13:08:08 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 21:56:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,9 @@ void	ft_alloc_new_const(t_list_char *tok, t_init *param,
 	}
 }
 
-void	ft_rest_var(t_env *tmp_env, t_env *tmp_exp,
+void	ft_rest_var(t_env *tmp_exp,
 	t_init *param, t_list_char *tok)
 {
-	tmp_env = param->lst_env;
 	tmp_exp = param->lst_export;
 	if (param->create_x == 2)
 		ft_create_add_back(param, tok, tmp_exp, param->exist_x);

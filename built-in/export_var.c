@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:23:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 18:51:10 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/29 21:58:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ void	ft_create_var(t_init *param, t_list_char *tok, t_env *tmp_exp)
 		}
 		tmp_exp = tmp_exp->next;
 	}
-	ft_rest_var(tmp_env, tmp_exp, param, tok);
+	ft_rest_var(tmp_exp, param, tok);
 }

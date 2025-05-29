@@ -16,12 +16,8 @@ void	end_verif_exp(t_init *param, char **tmp_cmd,
 		char **tmp_val, int len_tmp)
 {
 	int			i;
-	int			j;
-	t_list_char	*tmp;
 
 	i = 0;
-	j = 0;
-	tmp = param->tok;
 	while (i < param->i_ex)
 	{
 		while (i < len_tmp)

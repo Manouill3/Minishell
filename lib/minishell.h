@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:45:52 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 18:01:07 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 21:58:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -532,7 +532,7 @@ void		ft_add_value(t_env *tmp_exp, t_env *tmp_env,
 				char *new_const, t_init *param);
 void		ft_alloc_new_const(t_list_char *tok, t_init *param,
 				t_env *tmp_exp, t_env *tmp_env);
-void		ft_rest_var(t_env *tmp_env, t_env *tmp_exp,
+void		ft_rest_var(t_env *tmp_exp,
 				t_init *param, t_list_char *tok);
 void		ft_init_var(t_init *param);
 int			ft_return_var(t_init *param);
