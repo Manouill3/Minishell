@@ -195,3 +195,41 @@ heredoc> Minishell :
 
 [echo $USER$"$"USER
 mdegache$$USER
+
+********************************************************
+
+"" echo 
+
+Minishell : $e echo -> manque \n
+
+Minishell : cat << a << b'' << c""test -> plusieur a la suite rien dans le here doc
+
+export a -> dans export a=""
+
+cp /bin/cat ls
+{
+    Minishell : ls
+    command not found
+}
+
+Minishell : <"<"
+==112599== Invalid read of size 1
+==112599==    at 0x4039B9: exec_supp_quote_red (parsing_utils3.c:23)
+==112599==    by 0x403AE0: supp_quote_red (parsing_utils3.c:47)
+==112599==    by 0x402F50: before_exec (parse_line.c:73)
+==112599==    by 0x403130: parsing_line (parse_line.c:119)
+==112599==    by 0x4013E0: minishell (main.c:43)
+==112599==    by 0x4014F0: main (main.c:70)
+==112599==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+
+Minishell : "" -> manque message error
+
+Minishell : $? leak add historique
+
+Minishell : echo echo
+echo -> leak
+
+export a='                                                                          echo salut les amis je suis un gros con "$HOME"'
+not a valid identifier et en plus le pire du pire, le a est NULL (SUPER)
+
+
