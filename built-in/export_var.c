@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:23:09 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 18:07:59 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 18:51:10 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_verif_exp(t_init *param, t_list_char *tok)
 			&& tok->cmd[j][param->i_ex] != '_')
 		{
 			param->status = 1;
-			write(2, "not a valid identifier1\n", 24);
+			write(2, "not a valid identifier\n", 24);
 			return (1);
 		}
 		param->i_ex++;

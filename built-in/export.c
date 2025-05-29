@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 13:14:17 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 18:15:58 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/29 18:50:46 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_continue_value(t_init *param, t_list_char *tok)
 		if (ft_isalnum(tok->cmd[j][i]) == 0 && tok->cmd[j][i] != '_')
 		{
 			param->status = 1;
-			write(2, "not a valid identifier2\n", 24);
+			write(2, "not a valid identifier\n", 24);
 			return (0);
 		}
 		i++;
@@ -103,10 +103,10 @@ void	ft_export(t_init *param, t_list_char *tok)
 	verif = 0;
 	tok->ex_j = 0;
 	tmp_exp = param->lst_export;
-	if (tok->cmd[tok->ex_j + 1] == NULL)
-		ft_print_exp(tmp_exp);
 	while (tok->cmd[tok->ex_j] && ft_strcmp("export", tok->cmd[tok->ex_j]))
 		tok->ex_j++;
+	if (tok->cmd[tok->ex_j + 1] == NULL)
+		ft_print_exp(tmp_exp);
 	tok->ex_j++;
 	while (tok->ex_j < tok->len_cmd && tok->ex_j)
 	{
