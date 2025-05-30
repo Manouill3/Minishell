@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:38:55 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/30 09:08:05 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 15:04:42 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	verif_path(char **args, t_init *param)
 		tmp = verif_path_split(len, j, tmp, args);
 		if (access(tmp, F_OK) && args[0][0] == '/')
 		{
-			write(2, "Not a directory", 16);
+			write(2, "Not a directory\n", 16);
 			param->status = 126;
 			return (1);
 		}
@@ -56,7 +56,7 @@ char	**set_args_ann2(char **args, t_init *param)
 	if (!access(args[0], F_OK) && access(args[0], X_OK)
 		&& (args[0][0] == '.' && args[0][1] == '/'))
 	{
-		write(2, "Permission denied", 18);
+		write(2, "Permission denied\n", 18);
 		param->status = 126;
 	}
 	else
@@ -112,7 +112,7 @@ char	**set_args(char **args, char **path, t_init *param)
 		}
 		else if (S_ISDIR(mode.st_mode))
 		{
-			write(2, "Is a directory", 15);
+			write(2, "Is a directory\n", 15);
 			param->status = 126;
 		}
 		return (args);

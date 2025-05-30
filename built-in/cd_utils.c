@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 08:48:34 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 17:16:05 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 14:45:31 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ char	*ft_path_user(char *path, t_list_char *tok, t_mal *mal, int h)
 
 	i = 0;
 	j = 0;
-	if (tok->cmd[h + 1][0] == '/')
+	if (!tok->cmd[h + 1])
+		return (NULL);
+	if (tok->cmd[h + 1] && tok->cmd[h + 1][0] == '/')
 		tmp = ft_strjoin(path, tok->cmd[h + 1], mal);
 	else
 	{
@@ -78,12 +80,8 @@ char	*ft_path_user(char *path, t_list_char *tok, t_mal *mal, int h)
 		if (!tmp)
 			return (NULL);
 		tmp[0] = '/';
-		while (tok->cmd[h + 1][i])
-		{
-			tmp[j] = tok->cmd[h + 1][i];
-			j++;
-			i++;
-		}
+		while (tok->cmd[h + 1] && tok->cmd[h + 1][i])
+			tmp[j++] = tok->cmd[h + 1][i++];
 	}
 	return (tmp);
 }

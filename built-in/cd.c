@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/30 09:04:41 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 14:40:45 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_cd_rest(t_init *param, t_list_char *tok, char *path, int h)
 	char	*tmp;
 
 	tmp = ft_path_user(path, tok, param->mal, h);
+	if (!tmp)
+		return ;
 	result = chdir(tmp);
 	if (result == -1)
 	{

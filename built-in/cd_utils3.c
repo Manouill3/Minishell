@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 09:49:48 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/28 13:54:12 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 14:15:55 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*ft_path_null(t_init *param)
 	tmp_env = param->lst_env;
 	while (tmp_env && ft_strcmp("OLDPWD", tmp_env->name))
 		tmp_env = tmp_env->next;
+	if (!tmp_env)
+		return (NULL);
 	path = ft_strdup(tmp_env->cont, param->mal);
 	if (!path)
 		return (NULL);
@@ -42,6 +44,8 @@ char	*ft_old_path_null(t_init *param)
 	tmp_env = param->lst_env;
 	while (tmp_env && ft_strcmp("PWD", tmp_env->name))
 		tmp_env = tmp_env->next;
+	if (!tmp_env)
+		return (NULL);
 	path = ft_strdup(tmp_env->cont, param->mal);
 	if (!path)
 		return (NULL);
