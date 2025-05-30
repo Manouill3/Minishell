@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 09:20:05 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 23:31:09 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/30 09:06:19 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void	exec_heredoc(t_list_char *tmp, t_heredoc *heredoc,
 		get_eof_tab(tmp, mal);
 		while (heredoc->eof[i])
 		{
-			heredoc->fd = open(heredoc->name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+			heredoc->fd = open(heredoc->name, O_CREAT
+					| O_WRONLY | O_TRUNC, 0644);
 			heredoc->fd_tmp = dup(0);
 			if (heredoc->eof[i + 1] != NULL)
 				j = ft_heredoc_oef_before(heredoc, i, env, mal);

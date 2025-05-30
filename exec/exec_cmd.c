@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 23:36:57 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/30 09:08:35 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	built_in_fork(t_init *param, t_list_char *tmp)
 {
 	int		status;
 
-	if (ft_strlen(tmp->cmd[0]) < 1 && (tmp->len_ind_exp < 1 || tmp->ind_exp[0] != 0))
+	if (ft_strlen(tmp->cmd[0]) < 1
+		&& (tmp->len_ind_exp < 1 || tmp->ind_exp[0] != 0))
 	{
 		ft_putstr_fd("command not found\n", 2);
 		param->status = 127;

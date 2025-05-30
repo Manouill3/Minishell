@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_funct.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 22:48:49 by marvin            #+#    #+#             */
-/*   Updated: 2025/05/29 15:26:37 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/30 09:07:26 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	close_all(t_init *param, t_list_char *tmp)
 
 void	clear_files(t_list_char *lst)
 {
-	t_list_char *tmp;
+	t_list_char	*tmp;
 
 	tmp = lst;
 	while (tmp)

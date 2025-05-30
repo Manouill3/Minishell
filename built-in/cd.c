@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:14:23 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 17:41:45 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 09:04:41 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	ft_cd(t_init *param, t_list_char *tok, int i, int j)
 	char	*old_path;
 	char	**path_split;
 
-	param->good_cd = 0;
 	path = get_pwd(param);
 	if (!path)
 		path = ft_path_null(param);
@@ -78,7 +77,8 @@ void	ft_cd(t_init *param, t_list_char *tok, int i, int j)
 	path_split = NULL;
 	if (j > 2)
 		param->good_cd = ft_to_much_arg(param);
-	else if (tok->cmd[i + 1] == NULL || !ft_strcmp(tok->cmd[i + 1], "~"))
+	else if (tok->cmd[i + 1] == NULL || tok->cmd[i + 1][0] == '\0'
+		|| !ft_strcmp(tok->cmd[i + 1], "~"))
 		param->good_cd = ft_cd_alone(path, path_split, param);
 	else if (tok->cmd[i + 1] && !ft_strcmp(tok->cmd[i + 1], "/"))
 		param->good_cd = ft_cd_slash(param);

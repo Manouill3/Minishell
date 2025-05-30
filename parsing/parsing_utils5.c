@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 17:39:28 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 18:17:18 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 08:44:39 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	ft_verif_expand_good(t_list_char *tmp)
 		j = 0;
 		while (tmp->cmd[i][j])
 		{
-			if (tmp->cmd[i][j] == '$')
+			if (tmp->cmd[i][j] == '$' || tmp->cmd[i][j] == '=')
 				return (1);
 			j++;
 		}

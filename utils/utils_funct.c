@@ -6,7 +6,7 @@
 /*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 10:21:37 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/28 16:06:36 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 09:06:51 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,23 +95,4 @@ int	nb_exp(char **cmd)
 		i++;
 	}
 	return (nb);
-}
-
-void	print_lst_char(t_list_char *lst)
-{
-	int			i;
-	t_list_char	*curr;
-
-	curr = lst;
-	while (curr)
-	{
-		i = 0;
-		while (curr->cmd[i])
-		{
-			printf("cmd[%d] : %s\n", i, curr->cmd[i]);
-			i++;
-		}
-		i = 0;
-		curr = curr->next;
-	}
 }

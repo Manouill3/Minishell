@@ -27,6 +27,7 @@ void	minishell(t_init *param, int tt_y)
 {
 	while (1)
 	{
+		param->good_cd = 0;
 		param->line = readline("Minishell : ");
 		if (param->line == NULL)
 		{
