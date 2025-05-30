@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 11:25:16 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 17:37:22 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 09:35:16 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	fail_execve(char **path, t_init *param)
 	status = param->status;
 	if (!path)
 		ft_putstr_fd("command not found\n", 2);
+	free(param->line);
 	ft_lstclear_mal(&param->mal);
 	exit (status);
 }

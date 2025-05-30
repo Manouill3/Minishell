@@ -52,7 +52,7 @@ void	exec_verif_exp(t_init *param, t_list_char *tmp)
 
 	i = 0;
 	tmp_cmd = NULL;
-	if (tmp->cmd[i] && ft_strcmp(tmp->funct, tmp->cmd[i])
+	if (tmp->cmd[i] && tmp->len_ind_exp >= 1 && ft_strcmp(tmp->funct, tmp->cmd[i])
 		&& white_or_not(tmp->cmd[i]) && tmp->ind_exp[i] == i)
 	{
 		tmp_cmd = ft_all_one_ligne(param, tmp_cmd, tmp);

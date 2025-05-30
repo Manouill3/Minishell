@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:24:13 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/29 17:25:45 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 09:28:10 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_verif_nb(t_init *param, t_list_char *tok, int j)
 			param->status = 2;
 			write(2, "numeric argument required\n", 27);
 			status = param->status;
+			free(param->line);
 			ft_lstclear_mal(&param->mal);
 			exit(status);
 		}
@@ -46,6 +47,7 @@ int	ft_free_param(t_init *param, int nb_arg, t_list_char *tok, int j)
 	if (param->count_cmd == 1)
 		ft_putstr_fd("exit\n", 2);
 	nb_arg = param->status;
+	free(param->line);
 	ft_lstclear_mal(&param->mal);
 	return (nb_arg);
 }
@@ -57,6 +59,7 @@ void	check_exit_arg(t_init *param, int nb_arg)
 	if (nb_arg == 1)
 	{
 		status = param->status;
+		free(param->line);
 		ft_lstclear_mal(&param->mal);
 		exit(status);
 	}

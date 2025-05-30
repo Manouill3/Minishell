@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_file2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:24:54 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/29 23:16:07 by marvin           ###   ########.fr       */
+/*   Updated: 2025/05/30 09:22:40 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	get_in_h(t_init *param, t_list_char *node, int i)
 			status = param->status;
 			close_all(param, node);
 			rl_clear_history();
+			free(param->line);
 			ft_lstclear_mal(&param->mal);
 			exit (status);
 		}

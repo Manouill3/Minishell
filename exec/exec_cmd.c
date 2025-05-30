@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 09:10:20 by mdegache          #+#    #+#             */
-/*   Updated: 2025/05/30 09:08:35 by tcybak           ###   ########.fr       */
+/*   Updated: 2025/05/30 09:21:24 by mdegache         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	child_process(t_list_char *tmp, t_init *param, int count)
 		status = param->status;
 		close_all(param, tmp);
 		rl_clear_history();
+		free(param->line);
 		ft_lstclear_mal(&param->mal);
 		exit (status);
 	}
@@ -55,6 +56,7 @@ void	built_in_fork(t_init *param, t_list_char *tmp)
 		param->status = 127;
 		status = param->status;
 		rl_clear_history();
+		free(param->line);
 		ft_lstclear_mal(&param->mal);
 		exit (status);
 	}
@@ -63,6 +65,7 @@ void	built_in_fork(t_init *param, t_list_char *tmp)
 		ft_exec_built_in(param, tmp);
 		status = param->status;
 		rl_clear_history();
+		free(param->line);
 		ft_lstclear_mal(&param->mal);
 		exit (status);
 	}
@@ -86,6 +89,7 @@ void	exec_cmd(t_init *param, t_list_char *tmp)
 		param->status = 127;
 		status = param->status;
 		rl_clear_history();
+		free(param->line);
 		ft_lstclear_mal(&param->mal);
 		exit(status);
 	}

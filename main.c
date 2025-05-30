@@ -42,6 +42,7 @@ void	minishell(t_init *param, int tt_y)
 		if (param->line && param->line[0] != '\0')
 			add_history(param->line);
 		parsing_line(param);
+		free(param->line);
 		if (param->tok)
 			clear_files(param->tok);
 		if (!tt_y)
