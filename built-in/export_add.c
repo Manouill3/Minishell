@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_add.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdegache <mdegache@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tcybak <tcybak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:33:03 by tcybak            #+#    #+#             */
-/*   Updated: 2025/05/30 10:01:08 by mdegache         ###   ########.fr       */
+/*   Updated: 2025/05/30 10:20:17 by tcybak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,19 @@
 int	existing_vars(t_init *param, char *name, char *add, t_mal *mal)
 {
 	t_env	*tmp_env;
+	t_env	*tmp_exp;
 
 	tmp_env = param->lst_env;
+	tmp_exp = param->lst_export;
 	while (tmp_env)
 	{
 		if (!ft_strcmp(name, tmp_env->name))
 		{
 			env_content(tmp_env, add, mal);
-			while (ft_strcmp(name, param->lst_export->name))
-				param->lst_export = param->lst_export->next;
-			if (!ft_strcmp(name, param->lst_export->name))
-				export_content(param->lst_export, add, mal);
+			while (ft_strcmp(name, tmp_exp->name))
+				tmp_exp = tmp_exp->next;
+			if (!ft_strcmp(name, tmp_exp->name))
+				export_content(tmp_exp, add, mal);
 			return (1);
 		}
 		tmp_env = tmp_env->next;
